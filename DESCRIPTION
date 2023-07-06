@@ -13,7 +13,7 @@ Authors@R:
 Description: A dummy DBI back end that provides access to a
     hypothetical data source named "Kazam", intended to be used as
     boilerplate for implementing DBI back ends from scratch.
-License: CC0
+License: LGPL (>= 2.1)
 URL: https://rkazam.r-dbi.org, https://github.com/r-dbi/RKazam
 Depends: 
     R (>= 3.0.0)
