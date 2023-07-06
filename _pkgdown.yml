@@ -1,0 +1,33 @@
+url: https://rkazamg s.r-dbi.org
+
+template:
+  params:
+    bootswatch: flatly # https://bootswatch.com/flatly/
+
+home:
+  links:
+  - text: Report a security vulnerability
+    href: https://dbi.r-dbi.org/security.html
+  - text: DBI project website
+    href: https://r-dbi.org
+
+reference:
+- title: DBI methods
+  desc: Implementations for generics defined in the DBI package.
+  contents:
+  - DBI
+
+- title: Package documentation
+  contents:
+  - Kazam
+  - RKazam-package
+
+development:
+  mode: auto
+
+authors:
+  Kirill Müller:
+    href: https://krlmlr.info
+
+news:
+  cran_dates: false
