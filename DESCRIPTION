@@ -2,12 +2,11 @@ Package: adbi
 Title: Boilerplate for implementing a DBI back end
 Version: 0.0.0.9008
 Authors@R: 
-    c(person(given = "Kirill",
-             family = "M\u00fcller",
+    c(person(given = "Nicolas",
+             family = "Bennett",
              role = c("aut", "cre"),
-             email = "kirill@cynkra.com",
-             comment = c(ORCID = "0000-0002-1416-3412")),
-      person(given = "R Consortium",
+             email = "nicolas@cynkra.com"),
+      person(given = "Voltron Data",
              role = "fnd")
     )
 Description: A dummy DBI back end that provides access to a
