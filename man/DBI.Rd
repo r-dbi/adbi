@@ -21,14 +21,14 @@
 \docType{class}
 \name{DBI}
 \alias{DBI}
-\alias{KazamDriver-class}
-\alias{KazamConnection-class}
+\alias{AdbiDriver-class}
+\alias{AdbiConnection-class}
 \alias{KazamResult-class}
 \alias{KazamResultArrow-class}
-\alias{dbAppendTable_KazamConnection}
-\alias{dbAppendTable,KazamConnection-method}
-\alias{dbBegin_KazamConnection}
-\alias{dbBegin,KazamConnection-method}
+\alias{dbAppendTable_AdbiConnection}
+\alias{dbAppendTable,AdbiConnection-method}
+\alias{dbBegin_AdbiConnection}
+\alias{dbBegin,AdbiConnection-method}
 \alias{dbBind_KazamResult}
 \alias{dbBind,KazamResult-method}
 \alias{dbClearResult_KazamResult}
@@ -37,28 +37,28 @@
 \alias{dbClearResult,KazamResultArrow-method}
 \alias{dbColumnInfo_KazamResult}
 \alias{dbColumnInfo,KazamResult-method}
-\alias{dbCommit_KazamConnection}
-\alias{dbCommit,KazamConnection-method}
-\alias{dbConnect_KazamDriver}
-\alias{dbConnect,KazamDriver-method}
-\alias{dbDataType_KazamConnection}
-\alias{dbDataType,KazamConnection,ANY-method}
-\alias{dbDataType_KazamDriver}
-\alias{dbDataType,KazamDriver,ANY-method}
-\alias{dbDataType_KazamDriver_list}
-\alias{dbDataType,KazamDriver,list-method}
-\alias{dbDisconnect_KazamConnection}
-\alias{dbDisconnect,KazamConnection-method}
-\alias{dbExistsTable_KazamConnection_character}
-\alias{dbExistsTable,KazamConnection,character-method}
+\alias{dbCommit_AdbiConnection}
+\alias{dbCommit,AdbiConnection-method}
+\alias{dbConnect_AdbiDriver}
+\alias{dbConnect,AdbiDriver-method}
+\alias{dbDataType_AdbiConnection}
+\alias{dbDataType,AdbiConnection,ANY-method}
+\alias{dbDataType_AdbiDriver}
+\alias{dbDataType,AdbiDriver,ANY-method}
+\alias{dbDataType_AdbiDriver_list}
+\alias{dbDataType,AdbiDriver,list-method}
+\alias{dbDisconnect_AdbiConnection}
+\alias{dbDisconnect,AdbiConnection-method}
+\alias{dbExistsTable_AdbiConnection_character}
+\alias{dbExistsTable,AdbiConnection,character-method}
 \alias{dbFetchArrow_KazamResultArrow}
 \alias{dbFetchArrow,KazamResultArrow-method}
 \alias{dbFetch_KazamResult}
 \alias{dbFetch,KazamResult-method}
-\alias{dbGetInfo_KazamConnection}
-\alias{dbGetInfo,KazamConnection-method}
-\alias{dbGetInfo_KazamDriver}
-\alias{dbGetInfo,KazamDriver-method}
+\alias{dbGetInfo_AdbiConnection}
+\alias{dbGetInfo,AdbiConnection-method}
+\alias{dbGetInfo_AdbiDriver}
+\alias{dbGetInfo,AdbiDriver-method}
 \alias{dbGetInfo_KazamResult}
 \alias{dbGetInfo,KazamResult-method}
 \alias{dbGetRowCount_KazamResult}
@@ -69,43 +69,43 @@
 \alias{dbGetStatement,KazamResult-method}
 \alias{dbHasCompleted_KazamResult}
 \alias{dbHasCompleted,KazamResult-method}
-\alias{dbIsValid_KazamConnection}
-\alias{dbIsValid,KazamConnection-method}
-\alias{dbIsValid_KazamDriver}
-\alias{dbIsValid,KazamDriver-method}
+\alias{dbIsValid_AdbiConnection}
+\alias{dbIsValid,AdbiConnection-method}
+\alias{dbIsValid_AdbiDriver}
+\alias{dbIsValid,AdbiDriver-method}
 \alias{dbIsValid_KazamResult}
 \alias{dbIsValid,KazamResult-method}
-\alias{dbListFields_KazamConnection_character}
-\alias{dbListFields,KazamConnection,character-method}
-\alias{dbListTables_KazamConnection}
-\alias{dbListTables,KazamConnection-method}
-\alias{dbQuoteIdentifier_KazamConnection_character}
-\alias{dbQuoteIdentifier,KazamConnection,character-method}
-\alias{dbQuoteString_KazamConnection_character}
-\alias{dbQuoteString,KazamConnection,character-method}
-\alias{dbRemoveTable_KazamConnection_character}
-\alias{dbRemoveTable,KazamConnection,character-method}
-\alias{dbRollback_KazamConnection}
-\alias{dbRollback,KazamConnection-method}
-\alias{dbSendQueryArrow_KazamConnection}
-\alias{dbSendQueryArrow,KazamConnection-method}
-\alias{dbSendQuery_KazamConnection_character}
-\alias{dbSendQuery,KazamConnection,character-method}
-\alias{dbSendStatement_KazamConnection_character}
-\alias{dbSendStatement,KazamConnection,character-method}
-\alias{dbWriteTable_KazamConnection_character_data.frame}
-\alias{dbWriteTable,KazamConnection,character,data.frame-method}
-\alias{show_KazamConnection}
-\alias{show,KazamConnection-method}
-\alias{show_KazamDriver}
-\alias{show,KazamDriver-method}
+\alias{dbListFields_AdbiConnection_character}
+\alias{dbListFields,AdbiConnection,character-method}
+\alias{dbListTables_AdbiConnection}
+\alias{dbListTables,AdbiConnection-method}
+\alias{dbQuoteIdentifier_AdbiConnection_character}
+\alias{dbQuoteIdentifier,AdbiConnection,character-method}
+\alias{dbQuoteString_AdbiConnection_character}
+\alias{dbQuoteString,AdbiConnection,character-method}
+\alias{dbRemoveTable_AdbiConnection_character}
+\alias{dbRemoveTable,AdbiConnection,character-method}
+\alias{dbRollback_AdbiConnection}
+\alias{dbRollback,AdbiConnection-method}
+\alias{dbSendQueryArrow_AdbiConnection}
+\alias{dbSendQueryArrow,AdbiConnection-method}
+\alias{dbSendQuery_AdbiConnection_character}
+\alias{dbSendQuery,AdbiConnection,character-method}
+\alias{dbSendStatement_AdbiConnection_character}
+\alias{dbSendStatement,AdbiConnection,character-method}
+\alias{dbWriteTable_AdbiConnection_character_data.frame}
+\alias{dbWriteTable,AdbiConnection,character,data.frame-method}
+\alias{show_AdbiConnection}
+\alias{show,AdbiConnection-method}
+\alias{show_AdbiDriver}
+\alias{show,AdbiDriver-method}
 \alias{show_KazamResult}
 \alias{show,KazamResult-method}
 \title{DBI methods}
 \usage{
-\S4method{dbAppendTable}{KazamConnection}(conn, name, value, ..., row.names = NULL)
+\S4method{dbAppendTable}{AdbiConnection}(conn, name, value, ..., row.names = NULL)
 
-\S4method{dbBegin}{KazamConnection}(conn, ...)
+\S4method{dbBegin}{AdbiConnection}(conn, ...)
 
 \S4method{dbBind}{KazamResult}(res, params, ...)
 
@@ -115,27 +115,27 @@
 
 \S4method{dbColumnInfo}{KazamResult}(res, ...)
 
-\S4method{dbCommit}{KazamConnection}(conn, ...)
+\S4method{dbCommit}{AdbiConnection}(conn, ...)
 
-\S4method{dbConnect}{KazamDriver}(drv, ...)
+\S4method{dbConnect}{AdbiDriver}(drv, ...)
 
-\S4method{dbDataType}{KazamConnection,ANY}(dbObj, obj, ...)
+\S4method{dbDataType}{AdbiConnection,ANY}(dbObj, obj, ...)
 
-\S4method{dbDataType}{KazamDriver,ANY}(dbObj, obj, ...)
+\S4method{dbDataType}{AdbiDriver,ANY}(dbObj, obj, ...)
 
-\S4method{dbDataType}{KazamDriver,list}(dbObj, obj, ...)
+\S4method{dbDataType}{AdbiDriver,list}(dbObj, obj, ...)
 
-\S4method{dbDisconnect}{KazamConnection}(conn, ...)
+\S4method{dbDisconnect}{AdbiConnection}(conn, ...)
 
-\S4method{dbExistsTable}{KazamConnection,character}(conn, name, ...)
+\S4method{dbExistsTable}{AdbiConnection,character}(conn, name, ...)
 
 \S4method{dbFetchArrow}{KazamResultArrow}(res, ...)
 
 \S4method{dbFetch}{KazamResult}(res, n = -1, ...)
 
-\S4method{dbGetInfo}{KazamConnection}(dbObj, ...)
+\S4method{dbGetInfo}{AdbiConnection}(dbObj, ...)
 
-\S4method{dbGetInfo}{KazamDriver}(dbObj, ...)
+\S4method{dbGetInfo}{AdbiDriver}(dbObj, ...)
 
 \S4method{dbGetInfo}{KazamResult}(dbObj, ...)
 
@@ -147,31 +147,31 @@
 
 \S4method{dbHasCompleted}{KazamResult}(res, ...)
 
-\S4method{dbIsValid}{KazamConnection}(dbObj, ...)
+\S4method{dbIsValid}{AdbiConnection}(dbObj, ...)
 
-\S4method{dbIsValid}{KazamDriver}(dbObj, ...)
+\S4method{dbIsValid}{AdbiDriver}(dbObj, ...)
 
 \S4method{dbIsValid}{KazamResult}(dbObj, ...)
 
-\S4method{dbListFields}{KazamConnection,character}(conn, name, ...)
+\S4method{dbListFields}{AdbiConnection,character}(conn, name, ...)
 
-\S4method{dbListTables}{KazamConnection}(conn, ...)
+\S4method{dbListTables}{AdbiConnection}(conn, ...)
 
-\S4method{dbQuoteIdentifier}{KazamConnection,character}(conn, x, ...)
+\S4method{dbQuoteIdentifier}{AdbiConnection,character}(conn, x, ...)
 
-\S4method{dbQuoteString}{KazamConnection,character}(conn, x, ...)
+\S4method{dbQuoteString}{AdbiConnection,character}(conn, x, ...)
 
-\S4method{dbRemoveTable}{KazamConnection,character}(conn, name, ..., temporary = FALSE, fail_if_missing = TRUE)
+\S4method{dbRemoveTable}{AdbiConnection,character}(conn, name, ..., temporary = FALSE, fail_if_missing = TRUE)
 
-\S4method{dbRollback}{KazamConnection}(conn, ...)
+\S4method{dbRollback}{AdbiConnection}(conn, ...)
 
-\S4method{dbSendQueryArrow}{KazamConnection}(conn, statement, ..., params = NULL)
+\S4method{dbSendQueryArrow}{AdbiConnection}(conn, statement, ..., params = NULL)
 
-\S4method{dbSendQuery}{KazamConnection,character}(conn, statement, ..., params = NULL)
+\S4method{dbSendQuery}{AdbiConnection,character}(conn, statement, ..., params = NULL)
 
-\S4method{dbSendStatement}{KazamConnection,character}(conn, statement, ..., params = NULL)
+\S4method{dbSendStatement}{AdbiConnection,character}(conn, statement, ..., params = NULL)
 
-\S4method{dbWriteTable}{KazamConnection,character,data.frame}(
+\S4method{dbWriteTable}{AdbiConnection,character,data.frame}(
   conn,
   name,
   value,
@@ -183,9 +183,9 @@
   temporary = FALSE
 )
 
-\S4method{show}{KazamConnection}(object)
+\S4method{show}{AdbiConnection}(object)
 
-\S4method{show}{KazamDriver}(object)
+\S4method{show}{AdbiDriver}(object)
 
 \S4method{show}{KazamResult}(object)
 }

@@ -1,6 +1,6 @@
 #' @rdname DBI
 #' @usage NULL
-dbAppendTable_KazamConnection <- function(conn, name, value, ..., row.names = NULL) {
+dbAppendTable_AdbiConnection <- function(conn, name, value, ..., row.names = NULL) {
   # FIXME: Remove when parameterized binding is implemented
 
   if (!is.null(row.names)) {
@@ -19,4 +19,4 @@ dbAppendTable_KazamConnection <- function(conn, name, value, ..., row.names = NU
 }
 #' @rdname DBI
 #' @export
-setMethod("dbAppendTable", signature("KazamConnection"), dbAppendTable_KazamConnection)
+setMethod("dbAppendTable", signature("AdbiConnection"), dbAppendTable_AdbiConnection)

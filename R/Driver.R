@@ -1,4 +1,4 @@
-#' @include RKazam-package.R
+#' @include adbi-package.R
 NULL
 
 #' DBI methods
@@ -7,28 +7,38 @@ NULL
 #' @name DBI
 NULL
 
-#' Kazam driver
+#' Adbi driver
 #'
 #' TBD.
 #'
+#' @param driver String-valued driver specification
+#'
 #' @export
+#' @rdname adbi-driver
 #' @examples
 #' \dontrun{
 #' #' library(DBI)
-#' RKazam::Kazam()
+#' adbi::adbi()
 #' }
-Kazam <- function() {
-  new("KazamDriver")
+adbi <- function(driver = NA_character_) {
+
+  if (is.na(driver)) {
+    drv <- adbcdrivermanager::adbc_driver_monkey()
+  } else {
+    drv <- get(driver, envir = asNamespace(driver))
+  }
+
+  new("AdbiDriver", driver = drv)
 }
 
 #' @rdname DBI
 #' @export
 setClass(
-  "KazamDriver",
-  contains = "DBIDriver",
+  "AdbiDriver",
   slots = list(
-    # TODO: Add slots
-  )
+    driver = "adbc_driver"
+  ),
+  contains = "DBIDriver"
 )
 
 #' @export

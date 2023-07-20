@@ -1,9 +1,9 @@
 #' @rdname DBI
 #' @inheritParams DBI::dbRollback
 #' @usage NULL
-dbRollback_KazamConnection <- function(conn, ...) {
+dbRollback_AdbiConnection <- function(conn, ...) {
   testthat::skip("Not yet implemented: dbRollback(Connection)")
 }
 #' @rdname DBI
 #' @export
-setMethod("dbRollback", "KazamConnection", dbRollback_KazamConnection)
+setMethod("dbRollback", "AdbiConnection", dbRollback_AdbiConnection)

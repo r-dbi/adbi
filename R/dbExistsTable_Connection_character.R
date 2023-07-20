@@ -1,7 +1,7 @@
 #' @rdname DBI
 #' @inheritParams DBI::dbExistsTable
 #' @usage NULL
-dbExistsTable_KazamConnection_character <- function(conn, name, ...) {
+dbExistsTable_AdbiConnection_character <- function(conn, name, ...) {
   name <- dbQuoteIdentifier(conn, name)
 
   tryCatch(
@@ -16,4 +16,4 @@ dbExistsTable_KazamConnection_character <- function(conn, name, ...) {
 }
 #' @rdname DBI
 #' @export
-setMethod("dbExistsTable", c("KazamConnection", "character"), dbExistsTable_KazamConnection_character)
+setMethod("dbExistsTable", c("AdbiConnection", "character"), dbExistsTable_AdbiConnection_character)

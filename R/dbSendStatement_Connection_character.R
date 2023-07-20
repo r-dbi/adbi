@@ -1,7 +1,7 @@
 #' @rdname DBI
 #' @inheritParams DBI::dbSendStatement
 #' @usage NULL
-dbSendStatement_KazamConnection_character <- function(conn, statement, ..., params = NULL) {
+dbSendStatement_AdbiConnection_character <- function(conn, statement, ..., params = NULL) {
   if (!is.null(params)) {
     # TODO: Implement parameter binding
     testthat::skip("Not yet implemented: dbSendStatement(params = )")
@@ -13,4 +13,4 @@ dbSendStatement_KazamConnection_character <- function(conn, statement, ..., para
 }
 #' @rdname DBI
 #' @export
-setMethod("dbSendStatement", c("KazamConnection", "character"), dbSendStatement_KazamConnection_character)
+setMethod("dbSendStatement", c("AdbiConnection", "character"), dbSendStatement_AdbiConnection_character)

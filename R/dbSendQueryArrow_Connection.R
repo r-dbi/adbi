@@ -1,7 +1,7 @@
 #' @rdname DBI
 #' @inheritParams DBI::dbSendQuery
 #' @usage NULL
-dbSendQueryArrow_KazamConnection <- function(conn, statement, ..., params = NULL) {
+dbSendQueryArrow_AdbiConnection <- function(conn, statement, ..., params = NULL) {
   # TODO: Implement as needed, or remove (default DBI implementation exists)
 
   if (!is.null(params)) {
@@ -15,4 +15,4 @@ dbSendQueryArrow_KazamConnection <- function(conn, statement, ..., params = NULL
 }
 #' @rdname DBI
 #' @export
-setMethod("dbSendQueryArrow", "KazamConnection", dbSendQueryArrow_KazamConnection)
+setMethod("dbSendQueryArrow", "AdbiConnection", dbSendQueryArrow_AdbiConnection)

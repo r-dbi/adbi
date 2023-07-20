@@ -1,7 +1,7 @@
 #' @rdname DBI
 #' @inheritParams DBI::dbDataType
 #' @usage NULL
-dbDataType_KazamDriver <- function(dbObj, obj, ...) {
+dbDataType_AdbiDriver <- function(dbObj, obj, ...) {
   # Optional: Can remove this if all data types conform to SQL-92
   tryCatch(
     callNextMethod(...),
@@ -10,4 +10,4 @@ dbDataType_KazamDriver <- function(dbObj, obj, ...) {
 }
 #' @rdname DBI
 #' @export
-setMethod("dbDataType", "KazamDriver", dbDataType_KazamDriver)
+setMethod("dbDataType", "AdbiDriver", dbDataType_AdbiDriver)

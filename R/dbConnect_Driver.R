@@ -1,10 +1,9 @@
 #' @rdname DBI
 #' @inheritParams DBI::dbConnect
 #' @usage NULL
-dbConnect_KazamDriver <- function(drv, ...) {
-  # TODO: Implement
-  KazamConnection()
+dbConnect_AdbiDriver <- function(drv, ...) {
+  AdbiConnection(drv, ...)
 }
 #' @rdname DBI
 #' @export
-setMethod("dbConnect", "KazamDriver", dbConnect_KazamDriver)
+setMethod("dbConnect", "AdbiDriver", dbConnect_AdbiDriver)

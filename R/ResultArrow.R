@@ -15,7 +15,7 @@ setClass(
   "KazamResultArrow",
   contains = "DBIResultArrow",
   slots = list(
-    connection = "KazamConnection",
+    connection = "AdbiConnection",
     statement = "character"
   )
 )

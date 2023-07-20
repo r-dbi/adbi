@@ -15,7 +15,7 @@
 #' @param temporary a logical specifying whether the new table should be
 #'   temporary. Its default is `FALSE`.
 #' @usage NULL
-dbWriteTable_KazamConnection_character_data.frame <- function(conn, name, value, overwrite = FALSE, append = FALSE, ...,
+dbWriteTable_AdbiConnection_character_data.frame <- function(conn, name, value, overwrite = FALSE, append = FALSE, ...,
                                                               field.types = NULL, row.names = NULL, temporary = FALSE) {
   # TODO: Implement better ingestion
   if (is.null(row.names)) row.names <- FALSE
@@ -79,4 +79,4 @@ dbWriteTable_KazamConnection_character_data.frame <- function(conn, name, value,
 }
 #' @rdname DBI
 #' @export
-setMethod("dbWriteTable", c("KazamConnection", "character", "data.frame"), dbWriteTable_KazamConnection_character_data.frame)
+setMethod("dbWriteTable", c("AdbiConnection", "character", "data.frame"), dbWriteTable_AdbiConnection_character_data.frame)
