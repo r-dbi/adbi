@@ -23,7 +23,8 @@ Imports:
     adbcdrivermanager
 Suggests: 
     covr,
-    DBItest
+    DBItest,
+    adbcsqlite
 Remotes: 
     r-dbi/DBI
 Encoding: UTF-8
