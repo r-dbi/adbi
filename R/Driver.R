@@ -46,7 +46,7 @@ adbi <- function(driver = NA_character_) {
 setClass(
   "AdbiDriver",
   slots = list(
-    driver = "adbc_driver"
+    driver = "ANY"
   ),
   contains = "DBIDriver"
 )

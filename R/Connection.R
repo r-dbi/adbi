@@ -17,8 +17,8 @@ AdbiConnection <- function(driver, ...) {
 setClass(
   "AdbiConnection",
   slots = list(
-    database = "adbc_database",
-    connection = "adbc_connection"
+    database = "ANY",
+    connection = "ANY"
   ),
   contains = "DBIConnection"
 )
