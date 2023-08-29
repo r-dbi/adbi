@@ -16,7 +16,7 @@
 #'   temporary. Its default is `FALSE`.
 #' @usage NULL
 dbWriteTable_AdbiConnection_character_data.frame <- function(conn, name, value, overwrite = FALSE, append = FALSE, ...,
-                                                              field.types = NULL, row.names = NULL, temporary = FALSE) {
+                                                             field.types = NULL, row.names = NULL, temporary = FALSE) {
   # TODO: Implement better ingestion
   if (is.null(row.names)) row.names <- FALSE
   if ((!is.logical(row.names) && !is.character(row.names)) || length(row.names) != 1L) {

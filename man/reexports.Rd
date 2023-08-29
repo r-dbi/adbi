@@ -22,6 +22,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{DBI}{\code{\link[DBI]{Id}}, \code{\link[DBI]{dbAppendTable}}, \code{\link[DBI]{dbCanConnect}}, \code{\link[DBI]{dbCreateTable}}, \code{\link[DBI]{dbExecute}}, \code{\link[DBI]{dbGetQuery}}, \code{\link[DBI]{dbIsReadOnly}}, \code{\link[DBI]{dbListObjects}}, \code{\link[DBI]{dbQuoteLiteral}}, \code{\link[DBI]{dbReadTable}}, \code{\link[DBI]{dbUnquoteIdentifier}}, \code{\link[DBI]{dbWithTransaction}}}
+  \item{DBI}{\code{\link[DBI]{dbAppendTable}}, \code{\link[DBI]{dbCanConnect}}, \code{\link[DBI]{dbCreateTable}}, \code{\link[DBI]{dbExecute}}, \code{\link[DBI]{dbGetQuery}}, \code{\link[DBI]{dbIsReadOnly}}, \code{\link[DBI]{dbListObjects}}, \code{\link[DBI]{dbQuoteLiteral}}, \code{\link[DBI]{dbReadTable}}, \code{\link[DBI]{dbUnquoteIdentifier}}, \code{\link[DBI]{dbWithTransaction}}, \code{\link[DBI]{Id}}}
 }}
 

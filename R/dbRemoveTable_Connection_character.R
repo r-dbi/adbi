@@ -4,8 +4,8 @@
 #' @inheritParams DBI::dbRemoveTable
 #' @usage NULL
 dbRemoveTable_AdbiConnection_character <- function(conn, name, ...,
-                                                    temporary = FALSE,
-                                                    fail_if_missing = TRUE) {
+                                                   temporary = FALSE,
+                                                   fail_if_missing = TRUE) {
   name <- dbQuoteIdentifier(conn, name)
 
   sql <- paste0(
