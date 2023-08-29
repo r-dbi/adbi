@@ -3,11 +3,12 @@ NULL
 
 AdbiResult <- function(connection, statement) {
 
+  stopifnot(dbIsValid(connection))
+
   con <- connection@connection
 
   stmt <- adbcdrivermanager::adbc_statement_init(con)
 
-  adbcdrivermanager::adbc_statement_join(stmt, con)
   adbcdrivermanager::adbc_statement_set_sql_query(stmt, statement)
 
   new("AdbiResult",

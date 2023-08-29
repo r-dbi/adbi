@@ -2,6 +2,9 @@
 #' @inheritParams DBI::dbExistsTable
 #' @usage NULL
 dbExistsTable_AdbiConnection_character <- function(conn, name, ...) {
+
+  stopifnot(dbIsValid(conn))
+
   name <- dbQuoteIdentifier(conn, name)
 
   tryCatch(
