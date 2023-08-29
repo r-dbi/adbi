@@ -38,6 +38,8 @@ adbi <- function(driver = NA_character_) {
     }
   }
 
+  stopifnot(inherits(drv, "adbc_driver"))
+
   new("AdbiDriver", driver = drv)
 }
 
