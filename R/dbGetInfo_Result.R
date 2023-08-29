@@ -1,10 +1,10 @@
 #' @rdname DBI
 #' @inheritParams DBI::dbGetInfo
 #' @usage NULL
-dbGetInfo_KazamResult <- function(dbObj, ...) {
+dbGetInfo_AdbiResult <- function(dbObj, ...) {
   # Optional
   getMethod("dbGetInfo", "DBIResult", asNamespace("DBI"))(dbObj, ...)
 }
 #' @rdname DBI
 #' @export
-setMethod("dbGetInfo", "KazamResult", dbGetInfo_KazamResult)
+setMethod("dbGetInfo", "AdbiResult", dbGetInfo_AdbiResult)

@@ -1,10 +1,10 @@
 #' @rdname DBI
 #' @inheritParams methods::show
 #' @usage NULL
-show_KazamResult <- function(object) {
-  cat("<KazamResult>\n")
+show_AdbiResult <- function(object) {
+  cat("<AdbiResult>\n")
   # TODO: Print more details
 }
 #' @rdname DBI
 #' @export
-setMethod("show", "KazamResult", show_KazamResult)
+setMethod("show", "AdbiResult", show_AdbiResult)

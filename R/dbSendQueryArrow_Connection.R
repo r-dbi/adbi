@@ -11,7 +11,7 @@ dbSendQueryArrow_AdbiConnection <- function(conn, statement, ..., params = NULL)
 
   # TODO: Implement, remove skip() call
   testthat::skip("Not yet implemented: dbSendQueryArrow()")
-  KazamResult(connection = conn, statement = statement)
+  AdbiResult(connection = conn, statement = statement)
 }
 #' @rdname DBI
 #' @export

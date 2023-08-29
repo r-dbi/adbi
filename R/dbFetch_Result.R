@@ -1,7 +1,7 @@
 #' @rdname DBI
 #' @inheritParams DBI::dbFetch
 #' @usage NULL
-dbFetch_KazamResult <- function(res, n = -1, ...) {
+dbFetch_AdbiResult <- function(res, n = -1, ...) {
   #
   # FOR IMPLEMENTERS:
   #
@@ -15,4 +15,4 @@ dbFetch_KazamResult <- function(res, n = -1, ...) {
 }
 #' @rdname DBI
 #' @export
-setMethod("dbFetch", "KazamResult", dbFetch_KazamResult)
+setMethod("dbFetch", "AdbiResult", dbFetch_AdbiResult)

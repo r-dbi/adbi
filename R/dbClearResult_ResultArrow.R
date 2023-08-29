@@ -3,7 +3,7 @@
 #' @usage NULL
 dbClearResult_KazamResultArrow <- function(res, ...) {
   # TODO: Implement as needed, or remove (default DBI implementation exists)
-  dbClearResult_KazamResult(res)
+  dbClearResult_AdbiResult(res)
 }
 #' @rdname DBI
 #' @export

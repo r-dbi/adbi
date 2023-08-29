@@ -1,21 +1,26 @@
 #' @include Connection.R
 NULL
 
-KazamResult <- function(connection, statement) {
-  # TODO: Initialize result
-  new("KazamResult",
-    connection = connection,
-    statement = statement
+AdbiResult <- function(connection, statement) {
+
+  con <- connection@connection
+
+  stmt <- adbcdrivermanager::adbc_statement_init(con)
+
+  adbcdrivermanager::adbc_statement_join(stmt, con)
+  adbcdrivermanager::adbc_statement_set_sql_query(stmt, statement)
+
+  new("AdbiResult",
+    statement = stmt
   )
 }
 
 #' @rdname DBI
 #' @export
 setClass(
-  "KazamResult",
+  "AdbiResult",
   contains = "DBIResult",
   slots = list(
-    connection = "AdbiConnection",
-    statement = "character"
+    statement = "ANY"
   )
 )

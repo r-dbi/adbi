@@ -9,7 +9,7 @@ dbSendQuery_AdbiConnection_character <- function(conn, statement, ..., params = 
 
   # TODO: Implement, remove skip() call
   testthat::skip("Not yet implemented: dbSendQuery()")
-  KazamResult(connection = conn, statement = statement)
+  AdbiResult(connection = conn, statement = statement)
 }
 #' @rdname DBI
 #' @export

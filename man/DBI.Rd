@@ -23,20 +23,20 @@
 \alias{DBI}
 \alias{AdbiDriver-class}
 \alias{AdbiConnection-class}
-\alias{KazamResult-class}
+\alias{AdbiResult-class}
 \alias{KazamResultArrow-class}
 \alias{dbAppendTable_AdbiConnection}
 \alias{dbAppendTable,AdbiConnection-method}
 \alias{dbBegin_AdbiConnection}
 \alias{dbBegin,AdbiConnection-method}
-\alias{dbBind_KazamResult}
-\alias{dbBind,KazamResult-method}
-\alias{dbClearResult_KazamResult}
-\alias{dbClearResult,KazamResult-method}
+\alias{dbBind_AdbiResult}
+\alias{dbBind,AdbiResult-method}
+\alias{dbClearResult_AdbiResult}
+\alias{dbClearResult,AdbiResult-method}
 \alias{dbClearResult_KazamResultArrow}
 \alias{dbClearResult,KazamResultArrow-method}
-\alias{dbColumnInfo_KazamResult}
-\alias{dbColumnInfo,KazamResult-method}
+\alias{dbColumnInfo_AdbiResult}
+\alias{dbColumnInfo,AdbiResult-method}
 \alias{dbCommit_AdbiConnection}
 \alias{dbCommit,AdbiConnection-method}
 \alias{dbConnect_AdbiDriver}
@@ -53,28 +53,28 @@
 \alias{dbExistsTable,AdbiConnection,character-method}
 \alias{dbFetchArrow_KazamResultArrow}
 \alias{dbFetchArrow,KazamResultArrow-method}
-\alias{dbFetch_KazamResult}
-\alias{dbFetch,KazamResult-method}
+\alias{dbFetch_AdbiResult}
+\alias{dbFetch,AdbiResult-method}
 \alias{dbGetInfo_AdbiConnection}
 \alias{dbGetInfo,AdbiConnection-method}
 \alias{dbGetInfo_AdbiDriver}
 \alias{dbGetInfo,AdbiDriver-method}
-\alias{dbGetInfo_KazamResult}
-\alias{dbGetInfo,KazamResult-method}
-\alias{dbGetRowCount_KazamResult}
-\alias{dbGetRowCount,KazamResult-method}
-\alias{dbGetRowsAffected_KazamResult}
-\alias{dbGetRowsAffected,KazamResult-method}
-\alias{dbGetStatement_KazamResult}
-\alias{dbGetStatement,KazamResult-method}
-\alias{dbHasCompleted_KazamResult}
-\alias{dbHasCompleted,KazamResult-method}
+\alias{dbGetInfo_AdbiResult}
+\alias{dbGetInfo,AdbiResult-method}
+\alias{dbGetRowCount_AdbiResult}
+\alias{dbGetRowCount,AdbiResult-method}
+\alias{dbGetRowsAffected_AdbiResult}
+\alias{dbGetRowsAffected,AdbiResult-method}
+\alias{dbGetStatement_AdbiResult}
+\alias{dbGetStatement,AdbiResult-method}
+\alias{dbHasCompleted_AdbiResult}
+\alias{dbHasCompleted,AdbiResult-method}
 \alias{dbIsValid_AdbiConnection}
 \alias{dbIsValid,AdbiConnection-method}
 \alias{dbIsValid_AdbiDriver}
 \alias{dbIsValid,AdbiDriver-method}
-\alias{dbIsValid_KazamResult}
-\alias{dbIsValid,KazamResult-method}
+\alias{dbIsValid_AdbiResult}
+\alias{dbIsValid,AdbiResult-method}
 \alias{dbListFields_AdbiConnection_character}
 \alias{dbListFields,AdbiConnection,character-method}
 \alias{dbListTables_AdbiConnection}
@@ -99,21 +99,21 @@
 \alias{show,AdbiConnection-method}
 \alias{show_AdbiDriver}
 \alias{show,AdbiDriver-method}
-\alias{show_KazamResult}
-\alias{show,KazamResult-method}
+\alias{show_AdbiResult}
+\alias{show,AdbiResult-method}
 \title{DBI methods}
 \usage{
 \S4method{dbAppendTable}{AdbiConnection}(conn, name, value, ..., row.names = NULL)
 
 \S4method{dbBegin}{AdbiConnection}(conn, ...)
 
-\S4method{dbBind}{KazamResult}(res, params, ...)
+\S4method{dbBind}{AdbiResult}(res, params, ...)
 
-\S4method{dbClearResult}{KazamResult}(res, ...)
+\S4method{dbClearResult}{AdbiResult}(res, ...)
 
 \S4method{dbClearResult}{KazamResultArrow}(res, ...)
 
-\S4method{dbColumnInfo}{KazamResult}(res, ...)
+\S4method{dbColumnInfo}{AdbiResult}(res, ...)
 
 \S4method{dbCommit}{AdbiConnection}(conn, ...)
 
@@ -131,27 +131,27 @@
 
 \S4method{dbFetchArrow}{KazamResultArrow}(res, ...)
 
-\S4method{dbFetch}{KazamResult}(res, n = -1, ...)
+\S4method{dbFetch}{AdbiResult}(res, n = -1, ...)
 
 \S4method{dbGetInfo}{AdbiConnection}(dbObj, ...)
 
 \S4method{dbGetInfo}{AdbiDriver}(dbObj, ...)
 
-\S4method{dbGetInfo}{KazamResult}(dbObj, ...)
+\S4method{dbGetInfo}{AdbiResult}(dbObj, ...)
 
-\S4method{dbGetRowCount}{KazamResult}(res, ...)
+\S4method{dbGetRowCount}{AdbiResult}(res, ...)
 
-\S4method{dbGetRowsAffected}{KazamResult}(res, ...)
+\S4method{dbGetRowsAffected}{AdbiResult}(res, ...)
 
-\S4method{dbGetStatement}{KazamResult}(res, ...)
+\S4method{dbGetStatement}{AdbiResult}(res, ...)
 
-\S4method{dbHasCompleted}{KazamResult}(res, ...)
+\S4method{dbHasCompleted}{AdbiResult}(res, ...)
 
 \S4method{dbIsValid}{AdbiConnection}(dbObj, ...)
 
 \S4method{dbIsValid}{AdbiDriver}(dbObj, ...)
 
-\S4method{dbIsValid}{KazamResult}(dbObj, ...)
+\S4method{dbIsValid}{AdbiResult}(dbObj, ...)
 
 \S4method{dbListFields}{AdbiConnection,character}(conn, name, ...)
 
@@ -187,7 +187,7 @@
 
 \S4method{show}{AdbiDriver}(object)
 
-\S4method{show}{KazamResult}(object)
+\S4method{show}{AdbiResult}(object)
 }
 \arguments{
 \item{conn}{A \linkS4class{DBIConnection} object, as returned by
