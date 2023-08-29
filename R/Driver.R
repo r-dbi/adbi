@@ -24,23 +24,33 @@ adbi <- function(driver = NA_character_) {
 
   if (is.na(driver)) {
 
-    drv <- adbcdrivermanager::adbc_driver_monkey()
+    pkg <- "adbcdrivermanager"
+    fun <- "adbc_driver_monkey"
 
   } else {
 
     driver <- strsplit(driver, "::", fixed = TRUE)[[1L]]
 
     if (length(driver) == 1L) {
-      drv <- get(driver, envir = asNamespace(driver))
+
+      pkg <- fun <- driver
+
     } else {
+
       stopifnot(length(driver) == 2L)
-      drv <- get(driver[2L], envir = asNamespace(driver[1L]))
+
+      pkg <- driver[1L]
+      fun <- driver[2L]
     }
   }
 
-  stopifnot(inherits(drv, "adbc_driver"))
+  drv_fun <- get(fun, envir = asNamespace(pkg), mode = "function",
+                 inherits = FALSE)
+  drv_obj <- drv_fun()
 
-  new("AdbiDriver", driver = drv)
+  stopifnot(inherits(drv_obj, "adbc_driver"))
+
+  new("AdbiDriver", driver = drv_obj)
 }
 
 #' @rdname DBI
