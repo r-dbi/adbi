@@ -17,17 +17,3 @@ adbc_connection_is_valid <- function(x) {
 adbc_database_is_valid <- function(x) {
   adbc_is_valid(x, "adbc_database")
 }
-
-adbc_is_valid <- function(x, class) {
-
-  if (inherits(x, class)) {
-
-    res <- try(adbcdrivermanager::adbc_xptr_is_valid(x), silent = TRUE)
-
-    if (!inherits(res, "try-error")) {
-      return(res)
-    }
-  }
-
-  FALSE
-}

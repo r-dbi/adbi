@@ -2,8 +2,19 @@
 #' @inheritParams DBI::dbClearResult
 #' @usage NULL
 dbClearResult_AdbiResult <- function(res, ...) {
-  testthat::skip("Not yet implemented: dbClearResult(Result)")
+
+  if (adbc_statement_is_valid(res@statement)) {
+
+    adbcdrivermanager::adbc_statement_release(res@statement)
+
+  } else {
+
+    warning("Statement already released.", call. = FALSE)
+  }
+
+  invisible(TRUE)
 }
+
 #' @rdname DBI
 #' @export
 setMethod("dbClearResult", "AdbiResult", dbClearResult_AdbiResult)
