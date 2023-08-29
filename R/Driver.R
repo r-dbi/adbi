@@ -23,9 +23,19 @@ NULL
 adbi <- function(driver = NA_character_) {
 
   if (is.na(driver)) {
+
     drv <- adbcdrivermanager::adbc_driver_monkey()
+
   } else {
-    drv <- get(driver, envir = asNamespace(driver))
+
+    driver <- strsplit(driver, "::", fixed = TRUE)[[1L]]
+
+    if (length(driver) == 1L) {
+      drv <- get(driver, envir = asNamespace(driver))
+    } else {
+      stopifnot(length(driver) == 2L)
+      drv <- get(driver[2L], envir = asNamespace(driver[1L]))
+    }
   }
 
   new("AdbiDriver", driver = drv)
