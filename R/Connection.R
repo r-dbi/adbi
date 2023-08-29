@@ -4,15 +4,11 @@ NULL
 AdbiConnection <- function(driver, ...) {
 
   db <- adbcdrivermanager::adbc_database_init(driver@driver, ...)
-  attr(db, "is_open") <- TRUE
-
-  con <- adbcdrivermanager::adbc_connection_init(db)
-  attr(con, "is_open") <- TRUE
 
   new(
     "AdbiConnection",
     database = db,
-    connection = con
+    connection = adbcdrivermanager::adbc_connection_init(db)
   )
 }
 
@@ -22,8 +18,7 @@ setClass(
   "AdbiConnection",
   slots = list(
     database = "adbc_database",
-    connection = "adbc_connection",
-    is_open = "logical"
+    connection = "adbc_connection"
   ),
   contains = "DBIConnection"
 )
