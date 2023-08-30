@@ -9,7 +9,9 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
       "connect_bigint_character",
       "connect_bigint_integer64",
       "send_query_stale_warning",
+      "send_statement_stale_warning",
       "send_query_only_one_result_set",
+      "send_statement_only_one_result_set",
       "data_raw", # apache/arrow-adbc#1004
       "data_64_bit_numeric_warning", # apache/arrow-adbc#1005
       "data_64_bit_lossless", # apache/arrow-adbc#1005
@@ -37,6 +39,7 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
       "bind_factor",
       "bind_raw",
       "bind_blob",
+      "fetch_no_return_value",
       "begin_write_commit",
       "begin_write_disconnect",
       # TODO: Understand why test fails in R < 3.6
