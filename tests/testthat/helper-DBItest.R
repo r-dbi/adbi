@@ -1,7 +1,7 @@
 DBItest::make_context(
   adbi("adbcsqlite"),
   list(
-    uri = ":memory:"
+    uri = tempfile("DBItest", fileext = ".sqlite")
   ),
   tweaks = suppressWarnings(
     DBItest::tweaks(

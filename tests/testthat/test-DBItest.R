@@ -17,7 +17,7 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
       "data_64_bit_lossless", # apache/arrow-adbc#1005
       "quote_identifier_string",
       "create_table_visible_in_other_connection",
-      "table_visible_in_other_connection",
+      "table_visible_in_other_connection", # apache/arrow-adbc#1008
       "bind_return_value",
       "bind_too_many",
       "bind_not_enough",
