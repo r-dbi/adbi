@@ -44,13 +44,9 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
       "begin_write_disconnect",
       "read_table", # apache/arrow-adbc#1008
       "read_table_empty", # apache/arrow-adbc#1008
-      "read_table_row_names_false",
-      "read_table_row_names_true_exists",
-      "read_table_row_names_true_missing",
-      "read_table_row_names_na_exists",
-      "read_table_row_names_na_missing",
-      "read_table_row_names_string_missing",
-      "read_table_row_names_default",
+      "read_table_row_names_true_missing", # apache/arrow-adbc#1008
+      "read_table_row_names_na_missing", # apache/arrow-adbc#1008
+      "read_table_row_names_string_missing", # apache/arrow-adbc#1008
       "read_table_name",
       "create_roundtrip_keywords",
       "append_roundtrip_64_bit_roundtrip",

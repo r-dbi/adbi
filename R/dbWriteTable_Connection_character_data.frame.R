@@ -28,8 +28,6 @@ dbWriteTable_AdbiConnection_character_data.frame <- function(conn, name, value, 
     length(row.names) != 1L) {
 
     stop("`row.names` must be a logical scalar or a string")
-  } else if (is.character(row.names) || row.names) {
-    stop("setting row.names is not supported")
   }
 
   if (!is.logical(overwrite) || length(overwrite) != 1L || is.na(overwrite)) {
@@ -79,6 +77,8 @@ dbWriteTable_AdbiConnection_character_data.frame <- function(conn, name, value, 
   )
 
   on.exit(adbcdrivermanager::adbc_statement_release(stmt))
+
+  value <- sqlRownamesToColumn(value, row.names)
 
   adbcdrivermanager::adbc_statement_bind_stream(stmt, value)
   adbcdrivermanager::adbc_statement_execute_query(stmt)
