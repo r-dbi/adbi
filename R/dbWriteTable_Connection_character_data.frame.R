@@ -18,6 +18,8 @@
 dbWriteTable_AdbiConnection_character_data.frame <- function(conn, name, value, overwrite = FALSE, append = FALSE, ..., field.types = NULL, row.names = NULL,
   temporary = FALSE) {
 
+  stopifnot(dbIsValid(conn))
+
   if (is.null(row.names)) {
     row.names <- FALSE
   }
