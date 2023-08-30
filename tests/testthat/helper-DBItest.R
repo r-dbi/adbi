@@ -14,7 +14,9 @@ DBItest::make_context(
       logical_return = function(x) as.numeric(x), # apache/arrow-adbc#1005
       date_typed = FALSE,
       time_typed = FALSE,
-      timestamp_typed = FALSE
+      timestamp_typed = FALSE,
+      temporary_tables = FALSE,
+      strict_identifier = TRUE
     )
   ),
   name = "adbi"

@@ -1,0 +1,53 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# adbi
+
+<!-- badges: start -->
+[![rcc](https://github.com/r-dbi/adbi/workflows/rcc/badge.svg)](https://github.com/r-dbi/adbi/actions)
+[![Codecov test coverage](https://codecov.io/gh/r-dbi/adbi/branch/main/graph/badge.svg)](https://codecov.io/gh/r-dbi/adbi?branch=main)
+<!-- badges: end -->
+
+Bringing [arrow-adbc](https://github.com/apache/arrow-adbc) to R via [DBI](https://github.com/r-dbi), adbi aims to provide DBI-compliant database access.
+
+## Installation
+
+You can install the development version of adbi from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("r-dbi/adbi")
+```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r example}
+library(DBI)
+
+# Create an SQLite connection using the adbcsqlite backend
+con <- dbConnect(adbi::adbi("adbcsqlite"), uri = ":memory:")
+
+# Write a table
+dbWriteTable(con, "swiss", datasets::swiss)
+
+# Query it
+dbGetQuery(con, "SELECT * from swiss WHERE Agriculture < 50")
+
+# Cleanup
+dbDisconnect(con)
+```
+
