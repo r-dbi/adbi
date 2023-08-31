@@ -1,4 +1,4 @@
-url: https://rkazamg s.r-dbi.org
+url: https://adbi.r-dbi.org
 
 template:
   params:
@@ -19,8 +19,8 @@ reference:
 
 - title: Package documentation
   contents:
-  - Kazam
-  - RKazam-package
+  - adbi
+  - adbi-package
 
 development:
   mode: auto
