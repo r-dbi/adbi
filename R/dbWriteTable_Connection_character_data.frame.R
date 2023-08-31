@@ -16,7 +16,7 @@
 #'   temporary. Its default is `FALSE`.
 #' @usage NULL
 dbWriteTable_AdbiConnection_character_data.frame <- function(conn, name, value, overwrite = FALSE, append = FALSE, ..., field.types = NULL, row.names = NULL,
-  temporary = FALSE) {
+    temporary = FALSE) {
 
   stopifnot(dbIsValid(conn))
 
@@ -54,7 +54,7 @@ dbWriteTable_AdbiConnection_character_data.frame <- function(conn, name, value, 
     !is.null(names(field.types)) && !anyDuplicated(names(field.types)))) {
 
     stop("`field.types` must be a named character vector with unique names, ",
-         "or NULL")
+      "or NULL")
 
   } else if (!is.null(field.types)) {
     stop("specifying field.types is not supported")

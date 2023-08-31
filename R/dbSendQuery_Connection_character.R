@@ -2,7 +2,7 @@
 #' @inheritParams DBI::dbSendQuery
 #' @usage NULL
 dbSendQuery_AdbiConnection_character <- function(conn, statement, ...,
-  params = NULL) {
+    params = NULL) {
 
   if (!is.null(params)) {
     # TODO: Implement parameter binding

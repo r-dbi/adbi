@@ -2,7 +2,7 @@
 #' @inheritParams DBI::dbSendStatement
 #' @usage NULL
 dbSendStatement_AdbiConnection_character <- function(conn, statement, ...,
-  params = NULL) {
+    params = NULL) {
 
   if (!is.null(params)) {
     testthat::skip("Not yet implemented: dbSendStatement(params = )")

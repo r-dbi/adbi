@@ -45,7 +45,7 @@ adbi <- function(driver = NA_character_) {
   }
 
   drv_fun <- get(fun, envir = asNamespace(pkg), mode = "function",
-                 inherits = FALSE)
+    inherits = FALSE)
   drv_obj <- drv_fun()
 
   stopifnot(inherits(drv_obj, "adbc_driver"))
