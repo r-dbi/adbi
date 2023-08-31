@@ -1,6 +1,6 @@
 Package: adbi
 Title: Boilerplate for implementing a DBI back end
-Version: 0.0.0.9010
+Version: 0.0.0.9011
 Authors@R: 
     c(person(given = "Nicolas",
              family = "Bennett",
