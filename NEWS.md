@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# adbi 0.0.0.9012 (2023-09-01)
+
+## Bug fixes
+
+- Fix pkgdown builds.
+
+
 # adbi 0.0.0.9011 (2023-08-31)
 
 - Internal changes only.
