@@ -3,7 +3,10 @@
 #' @usage NULL
 show_AdbiConnection <- function(object) {
   cat("<AdbiConnection>\n")
-  # TODO: Print more details
+  browser()
+  nanoarrow::convert_array_stream(
+    adbcdrivermanager::adbc_connection_get_info(object@connection, 100)
+  )
 }
 #' @rdname DBI
 #' @export
