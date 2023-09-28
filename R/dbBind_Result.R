@@ -3,6 +3,11 @@
 #' @usage NULL
 dbBind_AdbiResult <- function(res, params, ...) {
 
+  stopifnot(length(params) > 0L)
+
+  params <- as.list(params)
+  params <- as.data.frame(params, fix.empty.names = FALSE)
+
   # can we call this only once? if not, can we query the "prep" status?
   adbcdrivermanager::adbc_statement_prepare(res@statement)
   # any advantage of bind_stream over bind?
