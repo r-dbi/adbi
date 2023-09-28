@@ -3,7 +3,9 @@
 #' @usage NULL
 dbBind_AdbiResult <- function(res, params, ...) {
 
-  stopifnot(length(params) > 0L)
+  if (length(params) == 0L) {
+    stop("Cannot bind zero-length parameter", call. = FALSE)
+  }
 
   params <- as.list(params)
   params <- as.data.frame(params, fix.empty.names = FALSE)
