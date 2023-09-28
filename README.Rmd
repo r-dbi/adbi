@@ -45,9 +45,19 @@ con <- dbConnect(adbi::adbi("adbcsqlite"), uri = ":memory:")
 dbWriteTable(con, "swiss", datasets::swiss)
 
 # Query it
-dbGetQuery(con, "SELECT * from swiss WHERE Agriculture < 50")
+dbGetQuery(con, "SELECT * from swiss WHERE Agriculture < 40")
+
+# Prepared statements
+res <- dbSendQuery(con, "SELECT * from swiss WHERE Agriculture < ?")
+
+dbBind(res, 30)
+dbFetch(res)
+
+dbBind(res, 20)
+dbFetch(res)
 
 # Cleanup
+dbClearResult(res)
 dbDisconnect(con)
 ```
 
