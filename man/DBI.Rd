@@ -169,7 +169,7 @@
 
 \S4method{dbSendQuery}{AdbiConnection,character}(conn, statement, ..., params = NULL)
 
-\S4method{dbSendStatement}{AdbiConnection,character}(conn, statement, ..., params = NULL)
+\S4method{dbSendStatement}{AdbiConnection,character}(conn, statement, ..., params = NULL, immediate = NULL)
 
 \S4method{dbWriteTable}{AdbiConnection,character,data.frame}(
   conn,
@@ -241,6 +241,11 @@ temporary. Its default is \code{FALSE}.}
 table doesn't exist.}
 
 \item{statement}{a character string containing SQL.}
+
+\item{immediate}{Passing a value \code{TRUE} is intended for statements containing
+no placeholders and \code{FALSE} otherwise. The default value \code{NULL} will
+inspect the statement for presence of placeholders (will \code{PREPARE} the
+statement)}
 
 \item{overwrite}{Allow overwriting the destination table. Cannot be
 \code{TRUE} if \code{append} is also \code{TRUE}.}

@@ -3,6 +3,18 @@
 #' @usage NULL
 dbDisconnect_AdbiConnection <- function(conn, ...) {
 
+  n_res <- length(meta(conn, "results"))
+
+  if (n_res > 0L) {
+
+    message("There are ", n_res, " result(s) in use. The connection will be ",
+            "released when they are closed")
+
+    meta(conn, "disconnect") <- TRUE
+
+    return(invisible(FALSE))
+  }
+
   if (adbc_connection_is_valid(conn@connection)) {
 
     adbcdrivermanager::adbc_connection_release(conn@connection)

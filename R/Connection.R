@@ -5,10 +5,15 @@ AdbiConnection <- function(driver, ...) {
 
   db <- adbcdrivermanager::adbc_database_init(driver@driver, ...)
 
+  meta <- list(
+    results = list()
+  )
+
   new(
     "AdbiConnection",
     database = db,
-    connection = adbcdrivermanager::adbc_connection_init(db)
+    connection = adbcdrivermanager::adbc_connection_init(db),
+    metadata = list2env(meta, envir = new.env(parent = emptyenv()))
   )
 }
 
@@ -18,7 +23,8 @@ setClass(
   "AdbiConnection",
   slots = list(
     database = "ANY",
-    connection = "ANY"
+    connection = "ANY",
+    metadata = "environment"
   ),
   contains = "DBIConnection"
 )

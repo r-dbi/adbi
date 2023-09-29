@@ -77,5 +77,6 @@ Collate:
     'show_Connection.R'
     'show_Driver.R'
     'show_Result.R'
+    'utils.R'
 Config/autostyle/scope: line_breaks
 Config/autostyle/strict: false
