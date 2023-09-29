@@ -2,8 +2,12 @@
 #' @inheritParams DBI::dbCommit
 #' @usage NULL
 dbCommit_AdbiConnection <- function(conn, ...) {
-  testthat::skip("Not yet implemented: dbCommit(Connection)")
+  adbcdrivermanager::adbc_connection_set_options(
+    conn@connection,
+    c(adbc.connection.autocommit = "true")
+  )
 }
+
 #' @rdname DBI
 #' @export
 setMethod("dbCommit", "AdbiConnection", dbCommit_AdbiConnection)

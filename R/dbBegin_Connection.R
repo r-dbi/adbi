@@ -2,7 +2,10 @@
 #' @inheritParams DBI::dbBegin
 #' @usage NULL
 dbBegin_AdbiConnection <- function(conn, ...) {
-  testthat::skip("Not yet implemented: dbBegin(Connection)")
+  adbcdrivermanager::adbc_connection_set_options(
+    conn@connection,
+    c(adbc.connection.autocommit = "false")
+  )
 }
 #' @rdname DBI
 #' @export
