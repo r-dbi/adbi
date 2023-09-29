@@ -14,8 +14,8 @@ dbFetch_AdbiResult <- function(res, n = -1, ...) {
     if (is.null(n_bound) || n_bound < 1L) {
 
       stop("A statement created with `immediate = FALSE` should be prepared ",
-        "before being executed, typically by a call to `dbBind()`",
-        call. = FALSE)
+           "before being executed, typically by a call to `dbBind()`.",
+           call. = FALSE)
     }
   }
 
