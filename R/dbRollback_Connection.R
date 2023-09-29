@@ -11,7 +11,7 @@ dbRollback_AdbiConnection <- function(conn, ...) {
 
   if (is.null(state) || state == 0L) {
     stop("Cannot commit a transaction without transactional context.",
-         call. = FALSE)
+      call. = FALSE)
   }
 
   adbcdrivermanager::adbc_connection_rollback(conn@connection)
