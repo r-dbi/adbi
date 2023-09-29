@@ -8,7 +8,7 @@ dbDisconnect_AdbiConnection <- function(conn, ...) {
   if (n_res > 0L) {
 
     message("There are ", n_res, " result(s) in use. The connection will be ",
-            "released when they are closed")
+      "released when they are closed")
 
     meta(conn, "disconnect") <- TRUE
 

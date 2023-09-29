@@ -4,11 +4,11 @@ NULL
 AdbiResult <- function(connection, statement, immediate = NULL) {
 
   if (!(is.null(immediate) || identical(immediate, TRUE) ||
-      identical(immediate, FALSE))) {
+    identical(immediate, FALSE))) {
 
     stop("Expecting `immediate` to be either `TRUE` or `FALSE` (or `NULL` ",
-         "in which case the statement is inspected for placeholders)",
-         call. = FALSE)
+      "in which case the statement is inspected for placeholders)",
+      call. = FALSE)
   }
 
   if (!dbIsValid(connection)) {

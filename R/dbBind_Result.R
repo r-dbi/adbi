@@ -5,7 +5,7 @@ dbBind_AdbiResult <- function(res, params, ...) {
 
   if (!isFALSE(meta(res, "immediate"))) {
     stop("A statement containing placeholders should be created using ",
-         "`immediate = FALSE`", call. = FALSE)
+      "`immediate = FALSE`", call. = FALSE)
   }
 
   if (length(params) == 0L) {
