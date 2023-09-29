@@ -19,13 +19,22 @@ dbFetch_AdbiResult <- function(res, n = -1, ...) {
     }
   }
 
-  strm <- nanoarrow::nanoarrow_allocate_array_stream()
+  if (is.null(meta(res, "data"))) {
+    ret <- execute_statement(res)
+  } else {
+    ret <- meta(res, "data")
+    meta(res, "data") <- NULL
+  }
 
-  adbcdrivermanager::adbc_statement_execute_query(res@statement, stream = strm)
-
-  as.data.frame(strm)
+  as.data.frame(ret)
 }
 
 #' @rdname DBI
 #' @export
 setMethod("dbFetch", "AdbiResult", dbFetch_AdbiResult)
+
+execute_statement <- function(res) {
+  strm <- nanoarrow::nanoarrow_allocate_array_stream()
+  adbcdrivermanager::adbc_statement_execute_query(res@statement, stream = strm)
+  strm
+}

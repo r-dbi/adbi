@@ -1,15 +1,32 @@
 #' @rdname DBI
+#' @param immediate Passing a value `TRUE` is intended for statements containing
+#'   no placeholders and `FALSE` otherwise. The default value `NULL` will
+#'   inspect the statement for presence of placeholders (will `PREPARE` the
+#'   statement)
 #' @inheritParams DBI::dbSendQuery
 #' @usage NULL
 dbSendQuery_AdbiConnection_character <- function(conn, statement, ...,
-    params = NULL) {
+    params = NULL, immediate = NULL) {
 
   if (!is.null(params)) {
-    # TODO: Implement parameter binding
-    testthat::skip("Not yet implemented: dbSendQuery(params = )")
+    immediate <- FALSE
   }
 
-  AdbiResult(connection = conn, statement = statement)
+  res <- AdbiResult(
+    connection = conn,
+    statement = statement,
+    immediate = immediate
+  )
+
+  if (!is.null(params)) {
+    dbBind(res, params)
+  }
+
+  if (isTRUE(immediate)) {
+    meta(res, "data") <- execute_statement(res)
+  }
+
+  res
 }
 
 #' @rdname DBI

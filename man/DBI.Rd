@@ -167,7 +167,7 @@
 
 \S4method{dbSendQueryArrow}{AdbiConnection}(conn, statement, ..., params = NULL)
 
-\S4method{dbSendQuery}{AdbiConnection,character}(conn, statement, ..., params = NULL)
+\S4method{dbSendQuery}{AdbiConnection,character}(conn, statement, ..., params = NULL, immediate = NULL)
 
 \S4method{dbSendStatement}{AdbiConnection,character}(conn, statement, ..., params = NULL, immediate = NULL)
 

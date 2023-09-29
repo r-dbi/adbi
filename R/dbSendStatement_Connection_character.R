@@ -9,15 +9,26 @@ dbSendStatement_AdbiConnection_character <- function(conn, statement, ...,
     params = NULL, immediate = NULL) {
 
   if (!is.null(params)) {
-    testthat::skip("Not yet implemented: dbSendStatement(params = )")
+    immediate <- FALSE
   }
 
-  AdbiResult(
+  res <- AdbiResult(
     connection = conn,
     statement = statement,
     immediate = immediate
   )
+
+  if (!is.null(params)) {
+    dbBind(res, params)
+  }
+
+  if (isTRUE(immediate)) {
+    execute_statement(res)
+  }
+
+  res
 }
+
 #' @rdname DBI
 #' @export
 setMethod(
