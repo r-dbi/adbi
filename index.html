@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">adbi</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9011</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9012</span>
       </span>
     </div>
 
@@ -93,31 +93,56 @@
 <span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbWriteTable.html" class="external-link">dbWriteTable</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"swiss"</span>, <span class="fu">datasets</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/datasets/swiss.html" class="external-link">swiss</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Query it</span></span>
-<span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html" class="external-link">dbGetQuery</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"SELECT * from swiss WHERE Agriculture &lt; 50"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html" class="external-link">dbGetQuery</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"SELECT * from swiss WHERE Agriculture &lt; 40"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    Fertility Agriculture Examination Education Catholic Infant.Mortality</span></span>
 <span><span class="co">#&gt; 1       80.2        17.0          15        12     9.96             22.2</span></span>
-<span><span class="co">#&gt; 2       83.1        45.1           6         9    84.84             22.2</span></span>
-<span><span class="co">#&gt; 3       92.5        39.7           5         5    93.40             20.2</span></span>
-<span><span class="co">#&gt; 4       85.8        36.5          12         7    33.77             20.3</span></span>
-<span><span class="co">#&gt; 5       76.9        43.5          17        15     5.16             20.6</span></span>
-<span><span class="co">#&gt; 6       76.1        35.3           9         7    90.57             26.6</span></span>
-<span><span class="co">#&gt; 7       82.9        45.2          16        13    91.38             24.4</span></span>
-<span><span class="co">#&gt; 8       71.7        34.0          17         8     3.30             20.0</span></span>
-<span><span class="co">#&gt; 9       55.7        19.4          26        28    12.11             20.2</span></span>
-<span><span class="co">#&gt; 10      54.3        15.2          31        20     2.15             10.8</span></span>
-<span><span class="co">#&gt; 11      58.3        26.8          25        19    18.46             20.9</span></span>
-<span><span class="co">#&gt; 12      65.4        49.5          15         8     6.10             22.5</span></span>
-<span><span class="co">#&gt; 13      70.4        38.4          26        12     5.62             20.3</span></span>
-<span><span class="co">#&gt; 14      65.7         7.7          29        11    13.79             20.5</span></span>
-<span><span class="co">#&gt; 15      72.7        16.7          22        13    11.22             18.9</span></span>
-<span><span class="co">#&gt; 16      64.4        17.6          35        32    16.92             23.0</span></span>
-<span><span class="co">#&gt; 17      77.6        37.6          15         7     4.97             20.0</span></span>
-<span><span class="co">#&gt; 18      67.6        18.7          25         7     8.65             19.5</span></span>
-<span><span class="co">#&gt; 19      35.0         1.2          37        53    42.34             18.0</span></span>
-<span><span class="co">#&gt; 20      44.7        46.6          16        29    50.43             18.2</span></span>
-<span><span class="co">#&gt; 21      42.8        27.7          22        29    58.33             19.3</span></span>
+<span><span class="co">#&gt; 2       92.5        39.7           5         5    93.40             20.2</span></span>
+<span><span class="co">#&gt; 3       85.8        36.5          12         7    33.77             20.3</span></span>
+<span><span class="co">#&gt; 4       76.1        35.3           9         7    90.57             26.6</span></span>
+<span><span class="co">#&gt; 5       71.7        34.0          17         8     3.30             20.0</span></span>
+<span><span class="co">#&gt; 6       55.7        19.4          26        28    12.11             20.2</span></span>
+<span><span class="co">#&gt; 7       54.3        15.2          31        20     2.15             10.8</span></span>
+<span><span class="co">#&gt; 8       58.3        26.8          25        19    18.46             20.9</span></span>
+<span><span class="co">#&gt; 9       70.4        38.4          26        12     5.62             20.3</span></span>
+<span><span class="co">#&gt; 10      65.7         7.7          29        11    13.79             20.5</span></span>
+<span><span class="co">#&gt; 11      72.7        16.7          22        13    11.22             18.9</span></span>
+<span><span class="co">#&gt; 12      64.4        17.6          35        32    16.92             23.0</span></span>
+<span><span class="co">#&gt; 13      77.6        37.6          15         7     4.97             20.0</span></span>
+<span><span class="co">#&gt; 14      67.6        18.7          25         7     8.65             19.5</span></span>
+<span><span class="co">#&gt; 15      35.0         1.2          37        53    42.34             18.0</span></span>
+<span><span class="co">#&gt; 16      42.8        27.7          22        29    58.33             19.3</span></span>
+<span></span>
+<span><span class="co"># Prepared statements</span></span>
+<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html" class="external-link">dbSendQuery</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"SELECT * from swiss WHERE Agriculture &lt; ?"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbBind.html" class="external-link">dbBind</a></span><span class="op">(</span><span class="va">res</span>, <span class="fl">30</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbFetch.html" class="external-link">dbFetch</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
+<span><span class="co">#&gt;    Fertility Agriculture Examination Education Catholic Infant.Mortality</span></span>
+<span><span class="co">#&gt; 1       80.2        17.0          15        12     9.96             22.2</span></span>
+<span><span class="co">#&gt; 2       55.7        19.4          26        28    12.11             20.2</span></span>
+<span><span class="co">#&gt; 3       54.3        15.2          31        20     2.15             10.8</span></span>
+<span><span class="co">#&gt; 4       58.3        26.8          25        19    18.46             20.9</span></span>
+<span><span class="co">#&gt; 5       65.7         7.7          29        11    13.79             20.5</span></span>
+<span><span class="co">#&gt; 6       72.7        16.7          22        13    11.22             18.9</span></span>
+<span><span class="co">#&gt; 7       64.4        17.6          35        32    16.92             23.0</span></span>
+<span><span class="co">#&gt; 8       67.6        18.7          25         7     8.65             19.5</span></span>
+<span><span class="co">#&gt; 9       35.0         1.2          37        53    42.34             18.0</span></span>
+<span><span class="co">#&gt; 10      42.8        27.7          22        29    58.33             19.3</span></span>
+<span></span>
+<span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbBind.html" class="external-link">dbBind</a></span><span class="op">(</span><span class="va">res</span>, <span class="fl">20</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbFetch.html" class="external-link">dbFetch</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   Fertility Agriculture Examination Education Catholic Infant.Mortality</span></span>
+<span><span class="co">#&gt; 1      80.2        17.0          15        12     9.96             22.2</span></span>
+<span><span class="co">#&gt; 2      55.7        19.4          26        28    12.11             20.2</span></span>
+<span><span class="co">#&gt; 3      54.3        15.2          31        20     2.15             10.8</span></span>
+<span><span class="co">#&gt; 4      65.7         7.7          29        11    13.79             20.5</span></span>
+<span><span class="co">#&gt; 5      72.7        16.7          22        13    11.22             18.9</span></span>
+<span><span class="co">#&gt; 6      64.4        17.6          35        32    16.92             23.0</span></span>
+<span><span class="co">#&gt; 7      67.6        18.7          25         7     8.65             19.5</span></span>
+<span><span class="co">#&gt; 8      35.0         1.2          37        53    42.34             18.0</span></span>
 <span></span>
 <span><span class="co"># Cleanup</span></span>
+<span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbClearResult.html" class="external-link">dbClearResult</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbDisconnect.html" class="external-link">dbDisconnect</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>

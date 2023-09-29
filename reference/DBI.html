@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">adbi</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9011</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9012</span>
       </span>
     </div>
 
@@ -153,7 +153,7 @@
 <span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html" class="external-link">dbSendQuery</a></span><span class="op">(</span><span class="va">conn</span>, <span class="va">statement</span>, <span class="va">...</span>, params <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for AdbiConnection,character</span></span>
-<span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbSendStatement.html" class="external-link">dbSendStatement</a></span><span class="op">(</span><span class="va">conn</span>, <span class="va">statement</span>, <span class="va">...</span>, params <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbSendStatement.html" class="external-link">dbSendStatement</a></span><span class="op">(</span><span class="va">conn</span>, <span class="va">statement</span>, <span class="va">...</span>, params <span class="op">=</span> <span class="cn">NULL</span>, immediate <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for AdbiConnection,character,data.frame</span></span>
 <span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbWriteTable.html" class="external-link">dbWriteTable</a></span><span class="op">(</span></span>
@@ -258,6 +258,13 @@ table doesn't exist.</p></dd>
 
 <dt>statement</dt>
 <dd><p>a character string containing SQL.</p></dd>
+
+
+<dt>immediate</dt>
+<dd><p>Passing a value <code>TRUE</code> is intended for statements containing
+no placeholders and <code>FALSE</code> otherwise. The default value <code>NULL</code> will
+inspect the statement for presence of placeholders (will <code>PREPARE</code> the
+statement)</p></dd>
 
 
 <dt>overwrite</dt>
