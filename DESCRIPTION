@@ -79,6 +79,8 @@ Collate:
     'dbSendQuery_Connection_character.R'
     'dbSendStatement_Connection_character.R'
     'dbUnquoteIdentifier_AdbiConnection.R'
+    'dbWriteTable_AdbiConnection_Id_data.frame.R'
+    'dbWriteTable_AdbiConnection_SQL_data.frame.R'
     'dbWriteTable_Connection_character_data.frame.R'
     'show_Connection.R'
     'show_Driver.R'

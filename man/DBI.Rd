@@ -21,6 +21,8 @@
 %   R/dbSendQueryArrow_Connection.R, R/dbSendQuery_Connection_character.R,
 %   R/dbSendStatement_Connection_character.R,
 %   R/dbUnquoteIdentifier_AdbiConnection.R,
+%   R/dbWriteTable_AdbiConnection_Id_data.frame.R,
+%   R/dbWriteTable_AdbiConnection_SQL_data.frame.R,
 %   R/dbWriteTable_Connection_character_data.frame.R, R/show_Connection.R,
 %   R/show_Driver.R, R/show_Result.R
 \docType{class}
@@ -110,6 +112,10 @@
 \alias{dbSendStatement,AdbiConnection,character-method}
 \alias{dbUnquoteIdentifier_AdbiConnection}
 \alias{dbUnquoteIdentifier,AdbiConnection-method}
+\alias{dbWriteTable_AdbiConnection_Id_data.frame}
+\alias{dbWriteTable,AdbiConnection,Id,data.frame-method}
+\alias{dbWriteTable_AdbiConnection_SQL_data.frame}
+\alias{dbWriteTable,AdbiConnection,SQL,data.frame-method}
 \alias{dbWriteTable_AdbiConnection_character_data.frame}
 \alias{dbWriteTable,AdbiConnection,character,data.frame-method}
 \alias{show_AdbiConnection}
@@ -200,7 +206,7 @@
 
 \S4method{dbUnquoteIdentifier}{AdbiConnection}(conn, x, ...)
 
-\S4method{dbWriteTable}{AdbiConnection,character,data.frame}(
+\S4method{dbWriteTable}{AdbiConnection,Id,data.frame}(
   conn,
   name,
   value,
@@ -211,6 +217,10 @@
   row.names = NULL,
   temporary = FALSE
 )
+
+\S4method{dbWriteTable}{AdbiConnection,SQL,data.frame}(conn, name, value, ...)
+
+\S4method{dbWriteTable}{AdbiConnection,character,data.frame}(conn, name, value, ...)
 
 \S4method{show}{AdbiConnection}(object)
 
