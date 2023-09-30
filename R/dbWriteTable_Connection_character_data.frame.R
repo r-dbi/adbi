@@ -18,7 +18,9 @@
 dbWriteTable_AdbiConnection_character_data.frame <- function(conn, name, value, overwrite = FALSE, append = FALSE, ..., field.types = NULL, row.names = NULL,
     temporary = FALSE) {
 
-  stopifnot(dbIsValid(conn))
+  if (!dbIsValid(conn)) {
+    stop("Invalid connection.", call. = FALSE)
+  }
 
   if (is.null(row.names)) {
     row.names <- FALSE
@@ -68,6 +70,21 @@ dbWriteTable_AdbiConnection_character_data.frame <- function(conn, name, value, 
     mode <- "replace"
   } else {
     mode <- "create"
+  }
+
+  if (is(name, "SQL")) {
+    name <- dbUnquoteIdentifier(conn, name)[[1L]]
+  }
+
+  if (is(name, "Id")) {
+
+    name <- name@name
+
+    if (!identical(names(name), "table")) {
+      stop("Currently passing catalog and schema information is not supported.")
+    }
+
+    name <- unname(name["table"])
   }
 
   stmt <- adbcdrivermanager::adbc_statement_init(

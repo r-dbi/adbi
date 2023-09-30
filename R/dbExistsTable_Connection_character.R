@@ -2,7 +2,7 @@
 #' @inheritParams DBI::dbExistsTable
 #' @usage NULL
 dbExistsTable_AdbiConnection_character <- function(conn, name, ...) {
-  name %in% dbListTables(conn)
+  dbExistsTable(conn, Id(table = name), ...)
 }
 
 #' @rdname DBI

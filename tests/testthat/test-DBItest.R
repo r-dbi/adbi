@@ -60,9 +60,6 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
       "remove_table_return",
       "remove_table_name_quoted",
       "remove_table_name",
-      "list_tables_quote",
-      "list_objects_quote",
-      "list_fields",
       "bind_multi_row_unequal_length",
       "bind_multi_row_statement",
       "column_info",
@@ -72,6 +69,8 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
       "with_transaction_break",
       "list_tables", # apache/arrow-adbc#1008
       "list_objects", # apache/arrow-adbc#1008
+      "list_fields", # apache/arrow-adbc#1008
+      "list_objects_quote", # some issue with table not being dropped before?
       # TODO: Understand why test fails in R < 3.6
       if (getRversion() < "3.6") "connect_format",
       # Fails with older DBItest

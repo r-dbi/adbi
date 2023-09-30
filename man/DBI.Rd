@@ -3,19 +3,24 @@
 %   R/ResultArrow.R, R/dbAppendTable_Connection_character_data.frame.R,
 %   R/dbBegin_Connection.R, R/dbBind_Result.R, R/dbClearResult_Result.R,
 %   R/dbClearResult_ResultArrow.R, R/dbColumnInfo_Result.R,
-%   R/dbCommit_Connection.R, R/dbConnect_Driver.R, R/dbDataType_Connection.R,
-%   R/dbDataType_Driver.R, R/dbDataType_Driver_list.R,
-%   R/dbDisconnect_Connection.R, R/dbExistsTable_Connection_character.R,
-%   R/dbFetchArrow_ResultArrow.R, R/dbFetch_Result.R, R/dbGetInfo_Connection.R,
-%   R/dbGetInfo_Driver.R, R/dbGetInfo_Result.R, R/dbGetRowCount_Result.R,
+%   R/dbCommit_Connection.R, R/dbConnect_Driver.R,
+%   R/dbDataType_Connection.R, R/dbDataType_Driver.R,
+%   R/dbDataType_Driver_list.R, R/dbDisconnect_Connection.R,
+%   R/dbExistsTable_AdbiConnection_Id.R, R/dbExistsTable_AdbiConnection_SQL.R,
+%   R/dbExistsTable_Connection_character.R, R/dbFetchArrow_ResultArrow.R,
+%   R/dbFetch_Result.R, R/dbGetInfo_Connection.R, R/dbGetInfo_Driver.R,
+%   R/dbGetInfo_Result.R, R/dbGetRowCount_Result.R,
 %   R/dbGetRowsAffected_Result.R, R/dbGetStatement_Result.R,
 %   R/dbHasCompleted_Result.R, R/dbIsValid_Connection.R, R/dbIsValid_Driver.R,
-%   R/dbIsValid_Result.R, R/dbListFields_Connection_character.R,
+%   R/dbIsValid_Result.R, R/dbListFields_AdbiConnection_Id.R,
+%   R/dbListFields_AdbiConnection_SQL.R, R/dbListFields_Connection_character.R,
 %   R/dbListTables_Connection.R, R/dbQuoteIdentifier_Connection_character.R,
+%   R/dbQuoteLiteral_AdbiConnection_character.R,
 %   R/dbQuoteString_Connection_character.R,
 %   R/dbRemoveTable_Connection_character.R, R/dbRollback_Connection.R,
 %   R/dbSendQueryArrow_Connection.R, R/dbSendQuery_Connection_character.R,
 %   R/dbSendStatement_Connection_character.R,
+%   R/dbUnquoteIdentifier_AdbiConnection.R,
 %   R/dbWriteTable_Connection_character_data.frame.R, R/show_Connection.R,
 %   R/show_Driver.R, R/show_Result.R
 \docType{class}
@@ -49,6 +54,10 @@
 \alias{dbDataType,AdbiDriver,list-method}
 \alias{dbDisconnect_AdbiConnection}
 \alias{dbDisconnect,AdbiConnection-method}
+\alias{dbExistsTable_AdbiConnection_Id}
+\alias{dbExistsTable,AdbiConnection,Id-method}
+\alias{dbExistsTable_AdbiConnection_SQL}
+\alias{dbExistsTable,AdbiConnection,SQL-method}
 \alias{dbExistsTable_AdbiConnection_character}
 \alias{dbExistsTable,AdbiConnection,character-method}
 \alias{dbFetchArrow_KazamResultArrow}
@@ -75,12 +84,18 @@
 \alias{dbIsValid,AdbiDriver-method}
 \alias{dbIsValid_AdbiResult}
 \alias{dbIsValid,AdbiResult-method}
+\alias{dbListFields_AdbiConnection_Id}
+\alias{dbListFields,AdbiConnection,Id-method}
+\alias{dbListFields_AdbiConnection_SQL}
+\alias{dbListFields,AdbiConnection,SQL-method}
 \alias{dbListFields_AdbiConnection_character}
 \alias{dbListFields,AdbiConnection,character-method}
 \alias{dbListTables_AdbiConnection}
 \alias{dbListTables,AdbiConnection-method}
 \alias{dbQuoteIdentifier_AdbiConnection_character}
 \alias{dbQuoteIdentifier,AdbiConnection,character-method}
+\alias{dbQuoteLiteral_AdbiConnection_character}
+\alias{dbQuoteLiteral,AdbiConnection,character-method}
 \alias{dbQuoteString_AdbiConnection_character}
 \alias{dbQuoteString,AdbiConnection,character-method}
 \alias{dbRemoveTable_AdbiConnection_character}
@@ -93,6 +108,8 @@
 \alias{dbSendQuery,AdbiConnection,character-method}
 \alias{dbSendStatement_AdbiConnection_character}
 \alias{dbSendStatement,AdbiConnection,character-method}
+\alias{dbUnquoteIdentifier_AdbiConnection}
+\alias{dbUnquoteIdentifier,AdbiConnection-method}
 \alias{dbWriteTable_AdbiConnection_character_data.frame}
 \alias{dbWriteTable,AdbiConnection,character,data.frame-method}
 \alias{show_AdbiConnection}
@@ -127,6 +144,10 @@
 
 \S4method{dbDisconnect}{AdbiConnection}(conn, ...)
 
+\S4method{dbExistsTable}{AdbiConnection,Id}(conn, name, ...)
+
+\S4method{dbExistsTable}{AdbiConnection,SQL}(conn, name, ...)
+
 \S4method{dbExistsTable}{AdbiConnection,character}(conn, name, ...)
 
 \S4method{dbFetchArrow}{KazamResultArrow}(res, ...)
@@ -153,11 +174,17 @@
 
 \S4method{dbIsValid}{AdbiResult}(dbObj, ...)
 
+\S4method{dbListFields}{AdbiConnection,Id}(conn, name, ...)
+
+\S4method{dbListFields}{AdbiConnection,SQL}(conn, name, ...)
+
 \S4method{dbListFields}{AdbiConnection,character}(conn, name, ...)
 
 \S4method{dbListTables}{AdbiConnection}(conn, ...)
 
 \S4method{dbQuoteIdentifier}{AdbiConnection,character}(conn, x, ...)
+
+\S4method{dbQuoteLiteral}{AdbiConnection,character}(conn, x, ...)
 
 \S4method{dbQuoteString}{AdbiConnection,character}(conn, x, ...)
 
@@ -170,6 +197,8 @@
 \S4method{dbSendQuery}{AdbiConnection,character}(conn, statement, ..., params = NULL, immediate = NULL)
 
 \S4method{dbSendStatement}{AdbiConnection,character}(conn, statement, ..., params = NULL, immediate = NULL)
+
+\S4method{dbUnquoteIdentifier}{AdbiConnection}(conn, x, ...)
 
 \S4method{dbWriteTable}{AdbiConnection,character,data.frame}(
   conn,

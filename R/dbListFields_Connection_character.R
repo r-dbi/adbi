@@ -2,8 +2,13 @@
 #' @inheritParams DBI::dbListFields
 #' @usage NULL
 dbListFields_AdbiConnection_character <- function(conn, name, ...) {
-  testthat::skip("Not yet implemented: dbListFields(Connection, character)")
+  dbListFields(conn, Id(table = name), ...)
 }
+
 #' @rdname DBI
 #' @export
-setMethod("dbListFields", c("AdbiConnection", "character"), dbListFields_AdbiConnection_character)
+setMethod(
+  "dbListFields",
+  c("AdbiConnection", "character"),
+  dbListFields_AdbiConnection_character
+)
