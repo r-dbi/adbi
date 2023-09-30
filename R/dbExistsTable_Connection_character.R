@@ -2,21 +2,13 @@
 #' @inheritParams DBI::dbExistsTable
 #' @usage NULL
 dbExistsTable_AdbiConnection_character <- function(conn, name, ...) {
-
-  stopifnot(dbIsValid(conn))
-
-  name <- dbQuoteIdentifier(conn, name)
-
-  tryCatch(
-    {
-      dbGetQuery(conn, paste0("SELECT COUNT(*) FROM ", name, " WHERE 0 = 1"))
-      TRUE
-    },
-    error = function(e) {
-      FALSE
-    }
-  )
+  name %in% dbListTables(conn)
 }
+
 #' @rdname DBI
 #' @export
-setMethod("dbExistsTable", c("AdbiConnection", "character"), dbExistsTable_AdbiConnection_character)
+setMethod(
+  "dbExistsTable",
+  c("AdbiConnection", "character"),
+  dbExistsTable_AdbiConnection_character
+)

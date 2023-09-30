@@ -70,6 +70,8 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
       "with_transaction_success",
       "with_transaction_failure",
       "with_transaction_break",
+      "list_tables", # apache/arrow-adbc#1008
+      "list_objects", # apache/arrow-adbc#1008
       # TODO: Understand why test fails in R < 3.6
       if (getRversion() < "3.6") "connect_format",
       # Fails with older DBItest
