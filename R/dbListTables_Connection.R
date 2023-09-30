@@ -94,10 +94,10 @@ process_catalogs <- function(x, what) {
 }
 
 get_schema_objects <- function(con,
-  what = c("catalog", "schema", "table", "field"),
-  catalog = NULL,
-  schema = NULL,
-  table = NULL) {
+    what = c("catalog", "schema", "table", "field"),
+    catalog = NULL,
+    schema = NULL,
+    table = NULL) {
 
   what <- match.arg(what)
 

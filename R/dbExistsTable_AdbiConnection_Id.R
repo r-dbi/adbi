@@ -11,7 +11,7 @@ dbExistsTable_AdbiConnection_Id <- function(conn, name, ...) {
 
   if (!all(names(name) %in% c("catalog", "schema", "table"))) {
     stop("Expecting Id components \"catalog\", \"schema\", and \"table\".",
-         call. = FALSE)
+      call. = FALSE)
   }
 
   res <- do.call(get_schema_objects, c(list(conn, "table"), name))
