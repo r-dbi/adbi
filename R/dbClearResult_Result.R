@@ -3,9 +3,14 @@
 #' @usage NULL
 dbClearResult_AdbiResult <- function(res, ...) {
 
+  if (!is.null(meta(res, "data"))) {
+    meta(res, "data")$release()
+    meta(res, "data") <- NULL
+  }
+
   if (adbc_statement_is_valid(res@statement)) {
 
-    release_statement(res)
+    adbcdrivermanager::adbc_statement_release(res@statement)
 
   } else {
 
@@ -20,8 +25,3 @@ dbClearResult_AdbiResult <- function(res, ...) {
 #' @rdname DBI
 #' @export
 setMethod("dbClearResult", "AdbiResult", dbClearResult_AdbiResult)
-
-release_statement <- function(x) {
-  adbcdrivermanager::adbc_statement_release(x@statement)
-  invisible(NULL)
-}

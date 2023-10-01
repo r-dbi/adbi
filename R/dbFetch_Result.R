@@ -3,8 +3,12 @@
 #' @usage NULL
 dbFetch_AdbiResult <- function(res, n = -1, ...) {
 
-  if (!n == -1) {
-    testthat::skip("not implmented")
+  if (length(n) == 1L && !is.na(n) && !is.finite(n)) {
+    n <- -1
+  }
+
+  if (!length(n) == 1L || n < -1 || isTRUE(n != trunc(n))) {
+    stop("Only scalar integer values >= -1 are recognized.", call. = FALSE)
   }
 
   if (isFALSE(meta(res, "immediate"))) {
@@ -14,23 +18,33 @@ dbFetch_AdbiResult <- function(res, n = -1, ...) {
     if (is.null(n_bound) || n_bound < 1L) {
 
       stop("A statement created with `immediate = FALSE` should be prepared ",
-        "before being executed, typically by a call to `dbBind()`.",
-        call. = FALSE)
+           "before being executed, typically by a call to `dbBind()`.",
+           call. = FALSE)
     }
   }
 
   if (is.null(meta(res, "data"))) {
-    ret <- execute_statement(res)
-  } else {
-    ret <- meta(res, "data")
-    meta(res, "data") <- NULL
+    meta(res, "data") <- execute_statement(res)
   }
 
-  if (is.null(meta(res, "schema"))) {
-    meta(res, "schema") <- ret$get_schema()
+  if (n == -1) {
+    return(as.data.frame(meta(res, "data")))
   }
 
-  as.data.frame(ret)
+  if (is.na(n)) {
+
+    ret <- meta(res, "data")$get_next()
+
+    if (is.null(ret)) {
+      ret <- nanoarrow::infer_nanoarrow_ptype(meta(res, "data"))
+    } else {
+      ret <- as.data.frame(ret)
+    }
+
+    return(ret)
+  }
+
+  testthat::skip("Cannot deal with fetching arbitrary chunk sizes.")
 }
 
 #' @rdname DBI

@@ -3,26 +3,14 @@
 #' @usage NULL
 dbColumnInfo_AdbiResult <- function(res, ...) {
 
-  if (is.null(meta(res, "schema"))) {
-
-    if (is.null(meta(res, "data"))) {
-
-      stream <- execute_statement(res)
-      meta(res, "data") <- stream
-
-    } else {
-      stream <- meta(res, "data")
-    }
-
-    schema <- stream$get_schema()
-    meta(res, "schema") <- schema
-
-  } else {
-
-    schema <- meta(res, "schema")
+  if (is.null(meta(res, "data"))) {
+    meta(res, "data") <- execute_statement(res)
   }
 
-  ret <- nanoarrow::nanoarrow_schema_parse(schema, recursive = TRUE)
+  ret <- nanoarrow::nanoarrow_schema_parse(
+    meta(res, "data")$get_schema(),
+    recursive = TRUE
+  )
 
   if (!"children" %in% names(ret)) {
     stop("Unexpected schema format", call. = FALSE)
