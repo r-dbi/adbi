@@ -26,6 +26,10 @@ dbFetch_AdbiResult <- function(res, n = -1, ...) {
     meta(res, "data") <- NULL
   }
 
+  if (is.null(meta(res, "schema"))) {
+    meta(res, "schema") <- ret$get_schema()
+  }
+
   as.data.frame(ret)
 }
 
