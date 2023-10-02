@@ -25,7 +25,8 @@ Imports:
 Suggests: 
     covr,
     DBItest,
-    adbcsqlite
+    adbcsqlite,
+    withr
 Remotes: 
     r-dbi/DBI,
     apache/arrow-adbc/r/adbcdrivermanager,

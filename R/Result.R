@@ -42,20 +42,25 @@ AdbiResult <- function(connection, statement, immediate = NULL) {
     prepared <- FALSE
   }
 
+  res <- new_adbi_result(stmt, immediate, prepared)
+
+  register_result(connection, res)
+
+  res
+}
+
+new_adbi_result <- function(statement, immediate, prepared) {
+
   meta <- list(
     immediate = immediate,
     prepared = prepared
   )
 
-  res <- new(
+  new(
     "AdbiResult",
-    statement = stmt,
+    statement = statement,
     metadata = list2env(meta, envir = new.env(parent = emptyenv()))
   )
-
-  register_result(connection, res)
-
-  res
 }
 
 #' @rdname DBI
