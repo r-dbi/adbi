@@ -42,7 +42,7 @@ dbFetch_AdbiResult <- function(res, n = -1, ...) {
     return(data.frame())
   }
 
-  if (is.null(meta(res, "data")) && is.null(meta(res, "row_count"))) {
+  if (is.null(meta(res, "data")) && !isTRUE(meta(res, "has_completed"))) {
     execute_statement(res)
   }
 
@@ -114,6 +114,10 @@ dbFetch_AdbiResult <- function(res, n = -1, ...) {
 
     rownames(ret) <- NULL
 
+    if (nrow(ret) < 0) {
+      stopifnot(nrow(get_data_batch(res)) == 0L, dbHasCompleted(res))
+    }
+
     return(ret)
   }
 
@@ -153,8 +157,12 @@ get_data_batch <- function(x, what = c("next", "rest")) {
   }
 
   if (identical(match.arg(what), "rest")) {
+
     res <- as.data.frame(meta(x, "data"))
+
     meta(x, "ptyp") <- res[0L, , drop = FALSE]
+    meta(x, "has_completed") <- TRUE
+
     return(res)
   }
 
@@ -165,6 +173,7 @@ get_data_batch <- function(x, what = c("next", "rest")) {
     meta(x, "ptyp") <- nanoarrow::infer_nanoarrow_ptype(meta(x, "data"))
     meta(x, "data")$release()
     meta(x, "data") <- NULL
+    meta(x, "has_completed") <- TRUE
 
     return(meta(x, "ptyp"))
   }

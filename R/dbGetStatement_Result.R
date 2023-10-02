@@ -9,6 +9,7 @@ dbGetStatement_AdbiResult <- function(res, ...) {
 
   meta(res, "sql")
 }
+
 #' @rdname DBI
 #' @export
 setMethod("dbGetStatement", "AdbiResult", dbGetStatement_AdbiResult)

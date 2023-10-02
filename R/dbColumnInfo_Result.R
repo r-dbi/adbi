@@ -3,7 +3,7 @@
 #' @usage NULL
 dbColumnInfo_AdbiResult <- function(res, ...) {
 
-  if (is.null(meta(res, "data")) && is.null(meta(res, "row_count"))) {
+  if (is.null(meta(res, "data")) && !isTRUE(meta(res, "has_completed"))) {
     execute_statement(res)
   }
 

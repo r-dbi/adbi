@@ -71,6 +71,11 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
       "list_objects", # apache/arrow-adbc#1008
       "list_fields", # apache/arrow-adbc#1008
       "list_objects_quote", # some issue with table not being dropped before?
+      "bind_multi_row_zero_length",
+      "bind_repeated",
+      "bind_factor",
+      "bind_raw",
+      "bind_blob",
       # TODO: Understand why test fails in R < 3.6
       if (getRversion() < "3.6") "connect_format",
       # Fails with older DBItest

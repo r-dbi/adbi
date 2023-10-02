@@ -41,11 +41,14 @@ AdbiResult <- function(connection, statement, immediate = NULL,
   } else {
 
     prepared <- FALSE
+    schema <- NULL
   }
 
   res <- new_adbi_result(stmt, immediate, prepared, match.arg(type), statement)
 
   register_result(connection, res)
+
+  meta(res, "params") <- schema
 
   res
 }
@@ -56,7 +59,8 @@ new_adbi_result <- function(statement, immediate, prepared, type, sql) {
     immediate = immediate,
     prepared = prepared,
     type = type,
-    sql = sql
+    sql = sql,
+    has_completed = switch(type, statement = TRUE, query = FALSE)
   )
 
   new(
