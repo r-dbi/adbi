@@ -43,19 +43,20 @@ AdbiResult <- function(connection, statement, immediate = NULL,
     prepared <- FALSE
   }
 
-  res <- new_adbi_result(stmt, immediate, prepared, match.arg(type))
+  res <- new_adbi_result(stmt, immediate, prepared, match.arg(type), statement)
 
   register_result(connection, res)
 
   res
 }
 
-new_adbi_result <- function(statement, immediate, prepared, type) {
+new_adbi_result <- function(statement, immediate, prepared, type, sql) {
 
   meta <- list(
     immediate = immediate,
     prepared = prepared,
-    type = type
+    type = type,
+    sql = sql
   )
 
   new(

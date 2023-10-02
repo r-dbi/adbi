@@ -2,7 +2,12 @@
 #' @inheritParams DBI::dbGetStatement
 #' @usage NULL
 dbGetStatement_AdbiResult <- function(res, ...) {
-  testthat::skip("Not yet implemented: dbGetStatement(Result)")
+
+  if (!dbIsValid(res)) {
+    stop("Cannot return statement of invalid result.", call. = FALSE)
+  }
+
+  meta(res, "sql")
 }
 #' @rdname DBI
 #' @export

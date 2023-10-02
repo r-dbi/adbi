@@ -15,7 +15,7 @@ DBItest::make_context(
       date_typed = FALSE,
       time_typed = FALSE,
       timestamp_typed = FALSE,
-      temporary_tables = FALSE,
+      temporary_tables = FALSE, # apache/arrow-adbc#1141
       strict_identifier = TRUE
     )
   ),
