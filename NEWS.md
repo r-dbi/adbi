@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# adbi 0.0.0.9015 (2023-10-02)
+
+- Internal changes only.
+
+
 # adbi 0.0.0.9014 (2023-10-01)
 
 - Internal changes only.
