@@ -37,6 +37,11 @@ dbFetch_AdbiResult <- function(res, n = -1, ...) {
     }
   }
 
+  if (identical(meta(res, "type"), "statement")) {
+    warning("Statements are not expected to return results.", call. = FALSE)
+    return(data.frame())
+  }
+
   if (is.null(meta(res, "data")) && is.null(meta(res, "row_count"))) {
     meta(res, "data") <- execute_statement(res)
   }

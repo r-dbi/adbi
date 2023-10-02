@@ -15,7 +15,8 @@ dbSendStatement_AdbiConnection_character <- function(conn, statement, ...,
   res <- AdbiResult(
     connection = conn,
     statement = statement,
-    immediate = immediate
+    immediate = immediate,
+    type = "statement"
   )
 
   if (!is.null(params)) {

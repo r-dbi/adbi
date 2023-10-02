@@ -1,7 +1,8 @@
 #' @include Connection.R
 NULL
 
-AdbiResult <- function(connection, statement, immediate = NULL) {
+AdbiResult <- function(connection, statement, immediate = NULL,
+                       type = c("query", "statement")) {
 
   if (!(is.null(immediate) || identical(immediate, TRUE) ||
     identical(immediate, FALSE))) {
@@ -42,18 +43,19 @@ AdbiResult <- function(connection, statement, immediate = NULL) {
     prepared <- FALSE
   }
 
-  res <- new_adbi_result(stmt, immediate, prepared)
+  res <- new_adbi_result(stmt, immediate, prepared, match.arg(type))
 
   register_result(connection, res)
 
   res
 }
 
-new_adbi_result <- function(statement, immediate, prepared) {
+new_adbi_result <- function(statement, immediate, prepared, type) {
 
   meta <- list(
     immediate = immediate,
-    prepared = prepared
+    prepared = prepared,
+    type = type
   )
 
   new(

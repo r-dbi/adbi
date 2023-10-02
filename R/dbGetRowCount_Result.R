@@ -2,8 +2,20 @@
 #' @inheritParams DBI::dbGetRowCount
 #' @usage NULL
 dbGetRowCount_AdbiResult <- function(res, ...) {
-  testthat::skip("Not yet implemented: dbGetRowCount(Result)")
+
+  if (!dbIsValid(res)) {
+    stop("Cannot return row count for invalid results.", call. = FALSE)
+  }
+
+  res <- meta(res, "row_count")
+
+  if (is.null(res)) {
+    return(0L)
+  }
+
+  res
 }
+
 #' @rdname DBI
 #' @export
 setMethod("dbGetRowCount", "AdbiResult", dbGetRowCount_AdbiResult)
