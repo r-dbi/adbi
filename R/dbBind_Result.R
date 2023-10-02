@@ -35,6 +35,29 @@ dbBind_AdbiResult <- function(res, params, ...) {
     meta(res, "bound") <- n_bound + 1L
   }
 
+  if (!is.null(meta(res, "row_count"))) {
+    meta(res, "row_count") <- NULL
+  }
+
+  if (!is.null(meta(res, "rows_affected"))) {
+    meta(res, "rows_affected") <- NULL
+  }
+
+  if (!is.null(meta(res, "ptyp"))) {
+    meta(res, "ptyp") <- NULL
+  }
+
+  if (!is.null(meta(res, "data"))) {
+    # unclear whether all data has been fetched or not
+    meta(res, "data")$release()
+    meta(res, "data") <- NULL
+  }
+
+  if (!is.null(meta(res, "remainder"))) {
+    warning("Not all data has been fetched.", call. = FALSE)
+    meta(res, "remainder") <- NULL
+  }
+
   invisible(res)
 }
 #' @rdname DBI

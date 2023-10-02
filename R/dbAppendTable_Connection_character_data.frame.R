@@ -1,12 +1,13 @@
 #' @rdname DBI
 #' @usage NULL
-dbAppendTable_AdbiConnection <- function(conn, name, value, ..., row.names = NULL) {
-  # FIXME: Remove when parameterized binding is implemented
+dbAppendTable_AdbiConnection <- function(conn, name, value, ...,
+  row.names = NULL) {
 
   if (!is.null(row.names)) {
     stop("Can't pass `row.names` to `dbAppendTable()`", call. = FALSE)
   }
-  stopifnot(is.data.frame(value))
+
+  # TODO: how about using dbWriteTable(..., append = TRUE) here?
 
   query <- sqlAppendTable(
     con = conn,
@@ -15,8 +16,14 @@ dbAppendTable_AdbiConnection <- function(conn, name, value, ..., row.names = NUL
     row.names = row.names,
     ...
   )
+
   dbExecute(conn, query)
 }
+
 #' @rdname DBI
 #' @export
-setMethod("dbAppendTable", signature("AdbiConnection"), dbAppendTable_AdbiConnection)
+setMethod(
+  "dbAppendTable",
+  signature("AdbiConnection"),
+  dbAppendTable_AdbiConnection
+)

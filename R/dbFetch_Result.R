@@ -43,7 +43,7 @@ dbFetch_AdbiResult <- function(res, n = -1, ...) {
   }
 
   if (is.null(meta(res, "data")) && is.null(meta(res, "row_count"))) {
-    meta(res, "data") <- execute_statement(res)
+    execute_statement(res)
   }
 
   rem <- meta(res, "remainder")
@@ -130,10 +130,20 @@ dbFetch_AdbiResult <- function(res, n = -1, ...) {
 #' @export
 setMethod("dbFetch", "AdbiResult", dbFetch_AdbiResult)
 
-execute_statement <- function(res) {
-  strm <- nanoarrow::nanoarrow_allocate_array_stream()
-  adbcdrivermanager::adbc_statement_execute_query(res@statement, stream = strm)
-  strm
+execute_statement <- function(x) {
+
+  stopifnot(
+    is.null(meta(x, "data")),
+    is.null(meta(x, "row_count"))
+  )
+
+  meta(x, "data") <- nanoarrow::nanoarrow_allocate_array_stream()
+  meta(x, "rows_affected") <- adbcdrivermanager::adbc_statement_execute_query(
+    x@statement,
+    stream = meta(x, "data")
+  )
+
+  invisible(x)
 }
 
 get_data_batch <- function(x, what = c("next", "rest")) {

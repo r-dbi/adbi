@@ -76,8 +76,10 @@ dbWriteTable_AdbiConnection_Id_data.frame <- function(conn, name, value, overwri
   name <- name@name
 
   if (!all(names(name) %in% c("catalog", "schema", "table"))) {
-    stop("Expecting Id components \"catalog\", \"schema\", and \"table\".",
-      call. = FALSE)
+    stop(
+      "Expecting Id components \"catalog\", \"schema\", and \"table\".",
+      call. = FALSE
+    )
   }
 
   if ("catalog" %in% names(name)) {

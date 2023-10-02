@@ -3,8 +3,8 @@
 #' @usage NULL
 dbColumnInfo_AdbiResult <- function(res, ...) {
 
-  if (is.null(meta(res, "data"))) {
-    meta(res, "data") <- execute_statement(res)
+  if (is.null(meta(res, "data")) && is.null(meta(res, "row_count"))) {
+    execute_statement(res)
   }
 
   ret <- nanoarrow::nanoarrow_schema_parse(

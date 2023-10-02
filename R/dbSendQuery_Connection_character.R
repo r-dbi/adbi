@@ -24,7 +24,7 @@ dbSendQuery_AdbiConnection_character <- function(conn, statement, ...,
   }
 
   if (isTRUE(immediate)) {
-    meta(res, "data") <- execute_statement(res)
+    execute_statement(res)
   }
 
   res
