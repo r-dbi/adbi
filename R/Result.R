@@ -16,11 +16,18 @@ AdbiResult <- function(connection, statement, immediate = NULL,
     stop("Invalid connection", call. = FALSE)
   }
 
+  if (!length(statement) == 1L || is.na(statement)) {
+    stop("Expecting a non-NA string as `statement`.", call. = FALSE)
+  }
+
   con <- connection@connection
 
   stmt <- adbcdrivermanager::adbc_statement_init(con)
 
-  adbcdrivermanager::adbc_statement_set_sql_query(stmt, statement)
+  adbcdrivermanager::adbc_statement_set_sql_query(
+    stmt,
+    as.character(statement)
+  )
 
   if (is.null(immediate)) {
 
