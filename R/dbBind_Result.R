@@ -108,13 +108,20 @@ dbBind_AdbiResult <- function(res, params, ...) {
   }
 
   if (!is.null(meta(res, "data"))) {
-    # unclear whether all data has been fetched or not
+
+    if (!isTRUE(meta(res, "has_completed"))) {
+      # only triggers if fetched past end
+      warning("Not all data has been fetched.", call. = FALSE)
+    } else {
+      meta(res, "has_completed") <- FALSE
+    }
+
     meta(res, "data")$release()
     meta(res, "data") <- NULL
   }
 
   if (!is.null(meta(res, "remainder"))) {
-    warning("Not all data has been fetched.", call. = FALSE)
+    warning("Not all data has been returned.", call. = FALSE)
     meta(res, "remainder") <- NULL
   }
 
