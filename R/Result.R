@@ -4,6 +4,12 @@ NULL
 AdbiResult <- function(connection, statement, immediate = NULL,
                        type = c("query", "statement")) {
 
+  init_result(connection, statement, "AdbiResult", immediate, type)
+}
+
+init_result <- function(connection, statement, class, immediate = NULL,
+                        type = c("query", "statement")) {
+
   if (!(is.null(immediate) || identical(immediate, TRUE) ||
     identical(immediate, FALSE))) {
 
@@ -51,7 +57,8 @@ AdbiResult <- function(connection, statement, immediate = NULL,
     schema <- NULL
   }
 
-  res <- new_adbi_result(stmt, immediate, prepared, match.arg(type), statement)
+  res <- new_result(stmt, immediate, prepared, match.arg(type), statement,
+                    class)
 
   register_result(connection, res)
 
@@ -60,7 +67,8 @@ AdbiResult <- function(connection, statement, immediate = NULL,
   res
 }
 
-new_adbi_result <- function(statement, immediate, prepared, type, sql) {
+new_result <- function(statement, immediate, prepared, type, sql,
+                       class = "AdbiResult") {
 
   meta <- list(
     immediate = immediate,
@@ -71,7 +79,7 @@ new_adbi_result <- function(statement, immediate, prepared, type, sql) {
   )
 
   new(
-    "AdbiResult",
+    class,
     statement = statement,
     metadata = list2env(meta, envir = new.env(parent = emptyenv()))
   )
