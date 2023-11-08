@@ -48,10 +48,6 @@ dbFetch_AdbiResult <- function(res, n = -1, ...) {
 
   rem <- meta(res, "remainder")
 
-  if (is.null(meta(res, "row_count"))) {
-    meta(res, "row_count") <- 0L
-  }
-
   if (isTRUE(n == -1)) {
 
     ret <- get_data_batch(res, "rest")
@@ -146,6 +142,7 @@ execute_statement <- function(x) {
     x@statement,
     stream = meta(x, "data")
   )
+  meta(x, "row_count") <- 0L
 
   invisible(x)
 }
@@ -166,6 +163,11 @@ get_data_batch <- function(x, what = c("next", "rest")) {
     return(res)
   }
 
+  as.data.frame(get_next_batch(x))
+}
+
+get_next_batch <- function(x) {
+
   res <- meta(x, "data")$get_next()
 
   if (is.null(res)) {
@@ -178,5 +180,5 @@ get_data_batch <- function(x, what = c("next", "rest")) {
     return(meta(x, "ptyp"))
   }
 
-  as.data.frame(res)
+  res
 }

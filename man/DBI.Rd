@@ -178,7 +178,7 @@
 
 \S4method{dbExistsTable}{AdbiConnection,character}(conn, name, ...)
 
-\S4method{dbFetchArrow}{AdbiResultArrow}(res, ...)
+\S4method{dbFetchArrow}{AdbiResultArrow}(res, n = NA, ...)
 
 \S4method{dbFetch}{AdbiResult}(res, n = -1, ...)
 
@@ -230,7 +230,7 @@
 
 \S4method{dbRollback}{AdbiConnection}(conn, ...)
 
-\S4method{dbSendQueryArrow}{AdbiConnection}(conn, statement, ..., params = NULL)
+\S4method{dbSendQueryArrow}{AdbiConnection}(conn, statement, ..., params = NULL, immediate = NULL)
 
 \S4method{dbSendQuery}{AdbiConnection,character}(conn, statement, ..., params = NULL, immediate = NULL)
 
