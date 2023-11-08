@@ -1,7 +1,7 @@
 #' @rdname DBI
 #' @usage NULL
 dbAppendTable_AdbiConnection <- function(conn, name, value, ...,
-  row.names = NULL) {
+    row.names = NULL) {
 
   if (!is.null(row.names)) {
     stop("Can't pass `row.names` to `dbAppendTable()`", call. = FALSE)
