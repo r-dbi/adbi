@@ -1,21 +1,19 @@
 #' @include Connection.R
 NULL
 
-KazamResultArrow <- function(connection, statement) {
-  # TODO: Initialize result
-  new("KazamResultArrow",
-    connection = connection,
-    statement = statement
-  )
+AdbiResultArrow <- function(connection, statement, immediate = NULL,
+                       type = c("query", "statement")) {
+
+  init_result(connection, statement, "AdbiResultArrow", immediate, type)
 }
 
 #' @rdname DBI
 #' @export
 setClass(
-  "KazamResultArrow",
-  contains = "DBIResultArrow",
+  "AdbiResultArrow",
+  contains = "DBIResult",
   slots = list(
-    connection = "AdbiConnection",
-    statement = "character"
+    statement = "ANY",
+    metadata = "environment"
   )
 )
