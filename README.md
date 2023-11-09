@@ -165,79 +165,20 @@ res <- dbSendQueryArrow(con, "SELECT * from swiss WHERE Agriculture < ?")
 dbBind(res, 30)
 
 while (!dbHasCompleted(res)) {
-  print(dbFetchArrow(res))
+  ret <- dbFetchArrow(res)
+  message("fetched ", ret$length, " rows")
 }
-#> <nanoarrow_array struct[10]>
-#>  $ length    : int 10
-#>  $ null_count: int 0
-#>  $ offset    : int 0
-#>  $ buffers   :List of 1
-#>   ..$ :<nanoarrow_buffer validity<bool>[0][0 b]> ``
-#>  $ children  :List of 6
-#>   ..$ Fertility       :<nanoarrow_array double[10]>
-#>   .. ..$ length    : int 10
-#>   .. ..$ null_count: int -1
-#>   .. ..$ offset    : int 0
-#>   .. ..$ buffers   :List of 2
-#>   .. .. ..$ :<nanoarrow_buffer validity<bool>[16][2 b]> `TRUE TRUE TRUE TRUE...`
-#>   .. .. ..$ :<nanoarrow_buffer data<double>[10][80 b]> `80.2 55.7 54.3 58.3 ...`
-#>   .. ..$ dictionary: NULL
-#>   .. ..$ children  : list()
-#>   ..$ Agriculture     :<nanoarrow_array double[10]>
-#>   .. ..$ length    : int 10
-#>   .. ..$ null_count: int -1
-#>   .. ..$ offset    : int 0
-#>   .. ..$ buffers   :List of 2
-#>   .. .. ..$ :<nanoarrow_buffer validity<bool>[16][2 b]> `TRUE TRUE TRUE TRUE...`
-#>   .. .. ..$ :<nanoarrow_buffer data<double>[10][80 b]> `17.0 19.4 15.2 26.8 ...`
-#>   .. ..$ dictionary: NULL
-#>   .. ..$ children  : list()
-#>   ..$ Examination     :<nanoarrow_array int64[10]>
-#>   .. ..$ length    : int 10
-#>   .. ..$ null_count: int -1
-#>   .. ..$ offset    : int 0
-#>   .. ..$ buffers   :List of 2
-#>   .. .. ..$ :<nanoarrow_buffer validity<bool>[16][2 b]> `TRUE TRUE TRUE TRUE...`
-#>   .. .. ..$ :<nanoarrow_buffer data<int64>[10][80 b]> `15 26 31 25 29 22 35 ...`
-#>   .. ..$ dictionary: NULL
-#>   .. ..$ children  : list()
-#>   ..$ Education       :<nanoarrow_array int64[10]>
-#>   .. ..$ length    : int 10
-#>   .. ..$ null_count: int -1
-#>   .. ..$ offset    : int 0
-#>   .. ..$ buffers   :List of 2
-#>   .. .. ..$ :<nanoarrow_buffer validity<bool>[16][2 b]> `TRUE TRUE TRUE TRUE...`
-#>   .. .. ..$ :<nanoarrow_buffer data<int64>[10][80 b]> `12 28 20 19 11 13 32 ...`
-#>   .. ..$ dictionary: NULL
-#>   .. ..$ children  : list()
-#>   ..$ Catholic        :<nanoarrow_array double[10]>
-#>   .. ..$ length    : int 10
-#>   .. ..$ null_count: int -1
-#>   .. ..$ offset    : int 0
-#>   .. ..$ buffers   :List of 2
-#>   .. .. ..$ :<nanoarrow_buffer validity<bool>[16][2 b]> `TRUE TRUE TRUE TRUE...`
-#>   .. .. ..$ :<nanoarrow_buffer data<double>[10][80 b]> `9.96 12.11 2.15 18.4...`
-#>   .. ..$ dictionary: NULL
-#>   .. ..$ children  : list()
-#>   ..$ Infant.Mortality:<nanoarrow_array double[10]>
-#>   .. ..$ length    : int 10
-#>   .. ..$ null_count: int -1
-#>   .. ..$ offset    : int 0
-#>   .. ..$ buffers   :List of 2
-#>   .. .. ..$ :<nanoarrow_buffer validity<bool>[16][2 b]> `TRUE TRUE TRUE TRUE...`
-#>   .. .. ..$ :<nanoarrow_buffer data<double>[10][80 b]> `22.2 20.2 10.8 20.9 ...`
-#>   .. ..$ dictionary: NULL
-#>   .. ..$ children  : list()
-#>  $ dictionary: NULL
-#> [1] Fertility        Agriculture      Examination      Education       
-#> [5] Catholic         Infant.Mortality
-#> <0 rows> (or 0-length row.names)
+#> fetched 10 rows
+#> fetched  rows
 
 dbBind(res, 20)
 
 while(!dbHasCompleted(res)) {
-  print(dbFetchArrow(res))
+  ret <- dbFetchArrow(res)
+  message("fetched ", ret$length, " rows")
 }
+#> fetched 8 rows
+#> fetched  rows
 
 # Cleanup
 dbClearResult(res)

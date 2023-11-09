@@ -115,8 +115,6 @@ dbBind_AdbiResult <- function(res, params, ...) {
         "It is possible that not all data has been fetched.",
         call. = FALSE
       )
-    } else {
-      meta(res, "has_completed") <- FALSE
     }
 
     meta(res, "data")$release()
@@ -127,6 +125,8 @@ dbBind_AdbiResult <- function(res, params, ...) {
     warning("Not all data has been returned.", call. = FALSE)
     meta(res, "remainder") <- NULL
   }
+
+  meta(res, "has_completed") <- FALSE
 
   invisible(res)
 }

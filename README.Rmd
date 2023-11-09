@@ -72,13 +72,15 @@ res <- dbSendQueryArrow(con, "SELECT * from swiss WHERE Agriculture < ?")
 dbBind(res, 30)
 
 while (!dbHasCompleted(res)) {
-  print(dbFetchArrow(res))
+  ret <- dbFetchArrow(res)
+  message("fetched ", ret$length, " rows")
 }
 
 dbBind(res, 20)
 
-while (!dbHasCompleted(res)) {
-  print(dbFetchArrow(res))
+while(!dbHasCompleted(res)) {
+  ret <- dbFetchArrow(res)
+  message("fetched ", ret$length, " rows")
 }
 
 # Cleanup
