@@ -26,7 +26,7 @@ devtools::install_github("r-dbi/adbi")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+The `data.frame` API of DBI is supported.
 
 ``` r
 library(DBI)
@@ -85,6 +85,159 @@ dbFetch(res)
 #> 6      64.4        17.6          35        32    16.92             23.0
 #> 7      67.6        18.7          25         7     8.65             19.5
 #> 8      35.0         1.2          37        53    42.34             18.0
+
+# Cleanup
+dbClearResult(res)
+```
+
+More interestingly, the recent arrow-extension API of DBI is supported
+as well.
+
+``` r
+# Queries
+dbGetQueryArrow(con, "SELECT * from swiss WHERE Agriculture < 40")
+#> <nanoarrow_array struct[16]>
+#>  $ length    : int 16
+#>  $ null_count: int 0
+#>  $ offset    : int 0
+#>  $ buffers   :List of 1
+#>   ..$ :<nanoarrow_buffer validity<bool>[0][0 b]> ``
+#>  $ children  :List of 6
+#>   ..$ Fertility       :<nanoarrow_array double[16]>
+#>   .. ..$ length    : int 16
+#>   .. ..$ null_count: int -1
+#>   .. ..$ offset    : int 0
+#>   .. ..$ buffers   :List of 2
+#>   .. .. ..$ :<nanoarrow_buffer validity<bool>[16][2 b]> `TRUE TRUE TRUE TRUE...`
+#>   .. .. ..$ :<nanoarrow_buffer data<double>[16][128 b]> `80.2 92.5 85.8 76.1...`
+#>   .. ..$ dictionary: NULL
+#>   .. ..$ children  : list()
+#>   ..$ Agriculture     :<nanoarrow_array double[16]>
+#>   .. ..$ length    : int 16
+#>   .. ..$ null_count: int -1
+#>   .. ..$ offset    : int 0
+#>   .. ..$ buffers   :List of 2
+#>   .. .. ..$ :<nanoarrow_buffer validity<bool>[16][2 b]> `TRUE TRUE TRUE TRUE...`
+#>   .. .. ..$ :<nanoarrow_buffer data<double>[16][128 b]> `17.0 39.7 36.5 35.3...`
+#>   .. ..$ dictionary: NULL
+#>   .. ..$ children  : list()
+#>   ..$ Examination     :<nanoarrow_array int64[16]>
+#>   .. ..$ length    : int 16
+#>   .. ..$ null_count: int -1
+#>   .. ..$ offset    : int 0
+#>   .. ..$ buffers   :List of 2
+#>   .. .. ..$ :<nanoarrow_buffer validity<bool>[16][2 b]> `TRUE TRUE TRUE TRUE...`
+#>   .. .. ..$ :<nanoarrow_buffer data<int64>[16][128 b]> `15 5 12 9 17 26 31 2...`
+#>   .. ..$ dictionary: NULL
+#>   .. ..$ children  : list()
+#>   ..$ Education       :<nanoarrow_array int64[16]>
+#>   .. ..$ length    : int 16
+#>   .. ..$ null_count: int -1
+#>   .. ..$ offset    : int 0
+#>   .. ..$ buffers   :List of 2
+#>   .. .. ..$ :<nanoarrow_buffer validity<bool>[16][2 b]> `TRUE TRUE TRUE TRUE...`
+#>   .. .. ..$ :<nanoarrow_buffer data<int64>[16][128 b]> `12 5 7 7 8 28 20 19 ...`
+#>   .. ..$ dictionary: NULL
+#>   .. ..$ children  : list()
+#>   ..$ Catholic        :<nanoarrow_array double[16]>
+#>   .. ..$ length    : int 16
+#>   .. ..$ null_count: int -1
+#>   .. ..$ offset    : int 0
+#>   .. ..$ buffers   :List of 2
+#>   .. .. ..$ :<nanoarrow_buffer validity<bool>[16][2 b]> `TRUE TRUE TRUE TRUE...`
+#>   .. .. ..$ :<nanoarrow_buffer data<double>[16][128 b]> `9.96 93.40 33.77 90...`
+#>   .. ..$ dictionary: NULL
+#>   .. ..$ children  : list()
+#>   ..$ Infant.Mortality:<nanoarrow_array double[16]>
+#>   .. ..$ length    : int 16
+#>   .. ..$ null_count: int -1
+#>   .. ..$ offset    : int 0
+#>   .. ..$ buffers   :List of 2
+#>   .. .. ..$ :<nanoarrow_buffer validity<bool>[16][2 b]> `TRUE TRUE TRUE TRUE...`
+#>   .. .. ..$ :<nanoarrow_buffer data<double>[16][128 b]> `22.2 20.2 20.3 26.6...`
+#>   .. ..$ dictionary: NULL
+#>   .. ..$ children  : list()
+#>  $ dictionary: NULL
+
+# Prepared statements
+res <- dbSendQueryArrow(con, "SELECT * from swiss WHERE Agriculture < ?")
+
+dbBind(res, 30)
+
+while (!dbHasCompleted(res)) {
+  print(dbFetchArrow(res))
+}
+#> <nanoarrow_array struct[10]>
+#>  $ length    : int 10
+#>  $ null_count: int 0
+#>  $ offset    : int 0
+#>  $ buffers   :List of 1
+#>   ..$ :<nanoarrow_buffer validity<bool>[0][0 b]> ``
+#>  $ children  :List of 6
+#>   ..$ Fertility       :<nanoarrow_array double[10]>
+#>   .. ..$ length    : int 10
+#>   .. ..$ null_count: int -1
+#>   .. ..$ offset    : int 0
+#>   .. ..$ buffers   :List of 2
+#>   .. .. ..$ :<nanoarrow_buffer validity<bool>[16][2 b]> `TRUE TRUE TRUE TRUE...`
+#>   .. .. ..$ :<nanoarrow_buffer data<double>[10][80 b]> `80.2 55.7 54.3 58.3 ...`
+#>   .. ..$ dictionary: NULL
+#>   .. ..$ children  : list()
+#>   ..$ Agriculture     :<nanoarrow_array double[10]>
+#>   .. ..$ length    : int 10
+#>   .. ..$ null_count: int -1
+#>   .. ..$ offset    : int 0
+#>   .. ..$ buffers   :List of 2
+#>   .. .. ..$ :<nanoarrow_buffer validity<bool>[16][2 b]> `TRUE TRUE TRUE TRUE...`
+#>   .. .. ..$ :<nanoarrow_buffer data<double>[10][80 b]> `17.0 19.4 15.2 26.8 ...`
+#>   .. ..$ dictionary: NULL
+#>   .. ..$ children  : list()
+#>   ..$ Examination     :<nanoarrow_array int64[10]>
+#>   .. ..$ length    : int 10
+#>   .. ..$ null_count: int -1
+#>   .. ..$ offset    : int 0
+#>   .. ..$ buffers   :List of 2
+#>   .. .. ..$ :<nanoarrow_buffer validity<bool>[16][2 b]> `TRUE TRUE TRUE TRUE...`
+#>   .. .. ..$ :<nanoarrow_buffer data<int64>[10][80 b]> `15 26 31 25 29 22 35 ...`
+#>   .. ..$ dictionary: NULL
+#>   .. ..$ children  : list()
+#>   ..$ Education       :<nanoarrow_array int64[10]>
+#>   .. ..$ length    : int 10
+#>   .. ..$ null_count: int -1
+#>   .. ..$ offset    : int 0
+#>   .. ..$ buffers   :List of 2
+#>   .. .. ..$ :<nanoarrow_buffer validity<bool>[16][2 b]> `TRUE TRUE TRUE TRUE...`
+#>   .. .. ..$ :<nanoarrow_buffer data<int64>[10][80 b]> `12 28 20 19 11 13 32 ...`
+#>   .. ..$ dictionary: NULL
+#>   .. ..$ children  : list()
+#>   ..$ Catholic        :<nanoarrow_array double[10]>
+#>   .. ..$ length    : int 10
+#>   .. ..$ null_count: int -1
+#>   .. ..$ offset    : int 0
+#>   .. ..$ buffers   :List of 2
+#>   .. .. ..$ :<nanoarrow_buffer validity<bool>[16][2 b]> `TRUE TRUE TRUE TRUE...`
+#>   .. .. ..$ :<nanoarrow_buffer data<double>[10][80 b]> `9.96 12.11 2.15 18.4...`
+#>   .. ..$ dictionary: NULL
+#>   .. ..$ children  : list()
+#>   ..$ Infant.Mortality:<nanoarrow_array double[10]>
+#>   .. ..$ length    : int 10
+#>   .. ..$ null_count: int -1
+#>   .. ..$ offset    : int 0
+#>   .. ..$ buffers   :List of 2
+#>   .. .. ..$ :<nanoarrow_buffer validity<bool>[16][2 b]> `TRUE TRUE TRUE TRUE...`
+#>   .. .. ..$ :<nanoarrow_buffer data<double>[10][80 b]> `22.2 20.2 10.8 20.9 ...`
+#>   .. ..$ dictionary: NULL
+#>   .. ..$ children  : list()
+#>  $ dictionary: NULL
+#> [1] Fertility        Agriculture      Examination      Education       
+#> [5] Catholic         Infant.Mortality
+#> <0 rows> (or 0-length row.names)
+
+dbBind(res, 20)
+
+while(!dbHasCompleted(res)) {
+  print(dbFetchArrow(res))
+}
 
 # Cleanup
 dbClearResult(res)

@@ -110,8 +110,11 @@ dbBind_AdbiResult <- function(res, params, ...) {
   if (!is.null(meta(res, "data"))) {
 
     if (!isTRUE(meta(res, "has_completed"))) {
-      # only triggers if fetched past end
-      warning("Not all data has been fetched.", call. = FALSE)
+      # trigger can only be disabled if fetched past end
+      warning(
+        "It is possible that not all data has been fetched.",
+        call. = FALSE
+      )
     } else {
       meta(res, "has_completed") <- FALSE
     }

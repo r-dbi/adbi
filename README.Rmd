@@ -33,9 +33,9 @@ devtools::install_github("r-dbi/adbi")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+The `data.frame` API of DBI is supported.
 
-```{r example}
+```{r df}
 library(DBI)
 
 # Create an SQLite connection using the adbcsqlite backend
@@ -58,6 +58,30 @@ dbFetch(res)
 
 # Cleanup
 dbClearResult(res)
-dbDisconnect(con)
 ```
 
+More interestingly, the recent arrow-extension API of DBI is supported as well.
+
+```{r arrow}
+# Queries
+dbGetQueryArrow(con, "SELECT * from swiss WHERE Agriculture < 40")
+
+# Prepared statements
+res <- dbSendQueryArrow(con, "SELECT * from swiss WHERE Agriculture < ?")
+
+dbBind(res, 30)
+
+while (!dbHasCompleted(res)) {
+  print(dbFetchArrow(res))
+}
+
+dbBind(res, 20)
+
+while(!dbHasCompleted(res)) {
+  print(dbFetchArrow(res))
+}
+
+# Cleanup
+dbClearResult(res)
+dbDisconnect(con)
+```

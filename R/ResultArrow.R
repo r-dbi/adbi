@@ -11,7 +11,7 @@ AdbiResultArrow <- function(connection, statement, immediate = NULL,
 #' @export
 setClass(
   "AdbiResultArrow",
-  contains = "DBIResult",
+  contains = "DBIResultArrow",
   slots = list(
     statement = "ANY",
     metadata = "environment"
