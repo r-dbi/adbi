@@ -77,7 +77,7 @@ while (!dbHasCompleted(res)) {
 
 dbBind(res, 20)
 
-while(!dbHasCompleted(res)) {
+while (!dbHasCompleted(res)) {
   print(dbFetchArrow(res))
 }
 

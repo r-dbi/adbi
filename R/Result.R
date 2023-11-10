@@ -58,7 +58,7 @@ init_result <- function(connection, statement, class, immediate = NULL,
   }
 
   res <- new_result(stmt, immediate, prepared, match.arg(type), statement,
-                    class)
+    class)
 
   register_result(connection, res)
 

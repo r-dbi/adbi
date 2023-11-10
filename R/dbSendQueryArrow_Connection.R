@@ -6,7 +6,7 @@
 #' @inheritParams DBI::dbSendQuery
 #' @usage NULL
 dbSendQueryArrow_AdbiConnection <- function(conn, statement, ...,
-  params = NULL, immediate = NULL) {
+    params = NULL, immediate = NULL) {
 
   if (!is.null(params)) {
     immediate <- FALSE
