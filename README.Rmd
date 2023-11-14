@@ -78,7 +78,7 @@ while (!dbHasCompleted(res)) {
 
 dbBind(res, 20)
 
-while(!dbHasCompleted(res)) {
+while (!dbHasCompleted(res)) {
   ret <- dbFetchArrow(res)
   message("fetched ", ret$length, " rows")
 }
