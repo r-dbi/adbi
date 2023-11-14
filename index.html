@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">adbi</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9015</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9016</span>
       </span>
     </div>
 
@@ -82,7 +82,7 @@
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<p>This is a basic example which shows you how to solve a common problem:</p>
+<p>The <code>data.frame</code> API of DBI is supported.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dbi.r-dbi.org" class="external-link">DBI</a></span><span class="op">)</span></span>
 <span></span>
@@ -140,6 +140,96 @@
 <span><span class="co">#&gt; 6      64.4        17.6          35        32    16.92             23.0</span></span>
 <span><span class="co">#&gt; 7      67.6        18.7          25         7     8.65             19.5</span></span>
 <span><span class="co">#&gt; 8      35.0         1.2          37        53    42.34             18.0</span></span>
+<span></span>
+<span><span class="co"># Cleanup</span></span>
+<span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbClearResult.html" class="external-link">dbClearResult</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></code></pre></div>
+<p>More interestingly, the recent arrow-extension API of DBI is supported as well.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Queries</span></span>
+<span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html" class="external-link">dbGetQueryArrow</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"SELECT * from swiss WHERE Agriculture &lt; 40"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; &lt;nanoarrow_array struct[16]&gt;</span></span>
+<span><span class="co">#&gt;  $ length    : int 16</span></span>
+<span><span class="co">#&gt;  $ null_count: int 0</span></span>
+<span><span class="co">#&gt;  $ offset    : int 0</span></span>
+<span><span class="co">#&gt;  $ buffers   :List of 1</span></span>
+<span><span class="co">#&gt;   ..$ :&lt;nanoarrow_buffer validity&lt;bool&gt;[0][0 b]&gt; ``</span></span>
+<span><span class="co">#&gt;  $ children  :List of 6</span></span>
+<span><span class="co">#&gt;   ..$ Fertility       :&lt;nanoarrow_array double[16]&gt;</span></span>
+<span><span class="co">#&gt;   .. ..$ length    : int 16</span></span>
+<span><span class="co">#&gt;   .. ..$ null_count: int -1</span></span>
+<span><span class="co">#&gt;   .. ..$ offset    : int 0</span></span>
+<span><span class="co">#&gt;   .. ..$ buffers   :List of 2</span></span>
+<span><span class="co">#&gt;   .. .. ..$ :&lt;nanoarrow_buffer validity&lt;bool&gt;[16][2 b]&gt; `TRUE TRUE TRUE TRUE...`</span></span>
+<span><span class="co">#&gt;   .. .. ..$ :&lt;nanoarrow_buffer data&lt;double&gt;[16][128 b]&gt; `80.2 92.5 85.8 76.1...`</span></span>
+<span><span class="co">#&gt;   .. ..$ dictionary: NULL</span></span>
+<span><span class="co">#&gt;   .. ..$ children  : list()</span></span>
+<span><span class="co">#&gt;   ..$ Agriculture     :&lt;nanoarrow_array double[16]&gt;</span></span>
+<span><span class="co">#&gt;   .. ..$ length    : int 16</span></span>
+<span><span class="co">#&gt;   .. ..$ null_count: int -1</span></span>
+<span><span class="co">#&gt;   .. ..$ offset    : int 0</span></span>
+<span><span class="co">#&gt;   .. ..$ buffers   :List of 2</span></span>
+<span><span class="co">#&gt;   .. .. ..$ :&lt;nanoarrow_buffer validity&lt;bool&gt;[16][2 b]&gt; `TRUE TRUE TRUE TRUE...`</span></span>
+<span><span class="co">#&gt;   .. .. ..$ :&lt;nanoarrow_buffer data&lt;double&gt;[16][128 b]&gt; `17.0 39.7 36.5 35.3...`</span></span>
+<span><span class="co">#&gt;   .. ..$ dictionary: NULL</span></span>
+<span><span class="co">#&gt;   .. ..$ children  : list()</span></span>
+<span><span class="co">#&gt;   ..$ Examination     :&lt;nanoarrow_array int64[16]&gt;</span></span>
+<span><span class="co">#&gt;   .. ..$ length    : int 16</span></span>
+<span><span class="co">#&gt;   .. ..$ null_count: int -1</span></span>
+<span><span class="co">#&gt;   .. ..$ offset    : int 0</span></span>
+<span><span class="co">#&gt;   .. ..$ buffers   :List of 2</span></span>
+<span><span class="co">#&gt;   .. .. ..$ :&lt;nanoarrow_buffer validity&lt;bool&gt;[16][2 b]&gt; `TRUE TRUE TRUE TRUE...`</span></span>
+<span><span class="co">#&gt;   .. .. ..$ :&lt;nanoarrow_buffer data&lt;int64&gt;[16][128 b]&gt; `15 5 12 9 17 26 31 2...`</span></span>
+<span><span class="co">#&gt;   .. ..$ dictionary: NULL</span></span>
+<span><span class="co">#&gt;   .. ..$ children  : list()</span></span>
+<span><span class="co">#&gt;   ..$ Education       :&lt;nanoarrow_array int64[16]&gt;</span></span>
+<span><span class="co">#&gt;   .. ..$ length    : int 16</span></span>
+<span><span class="co">#&gt;   .. ..$ null_count: int -1</span></span>
+<span><span class="co">#&gt;   .. ..$ offset    : int 0</span></span>
+<span><span class="co">#&gt;   .. ..$ buffers   :List of 2</span></span>
+<span><span class="co">#&gt;   .. .. ..$ :&lt;nanoarrow_buffer validity&lt;bool&gt;[16][2 b]&gt; `TRUE TRUE TRUE TRUE...`</span></span>
+<span><span class="co">#&gt;   .. .. ..$ :&lt;nanoarrow_buffer data&lt;int64&gt;[16][128 b]&gt; `12 5 7 7 8 28 20 19 ...`</span></span>
+<span><span class="co">#&gt;   .. ..$ dictionary: NULL</span></span>
+<span><span class="co">#&gt;   .. ..$ children  : list()</span></span>
+<span><span class="co">#&gt;   ..$ Catholic        :&lt;nanoarrow_array double[16]&gt;</span></span>
+<span><span class="co">#&gt;   .. ..$ length    : int 16</span></span>
+<span><span class="co">#&gt;   .. ..$ null_count: int -1</span></span>
+<span><span class="co">#&gt;   .. ..$ offset    : int 0</span></span>
+<span><span class="co">#&gt;   .. ..$ buffers   :List of 2</span></span>
+<span><span class="co">#&gt;   .. .. ..$ :&lt;nanoarrow_buffer validity&lt;bool&gt;[16][2 b]&gt; `TRUE TRUE TRUE TRUE...`</span></span>
+<span><span class="co">#&gt;   .. .. ..$ :&lt;nanoarrow_buffer data&lt;double&gt;[16][128 b]&gt; `9.96 93.40 33.77 90...`</span></span>
+<span><span class="co">#&gt;   .. ..$ dictionary: NULL</span></span>
+<span><span class="co">#&gt;   .. ..$ children  : list()</span></span>
+<span><span class="co">#&gt;   ..$ Infant.Mortality:&lt;nanoarrow_array double[16]&gt;</span></span>
+<span><span class="co">#&gt;   .. ..$ length    : int 16</span></span>
+<span><span class="co">#&gt;   .. ..$ null_count: int -1</span></span>
+<span><span class="co">#&gt;   .. ..$ offset    : int 0</span></span>
+<span><span class="co">#&gt;   .. ..$ buffers   :List of 2</span></span>
+<span><span class="co">#&gt;   .. .. ..$ :&lt;nanoarrow_buffer validity&lt;bool&gt;[16][2 b]&gt; `TRUE TRUE TRUE TRUE...`</span></span>
+<span><span class="co">#&gt;   .. .. ..$ :&lt;nanoarrow_buffer data&lt;double&gt;[16][128 b]&gt; `22.2 20.2 20.3 26.6...`</span></span>
+<span><span class="co">#&gt;   .. ..$ dictionary: NULL</span></span>
+<span><span class="co">#&gt;   .. ..$ children  : list()</span></span>
+<span><span class="co">#&gt;  $ dictionary: NULL</span></span>
+<span></span>
+<span><span class="co"># Prepared statements</span></span>
+<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html" class="external-link">dbSendQueryArrow</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"SELECT * from swiss WHERE Agriculture &lt; ?"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbBind.html" class="external-link">dbBind</a></span><span class="op">(</span><span class="va">res</span>, <span class="fl">30</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw">while</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbHasCompleted.html" class="external-link">dbHasCompleted</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">ret</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbFetch.html" class="external-link">dbFetchArrow</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"fetched "</span>, <span class="va">ret</span><span class="op">$</span><span class="va">length</span>, <span class="st">" rows"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="co">#&gt; fetched 10 rows</span></span>
+<span><span class="co">#&gt; fetched  rows</span></span>
+<span></span>
+<span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbBind.html" class="external-link">dbBind</a></span><span class="op">(</span><span class="va">res</span>, <span class="fl">20</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw">while</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbHasCompleted.html" class="external-link">dbHasCompleted</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">ret</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbFetch.html" class="external-link">dbFetchArrow</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"fetched "</span>, <span class="va">ret</span><span class="op">$</span><span class="va">length</span>, <span class="st">" rows"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="co">#&gt; fetched 8 rows</span></span>
+<span><span class="co">#&gt; fetched  rows</span></span>
 <span></span>
 <span><span class="co"># Cleanup</span></span>
 <span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbClearResult.html" class="external-link">dbClearResult</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
