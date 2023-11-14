@@ -76,8 +76,12 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
       "bind_factor",
       "bind_raw",
       "bind_blob",
-      # TODO: Understand why test fails in R < 3.6
-      if (getRversion() < "3.6") "connect_format",
+
+      if (getRversion() < "4.0") "column_info_consistent_keywords",
+      if (getRversion() < "4.0") "column_info_consistent_unnamed",
+      if (getRversion() < "4.0") "column_info_consistent",
+      if (getRversion() < "4.0") "column_info_row_names",
+
       # Fails with older DBItest
       if (packageVersion("DBItest") < "1.7.2") "reexport"
     )
