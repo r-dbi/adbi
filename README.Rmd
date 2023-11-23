@@ -71,15 +71,14 @@ res <- dbSendQueryArrow(con, "SELECT * from swiss WHERE Agriculture < ?")
 
 dbBind(res, 30)
 
-while (!dbHasCompleted(res)) {
-  ret <- dbFetchArrow(res)
-  message("fetched ", ret$length, " rows")
-}
+ret <- dbFetchArrow(res)
+ret$length
 
 dbBind(res, 20)
 
+# Chunked fetches
 while (!dbHasCompleted(res)) {
-  ret <- dbFetchArrow(res)
+  ret <- dbFetchArrowChunk(res)
   message("fetched ", ret$length, " rows")
 }
 

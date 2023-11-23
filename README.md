@@ -96,6 +96,7 @@ as well.
 ``` r
 # Queries
 dbGetQueryArrow(con, "SELECT * from swiss WHERE Agriculture < 40")
+#> [[1]]
 #> <nanoarrow_array struct[16]>
 #>  $ length    : int 16
 #>  $ null_count: int 0
@@ -164,21 +165,19 @@ res <- dbSendQueryArrow(con, "SELECT * from swiss WHERE Agriculture < ?")
 
 dbBind(res, 30)
 
-while (!dbHasCompleted(res)) {
-  ret <- dbFetchArrow(res)
-  message("fetched ", ret$length, " rows")
-}
-#> fetched 10 rows
-#> fetched  rows
+ret <- dbFetchArrow(res)
+ret$length
+#> NULL
 
 dbBind(res, 20)
 
-while(!dbHasCompleted(res)) {
-  ret <- dbFetchArrow(res)
+# Chunked fetches
+while (!dbHasCompleted(res)) {
+  ret <- dbFetchArrowChunk(res)
   message("fetched ", ret$length, " rows")
 }
 #> fetched 8 rows
-#> fetched  rows
+#> fetched 0 rows
 
 # Cleanup
 dbClearResult(res)
