@@ -8,17 +8,17 @@
 %   R/dbDataType_Connection.R, R/dbDataType_Driver.R,
 %   R/dbDataType_Driver_list.R, R/dbDisconnect_Connection.R,
 %   R/dbExistsTable_AdbiConnection_Id.R, R/dbExistsTable_AdbiConnection_SQL.R,
-%   R/dbExistsTable_Connection_character.R, R/dbFetchArrow_ResultArrow.R,
-%   R/dbFetch_Result.R, R/dbGetInfo_Connection.R, R/dbGetInfo_Driver.R,
-%   R/dbGetInfo_Result.R, R/dbGetRowCount_Result.R,
-%   R/dbGetRowCount_ResultArrow.R, R/dbGetRowsAffected_Result.R,
-%   R/dbGetRowsAffected_ResultArrow.R, R/dbGetStatement_Result.R,
-%   R/dbGetStatement_ResultArrow.R, R/dbHasCompleted_Result.R,
-%   R/dbHasCompleted_ResultArrow.R, R/dbIsValid_Connection.R,
-%   R/dbIsValid_Driver.R, R/dbIsValid_Result.R, R/dbIsValid_ResultArrow.R,
-%   R/dbListFields_AdbiConnection_Id.R, R/dbListFields_AdbiConnection_SQL.R,
-%   R/dbListFields_Connection_character.R, R/dbListTables_Connection.R,
-%   R/dbQuoteIdentifier_Connection_character.R,
+%   R/dbExistsTable_Connection_character.R, R/dbFetchArrowChunk_ResultArrow.R,
+%   R/dbFetchArrow_ResultArrow.R, R/dbFetch_Result.R,
+%   R/dbGetInfo_Connection.R, R/dbGetInfo_Driver.R, R/dbGetInfo_Result.R,
+%   R/dbGetRowCount_Result.R, R/dbGetRowCount_ResultArrow.R,
+%   R/dbGetRowsAffected_Result.R, R/dbGetRowsAffected_ResultArrow.R,
+%   R/dbGetStatement_Result.R, R/dbGetStatement_ResultArrow.R,
+%   R/dbHasCompleted_Result.R, R/dbHasCompleted_ResultArrow.R,
+%   R/dbIsValid_Connection.R, R/dbIsValid_Driver.R, R/dbIsValid_Result.R,
+%   R/dbIsValid_ResultArrow.R, R/dbListFields_AdbiConnection_Id.R,
+%   R/dbListFields_AdbiConnection_SQL.R, R/dbListFields_Connection_character.R,
+%   R/dbListTables_Connection.R, R/dbQuoteIdentifier_Connection_character.R,
 %   R/dbQuoteLiteral_AdbiConnection_character.R,
 %   R/dbQuoteString_Connection_character.R,
 %   R/dbRemoveTable_Connection_character.R, R/dbRollback_Connection.R,
@@ -70,6 +70,8 @@
 \alias{dbExistsTable,AdbiConnection,SQL-method}
 \alias{dbExistsTable_AdbiConnection_character}
 \alias{dbExistsTable,AdbiConnection,character-method}
+\alias{dbFetchArrowChunk_AdbiResultArrow}
+\alias{dbFetchArrowChunk,AdbiResultArrow-method}
 \alias{dbFetchArrow_AdbiResultArrow}
 \alias{dbFetchArrow,AdbiResultArrow-method}
 \alias{dbFetch_AdbiResult}
@@ -177,6 +179,8 @@
 \S4method{dbExistsTable}{AdbiConnection,SQL}(conn, name, ...)
 
 \S4method{dbExistsTable}{AdbiConnection,character}(conn, name, ...)
+
+\S4method{dbFetchArrowChunk}{AdbiResultArrow}(res, ...)
 
 \S4method{dbFetchArrow}{AdbiResultArrow}(res, ...)
 
