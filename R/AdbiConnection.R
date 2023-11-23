@@ -1,4 +1,4 @@
-#' @include Driver.R
+#' @include AdbiDriver.R
 NULL
 
 AdbiConnection <- function(driver, ...) {

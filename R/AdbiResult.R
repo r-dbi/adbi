@@ -1,4 +1,4 @@
-#' @include Connection.R
+#' @include AdbiConnection.R
 NULL
 
 AdbiResult <- function(connection, statement, immediate = NULL,
