@@ -1,15 +1,7 @@
 #' @rdname DBI
 #' @inheritParams DBI::dbFetch
 #' @usage NULL
-dbFetchArrow_AdbiResultArrow <- function(res, n = NA, ...) {
-
-  if (length(n) != 1L) {
-    stop("Can only handle scalar values for `n`.", call. = FALSE)
-  }
-
-  if (!(is.na(n) || n == -1)) {
-    stop("Allowed values for `n` are -1 and NA.", call. = FALSE)
-  }
+dbFetchArrow_AdbiResultArrow <- function(res, ...) {
 
   if (isFALSE(meta(res, "immediate"))) {
 
@@ -34,20 +26,11 @@ dbFetchArrow_AdbiResultArrow <- function(res, n = NA, ...) {
     execute_statement(res)
   }
 
-  if (isTRUE(n == -1)) {
+  ret <- collect_array_stream(res)
 
-    testthat::skip("TODO: how do we get an array union from an array stream")
-
-  } else if (isTRUE(is.na(n))) {
-
-    ret <- get_next_batch(res)
-
-  } else {
-
-    stop("Unexpected branch.", call. = FALSE)
-  }
-
-  meta(res, "row_count") <- meta(res, "row_count") + ret$length
+  meta(res, "row_count") <- meta(res, "row_count") + sum(
+    vapply(ret, `[[`, integer(1L), "length")
+  )
 
   ret
 }

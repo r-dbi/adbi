@@ -178,7 +178,7 @@
 
 \S4method{dbExistsTable}{AdbiConnection,character}(conn, name, ...)
 
-\S4method{dbFetchArrow}{AdbiResultArrow}(res, n = NA, ...)
+\S4method{dbFetchArrow}{AdbiResultArrow}(res, ...)
 
 \S4method{dbFetch}{AdbiResult}(res, n = -1, ...)
 

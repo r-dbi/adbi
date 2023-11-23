@@ -150,14 +150,16 @@ execute_statement <- function(x) {
 get_data_batch <- function(x, what = c("next", "rest")) {
 
   if (is.null(meta(x, "data"))) {
-    return(meta(x, "ptyp"))
+    return(as.data.frame(meta(x, "ptyp")))
   }
 
   if (identical(match.arg(what), "rest")) {
 
+    meta(x, "ptyp") <- arrow_ptype(x)
+
     res <- as.data.frame(meta(x, "data"))
 
-    meta(x, "ptyp") <- res[0L, , drop = FALSE]
+    meta(x, "data") <- NULL
     meta(x, "has_completed") <- TRUE
 
     return(res)
@@ -168,11 +170,24 @@ get_data_batch <- function(x, what = c("next", "rest")) {
 
 get_next_batch <- function(x) {
 
+  if (is.null(meta(x, "data"))) {
+
+    if (!isTRUE(meta(x, "has_completed"))) {
+
+      stop(
+        "Result has been released but not marked as completed.",
+        call. = FALSE
+      )
+    }
+
+    return(meta(x, "ptyp"))
+  }
+
   res <- meta(x, "data")$get_next()
 
   if (is.null(res)) {
 
-    meta(x, "ptyp") <- nanoarrow::infer_nanoarrow_ptype(meta(x, "data"))
+    meta(x, "ptyp") <- arrow_ptype(x)
     meta(x, "data")$release()
     meta(x, "data") <- NULL
     meta(x, "has_completed") <- TRUE
@@ -181,4 +196,45 @@ get_next_batch <- function(x) {
   }
 
   res
+}
+
+arrow_ptype <- function(x) {
+
+  if (is.null(meta(x, "data"))) {
+    stop("Cannot infer ptype from released result.", call. = FALSE)
+  }
+
+  nanoarrow::nanoarrow_array_init(
+    nanoarrow::infer_nanoarrow_schema(meta(x, "data"))
+  )
+}
+
+collect_array_stream <- function(x) {
+
+  if (is.null(meta(x, "data"))) {
+
+    if (!isTRUE(meta(x, "has_completed"))) {
+
+      stop(
+        "Result has been released but not marked as completed.",
+        call. = FALSE
+      )
+    }
+
+    return(meta(x, "ptyp"))
+  }
+
+  ret <- nanoarrow::collect_array_stream(meta(x, "data"))
+
+  meta(x, "ptyp") <- list(arrow_ptype(x))
+
+  meta(x, "data")$release()
+  meta(x, "data") <- NULL
+  meta(x, "has_completed") <- TRUE
+
+  if (length(ret)) {
+    return(ret)
+  }
+
+  meta(x, "ptyp")
 }
