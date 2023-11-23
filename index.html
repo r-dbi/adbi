@@ -147,6 +147,7 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Queries</span></span>
 <span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html" class="external-link">dbGetQueryArrow</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"SELECT * from swiss WHERE Agriculture &lt; 40"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [[1]]</span></span>
 <span><span class="co">#&gt; &lt;nanoarrow_array struct[16]&gt;</span></span>
 <span><span class="co">#&gt;  $ length    : int 16</span></span>
 <span><span class="co">#&gt;  $ null_count: int 0</span></span>
@@ -215,21 +216,19 @@
 <span></span>
 <span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbBind.html" class="external-link">dbBind</a></span><span class="op">(</span><span class="va">res</span>, <span class="fl">30</span><span class="op">)</span></span>
 <span></span>
-<span><span class="kw">while</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbHasCompleted.html" class="external-link">dbHasCompleted</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">ret</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbFetch.html" class="external-link">dbFetchArrow</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"fetched "</span>, <span class="va">ret</span><span class="op">$</span><span class="va">length</span>, <span class="st">" rows"</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span><span class="co">#&gt; fetched 10 rows</span></span>
-<span><span class="co">#&gt; fetched  rows</span></span>
+<span><span class="va">ret</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbFetch.html" class="external-link">dbFetchArrow</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
+<span><span class="va">ret</span><span class="op">$</span><span class="va">length</span></span>
+<span><span class="co">#&gt; NULL</span></span>
 <span></span>
 <span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbBind.html" class="external-link">dbBind</a></span><span class="op">(</span><span class="va">res</span>, <span class="fl">20</span><span class="op">)</span></span>
 <span></span>
-<span><span class="kw">while</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbHasCompleted.html" class="external-link">dbHasCompleted</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">ret</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbFetch.html" class="external-link">dbFetchArrow</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
+<span><span class="co"># Chunked fetches</span></span>
+<span><span class="kw">while</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbHasCompleted.html" class="external-link">dbHasCompleted</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">ret</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbFetch.html" class="external-link">dbFetchArrowChunk</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"fetched "</span>, <span class="va">ret</span><span class="op">$</span><span class="va">length</span>, <span class="st">" rows"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span><span class="co">#&gt; fetched 8 rows</span></span>
-<span><span class="co">#&gt; fetched  rows</span></span>
+<span><span class="co">#&gt; fetched 0 rows</span></span>
 <span></span>
 <span><span class="co"># Cleanup</span></span>
 <span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbClearResult.html" class="external-link">dbClearResult</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
