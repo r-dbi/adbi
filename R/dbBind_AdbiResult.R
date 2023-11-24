@@ -130,6 +130,7 @@ dbBind_AdbiResult <- function(res, params, ...) {
 
   invisible(res)
 }
+
 #' @rdname DBI
 #' @export
 setMethod("dbBind", "AdbiResult", dbBind_AdbiResult)

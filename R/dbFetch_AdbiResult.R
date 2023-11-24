@@ -83,7 +83,7 @@ dbFetch_AdbiResult <- function(res, n = -1, ...) {
   if (is.null(rem)) {
 
     if (is.null(meta(res, "ptyp"))) {
-      meta(res, "ptyp") <- nanoarrow::infer_nanoarrow_ptype(meta(res, "data"))
+      meta(res, "ptyp") <- arrow_ptype(res)
     }
 
     ret <- meta(res, "ptyp")
@@ -147,17 +147,59 @@ execute_statement <- function(x) {
   invisible(x)
 }
 
+converter_to <- function(to) {
+
+  bint_ptype <- switch(
+    to,
+    integer = integer(),
+    numeric = numeric(),
+    character = character(),
+    integer64 = bit64::integer64(),
+    stop("Unexpected value for `to`.", call. = FALSE)
+  )
+
+  function(schema, ptype) {
+
+    if (!inherits(schema, "nanoarrow_schema")) {
+      schema <- nanoarrow::infer_nanoarrow_schema(schema)
+    }
+
+    cols <- nanoarrow::nanoarrow_schema_parse(schema, recursive = TRUE)
+    cols <- cols[["children"]]
+
+    typs <- vapply(cols, `[[`, character(1L), "type")
+    bint <- typs == "int64"
+
+    ptype[bint] <- rep(list(bint_ptype), sum(bint))
+
+    ptype
+  }
+}
+
+as_data_frame <- function(x, bigint) {
+
+  to <- converter_to(bigint)
+
+  if (inherits(x, "nanoarrow_array_stream")) {
+    nanoarrow::convert_array_stream(x, to)
+  } else if (inherits(x, "nanoarrow_array")) {
+    nanoarrow::convert_array(x, to)
+  } else {
+    stop("Unexpected conversion of type ", class(x), ".", call. = FALSE)
+  }
+}
+
 get_data_batch <- function(x, what = c("next", "rest")) {
 
   if (is.null(meta(x, "data"))) {
-    return(as.data.frame(meta(x, "ptyp")))
+    return(as_data_frame(meta(x, "ptyp"), x@bigint))
   }
 
   if (identical(match.arg(what), "rest")) {
 
     meta(x, "ptyp") <- arrow_ptype(x)
 
-    res <- as.data.frame(meta(x, "data"))
+    res <- as_data_frame(meta(x, "data"), x@bigint)
 
     meta(x, "data") <- NULL
     meta(x, "has_completed") <- TRUE
@@ -165,7 +207,7 @@ get_data_batch <- function(x, what = c("next", "rest")) {
     return(res)
   }
 
-  as.data.frame(get_next_batch(x))
+  as_data_frame(get_next_batch(x), x@bigint)
 }
 
 get_next_batch <- function(x) {

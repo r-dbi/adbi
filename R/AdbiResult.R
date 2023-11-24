@@ -2,13 +2,13 @@
 NULL
 
 AdbiResult <- function(connection, statement, immediate = NULL,
-                       type = c("query", "statement")) {
+                       type = c("query", "statement"), bigint = NULL) {
 
-  init_result(connection, statement, "AdbiResult", immediate, type)
+  init_result(connection, statement, "AdbiResult", immediate, type, bigint)
 }
 
 init_result <- function(connection, statement, class, immediate = NULL,
-                        type = c("query", "statement")) {
+                        type = c("query", "statement"), bigint = NULL) {
 
   if (!(is.null(immediate) || identical(immediate, TRUE) ||
     identical(immediate, FALSE))) {
@@ -57,8 +57,12 @@ init_result <- function(connection, statement, class, immediate = NULL,
     schema <- NULL
   }
 
+  if (is.null(bigint)) {
+    bigint <- connection@bigint
+  }
+
   res <- new_result(stmt, immediate, prepared, match.arg(type), statement,
-    class)
+    class, bigint)
 
   register_result(connection, res)
 
@@ -68,7 +72,7 @@ init_result <- function(connection, statement, class, immediate = NULL,
 }
 
 new_result <- function(statement, immediate, prepared, type, sql,
-                       class = "AdbiResult") {
+                       class = "AdbiResult", bigint = NULL) {
 
   meta <- list(
     immediate = immediate,
@@ -81,7 +85,8 @@ new_result <- function(statement, immediate, prepared, type, sql,
   new(
     class,
     statement = statement,
-    metadata = list2env(meta, envir = new.env(parent = emptyenv()))
+    metadata = list2env(meta, envir = new.env(parent = emptyenv())),
+    bigint = resolve_bigint(bigint)
   )
 }
 
@@ -92,6 +97,7 @@ setClass(
   contains = "DBIResult",
   slots = list(
     statement = "ANY",
-    metadata = "environment"
+    metadata = "environment",
+    bigint = "character"
   )
 )

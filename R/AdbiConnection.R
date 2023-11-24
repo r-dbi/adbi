@@ -1,7 +1,7 @@
 #' @include AdbiDriver.R
 NULL
 
-AdbiConnection <- function(driver, ...) {
+AdbiConnection <- function(driver, ..., bigint = NULL) {
 
   db <- adbcdrivermanager::adbc_database_init(driver@driver, ...)
 
@@ -13,7 +13,8 @@ AdbiConnection <- function(driver, ...) {
     "AdbiConnection",
     database = db,
     connection = adbcdrivermanager::adbc_connection_init(db),
-    metadata = list2env(meta, envir = new.env(parent = emptyenv()))
+    metadata = list2env(meta, envir = new.env(parent = emptyenv())),
+    bigint = resolve_bigint(bigint)
   )
 }
 
@@ -24,7 +25,8 @@ setClass(
   slots = list(
     database = "ANY",
     connection = "ANY",
-    metadata = "environment"
+    metadata = "environment",
+    bigint = "character"
   ),
   contains = "DBIConnection"
 )
@@ -58,3 +60,16 @@ DBI::dbListObjects
 
 #' @export
 DBI::dbWithTransaction
+
+resolve_bigint <- function(x) {
+
+  if (is.null(x)) {
+    if (requireNamespace("bit64", quietly = TRUE)) {
+      x <- "integer64"
+    } else {
+      x <- "character"
+    }
+  }
+
+  match.arg(x, c("integer", "numeric", "character", "integer64"))
+}

@@ -32,9 +32,13 @@ register_result <- function(con, res) {
 
 rm_result <- function(res) {
 
+  id <- meta(res, "id")
+
+  message("removing ", id)
+
   con <- meta(res, "con")
 
-  meta(con, "results")[meta(res, "id")] <- NULL
+  meta(con, "results")[id] <- NULL
 
   if (isTRUE(meta(con, "disconnect")) && length(meta(con, "results")) == 0L) {
     dbDisconnect(con)

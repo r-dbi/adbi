@@ -2,9 +2,9 @@
 NULL
 
 AdbiResultArrow <- function(connection, statement, immediate = NULL,
-                            type = c("query", "statement")) {
+                            type = c("query", "statement"), bigint = NULL) {
 
-  init_result(connection, statement, "AdbiResultArrow", immediate, type)
+  init_result(connection, statement, "AdbiResultArrow", immediate, type, bigint)
 }
 
 #' @rdname DBI
@@ -14,6 +14,7 @@ setClass(
   contains = "DBIResultArrow",
   slots = list(
     statement = "ANY",
-    metadata = "environment"
+    metadata = "environment",
+    bigint = "character"
   )
 )
