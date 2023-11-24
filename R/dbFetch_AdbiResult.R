@@ -86,7 +86,7 @@ dbFetch_AdbiResult <- function(res, n = -1, ...) {
       meta(res, "ptyp") <- arrow_ptype(res)
     }
 
-    ret <- meta(res, "ptyp")
+    ret <- as_data_frame(meta(res, "ptyp"), res@bigint)
 
   } else {
 
@@ -170,7 +170,7 @@ converter_to <- function(to) {
     typs <- vapply(cols, `[[`, character(1L), "type")
     bint <- typs == "int64"
 
-    ptype[bint] <- rep(list(bint_ptype), sum(bint))
+    ptype[bint] <- list(bint_ptype)
 
     ptype
   }
@@ -181,6 +181,7 @@ as_data_frame <- function(x, bigint) {
   to <- converter_to(bigint)
 
   if (inherits(x, "nanoarrow_array_stream")) {
+    on.exit(x$release())
     nanoarrow::convert_array_stream(x, to)
   } else if (inherits(x, "nanoarrow_array")) {
     nanoarrow::convert_array(x, to)
@@ -192,22 +193,24 @@ as_data_frame <- function(x, bigint) {
 get_data_batch <- function(x, what = c("next", "rest")) {
 
   if (is.null(meta(x, "data"))) {
-    return(as.data.frame(meta(x, "ptyp"), x@bigint))
-  }
 
-  if (identical(match.arg(what), "rest")) {
+    res <- meta(x, "ptyp")
+
+  } else if (identical(match.arg(what), "rest")) {
 
     meta(x, "ptyp") <- arrow_ptype(x)
 
-    res <- as.data.frame(meta(x, "data"), x@bigint)
+    res <- meta(x, "data")
 
     meta(x, "data") <- NULL
     meta(x, "has_completed") <- TRUE
 
-    return(res)
+  } else {
+
+    res <- get_next_batch(x)
   }
 
-  as.data.frame(get_next_batch(x), x@bigint)
+  as_data_frame(res, x@bigint)
 }
 
 get_next_batch <- function(x) {

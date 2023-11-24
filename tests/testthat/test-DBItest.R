@@ -12,6 +12,7 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
       "send_statement_stale_warning",
       "send_query_only_one_result_set",
       "send_statement_only_one_result_set",
+      "data_logical",
       "data_raw", # apache/arrow-adbc#1004
       "data_64_bit_numeric_warning", # apache/arrow-adbc#1005
       "data_64_bit_lossless", # apache/arrow-adbc#1005
