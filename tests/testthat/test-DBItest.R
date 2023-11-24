@@ -4,18 +4,14 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
   DBItest::test_all(
     skip = c(
       "package_name",
-      "connect_bigint_integer",
-      "connect_bigint_numeric",
-      "connect_bigint_character",
-      "connect_bigint_integer64",
+      "connect_bigint_integer", # not compliant with silent overflow
+      "connect_bigint_numeric", # not compliant with silent rounding
+      "connect_bigint_character", # arrow-nanoarrow#324
+      "data_logical", # r-dbi/DBItest/issues/308
       "send_query_stale_warning",
       "send_statement_stale_warning",
       "send_query_only_one_result_set",
       "send_statement_only_one_result_set",
-      "data_logical",
-      "data_raw", # apache/arrow-adbc#1004
-      "data_64_bit_numeric_warning", # apache/arrow-adbc#1005
-      "data_64_bit_lossless", # apache/arrow-adbc#1005
       "quote_identifier_string",
       "create_table_visible_in_other_connection",
       "table_visible_in_other_connection", # apache/arrow-adbc#1008

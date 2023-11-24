@@ -1,5 +1,5 @@
 DBItest::make_context(
-  adbi("adbcsqlite"),
+  adbi::adbi("adbcsqlite"),
   list(
     uri = tempfile("DBItest", fileext = ".sqlite")
   ),
@@ -11,7 +11,7 @@ DBItest::make_context(
       date_cast = function(x) paste0("'", x, "'"),
       time_cast = function(x) paste0("'", x, "'"),
       timestamp_cast = function(x) paste0("'", x, "'"),
-      logical_return = function(x) as.numeric(x), # apache/arrow-adbc#1005
+      logical_return = function(x) bit64::as.integer64(x),
       date_typed = FALSE,
       time_typed = FALSE,
       timestamp_typed = FALSE,
