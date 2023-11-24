@@ -192,14 +192,14 @@ as_data_frame <- function(x, bigint) {
 get_data_batch <- function(x, what = c("next", "rest")) {
 
   if (is.null(meta(x, "data"))) {
-    return(as_data_frame(meta(x, "ptyp"), x@bigint))
+    return(as.data.frame(meta(x, "ptyp"), x@bigint))
   }
 
   if (identical(match.arg(what), "rest")) {
 
     meta(x, "ptyp") <- arrow_ptype(x)
 
-    res <- as_data_frame(meta(x, "data"), x@bigint)
+    res <- as.data.frame(meta(x, "data"), x@bigint)
 
     meta(x, "data") <- NULL
     meta(x, "has_completed") <- TRUE
@@ -207,7 +207,7 @@ get_data_batch <- function(x, what = c("next", "rest")) {
     return(res)
   }
 
-  as_data_frame(get_next_batch(x), x@bigint)
+  as.data.frame(get_next_batch(x), x@bigint)
 }
 
 get_next_batch <- function(x) {
