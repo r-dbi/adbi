@@ -74,13 +74,18 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
       "bind_raw",
       "bind_blob",
 
-      if (getRversion() < "4.0") "column_info_consistent_keywords",
-      if (getRversion() < "4.0") "column_info_consistent_unnamed",
-      if (getRversion() < "4.0") "column_info_consistent",
-      if (getRversion() < "4.0") "column_info_row_names",
+      if (getRversion() < "4.0") {
+        c(
+          "column_info_consistent_keywords",
+          "column_info_consistent_unnamed",
+          "column_info_consistent",
+          "column_info_row_names"
+        )
+      },
 
-      # Fails with older DBItest
-      if (packageVersion("DBItest") < "1.7.2") "reexport"
+      if (packageVersion("DBItest") < "1.7.2") "reexport",
+
+      if (packageVersion("DBItest") > "1.7.2") "arrow_read_table_arrow_name"
     )
   )
 }

@@ -19,7 +19,7 @@ dbFetchArrow_AdbiResultArrow <- function(res, ...) {
 
   if (identical(meta(res, "type"), "statement")) {
     warning("Statements are not expected to return results.", call. = FALSE)
-    return(nanoarrow::as_nanoarrow_array(data.frame()))
+    return(nanoarrow::basic_array_stream(list(data.frame())))
   }
 
   if (is.null(meta(res, "data")) && !isTRUE(meta(res, "has_completed"))) {
@@ -32,7 +32,7 @@ dbFetchArrow_AdbiResultArrow <- function(res, ...) {
     vapply(ret, `[[`, integer(1L), "length")
   )
 
-  ret
+  nanoarrow::basic_array_stream(ret, validate = FALSE)
 }
 
 #' @rdname DBI
