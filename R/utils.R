@@ -34,8 +34,6 @@ rm_result <- function(res) {
 
   id <- meta(res, "id")
 
-  message("removing ", id)
-
   con <- meta(res, "con")
 
   meta(con, "results")[id] <- NULL

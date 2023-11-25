@@ -26,7 +26,8 @@ Suggests:
     covr,
     DBItest,
     adbcsqlite,
-    withr
+    withr,
+    bit64
 Remotes: 
     r-dbi/DBI,
     apache/arrow-adbc/r/adbcdrivermanager,

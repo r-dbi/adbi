@@ -177,7 +177,7 @@
 
 \S4method{dbDataType}{AdbiDriver,list}(dbObj, obj, ...)
 
-\S4method{dbDisconnect}{AdbiConnection}(conn, ...)
+\S4method{dbDisconnect}{AdbiConnection}(conn, force = getOption("adbi.force_close_results", FALSE), ...)
 
 \S4method{dbExistsTable}{AdbiConnection,Id}(conn, name, ...)
 
@@ -306,6 +306,8 @@ object (in order to clone an existing connection).}
 or \linkS4class{DBIConnection}}
 
 \item{obj}{An R object whose SQL type we want to determine.}
+
+\item{force}{Close open results when disconnecting}
 
 \item{n}{maximum number of records to retrieve per fetch. Use \code{n = -1}
 or \code{n = Inf}
