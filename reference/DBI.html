@@ -93,7 +93,7 @@
 <span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbDataType.html" class="external-link">dbDataType</a></span><span class="op">(</span><span class="va">dbObj</span>, <span class="va">obj</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for AdbiConnection</span></span>
-<span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbDisconnect.html" class="external-link">dbDisconnect</a></span><span class="op">(</span><span class="va">conn</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbDisconnect.html" class="external-link">dbDisconnect</a></span><span class="op">(</span><span class="va">conn</span>, force <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"adbi.force_close_results"</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for AdbiConnection,Id</span></span>
 <span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbExistsTable.html" class="external-link">dbExistsTable</a></span><span class="op">(</span><span class="va">conn</span>, <span class="va">name</span>, <span class="va">...</span><span class="op">)</span></span>
@@ -281,6 +281,10 @@ or <a href="https://dbi.r-dbi.org/reference/DBIConnection-class.html" class="ext
 
 <dt>obj</dt>
 <dd><p>An R object whose SQL type we want to determine.</p></dd>
+
+
+<dt>force</dt>
+<dd><p>Close open results when disconnecting</p></dd>
 
 
 <dt>n</dt>
