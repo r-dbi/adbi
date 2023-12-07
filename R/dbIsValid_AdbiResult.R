@@ -1,10 +1,11 @@
-#' @rdname DBI
+#' @rdname AdbiResult-class
 #' @inheritParams DBI::dbIsValid
 #' @usage NULL
 dbIsValid_AdbiResult <- function(dbObj, ...) {
   adbc_statement_is_valid(dbObj@statement)
 }
-#' @rdname DBI
+
+#' @rdname AdbiResult-class
 #' @export
 setMethod("dbIsValid", "AdbiResult", dbIsValid_AdbiResult)
 

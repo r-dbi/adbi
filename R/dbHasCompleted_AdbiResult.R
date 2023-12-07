@@ -1,4 +1,4 @@
-#' @rdname DBI
+#' @rdname AdbiResult-class
 #' @inheritParams DBI::dbHasCompleted
 #' @usage NULL
 dbHasCompleted_AdbiResult <- function(res, ...) {
@@ -10,6 +10,6 @@ dbHasCompleted_AdbiResult <- function(res, ...) {
   meta(res, "has_completed")
 }
 
-#' @rdname DBI
+#' @rdname AdbiResult-class
 #' @export
 setMethod("dbHasCompleted", "AdbiResult", dbHasCompleted_AdbiResult)

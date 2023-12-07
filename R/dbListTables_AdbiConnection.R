@@ -1,4 +1,4 @@
-#' @rdname DBI
+#' @rdname AdbiConnection-class
 #' @inheritParams DBI::dbListTables
 #' @usage NULL
 dbListTables_AdbiConnection <- function(conn, ...) {
@@ -10,7 +10,7 @@ dbListTables_AdbiConnection <- function(conn, ...) {
   get_schema_objects(conn, "table")[["table_name"]]
 }
 
-#' @rdname DBI
+#' @rdname AdbiConnection-class
 #' @export
 setMethod("dbListTables", "AdbiConnection", dbListTables_AdbiConnection)
 

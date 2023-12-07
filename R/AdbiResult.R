@@ -90,8 +90,22 @@ new_result <- function(statement, immediate, prepared, type, sql,
   )
 }
 
-#' @rdname DBI
+#' Class AdbiResult (and methods)
+#'
+#' AdbiResult objects are created by [DBI::dbSendQuery()] or
+#' [DBI::dbSendStatement()], and encapsulate the result of an SQL statement
+#' (either `SELECT` or not). They are a superclass of the [DBIResult-class]
+#' class. The "Usage" section lists the class methods overridden by
+#' \pkg{adbi}.
+#'
+#' @seealso
+#' The corresponding generic functions
+#' [DBI::dbFetch()], [DBI::dbClearResult()], [DBI::dbBind()],
+#' [DBI::dbColumnInfo()], [DBI::dbGetRowsAffected()], [DBI::dbGetRowCount()],
+#' [DBI::dbHasCompleted()], and [DBI::dbGetStatement()].
+#'
 #' @export
+#' @keywords internal
 setClass(
   "AdbiResult",
   contains = "DBIResult",

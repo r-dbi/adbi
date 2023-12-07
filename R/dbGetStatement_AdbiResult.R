@@ -1,4 +1,4 @@
-#' @rdname DBI
+#' @rdname AdbiResult-class
 #' @inheritParams DBI::dbGetStatement
 #' @usage NULL
 dbGetStatement_AdbiResult <- function(res, ...) {
@@ -10,6 +10,6 @@ dbGetStatement_AdbiResult <- function(res, ...) {
   meta(res, "sql")
 }
 
-#' @rdname DBI
+#' @rdname AdbiResult-class
 #' @export
 setMethod("dbGetStatement", "AdbiResult", dbGetStatement_AdbiResult)

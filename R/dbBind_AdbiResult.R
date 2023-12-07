@@ -1,4 +1,4 @@
-#' @rdname DBI
+#' @rdname AdbiResult-class
 #' @inheritParams DBI::dbBind
 #' @usage NULL
 dbBind_AdbiResult <- function(res, params, ...) {
@@ -131,6 +131,6 @@ dbBind_AdbiResult <- function(res, params, ...) {
   invisible(res)
 }
 
-#' @rdname DBI
+#' @rdname AdbiResult-class
 #' @export
 setMethod("dbBind", "AdbiResult", dbBind_AdbiResult)

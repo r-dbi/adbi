@@ -1,4 +1,4 @@
-#' @rdname DBI
+#' @rdname AdbiConnection-class
 #' @inheritParams DBI::dbWriteTable
 #' @param overwrite Allow overwriting the destination table. Cannot be
 #'   `TRUE` if `append` is also `TRUE`.
@@ -111,7 +111,7 @@ dbWriteTable_AdbiConnection_Id_data.frame <- function(conn, name, value, overwri
   invisible(TRUE)
 }
 
-#' @rdname DBI
+#' @rdname AdbiConnection-class
 #' @export
 setMethod(
   "dbWriteTable",

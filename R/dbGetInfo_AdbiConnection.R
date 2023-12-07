@@ -1,9 +1,10 @@
-#' @rdname DBI
+#' @rdname AdbiConnection-class
 #' @inheritParams DBI::dbGetInfo
 #' @usage NULL
 dbGetInfo_AdbiConnection <- function(dbObj, ...) {
   testthat::skip("Not yet implemented: dbGetInfo(Connection)")
 }
-#' @rdname DBI
+
+#' @rdname AdbiConnection-class
 #' @export
 setMethod("dbGetInfo", "AdbiConnection", dbGetInfo_AdbiConnection)

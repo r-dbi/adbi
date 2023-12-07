@@ -1,4 +1,4 @@
-#' @rdname DBI
+#' @rdname AdbiResult-class
 #' @inheritParams DBI::dbColumnInfo
 #' @usage NULL
 dbColumnInfo_AdbiResult <- function(res, ...) {
@@ -26,6 +26,6 @@ dbColumnInfo_AdbiResult <- function(res, ...) {
   )
 }
 
-#' @rdname DBI
+#' @rdname AdbiResult-class
 #' @export
 setMethod("dbColumnInfo", "AdbiResult", dbColumnInfo_AdbiResult)

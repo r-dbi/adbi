@@ -1,4 +1,4 @@
-#' @rdname DBI
+#' @rdname AdbiConnection-class
 #' @inheritParams DBI::dbCommit
 #' @usage NULL
 dbCommit_AdbiConnection <- function(conn, ...) {
@@ -26,6 +26,6 @@ dbCommit_AdbiConnection <- function(conn, ...) {
   invisible(TRUE)
 }
 
-#' @rdname DBI
+#' @rdname AdbiConnection-class
 #' @export
 setMethod("dbCommit", "AdbiConnection", dbCommit_AdbiConnection)

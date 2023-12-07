@@ -1,4 +1,4 @@
-#' @rdname DBI
+#' @rdname AdbiConnection-class
 #' @inheritParams DBI::dbListFields
 #' @usage NULL
 dbListFields_AdbiConnection_Id <- function(conn, name, ...) {
@@ -23,7 +23,7 @@ dbListFields_AdbiConnection_Id <- function(conn, name, ...) {
   res[["column_name"]]
 }
 
-#' @rdname DBI
+#' @rdname AdbiConnection-class
 #' @export
 setMethod(
   "dbListFields",

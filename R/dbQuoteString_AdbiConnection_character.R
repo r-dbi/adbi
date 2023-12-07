@@ -1,11 +1,11 @@
-#' @rdname DBI
+#' @rdname AdbiConnection-class
 #' @inheritParams DBI::dbQuoteString
 #' @usage NULL
 dbQuoteString_AdbiConnection_character <- function(conn, x, ...) {
   dbQuoteString(ANSI(), x, ...)
 }
 
-#' @rdname DBI
+#' @rdname AdbiConnection-class
 #' @export
 setMethod(
   "dbQuoteString",

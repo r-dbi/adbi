@@ -1,4 +1,4 @@
-#' @rdname DBI
+#' @rdname AdbiDriver-class
 #' @inheritParams DBI::dbDataType
 #' @usage NULL
 dbDataType_AdbiDriver <- function(dbObj, obj, ...) {
@@ -10,6 +10,7 @@ dbDataType_AdbiDriver <- function(dbObj, obj, ...) {
     }
   )
 }
-#' @rdname DBI
+
+#' @rdname AdbiDriver-class
 #' @export
 setMethod("dbDataType", "AdbiDriver", dbDataType_AdbiDriver)

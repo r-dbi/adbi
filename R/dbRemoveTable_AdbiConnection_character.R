@@ -1,4 +1,4 @@
-#' @rdname DBI
+#' @rdname AdbiConnection-class
 #' @param fail_if_missing If `FALSE`, `dbRemoveTable()` succeeds if the
 #'   table doesn't exist.
 #' @inheritParams DBI::dbRemoveTable
@@ -20,6 +20,7 @@ dbRemoveTable_AdbiConnection_character <- function(conn, name, ...,
 
   invisible(TRUE)
 }
-#' @rdname DBI
+
+#' @rdname AdbiConnection-class
 #' @export
 setMethod("dbRemoveTable", c("AdbiConnection", "character"), dbRemoveTable_AdbiConnection_character)

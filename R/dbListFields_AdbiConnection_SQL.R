@@ -1,11 +1,11 @@
-#' @rdname DBI
+#' @rdname AdbiConnection-class
 #' @inheritParams DBI::dbListFields
 #' @usage NULL
 dbListFields_AdbiConnection_SQL <- function(conn, name, ...) {
   dbListFields(conn, dbUnquoteIdentifier(conn, name)[[1L]], ...)
 }
 
-#' @rdname DBI
+#' @rdname AdbiConnection-class
 #' @export
 setMethod(
   "dbListFields",

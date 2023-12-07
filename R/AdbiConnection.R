@@ -18,7 +18,21 @@ AdbiConnection <- function(driver, ..., bigint = NULL) {
   )
 }
 
-#' @rdname DBI
+#' Class AdbiConnection (and methods)
+#'
+#' AdbiConnection objects are created by passing [adbi()] as first
+#' argument to [DBI::dbConnect()]. They are a superclass of the
+#' [DBIConnection-class] class. The "Usage" section lists the class methods
+#' overridden by \pkg{adbi}.
+#'
+#' @seealso
+#' The corresponding generic functions
+#' [DBI::dbSendQuery()], [DBI::dbGetQuery()],
+#' [DBI::dbSendStatement()], [DBI::dbExecute()],
+#' [DBI::dbExistsTable()], [DBI::dbListTables()], [DBI::dbListFields()],
+#' [DBI::dbRemoveTable()], and [DBI::sqlData()].
+#'
+#' @keywords internal
 #' @export
 setClass(
   "AdbiConnection",

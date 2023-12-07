@@ -7,14 +7,30 @@
 adbi(driver = NA_character_)
 }
 \arguments{
-\item{driver}{String-valued driver specification}
+\item{driver}{A driver specification that can be evaluated (with no
+arguments) to give an \code{\link[adbcdrivermanager:adbc_driver_void]{adbcdrivermanager::adbc_driver()}}. See Details for
+more information.}
 }
 \description{
-TBD.
+In order to open a database connection, \code{\link[DBI:dbConnect]{DBI::dbConnect()}} disptaches on a
+driver object, which can be instantiated by calling \code{adbi()}.
+}
+\details{
+To specify the type of adbc driver, \code{adbi} accepts as \code{driver} argument
+\itemize{
+\item an object inheriting from \code{adbc_driver},
+\item a function that can be evaluated with no arguments and returns an object
+inheriting from \code{adbc_driver},
+\item a string of the form \code{pkg::fun} (where \verb{pkg::} is optional and defaults
+to \code{fun}), which can be used to look up such a function.
+}
+
+As default, an \code{\link[adbcdrivermanager:adbc_driver_monkey]{adbcdrivermanager::adbc_driver_monkey()}} object is created.
 }
 \examples{
 \dontrun{
-#' library(DBI)
+library(DBI)
 adbi::adbi()
+adbi::adbi("adbcsqlite")
 }
 }

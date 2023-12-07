@@ -1,4 +1,4 @@
-#' @rdname DBI
+#' @rdname AdbiResult-class
 #' @inheritParams DBI::dbFetch
 #' @usage NULL
 dbFetch_AdbiResult <- function(res, n = -1, ...) {
@@ -126,7 +126,7 @@ dbFetch_AdbiResult <- function(res, n = -1, ...) {
   ret
 }
 
-#' @rdname DBI
+#' @rdname AdbiResult-class
 #' @export
 setMethod("dbFetch", "AdbiResult", dbFetch_AdbiResult)
 

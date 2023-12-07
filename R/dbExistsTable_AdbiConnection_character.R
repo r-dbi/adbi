@@ -1,11 +1,11 @@
-#' @rdname DBI
+#' @rdname AdbiConnection-class
 #' @inheritParams DBI::dbExistsTable
 #' @usage NULL
 dbExistsTable_AdbiConnection_character <- function(conn, name, ...) {
   dbExistsTable(conn, Id(table = name), ...)
 }
 
-#' @rdname DBI
+#' @rdname AdbiConnection-class
 #' @export
 setMethod(
   "dbExistsTable",

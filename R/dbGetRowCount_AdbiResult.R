@@ -1,4 +1,4 @@
-#' @rdname DBI
+#' @rdname AdbiResult-class
 #' @inheritParams DBI::dbGetRowCount
 #' @usage NULL
 dbGetRowCount_AdbiResult <- function(res, ...) {
@@ -16,6 +16,6 @@ dbGetRowCount_AdbiResult <- function(res, ...) {
   res
 }
 
-#' @rdname DBI
+#' @rdname AdbiResult-class
 #' @export
 setMethod("dbGetRowCount", "AdbiResult", dbGetRowCount_AdbiResult)

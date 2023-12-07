@@ -1,4 +1,4 @@
-#' @rdname DBI
+#' @rdname AdbiResult-class
 #' @inheritParams DBI::dbClearResult
 #' @usage NULL
 dbClearResult_AdbiResult <- function(res, ...) {
@@ -22,6 +22,6 @@ dbClearResult_AdbiResult <- function(res, ...) {
   invisible(TRUE)
 }
 
-#' @rdname DBI
+#' @rdname AdbiResult-class
 #' @export
 setMethod("dbClearResult", "AdbiResult", dbClearResult_AdbiResult)

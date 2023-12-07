@@ -1,4 +1,4 @@
-#' @rdname DBI
+#' @rdname AdbiConnection-class
 #' @inheritParams DBI::dbBegin
 #' @usage NULL
 dbBegin_AdbiConnection <- function(conn, ...) {
@@ -27,6 +27,6 @@ dbBegin_AdbiConnection <- function(conn, ...) {
   invisible(TRUE)
 }
 
-#' @rdname DBI
+#' @rdname AdbiConnection-class
 #' @export
 setMethod("dbBegin", "AdbiConnection", dbBegin_AdbiConnection)

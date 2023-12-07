@@ -1,4 +1,4 @@
-#' @rdname DBI
+#' @rdname AdbiConnection-class
 #' @inheritParams DBI::dbIsValid
 #' @usage NULL
 dbIsValid_AdbiConnection <- function(dbObj, ...) {
@@ -6,7 +6,7 @@ dbIsValid_AdbiConnection <- function(dbObj, ...) {
     adbc_database_is_valid(dbObj@database)
 }
 
-#' @rdname DBI
+#' @rdname AdbiConnection-class
 #' @export
 setMethod("dbIsValid", "AdbiConnection", dbIsValid_AdbiConnection)
 

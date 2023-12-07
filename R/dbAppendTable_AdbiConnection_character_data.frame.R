@@ -1,4 +1,4 @@
-#' @rdname DBI
+#' @rdname AdbiConnection-class
 #' @usage NULL
 dbAppendTable_AdbiConnection <- function(conn, name, value, ...,
     row.names = NULL) {
@@ -6,8 +6,6 @@ dbAppendTable_AdbiConnection <- function(conn, name, value, ...,
   if (!is.null(row.names)) {
     stop("Can't pass `row.names` to `dbAppendTable()`", call. = FALSE)
   }
-
-  # TODO: how about using dbWriteTable(..., append = TRUE) here?
 
   query <- sqlAppendTable(
     con = conn,
@@ -20,7 +18,7 @@ dbAppendTable_AdbiConnection <- function(conn, name, value, ...,
   dbExecute(conn, query)
 }
 
-#' @rdname DBI
+#' @rdname AdbiConnection-class
 #' @export
 setMethod(
   "dbAppendTable",

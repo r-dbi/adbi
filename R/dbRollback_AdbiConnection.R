@@ -1,4 +1,4 @@
-#' @rdname DBI
+#' @rdname AdbiConnection-class
 #' @inheritParams DBI::dbRollback
 #' @usage NULL
 dbRollback_AdbiConnection <- function(conn, ...) {
@@ -26,6 +26,6 @@ dbRollback_AdbiConnection <- function(conn, ...) {
   invisible(TRUE)
 }
 
-#' @rdname DBI
+#' @rdname AdbiConnection-class
 #' @export
 setMethod("dbRollback", "AdbiConnection", dbRollback_AdbiConnection)

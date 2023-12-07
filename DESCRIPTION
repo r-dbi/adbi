@@ -65,7 +65,6 @@ Collate:
     'dbFetch_AdbiResult.R'
     'dbGetInfo_AdbiConnection.R'
     'dbGetInfo_AdbiDriver.R'
-    'dbGetInfo_AdbiResult.R'
     'dbGetRowCount_AdbiResult.R'
     'dbGetRowCount_AdbiResultArrow.R'
     'dbGetRowsAffected_AdbiResult.R'
