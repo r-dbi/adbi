@@ -8,16 +8,15 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
       "connect_bigint_numeric", # not compliant with silent rounding
       "connect_bigint_character", # arrow-nanoarrow#324
       "data_logical", # r-dbi/DBItest/issues/308
-      "send_query_stale_warning",
-      "send_statement_stale_warning",
-      "send_query_only_one_result_set",
-      "send_statement_only_one_result_set",
-      "quote_identifier_string",
-      "create_table_visible_in_other_connection",
+      "send_query_stale_warning", # no warning produced
+      "send_statement_stale_warning", # no warning produced
+      "send_query_only_one_result_set", # no warning produced
+      "send_statement_only_one_result_set", # result not invalid
+      "quote_identifier_string", # no error produced
+      "create_table_visible_in_other_connection", # r-dbi/DBItest#297
       "table_visible_in_other_connection", # apache/arrow-adbc#1008
-      "fetch_no_return_value",
-      "begin_write_commit",
-      "begin_write_disconnect",
+      "begin_write_commit", # Invalid adbc.ingest.mode.replace
+      "begin_write_disconnect", # Invalid adbc.ingest.mode.replace
       "read_table", # apache/arrow-adbc#1008
       "read_table_empty", # apache/arrow-adbc#1008
       "read_table_row_names_true_missing", # apache/arrow-adbc#1008
@@ -68,9 +67,9 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
       "list_objects", # apache/arrow-adbc#1008
       "list_fields", # apache/arrow-adbc#1008
       "list_objects_quote", # some issue with table not being dropped before?
-      "bind_multi_row_zero_length",
-      "bind_repeated",
-      "bind_factor",
+      "bind_multi_row_zero_length", # segfault
+      "bind_repeated", # segfault
+      "bind_factor", # segfault
       "bind_raw",
       "bind_blob",
 
