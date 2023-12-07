@@ -3,21 +3,21 @@ if (identical(Sys.getenv("NOT_CRAN"), "true")) {
   DBItest::test_all(
     skip = c(
       "package_name",
-      "connect_bigint_integer",
-      "connect_bigint_character",
-      "data_logical",
-      "send_query_stale_warning",
-      "send_statement_stale_warning",
-      "send_query_only_one_result_set",
-      "send_statement_only_one_result_set",
-      "quote_identifier_string",
-      "create_table_visible_in_other_connection",
-      "table_visible_in_other_connection",
-      "begin_write_commit",
-      "begin_write_disconnect",
-      "read_table",
-      "read_table_empty",
-      "read_table_row_names_na_missing",
+      "connect_bigint_integer", # not compliant with silent overflow
+      "connect_bigint_character", # arrow-nanoarrow#324
+      "data_logical", # r-dbi/DBItest/issues/308
+      "send_query_stale_warning", # no warning produced
+      "send_statement_stale_warning", # no warning produced
+      "send_query_only_one_result_set", # no warning produced
+      "send_statement_only_one_result_set", # result not invalid
+      "quote_identifier_string", # no error produced
+      "create_table_visible_in_other_connection", # r-dbi/DBItest#297
+      "table_visible_in_other_connection", # apache/arrow-adbc#1008
+      "begin_write_commit", # Invalid adbc.ingest.mode.replace
+      "begin_write_disconnect", # Invalid adbc.ingest.mode.replace
+      "read_table", # apache/arrow-adbc#1008
+      "read_table_empty", # apache/arrow-adbc#1008
+      "read_table_row_names_na_missing", # apache/arrow-adbc#1008
       "read_table_name",
       "append_roundtrip_64_bit_roundtrip",
       "write_table_overwrite",
@@ -44,6 +44,8 @@ if (identical(Sys.getenv("NOT_CRAN"), "true")) {
       "with_transaction_break",
       "bind_multi_row_zero_length",
       "bind_factor",
+      "bind_multi_row_zero_length", # segfault
+      "bind_factor", # segfault
       "bind_raw",
 
       if (getRversion() < "4.0") {
