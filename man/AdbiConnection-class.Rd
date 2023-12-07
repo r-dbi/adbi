@@ -29,7 +29,7 @@
 \alias{dbCommit_AdbiConnection}
 \alias{dbCommit,AdbiConnection-method}
 \alias{dbDataType_AdbiConnection}
-\alias{dbDataType,AdbiConnection,ANY-method}
+\alias{dbDataType,AdbiConnection-method}
 \alias{dbDisconnect_AdbiConnection}
 \alias{dbDisconnect,AdbiConnection-method}
 \alias{dbExistsTable_AdbiConnection_Id}
@@ -82,7 +82,7 @@
 
 \S4method{dbCommit}{AdbiConnection}(conn, ...)
 
-\S4method{dbDataType}{AdbiConnection,ANY}(dbObj, obj, ...)
+\S4method{dbDataType}{AdbiConnection}(dbObj, obj, ...)
 
 \S4method{dbDisconnect}{AdbiConnection}(conn, force = getOption("adbi.force_close_results", FALSE), ...)
 

@@ -46,7 +46,6 @@ Collate:
     'dbConnect_AdbiDriver.R'
     'dbDataType_AdbiConnection.R'
     'dbDataType_AdbiDriver.R'
-    'dbDataType_AdbiDriver_list.R'
     'dbDisconnect_AdbiConnection.R'
     'dbExistsTable_AdbiConnection_Id.R'
     'dbExistsTable_AdbiConnection_SQL.R'
