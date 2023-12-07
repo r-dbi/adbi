@@ -2,7 +2,10 @@
 #' @inheritParams DBI::dbGetInfo
 #' @usage NULL
 dbGetInfo_AdbiDriver <- function(dbObj, ...) {
-  testthat::skip("Not yet implemented: dbGetInfo(Driver)")
+  list(
+    driver.version = utils::packageVersion(utils::packageName()),
+    client.version = utils::packageVersion("adbcdrivermanager")
+  )
 }
 
 #' @rdname AdbiDriver-class

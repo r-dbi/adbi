@@ -2,8 +2,19 @@
 #' @inheritParams methods::show
 #' @usage NULL
 show_AdbiResult <- function(object) {
+
   cat("<AdbiResult>\n")
-  # TODO: Print more details
+
+  if (dbIsValid(object)) {
+
+    cat("  Immediate: ", meta(object, "immediate"), "\n", sep = "")
+    cat("  Prepared: ", meta(object, "prepared"), "\n", sep = "")
+    cat("  Type: ", meta(object, "type"), "\n", sep = "")
+
+  } else {
+
+    cat("  CLEARED\n")
+  }
 }
 
 #' @rdname AdbiResult-class
