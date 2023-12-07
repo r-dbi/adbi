@@ -1,5 +1,4 @@
-if (identical(Sys.getenv("NOT_CRAN"), "true") &&
-  packageVersion("DBItest") >= "1.7.2") {
+if (identical(Sys.getenv("NOT_CRAN"), "true")) {
 
   DBItest::test_all(
     skip = c(
@@ -81,11 +80,7 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
           "column_info_consistent",
           "column_info_row_names"
         )
-      },
-
-      if (packageVersion("DBItest") < "1.7.2") "reexport",
-
-      if (packageVersion("DBItest") > "1.7.2") "arrow_read_table_arrow_name"
+      }
     )
   )
 }

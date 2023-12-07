@@ -1,12 +1,6 @@
 #' @include adbi-package.R
 NULL
 
-#' DBI methods
-#'
-#' Implementations of pure virtual functions defined in the `DBI` package.
-#' @name DBI
-NULL
-
 #' Adbi driver
 #'
 #' In order to open a database connection, [DBI::dbConnect()] disptaches on a

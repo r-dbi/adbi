@@ -4,9 +4,9 @@
 \name{adbi-package}
 \alias{adbi-package}
 \alias{_PACKAGE}
-\title{adbi: Boilerplate for implementing a DBI back end}
+\title{adbi: DBI backend for adbc database access}
 \description{
-A dummy DBI back end that provides access to a hypothetical data source named "Kazam", intended to be used as boilerplate for implementing DBI back ends from scratch.
+In order to make accessible Arrow Database Connectivity (\url{https://arrow.apache.org/docs/format/ADBC.html}) in R, an interface compliant with the DBI package is provided by building on 'adbcdrivermanager'.
 }
 \seealso{
 Useful links:
