@@ -1,6 +1,6 @@
-# Contributing to RKazam
+# Contributing to adbi
 
-This outlines how to propose a change to RKazam.
+This outlines how to propose a change to adbi.
 
 ### Fixing typos
 
@@ -32,6 +32,6 @@ with test cases included are easier to accept.
 
 ### Code of Conduct
 
-Please note that the RKazam project is released with a
+Please note that the adbi project is released with a
 [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this
 project you agree to abide by its terms.
