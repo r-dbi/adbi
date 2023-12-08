@@ -22,7 +22,7 @@ NULL
 #'  more information.
 #'
 #' @export
-#' @rdname adbi-driver
+#' @rdname dbConnect
 #' @examples
 #' adbi()
 #' if (requireNamespace("adbcsqlite")) {

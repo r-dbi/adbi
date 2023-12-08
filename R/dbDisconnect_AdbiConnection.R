@@ -2,7 +2,7 @@
 #' open results for the connection and immediately finalize all affected objects
 #' (default) or to simply inform about open results and mark the connection for
 #' finalization (which is triggered when the last open result is closed).
-#' @rdname adbi-driver
+#' @rdname dbConnect
 #' @inheritParams DBI::dbDisconnect
 #' @param force Close open results when disconnecting
 #' @usage NULL
@@ -53,6 +53,6 @@ dbDisconnect_AdbiConnection <- function(conn,
   invisible(TRUE)
 }
 
-#' @rdname adbi-driver
+#' @rdname dbConnect
 #' @export
 setMethod("dbDisconnect", "AdbiConnection", dbDisconnect_AdbiConnection)
