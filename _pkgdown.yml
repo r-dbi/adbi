@@ -11,23 +11,12 @@ home:
   - text: DBI project website
     href: https://r-dbi.org
 
-reference:
-- title: DBI methods
-  desc: Implementations for generics defined in the DBI package.
-  contents:
-  - DBI
-
-- title: Package documentation
-  contents:
-  - adbi
-  - adbi-package
-
 development:
   mode: auto
 
 authors:
-  Kirill Müller:
-    href: https://krlmlr.info
+  Nicolas Bennett:
+    href: https://github.com/nbenn
 
 news:
   cran_dates: false
