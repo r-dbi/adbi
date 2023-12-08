@@ -7,7 +7,7 @@
 
 [![rcc](https://github.com/r-dbi/adbi/workflows/rcc/badge.svg)](https://github.com/r-dbi/adbi/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/r-dbi/adbi/branch/main/graph/badge.svg)](https://codecov.io/gh/r-dbi/adbi?branch=main)
+coverage](https://codecov.io/gh/r-dbi/adbi/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-dbi/adbi?branch=main)
 <!-- badges: end -->
 
 Bringing [arrow-adbc](https://github.com/apache/arrow-adbc) to R via

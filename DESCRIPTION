@@ -1,5 +1,5 @@
 Package: adbi
-Title: DBI Backend for 'ADBC' Database Access
+Title: DBI Compliant Database Access Using 'ADBC'
 Version: 0.0.2
 Authors@R: 
     c(person(given = "Nicolas",
@@ -9,7 +9,7 @@ Authors@R:
       person(given = "Voltron Data",
              role = "fnd")
     )
-Description: In order to make Arrow Database Connectivity ('ADBC') accessible from R, an interface compliant with the DBI package is provided, using driver back-ends that are implemented using the 'adbcdrivermanager' framework. This enables interacting with database systems using the Arrow data format, thereby offering an efficient alternative to JDBC/ODBC for analytical applications.
+Description: In order to make Arrow Database Connectivity ('ADBC') accessible from R, an interface compliant with the DBI package is provided, using driver back-ends that are implemented in the 'adbcdrivermanager' framework. This enables interacting with database systems using the Arrow data format, thereby offering an efficient alternative to ODBC for analytical applications.
 License: LGPL (>= 2.1)
 URL: https://github.com/r-dbi/adbi, https://arrow.apache.org/adbc/
 Depends: 
