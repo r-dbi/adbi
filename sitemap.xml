@@ -25,13 +25,25 @@
     <loc>https://adbi.r-dbi.org/news/index.html</loc>
   </url>
   <url>
-    <loc>https://adbi.r-dbi.org/reference/DBI.html</loc>
+    <loc>https://adbi.r-dbi.org/reference/AdbiConnection-class.html</loc>
   </url>
   <url>
-    <loc>https://adbi.r-dbi.org/reference/adbi-driver.html</loc>
+    <loc>https://adbi.r-dbi.org/reference/AdbiDriver-class.html</loc>
+  </url>
+  <url>
+    <loc>https://adbi.r-dbi.org/reference/AdbiResult-class.html</loc>
   </url>
   <url>
     <loc>https://adbi.r-dbi.org/reference/adbi-package.html</loc>
+  </url>
+  <url>
+    <loc>https://adbi.r-dbi.org/reference/dbConnect.html</loc>
+  </url>
+  <url>
+    <loc>https://adbi.r-dbi.org/reference/dbFetch.html</loc>
+  </url>
+  <url>
+    <loc>https://adbi.r-dbi.org/reference/dbSendQuery.html</loc>
   </url>
   <url>
     <loc>https://adbi.r-dbi.org/reference/index.html</loc>
