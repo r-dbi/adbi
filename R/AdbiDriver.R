@@ -3,7 +3,7 @@ NULL
 
 #' Adbi driver
 #'
-#' In order to open a database connection, [DBI::dbConnect()] disptaches on a
+#' In order to open a database connection, [DBI::dbConnect()] dispatches on a
 #' driver object, which can be instantiated by calling `adbi()`.
 #'
 #' @details

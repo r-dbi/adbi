@@ -4,9 +4,9 @@
 \name{adbi-package}
 \alias{adbi-package}
 \alias{_PACKAGE}
-\title{adbi: DBI Backend for 'ADBC' Database Access}
+\title{adbi: DBI Compliant Database Access Using 'ADBC'}
 \description{
-In order to make Arrow Database Connectivity ('ADBC') accessible from R, an interface compliant with the DBI package is provided, using driver back-ends that are implemented using the 'adbcdrivermanager' framework. This enables interacting with database systems using the Arrow data format, thereby offering an efficient alternative to JDBC/ODBC for analytical applications.
+In order to make Arrow Database Connectivity ('ADBC') accessible from R, an interface compliant with the DBI package is provided, using driver back-ends that are implemented in the 'adbcdrivermanager' framework. This enables interacting with database systems using the Arrow data format, thereby offering an efficient alternative to ODBC for analytical applications.
 }
 \seealso{
 Useful links:

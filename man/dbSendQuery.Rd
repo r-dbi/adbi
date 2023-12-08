@@ -48,9 +48,9 @@ default is chosen according to the connection setting}
 Creating result sets using \code{\link[=dbSendQuery]{dbSendQuery()}} (and by extension using
 \code{\link[=dbGetQuery]{dbGetQuery()}}) mostly follows DBI specification. One way where adbi
 deviates from DBI mechanisms is how the \code{bigint} setting is not only per
-connection, but the per-connection setting can be overridden on a restult
+connection, but the per-connection setting can be overridden on a result
 set basis. As default, the connection setting is applied, but passing one
-of the accpeted values as \code{bigint} when creating a result set will
+of the accepted values as \code{bigint} when creating a result set will
 subsequently use that setting for all fetches using this result set.
 }
 \examples{

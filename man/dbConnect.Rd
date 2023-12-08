@@ -37,7 +37,7 @@ otherwise}
 \item{force}{Close open results when disconnecting}
 }
 \description{
-In order to open a database connection, \code{\link[DBI:dbConnect]{DBI::dbConnect()}} disptaches on a
+In order to open a database connection, \code{\link[DBI:dbConnect]{DBI::dbConnect()}} dispatches on a
 driver object, which can be instantiated by calling \code{adbi()}.
 }
 \details{

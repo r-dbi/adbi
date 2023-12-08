@@ -1,8 +1,8 @@
-#' Fetch result setss
+#' Fetch result sets
 #'
 #' When fetching results using [dbFetch()], the argument `n` can be specified
 #' to control chunk size per fetching operation. The default value of `-1`
-#' corresonds to retrieving the entire result set at once, while a positive
+#' corresponds to retrieving the entire result set at once, while a positive
 #' integer will try returning as many rows (as long as `n` does not exceed the
 #' available number of rows), in line with standard DBI expectations. As data
 #' transfer is mediated by Arrow data structures, which are retrieved as array
