@@ -48,7 +48,7 @@ adbi.'><meta name="robots" content="noindex"><!-- mathjax --><script src="https:
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Class AdbiResult (and methods)</h1>
-    <small class="dont-index">Source: <a href="https://github.com/r-dbi/adbi/blob/HEAD/R/AdbiResult.R" class="external-link"><code>R/AdbiResult.R</code></a>, <a href="https://github.com/r-dbi/adbi/blob/HEAD/R/dbBind_AdbiResult.R" class="external-link"><code>R/dbBind_AdbiResult.R</code></a>, <a href="https://github.com/r-dbi/adbi/blob/HEAD/R/dbClearResult_AdbiResult.R" class="external-link"><code>R/dbClearResult_AdbiResult.R</code></a>, and 8 more</small>
+    <small class="dont-index">Source: <a href="https://github.com/r-dbi/adbi/blob/HEAD/R/AdbiResult.R" class="external-link"><code>R/AdbiResult.R</code></a>, <a href="https://github.com/r-dbi/adbi/blob/HEAD/R/dbBind_AdbiResult.R" class="external-link"><code>R/dbBind_AdbiResult.R</code></a>, <a href="https://github.com/r-dbi/adbi/blob/HEAD/R/dbClearResult_AdbiResult.R" class="external-link"><code>R/dbClearResult_AdbiResult.R</code></a>, and 7 more</small>
     <div class="hidden name"><code>AdbiResult-class.Rd</code></div>
     </div>
 
@@ -69,9 +69,6 @@ class. The "Usage" section lists the class methods overridden by
 <span></span>
 <span><span class="co"># S4 method for AdbiResult</span></span>
 <span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbColumnInfo.html" class="external-link">dbColumnInfo</a></span><span class="op">(</span><span class="va">res</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S4 method for AdbiResult</span></span>
-<span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbFetch.html" class="external-link">dbFetch</a></span><span class="op">(</span><span class="va">res</span>, n <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for AdbiResult</span></span>
 <span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbGetRowCount.html" class="external-link">dbGetRowCount</a></span><span class="op">(</span><span class="va">res</span>, <span class="va">...</span><span class="op">)</span></span>
@@ -104,13 +101,6 @@ class. The "Usage" section lists the class methods overridden by
 
 <dt>...</dt>
 <dd><p>Other arguments passed on to methods.</p></dd>
-
-
-<dt>n</dt>
-<dd><p>maximum number of records to retrieve per fetch. Use <code>n = -1</code>
-or <code>n = Inf</code>
-to retrieve all pending records.  Some implementations may recognize other
-special values.</p></dd>
 
 
 <dt>dbObj</dt>

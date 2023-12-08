@@ -45,7 +45,7 @@ driver object, which can be instantiated by calling adbi()."><meta name="robots"
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Adbi driver</h1>
-    <small class="dont-index">Source: <a href="https://github.com/r-dbi/adbi/blob/HEAD/R/AdbiDriver.R" class="external-link"><code>R/AdbiDriver.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/r-dbi/adbi/blob/HEAD/R/AdbiDriver.R" class="external-link"><code>R/AdbiDriver.R</code></a>, <a href="https://github.com/r-dbi/adbi/blob/HEAD/R/dbConnect_AdbiDriver.R" class="external-link"><code>R/dbConnect_AdbiDriver.R</code></a>, <a href="https://github.com/r-dbi/adbi/blob/HEAD/R/dbDisconnect_AdbiConnection.R" class="external-link"><code>R/dbDisconnect_AdbiConnection.R</code></a></small>
     <div class="hidden name"><code>adbi-driver.Rd</code></div>
     </div>
 
@@ -55,7 +55,13 @@ driver object, which can be instantiated by calling <code>adbi()</code>.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">adbi</span><span class="op">(</span>driver <span class="op">=</span> <span class="cn">NA_character_</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">adbi</span><span class="op">(</span>driver <span class="op">=</span> <span class="cn">NA_character_</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for AdbiDriver</span></span>
+<span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect</a></span><span class="op">(</span><span class="va">drv</span>, <span class="va">...</span>, bigint <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for AdbiConnection</span></span>
+<span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbDisconnect.html" class="external-link">dbDisconnect</a></span><span class="op">(</span><span class="va">conn</span>, force <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"adbi.force_close_results"</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -64,6 +70,32 @@ driver object, which can be instantiated by calling <code>adbi()</code>.</p>
 <dd><p>A driver specification that can be evaluated (with no
 arguments) to give an <code><a href="https://rdrr.io/pkg/adbcdrivermanager/man/adbc_driver_void.html" class="external-link">adbcdrivermanager::adbc_driver()</a></code>. See Details for
 more information.</p></dd>
+
+
+<dt>drv</dt>
+<dd><p>an object that inherits from <a href="https://dbi.r-dbi.org/reference/DBIDriver-class.html" class="external-link">DBIDriver</a>,
+or an existing <a href="https://dbi.r-dbi.org/reference/DBIConnection-class.html" class="external-link">DBIConnection</a>
+object (in order to clone an existing connection).</p></dd>
+
+
+<dt>...</dt>
+<dd><p>Extra arguments passed to <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code> are forwarded to
+<code><a href="https://rdrr.io/pkg/adbcdrivermanager/man/adbc_database_init.html" class="external-link">adbcdrivermanager::adbc_database_init()</a></code></p></dd>
+
+
+<dt>bigint</dt>
+<dd><p>The R type that 64-bit integer types should be mapped to,
+default is <a href="https://rdrr.io/pkg/bit64/man/bit64-package.html" class="external-link">bit64::integer64</a>, if bit64 is installed and <code>character</code>
+otherwise</p></dd>
+
+
+<dt>conn</dt>
+<dd><p>A <a href="https://dbi.r-dbi.org/reference/DBIConnection-class.html" class="external-link">DBIConnection</a> object, as returned by
+<code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code>.</p></dd>
+
+
+<dt>force</dt>
+<dd><p>Close open results when disconnecting</p></dd>
 
 </dl></div>
     <div id="details">
@@ -78,11 +110,22 @@ to <code>fun</code>), which can be used to look up such a function.</p></li>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dbi.r-dbi.org" class="external-link">DBI</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">adbi</span><span class="fu">::</span><span class="fu">adbi</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">adbi</span><span class="fu">::</span><span class="fu">adbi</span><span class="op">(</span><span class="st">"adbcsqlite"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">adbi</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;AdbiDriver&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Type: &lt;adbc_driver_monkey&gt;</span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"adbcsqlite"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu">adbi</span><span class="op">(</span><span class="st">"adbcsqlite"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required namespace: adbcsqlite</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;AdbiDriver&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Type: &lt;adbcsqlite_driver_sqlite&gt;</span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dbi.r-dbi.org" class="external-link">DBI</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect</a></span><span class="op">(</span><span class="fu">adbi</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbIsValid.html" class="external-link">dbIsValid</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-in"><span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbDisconnect.html" class="external-link">dbDisconnect</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbIsValid.html" class="external-link">dbIsValid</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 </code></pre></div>
     </div>
   </div>

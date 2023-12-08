@@ -47,7 +47,7 @@ The "Usage" section lists the class methods overridden by adbi.'><meta name="rob
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Class AdbiDriver (and methods)</h1>
-    <small class="dont-index">Source: <a href="https://github.com/r-dbi/adbi/blob/HEAD/R/AdbiDriver.R" class="external-link"><code>R/AdbiDriver.R</code></a>, <a href="https://github.com/r-dbi/adbi/blob/HEAD/R/dbConnect_AdbiDriver.R" class="external-link"><code>R/dbConnect_AdbiDriver.R</code></a>, <a href="https://github.com/r-dbi/adbi/blob/HEAD/R/dbDataType_AdbiDriver.R" class="external-link"><code>R/dbDataType_AdbiDriver.R</code></a>, and 3 more</small>
+    <small class="dont-index">Source: <a href="https://github.com/r-dbi/adbi/blob/HEAD/R/AdbiDriver.R" class="external-link"><code>R/AdbiDriver.R</code></a>, <a href="https://github.com/r-dbi/adbi/blob/HEAD/R/dbDataType_AdbiDriver.R" class="external-link"><code>R/dbDataType_AdbiDriver.R</code></a>, <a href="https://github.com/r-dbi/adbi/blob/HEAD/R/dbGetInfo_AdbiDriver.R" class="external-link"><code>R/dbGetInfo_AdbiDriver.R</code></a>, and 2 more</small>
     <div class="hidden name"><code>AdbiDriver-class.Rd</code></div>
     </div>
 
@@ -60,9 +60,6 @@ The "Usage" section lists the class methods overridden by <span class="pkg">adbi
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for AdbiDriver</span></span>
-<span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect</a></span><span class="op">(</span><span class="va">drv</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S4 method for AdbiDriver</span></span>
 <span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbDataType.html" class="external-link">dbDataType</a></span><span class="op">(</span><span class="va">dbObj</span>, <span class="va">obj</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for AdbiDriver</span></span>
@@ -77,25 +74,17 @@ The "Usage" section lists the class methods overridden by <span class="pkg">adbi
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>drv</dt>
-<dd><p>an object that inherits from <a href="https://dbi.r-dbi.org/reference/DBIDriver-class.html" class="external-link">DBIDriver</a>,
-or an existing <a href="https://dbi.r-dbi.org/reference/DBIConnection-class.html" class="external-link">DBIConnection</a>
-object (in order to clone an existing connection).</p></dd>
-
-
-<dt>...</dt>
-<dd><p>authentication arguments needed by the DBMS instance; these
-typically include <code>user</code>, <code>password</code>, <code>host</code>, <code>port</code>, <code>dbname</code>, etc.
-For details see the appropriate <code>DBIDriver</code>.</p></dd>
-
-
-<dt>dbObj</dt>
+    <dl><dt>dbObj</dt>
 <dd><p>A object inheriting from <a href="https://dbi.r-dbi.org/reference/DBIDriver-class.html" class="external-link">DBIDriver</a>
 or <a href="https://dbi.r-dbi.org/reference/DBIConnection-class.html" class="external-link">DBIConnection</a></p></dd>
 
 
 <dt>obj</dt>
 <dd><p>An R object whose SQL type we want to determine.</p></dd>
+
+
+<dt>...</dt>
+<dd><p>Other arguments passed on to methods.</p></dd>
 
 
 <dt>object</dt>

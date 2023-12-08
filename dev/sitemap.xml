@@ -37,6 +37,12 @@
     <loc>https://adbi.r-dbi.org/reference/adbi-package.html</loc>
   </url>
   <url>
+    <loc>https://adbi.r-dbi.org/reference/dbFetch.html</loc>
+  </url>
+  <url>
+    <loc>https://adbi.r-dbi.org/reference/dbSendQuery.html</loc>
+  </url>
+  <url>
     <loc>https://adbi.r-dbi.org/reference/index.html</loc>
   </url>
   <url>
