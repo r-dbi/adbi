@@ -88,4 +88,5 @@ dbFetch(res)
 
 # Cleanup
 dbClearResult(res)
+dbDisconnect(con)
 ```

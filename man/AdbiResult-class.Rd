@@ -13,7 +13,6 @@
 \alias{dbClearResult,AdbiResult-method}
 \alias{dbColumnInfo_AdbiResult}
 \alias{dbColumnInfo,AdbiResult-method}
-\alias{dbFetch_AdbiResult}
 \alias{dbFetch,AdbiResult-method}
 \alias{dbGetRowCount_AdbiResult}
 \alias{dbGetRowCount,AdbiResult-method}
@@ -55,11 +54,6 @@
 \item{params}{A list of bindings, named or unnamed.}
 
 \item{...}{Other arguments passed on to methods.}
-
-\item{n}{maximum number of records to retrieve per fetch. Use \code{n = -1}
-or \code{n = Inf}
-to retrieve all pending records.  Some implementations may recognize other
-special values.}
 
 \item{dbObj}{An object inheriting from \linkS4class{DBIObject},
 i.e. \linkS4class{DBIDriver}, \linkS4class{DBIConnection},
