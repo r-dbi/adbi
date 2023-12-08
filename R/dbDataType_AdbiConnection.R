@@ -16,18 +16,3 @@ db_data_type <- function(x, drv) {
     dbDataType(ANSI(), x)
   }
 }
-
-db_data_type_blob <- function(drv) {
-
-  if (inherits(drv, "adbcsqlite_driver_sqlite")) {
-    "BLOB"
-  } else if (inherits(drv, "adbcpostgresql_driver_postgresql")) {
-    "bytea"
-  } else {
-    stop(
-      "dbDataType for blob objects unknown for type ",
-      paste0(class(drv), collapse = ", "),
-      call. = FALSE
-    )
-  }
-}
