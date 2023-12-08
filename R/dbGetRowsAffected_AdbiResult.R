@@ -15,13 +15,9 @@ dbGetRowsAffected_AdbiResult <- function(res, ...) {
     execute_statement(res)
   }
 
-  res <- meta(res, "rows_affected")
-
-  if (res == -1 && testthat::is_testing()) {
-    testthat::skip("TODO: unknown number of `rows_affected`")
-  }
-
-  res
+  res@rows_affected_callback(
+    meta(res, "rows_affected")
+  )
 }
 
 #' @rdname AdbiResult-class

@@ -16,7 +16,8 @@ dbSendStatement_AdbiConnection_character <- function(conn, statement, ...,
     connection = conn,
     statement = statement,
     immediate = immediate,
-    type = "statement"
+    type = "statement",
+    rows_affected_callback = conn@rows_affected_callback
   )
 
   if (!is.null(params)) {
