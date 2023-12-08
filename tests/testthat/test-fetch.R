@@ -9,13 +9,13 @@ test_that("fetch result with arbitrary chunk size", {
     split(dat, rep(1:3, each = 5))
   )
 
-  n_seq <- c(2, NA, 7, -1)
+  n_seq <- c(2, NA, 7, -1, NA)
   ret <- vector("list", length(n_seq))
 
   for (i in seq_along(n_seq)) {
     ret[[i]] <- dbFetch(res, n_seq[i])
   }
 
-  expect_identical(vapply(ret, nrow, integer(1L)), c(2L, 3L, 7L, 3L))
+  expect_identical(vapply(ret, nrow, integer(1L)), c(2L, 3L, 7L, 3L, 0L))
   expect_equal(dat, do.call(rbind, ret), check.attributes = FALSE)
 })
