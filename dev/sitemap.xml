@@ -31,10 +31,10 @@
     <loc>https://adbi.r-dbi.org/reference/AdbiResult-class.html</loc>
   </url>
   <url>
-    <loc>https://adbi.r-dbi.org/reference/adbi-driver.html</loc>
+    <loc>https://adbi.r-dbi.org/reference/adbi-package.html</loc>
   </url>
   <url>
-    <loc>https://adbi.r-dbi.org/reference/adbi-package.html</loc>
+    <loc>https://adbi.r-dbi.org/reference/dbConnect.html</loc>
   </url>
   <url>
     <loc>https://adbi.r-dbi.org/reference/dbFetch.html</loc>
