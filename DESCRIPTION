@@ -1,6 +1,6 @@
 Package: adbi
 Title: DBI backend for adbc database access
-Version: 0.0.1
+Version: 0.0.1.9000
 Authors@R: 
     c(person(given = "Nicolas",
              family = "Bennett",
