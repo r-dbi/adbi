@@ -26,7 +26,7 @@ NULL
 #' @examples
 #' adbi()
 #' if (requireNamespace("adbcsqlite")) {
-#' adbi("adbcsqlite")
+#'   adbi("adbcsqlite")
 #' }
 adbi <- function(driver = NA_character_) {
 

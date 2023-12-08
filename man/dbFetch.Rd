@@ -29,12 +29,12 @@ chunks, the underlying chunk size can be used by passing an \code{n} value \code
 }
 \examples{
 if (requireNamespace("adbcsqlite")) {
-library(DBI)
-con <- dbConnect(adbi::adbi("adbcsqlite"), uri = ":memory:")
-dbWriteTable(con, "swiss", swiss)
-res <- dbSendQuery(con, "SELECT * from swiss WHERE Agriculture < 30")
-dbFetch(res)
-dbClearResult(res)
-dbDisconnect(con)
+  library(DBI)
+  con <- dbConnect(adbi::adbi("adbcsqlite"), uri = ":memory:")
+  dbWriteTable(con, "swiss", swiss)
+  res <- dbSendQuery(con, "SELECT * from swiss WHERE Agriculture < 30")
+  dbFetch(res)
+  dbClearResult(res)
+  dbDisconnect(con)
 }
 }

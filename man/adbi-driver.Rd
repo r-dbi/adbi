@@ -55,7 +55,7 @@ As default, an \code{\link[adbcdrivermanager:adbc_driver_monkey]{adbcdrivermanag
 \examples{
 adbi()
 if (requireNamespace("adbcsqlite")) {
-adbi("adbcsqlite")
+  adbi("adbcsqlite")
 }
 library(DBI)
 con <- dbConnect(adbi())
