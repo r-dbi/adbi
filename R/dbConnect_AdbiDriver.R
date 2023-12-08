@@ -6,13 +6,12 @@
 #'   otherwise
 #' @inheritParams DBI::dbConnect
 #' @examples
-#' \dontrun{
 #' library(DBI)
 #' con <- dbConnect(adbi())
 #' dbIsValid(con)
 #' dbDisconnect(con)
 #' dbIsValid(con)
-#' }
+#' @usage NULL
 dbConnect_AdbiDriver <- function(drv, ..., bigint = NULL) {
   AdbiConnection(drv, ..., bigint = bigint)
 }

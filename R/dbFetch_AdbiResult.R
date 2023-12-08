@@ -1,4 +1,4 @@
-#' Fetch results
+#' Fetch result setss
 #'
 #' When fetching results using [dbFetch()], the argument `n` can be specified
 #' to control chunk size per fetching operation. The default value of `-1`
@@ -11,7 +11,7 @@
 #' @rdname dbFetch
 #' @inheritParams DBI::dbFetch
 #' @examples
-#' \dontrun{
+#' if (requireNamespace("adbcsqlite")) {
 #' library(DBI)
 #' con <- dbConnect(adbi::adbi("adbcsqlite"), uri = ":memory:")
 #' dbWriteTable(con, "swiss", swiss)
@@ -20,6 +20,7 @@
 #' dbClearResult(res)
 #' dbDisconnect(con)
 #' }
+#' @usage NULL
 dbFetch_AdbiResult <- function(res, n = -1, ...) {
 
   if (length(n) == 1L && !is.na(n) && !is.finite(n)) {
@@ -145,7 +146,7 @@ dbFetch_AdbiResult <- function(res, n = -1, ...) {
   ret
 }
 
-#' @rdname AdbiResult-class
+#' @rdname dbFetch
 #' @export
 setMethod("dbFetch", "AdbiResult", dbFetch_AdbiResult)
 

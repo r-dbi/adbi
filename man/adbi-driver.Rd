@@ -11,8 +11,6 @@
 \usage{
 adbi(driver = NA_character_)
 
-dbConnect_AdbiDriver(drv, ..., bigint = NULL)
-
 \S4method{dbConnect}{AdbiDriver}(drv, ..., bigint = NULL)
 
 \S4method{dbDisconnect}{AdbiConnection}(conn, force = getOption("adbi.force_close_results", FALSE), ...)
@@ -55,15 +53,13 @@ to \code{fun}), which can be used to look up such a function.
 As default, an \code{\link[adbcdrivermanager:adbc_driver_monkey]{adbcdrivermanager::adbc_driver_monkey()}} object is created.
 }
 \examples{
-\dontrun{
 adbi()
+if (requireNamespace("adbcsqlite")) {
 adbi("adbcsqlite")
 }
-\dontrun{
 library(DBI)
 con <- dbConnect(adbi())
 dbIsValid(con)
 dbDisconnect(con)
 dbIsValid(con)
-}
 }

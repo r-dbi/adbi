@@ -12,9 +12,7 @@
 %   R/dbQuoteLiteral_AdbiConnection_character.R,
 %   R/dbQuoteString_AdbiConnection_character.R,
 %   R/dbRemoveTable_AdbiConnection_character.R,
-%   R/dbRollback_AdbiConnection.R, R/dbSendQuery_AdbiConnection_character.R,
-%   R/dbSendStatement_AdbiConnection_character.R,
-%   R/dbUnquoteIdentifier_AdbiConnection.R,
+%   R/dbRollback_AdbiConnection.R, R/dbUnquoteIdentifier_AdbiConnection.R,
 %   R/dbWriteTable_AdbiConnection_Id_data.frame.R,
 %   R/dbWriteTable_AdbiConnection_SQL_data.frame.R,
 %   R/dbWriteTable_AdbiConnection_character_data.frame.R,
@@ -58,10 +56,6 @@
 \alias{dbRemoveTable,AdbiConnection,character-method}
 \alias{dbRollback_AdbiConnection}
 \alias{dbRollback,AdbiConnection-method}
-\alias{dbSendQuery_AdbiConnection_character}
-\alias{dbSendQuery,AdbiConnection,character-method}
-\alias{dbSendStatement_AdbiConnection_character}
-\alias{dbSendStatement,AdbiConnection,character-method}
 \alias{dbUnquoteIdentifier_AdbiConnection}
 \alias{dbUnquoteIdentifier,AdbiConnection-method}
 \alias{dbWriteTable_AdbiConnection_Id_data.frame}
@@ -109,10 +103,6 @@
 \S4method{dbRemoveTable}{AdbiConnection,character}(conn, name, ..., temporary = FALSE, fail_if_missing = TRUE)
 
 \S4method{dbRollback}{AdbiConnection}(conn, ...)
-
-\S4method{dbSendQuery}{AdbiConnection,character}(conn, statement, ..., params = NULL, immediate = NULL)
-
-\S4method{dbSendStatement}{AdbiConnection,character}(conn, statement, ..., params = NULL, immediate = NULL)
 
 \S4method{dbUnquoteIdentifier}{AdbiConnection}(conn, x, ...)
 
@@ -170,13 +160,6 @@ temporary. Its default is \code{FALSE}.}
 
 \item{fail_if_missing}{If \code{FALSE}, \code{dbRemoveTable()} succeeds if the
 table doesn't exist.}
-
-\item{statement}{a character string containing SQL.}
-
-\item{immediate}{Passing a value \code{TRUE} is intended for statements containing
-no placeholders and \code{FALSE} otherwise. The default value \code{NULL} will
-inspect the statement for presence of placeholders (will \code{PREPARE} the
-statement)}
 
 \item{overwrite}{Allow overwriting the destination table. Cannot be
 \code{TRUE} if \code{append} is also \code{TRUE}.}

@@ -2,9 +2,10 @@
 % Please edit documentation in R/dbFetch_AdbiResult.R
 \name{dbFetch_AdbiResult}
 \alias{dbFetch_AdbiResult}
-\title{Fetch results}
+\alias{dbFetch,AdbiResult-method}
+\title{Fetch result setss}
 \usage{
-dbFetch_AdbiResult(res, n = -1, ...)
+\S4method{dbFetch}{AdbiResult}(res, n = -1, ...)
 }
 \arguments{
 \item{res}{An object inheriting from \linkS4class{DBIResult}, created by
@@ -27,7 +28,7 @@ transfer is mediated by Arrow data structures, which are retrieved as array
 chunks, the underlying chunk size can be used by passing an \code{n} value \code{NA}.
 }
 \examples{
-\dontrun{
+if (requireNamespace("adbcsqlite")) {
 library(DBI)
 con <- dbConnect(adbi::adbi("adbcsqlite"), uri = ":memory:")
 dbWriteTable(con, "swiss", swiss)

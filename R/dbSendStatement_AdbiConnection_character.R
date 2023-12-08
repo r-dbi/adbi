@@ -1,12 +1,8 @@
-#' @rdname AdbiConnection-class
-#' @param immediate Passing a value `TRUE` is intended for statements containing
-#'   no placeholders and `FALSE` otherwise. The default value `NULL` will
-#'   inspect the statement for presence of placeholders (will `PREPARE` the
-#'   statement)
+#' @rdname dbSendQuery
 #' @inheritParams DBI::dbSendStatement
 #' @usage NULL
 dbSendStatement_AdbiConnection_character <- function(conn, statement, ...,
-    params = NULL, immediate = NULL) {
+    params = NULL, immediate = NULL, bigint = NULL) {
 
   if (!is.null(params)) {
     immediate <- FALSE
@@ -17,6 +13,7 @@ dbSendStatement_AdbiConnection_character <- function(conn, statement, ...,
     statement = statement,
     immediate = immediate,
     type = "statement",
+    bigint = bigint,
     rows_affected_callback = conn@rows_affected_callback
   )
 
@@ -31,7 +28,7 @@ dbSendStatement_AdbiConnection_character <- function(conn, statement, ...,
   res
 }
 
-#' @rdname AdbiConnection-class
+#' @rdname dbSendQuery
 #' @export
 setMethod(
   "dbSendStatement",

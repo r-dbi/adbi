@@ -24,8 +24,8 @@ NULL
 #' @export
 #' @rdname adbi-driver
 #' @examples
-#' \dontrun{
 #' adbi()
+#' if (requireNamespace("adbcsqlite")) {
 #' adbi("adbcsqlite")
 #' }
 adbi <- function(driver = NA_character_) {
