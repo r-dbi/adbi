@@ -6,13 +6,13 @@
 \alias{_PACKAGE}
 \title{adbi: DBI backend for adbc database access}
 \description{
-In order to make accessible Arrow Database Connectivity (\url{https://arrow.apache.org/docs/format/ADBC.html}) in R, an interface compliant with the DBI package is provided by building on 'adbcdrivermanager'.
+In order to make Arrow Database Connectivity ('ADBC') accessible from R, an interface compliant with the DBI package is provided, using driver back-ends that are implemented using the 'adbcdrivermanager' framework. This enables interacting with database systems using the Arrow data format, thereby offering an efficient alternative to JDBC/ODBC for analytical applications.
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://adbi.r-dbi.org}
   \item \url{https://github.com/r-dbi/adbi}
+  \item \url{https://arrow.apache.org/adbc/}
 }
 
 }

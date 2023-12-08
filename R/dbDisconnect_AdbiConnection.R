@@ -1,4 +1,4 @@
-#' @rdname AdbiConnection-class
+#' @rdname adbi-driver
 #' @inheritParams DBI::dbDisconnect
 #' @param force Close open results when disconnecting
 #' @usage NULL
@@ -49,6 +49,6 @@ dbDisconnect_AdbiConnection <- function(conn,
   invisible(TRUE)
 }
 
-#' @rdname AdbiConnection-class
+#' @rdname adbi-driver
 #' @export
 setMethod("dbDisconnect", "AdbiConnection", dbDisconnect_AdbiConnection)

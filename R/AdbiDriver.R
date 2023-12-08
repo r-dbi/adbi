@@ -25,9 +25,8 @@ NULL
 #' @rdname adbi-driver
 #' @examples
 #' \dontrun{
-#' library(DBI)
-#' adbi::adbi()
-#' adbi::adbi("adbcsqlite")
+#' adbi()
+#' adbi("adbcsqlite")
 #' }
 adbi <- function(driver = NA_character_) {
 

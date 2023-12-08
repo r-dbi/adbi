@@ -2,8 +2,8 @@
 % Please edit documentation in R/AdbiConnection.R,
 %   R/dbAppendTable_AdbiConnection_character_data.frame.R,
 %   R/dbBegin_AdbiConnection.R, R/dbCommit_AdbiConnection.R,
-%   R/dbDataType_AdbiConnection.R, R/dbDisconnect_AdbiConnection.R,
-%   R/dbExistsTable_AdbiConnection_Id.R, R/dbExistsTable_AdbiConnection_SQL.R,
+%   R/dbDataType_AdbiConnection.R, R/dbExistsTable_AdbiConnection_Id.R,
+%   R/dbExistsTable_AdbiConnection_SQL.R,
 %   R/dbExistsTable_AdbiConnection_character.R,
 %   R/dbGetInfo_AdbiConnection.R, R/dbIsValid_AdbiConnection.R,
 %   R/dbListFields_AdbiConnection_Id.R, R/dbListFields_AdbiConnection_SQL.R,
@@ -30,8 +30,6 @@
 \alias{dbCommit,AdbiConnection-method}
 \alias{dbDataType_AdbiConnection}
 \alias{dbDataType,AdbiConnection-method}
-\alias{dbDisconnect_AdbiConnection}
-\alias{dbDisconnect,AdbiConnection-method}
 \alias{dbExistsTable_AdbiConnection_Id}
 \alias{dbExistsTable,AdbiConnection,Id-method}
 \alias{dbExistsTable_AdbiConnection_SQL}
@@ -83,8 +81,6 @@
 \S4method{dbCommit}{AdbiConnection}(conn, ...)
 
 \S4method{dbDataType}{AdbiConnection}(dbObj, obj, ...)
-
-\S4method{dbDisconnect}{AdbiConnection}(conn, force = getOption("adbi.force_close_results", FALSE), ...)
 
 \S4method{dbExistsTable}{AdbiConnection,Id}(conn, name, ...)
 
@@ -166,8 +162,6 @@ they are characters, otherwise will ignore.}
 or \linkS4class{DBIConnection}}
 
 \item{obj}{An R object whose SQL type we want to determine.}
-
-\item{force}{Close open results when disconnecting}
 
 \item{x}{A character vector, \link[DBI]{SQL} or \link[DBI]{Id} object to quote as identifier.}
 

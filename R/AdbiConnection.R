@@ -1,8 +1,8 @@
 #' @include AdbiDriver.R
 NULL
 
-AdbiConnection <- function(driver, ..., bigint = NULL,
-    rows_affected_callback = identity) {
+AdbiConnection <- function(driver, ..., rows_affected_callback = identity,
+    bigint = NULL) {
 
   db <- adbcdrivermanager::adbc_database_init(driver@driver, ...)
 
