@@ -11,6 +11,9 @@
 #' dbIsValid(con)
 #' dbDisconnect(con)
 #' dbIsValid(con)
+#' @return A connection object (S4 class `AdbiCOnnection`, inheriting from
+#'   [DBIConnection-class]) is returned by [dbConnect()], while [dbDisconnect()]
+#'   returns `TRUE` invisibly.
 #' @usage NULL
 dbConnect_AdbiDriver <- function(drv, ..., bigint = NULL) {
   AdbiConnection(drv, ..., bigint = bigint)

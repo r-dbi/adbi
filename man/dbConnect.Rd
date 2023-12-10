@@ -36,6 +36,11 @@ otherwise}
 
 \item{force}{Close open results when disconnecting}
 }
+\value{
+A connection object (S4 class \code{AdbiCOnnection}, inheriting from
+\linkS4class{DBIConnection}) is returned by \code{\link[=dbConnect]{dbConnect()}}, while \code{\link[=dbDisconnect]{dbDisconnect()}}
+returns \code{TRUE} invisibly.
+}
 \description{
 In order to open a database connection, \code{\link[DBI:dbConnect]{DBI::dbConnect()}} dispatches on a
 driver object, which can be instantiated by calling \code{adbi()}.

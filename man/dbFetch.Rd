@@ -18,6 +18,10 @@ special values.}
 
 \item{...}{Other arguments passed on to methods.}
 }
+\value{
+A \code{data.frame} with the requested numer of rows (or zero rows if
+\code{\link[=dbFetch]{dbFetch()}} is called on a result set with no more remaining rows).
+}
 \description{
 When fetching results using \code{\link[=dbFetch]{dbFetch()}}, the argument \code{n} can be specified
 to control chunk size per fetching operation. The default value of \code{-1}

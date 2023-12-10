@@ -32,6 +32,7 @@
 #'   )
 #'   dbDisconnect(con)
 #' }
+#' @return An S4 class `AdbiResult` (inheriting from [DBIResult-class]).
 #' @usage NULL
 dbSendQuery_AdbiConnection_character <- function(conn, statement, ...,
     params = NULL, immediate = NULL, bigint = NULL) {

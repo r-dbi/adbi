@@ -44,6 +44,9 @@ statement)}
 \item{bigint}{The R type that 64-bit integer types should be mapped to,
 default is chosen according to the connection setting}
 }
+\value{
+An S4 class \code{AdbiResult} (inheriting from \linkS4class{DBIResult}).
+}
 \description{
 Creating result sets using \code{\link[=dbSendQuery]{dbSendQuery()}} (and by extension using
 \code{\link[=dbGetQuery]{dbGetQuery()}}) mostly follows DBI specification. One way where adbi
