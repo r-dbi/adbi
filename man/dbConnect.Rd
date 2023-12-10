@@ -38,8 +38,8 @@ otherwise}
 }
 \value{
 A connection object (S4 class \code{AdbiCOnnection}, inheriting from
-\linkS4class{DBIConnection}) is returned by \code{\link[=dbConnect]{dbConnect()}}, while \code{\link[=dbDisconnect]{dbDisconnect()}}
-returns \code{TRUE} invisibly.
+\linkS4class{DBIConnection}) is returned by \code{\link[=dbConnect]{dbConnect()}}, while
+\code{\link[=dbDisconnect]{dbDisconnect()}} returns \code{TRUE} invisibly.
 }
 \description{
 In order to open a database connection, \code{\link[DBI:dbConnect]{DBI::dbConnect()}} dispatches on a
