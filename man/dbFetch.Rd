@@ -19,7 +19,7 @@ special values.}
 \item{...}{Other arguments passed on to methods.}
 }
 \value{
-A \code{data.frame} with the requested numer of rows (or zero rows if
+A \code{data.frame} with the requested number of rows (or zero rows if
 \code{\link[=dbFetch]{dbFetch()}} is called on a result set with no more remaining rows).
 }
 \description{

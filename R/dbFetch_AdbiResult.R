@@ -22,7 +22,7 @@
 #'   dbClearResult(res)
 #'   dbDisconnect(con)
 #' }
-#' @return A `data.frame` with the requested numer of rows (or zero rows if
+#' @return A `data.frame` with the requested number of rows (or zero rows if
 #'   [dbFetch()] is called on a result set with no more remaining rows).
 #' @usage NULL
 dbFetch_AdbiResult <- function(res, n = -1, ...) {
