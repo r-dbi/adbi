@@ -12,3 +12,7 @@
 0 errors | 0 warnings | 1 notes
 
 * New submission (NOTE)
+* Addresses CRAN feedback:
+  - Package/API names are all in single quotes
+  - ADBC URL added to the Description field
+  - Adds \value{} documentation
