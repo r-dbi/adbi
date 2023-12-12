@@ -1,10 +1,10 @@
-#' @rdname DBI
+#' @rdname AdbiResultArrow-class
 #' @inheritParams DBI::dbClearResult
 #' @usage NULL
 dbClearResult_AdbiResultArrow <- function(res, ...) {
-  # TODO: Implement as needed, or remove (default DBI implementation exists)
   dbClearResult_AdbiResult(res)
 }
-#' @rdname DBI
+
+#' @rdname AdbiResultArrow-class
 #' @export
 setMethod("dbClearResult", "AdbiResultArrow", dbClearResult_AdbiResultArrow)

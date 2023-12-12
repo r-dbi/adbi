@@ -1,4 +1,4 @@
-#' @rdname DBI
+#' @rdname AdbiResultArrow-class
 #' @inheritParams DBI::dbFetch
 #' @usage NULL
 dbFetchArrowChunk_AdbiResultArrow <- function(res, ...) {
@@ -33,7 +33,7 @@ dbFetchArrowChunk_AdbiResultArrow <- function(res, ...) {
   ret
 }
 
-#' @rdname DBI
+#' @rdname AdbiResultArrow-class
 #' @export
 setMethod(
   "dbFetchArrowChunk",
