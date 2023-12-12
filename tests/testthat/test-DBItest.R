@@ -58,7 +58,7 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
         )
       },
 
-      if (packageVersion("DBItest") > "1.7.2") {
+      if (packageVersion("DBItest") > "1.7.3") {
         "arrow_read_table_arrow_name"
       }
     )
