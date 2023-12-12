@@ -25,8 +25,7 @@ Suggests:
     DBItest,
     adbcsqlite,
     withr,
-    bit64,
-    utils
+    utils,
     bit64
 Remotes:
     r-dbi/DBI
