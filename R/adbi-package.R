@@ -8,3 +8,5 @@
 #' @importFrom adbcdrivermanager adbc_driver
 ## usethis namespace: end
 NULL
+
+setOldClass("substrait_Plan")

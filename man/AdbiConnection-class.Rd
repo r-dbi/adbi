@@ -5,7 +5,8 @@
 %   R/dbDataType_AdbiConnection.R, R/dbExistsTable_AdbiConnection_Id.R,
 %   R/dbExistsTable_AdbiConnection_SQL.R,
 %   R/dbExistsTable_AdbiConnection_character.R,
-%   R/dbGetInfo_AdbiConnection.R, R/dbIsValid_AdbiConnection.R,
+%   R/dbGetInfo_AdbiConnection.R, R/dbGetQuery_AdbiConnection_character.R,
+%   R/dbGetQuery_AdbiConnection_substrait_Plan.R, R/dbIsValid_AdbiConnection.R,
 %   R/dbListFields_AdbiConnection_Id.R, R/dbListFields_AdbiConnection_SQL.R,
 %   R/dbListFields_AdbiConnection_character.R, R/dbListTables_AdbiConnection.R,
 %   R/dbQuoteIdentifier_AdbiConnection_character.R,
@@ -36,6 +37,9 @@
 \alias{dbExistsTable,AdbiConnection,character-method}
 \alias{dbGetInfo_AdbiConnection}
 \alias{dbGetInfo,AdbiConnection-method}
+\alias{dbGetQuery_AdbiConnection_character}
+\alias{dbGetQuery,AdbiConnection,character-method}
+\alias{dbGetQuery,AdbiConnection,substrait_Plan-method}
 \alias{dbIsValid_AdbiConnection}
 \alias{dbIsValid,AdbiConnection-method}
 \alias{dbListFields_AdbiConnection_Id}
@@ -83,6 +87,10 @@
 \S4method{dbExistsTable}{AdbiConnection,character}(conn, name, ...)
 
 \S4method{dbGetInfo}{AdbiConnection}(dbObj, ...)
+
+\S4method{dbGetQuery}{AdbiConnection,character}(conn, statement, ..., n = -1L)
+
+\S4method{dbGetQuery}{AdbiConnection,substrait_Plan}(conn, statement, ..., n = -1L)
 
 \S4method{dbIsValid}{AdbiConnection}(dbObj, ...)
 
@@ -153,6 +161,8 @@ they are characters, otherwise will ignore.}
 or \linkS4class{DBIConnection}}
 
 \item{obj}{An R object whose SQL type we want to determine.}
+
+\item{n}{Number of rows to fetch, default -1}
 
 \item{x}{A character vector, \link[DBI]{SQL} or \link[DBI]{Id} object to quote as identifier.}
 

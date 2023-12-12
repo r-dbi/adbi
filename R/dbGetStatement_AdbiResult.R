@@ -7,7 +7,7 @@ dbGetStatement_AdbiResult <- function(res, ...) {
     stop("Cannot return statement of invalid result.", call. = FALSE)
   }
 
-  meta(res, "sql")
+  meta(res, "query")
 }
 
 #' @rdname AdbiResult-class

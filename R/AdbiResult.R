@@ -32,18 +32,30 @@ init_result <- function(connection, statement, class, immediate = NULL,
     stop("Invalid connection", call. = FALSE)
   }
 
-  if (!length(statement) == 1L || is.na(statement)) {
-    stop("Expecting a non-NA string as `statement`.", call. = FALSE)
+  if (!inherits(statement, "substrait_Plan")) {
+    if (!length(statement) == 1L || is.na(statement)) {
+      stop("Expecting a non-NA string as `statement`.", call. = FALSE)
+    }
   }
 
   con <- connection@connection
 
   stmt <- adbcdrivermanager::adbc_statement_init(con)
 
-  adbcdrivermanager::adbc_statement_set_sql_query(
-    stmt,
-    as.character(statement)
-  )
+  if (inherits(statement, "substrait_Plan")) {
+
+    adbcdrivermanager::adbc_statement_set_substrait_plan(
+      stmt,
+      as.raw(statement)
+    )
+
+  } else {
+
+    adbcdrivermanager::adbc_statement_set_sql_query(
+      stmt,
+      as.character(statement)
+    )
+  }
 
   if (is.null(immediate)) {
 
@@ -81,7 +93,7 @@ init_result <- function(connection, statement, class, immediate = NULL,
   res
 }
 
-new_result <- function(statement, immediate, prepared, type, sql,
+new_result <- function(statement, immediate, prepared, type, query,
                        class = "AdbiResult", bigint = NULL,
                        rows_affected_callback = identity) {
 
@@ -89,7 +101,7 @@ new_result <- function(statement, immediate, prepared, type, sql,
     immediate = immediate,
     prepared = prepared,
     type = type,
-    sql = sql,
+    query = query,
     has_completed = switch(type, statement = TRUE, query = FALSE)
   )
 
