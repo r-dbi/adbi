@@ -1,4 +1,4 @@
-#' @rdname DBI
+#' @rdname AdbiResultArrow-class
 #' @inheritParams DBI::dbFetch
 #' @usage NULL
 dbFetchArrow_AdbiResultArrow <- function(res, ...) {
@@ -35,6 +35,6 @@ dbFetchArrow_AdbiResultArrow <- function(res, ...) {
   nanoarrow::basic_array_stream(ret, validate = FALSE)
 }
 
-#' @rdname DBI
+#' @rdname AdbiResultArrow-class
 #' @export
 setMethod("dbFetchArrow", "AdbiResultArrow", dbFetchArrow_AdbiResultArrow)

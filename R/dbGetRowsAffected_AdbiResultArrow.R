@@ -1,11 +1,11 @@
-#' @rdname DBI
+#' @rdname AdbiResultArrow-class
 #' @inheritParams DBI::dbGetRowsAffected
 #' @usage NULL
 dbGetRowsAffected_AdbiResultArrow <- function(res, ...) {
   dbGetRowsAffected_AdbiResult(res, ...)
 }
 
-#' @rdname DBI
+#' @rdname AdbiResultArrow-class
 #' @export
 setMethod(
   "dbGetRowsAffected",

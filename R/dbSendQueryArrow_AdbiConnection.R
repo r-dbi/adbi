@@ -1,9 +1,5 @@
-#' @rdname DBI
-#' @param immediate Passing a value `TRUE` is intended for statements containing
-#'   no placeholders and `FALSE` otherwise. The default value `NULL` will
-#'   inspect the statement for presence of placeholders (will `PREPARE` the
-#'   statement)
-#' @inheritParams DBI::dbSendQuery
+#' @rdname dbSendQuery
+#' @inheritParams DBI::dbSendQueryArrow
 #' @usage NULL
 dbSendQueryArrow_AdbiConnection <- function(conn, statement, ...,
     params = NULL, immediate = NULL) {
@@ -30,7 +26,7 @@ dbSendQueryArrow_AdbiConnection <- function(conn, statement, ...,
   res
 }
 
-#' @rdname DBI
+#' @rdname dbSendQuery
 #' @export
 setMethod(
   "dbSendQueryArrow",
