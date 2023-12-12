@@ -4,7 +4,7 @@
 %   R/dbFetchArrowChunk_AdbiResultArrow.R, R/dbFetchArrow_AdbiResultArrow.R,
 %   R/dbGetRowCount_AdbiResultArrow.R, R/dbGetRowsAffected_AdbiResultArrow.R,
 %   R/dbGetStatement_AdbiResultArrow.R, R/dbHasCompleted_AdbiResultArrow.R,
-%   R/dbIsValid_AdbiResultArrow.R
+%   R/dbIsValid_AdbiResultArrow.R, R/show_AdbiResultArrow.R
 \docType{class}
 \name{AdbiResultArrow-class}
 \alias{AdbiResultArrow-class}
@@ -28,6 +28,8 @@
 \alias{dbHasCompleted,AdbiResultArrow-method}
 \alias{dbIsValid_AdbiResultArrow}
 \alias{dbIsValid,AdbiResultArrow-method}
+\alias{show_AdbiResultArrow}
+\alias{show,AdbiResultArrow-method}
 \title{Class AdbiResultArrow (and methods)}
 \usage{
 \S4method{dbBind}{AdbiResultArrow}(res, params, ...)
@@ -49,6 +51,8 @@
 \S4method{dbHasCompleted}{AdbiResultArrow}(res, ...)
 
 \S4method{dbIsValid}{AdbiResultArrow}(dbObj, ...)
+
+\S4method{show}{AdbiResultArrow}(object)
 }
 \arguments{
 \item{res}{An object inheriting from \linkS4class{DBIResult}.}
@@ -60,6 +64,8 @@
 \item{dbObj}{An object inheriting from \linkS4class{DBIObject},
 i.e. \linkS4class{DBIDriver}, \linkS4class{DBIConnection},
 or a \linkS4class{DBIResult}}
+
+\item{object}{Any R object}
 }
 \description{
 AdbiResultArrow objects are created by \code{\link[DBI:dbSendQuery]{DBI::dbSendQueryArrow()}}, and
