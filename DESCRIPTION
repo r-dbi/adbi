@@ -92,4 +92,5 @@ Collate:
     'show_AdbiConnection.R'
     'show_AdbiDriver.R'
     'show_AdbiResult.R'
+    'show_AdbiResultArrow.R'
     'utils.R'

@@ -11,7 +11,14 @@
 \alias{dbSendStatement,AdbiConnection,character-method}
 \title{Create result sets}
 \usage{
-\S4method{dbSendQueryArrow}{AdbiConnection}(conn, statement, ..., params = NULL, immediate = NULL)
+\S4method{dbSendQueryArrow}{AdbiConnection}(
+  conn,
+  statement,
+  ...,
+  params = NULL,
+  immediate = NULL,
+  bigint = NULL
+)
 
 \S4method{dbSendQuery}{AdbiConnection,character}(
   conn,
