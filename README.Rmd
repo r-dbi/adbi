@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![rcc](https://github.com/r-dbi/adbi/workflows/rcc/badge.svg)](https://github.com/r-dbi/adbi/actions)
 [![Codecov test coverage](https://codecov.io/gh/r-dbi/adbi/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-dbi/adbi?branch=main)
+[![CRAN status](https://www.r-pkg.org/badges/version/adbi)](https://CRAN.R-project.org/package=adbi)
 <!-- badges: end -->
 
 Bringing [arrow-adbc](https://github.com/apache/arrow-adbc) to R via [DBI](https://github.com/r-dbi), adbi aims to provide DBI-compliant database access.
