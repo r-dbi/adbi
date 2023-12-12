@@ -2,9 +2,18 @@
 NULL
 
 AdbiResultArrow <- function(connection, statement, immediate = NULL,
-                            type = c("query", "statement"), bigint = NULL) {
+                            type = c("query", "statement"), bigint = NULL,
+                            rows_affected_callback = identity) {
 
-  init_result(connection, statement, "AdbiResultArrow", immediate, type, bigint)
+  init_result(
+    connection = connection,
+    statement = statement,
+    class = "AdbiResultArrow",
+    immediate = immediate,
+    type = type,
+    bigint = bigint,
+    rows_affected_callback = rows_affected_callback
+  )
 }
 
 #' Class AdbiResultArrow (and methods)
@@ -28,6 +37,7 @@ setClass(
   slots = list(
     statement = "ANY",
     metadata = "environment",
-    bigint = "character"
+    bigint = "character",
+    rows_affected_callback = "function"
   )
 )
