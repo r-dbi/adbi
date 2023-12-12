@@ -23,11 +23,11 @@ Imports:
 Suggests: 
     testthat,
     covr,
-    DBItest,
-    adbcsqlite,
+    DBItest (>= 1.7.3),
+    adbcsqlite (>= 0.8.0),
     withr,
-    utils,
-    bit64
+    bit64,
+    utils
 Remotes:
     r-dbi/DBI
 Encoding: UTF-8
