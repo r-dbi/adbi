@@ -2,7 +2,7 @@
 #' @inheritParams DBI::dbSendQueryArrow
 #' @usage NULL
 dbSendQueryArrow_AdbiConnection <- function(conn, statement, ...,
-    params = NULL, immediate = NULL) {
+    params = NULL, immediate = NULL, bigint = NULL) {
 
   if (!is.null(params)) {
     immediate <- FALSE
@@ -12,7 +12,9 @@ dbSendQueryArrow_AdbiConnection <- function(conn, statement, ...,
     connection = conn,
     statement = statement,
     immediate = immediate,
-    type = "query"
+    type = "query",
+    bigint = bigint,
+    rows_affected_callback = conn@rows_affected_callback
   )
 
   if (!is.null(params)) {
