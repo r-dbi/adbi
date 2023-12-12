@@ -58,7 +58,6 @@ dbFetch(res)
 
 # Cleanup
 dbClearResult(res)
-dbDisconnect(con)
 ```
 
 More interestingly, the recent arrow-extension API of DBI is supported as well.
