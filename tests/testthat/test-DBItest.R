@@ -3,17 +3,20 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
 
   DBItest::test_all(
     skip = c(
+
       "package_name",
+
+      # options(adbi.allow_multiple_results = FALSE)
+      "send_query_only_one_result_set",
+      "send_statement_only_one_result_set",
+
       "connect_bigint_integer", # not compliant with silent overflow
       "connect_bigint_character", # arrow-nanoarrow#324
       "data_logical", # r-dbi/DBItest/issues/308
-      "send_query_stale_warning", # no warning produced
-      "send_statement_stale_warning", # no warning produced
-      "send_query_only_one_result_set", # no warning produced
-      "send_statement_only_one_result_set", # result not invalid
       "quote_identifier_string", # no error produced
       "create_table_visible_in_other_connection", # r-dbi/DBItest#297
-      "table_visible_in_other_connection", # apache/arrow-adbc#1008
+      "table_visible_in_other_connection", # r-dbi/DBItest/issues/311
+
       "begin_write_commit", # Invalid adbc.ingest.mode.replace
       "begin_write_disconnect", # Invalid adbc.ingest.mode.replace
       "read_table", # apache/arrow-adbc#1008

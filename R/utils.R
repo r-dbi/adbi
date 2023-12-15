@@ -23,11 +23,34 @@ adbc_is_valid <- function(x, class) {
 
 register_result <- function(con, res) {
 
+  if (!isTRUE(getOption("adbi.allow_multiple_results", TRUE)) &&
+      length(meta(con, "results"))) {
+
+    warning(
+      "Open result(s) already exists for this connection and will be ",
+      "closed. To enable multiple open results, set ",
+      "`options(adbi.allow_multiple_results = TRUE)`."
+    )
+
+    clear_results(con)
+  }
+
   meta(con, "results") <- append(meta(con, "results"), res)
   meta(res, "id") <- length(meta(con, "results"))
   meta(res, "con") <- con
 
   invisible(res)
+}
+
+clear_results <- function(con) {
+
+  for (res in meta(con, "results")) {
+    dbClearResult(res)
+  }
+
+  meta(con, "results") <- list()
+
+  invisible()
 }
 
 rm_result <- function(res) {

@@ -68,6 +68,12 @@ set basis. As default, the connection setting is applied, but passing one
 of the accepted values as \code{bigint} when creating a result set will
 subsequently use that setting for all fetches using this result set.
 }
+\details{
+Multiple open result sets per connection are supported and support can
+be disabled by setting \code{options(adbi.allow_multiple_results = FALSE)}. If
+not enabled, creating a new result will finalize potential other results
+and throw a warning.
+}
 \examples{
 if (requireNamespace("adbcsqlite")) {
   library(DBI)
