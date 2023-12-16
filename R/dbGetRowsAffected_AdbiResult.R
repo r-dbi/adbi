@@ -15,9 +15,11 @@ dbGetRowsAffected_AdbiResult <- function(res, ...) {
     execute_statement(res)
   }
 
-  res@rows_affected_callback(
-    meta(res, "rows_affected")
-  )
+  out <- meta(res, "rows_affected")
+  if (out < 0) {
+    out <- NA_integer_
+  }
+  out
 }
 
 #' @rdname AdbiResult-class

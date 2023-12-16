@@ -1,10 +1,7 @@
 DBItest::make_context(
   adbi::adbi("adbcsqlite"),
   list(
-    uri = tempfile("DBItest", fileext = ".sqlite"),
-    rows_affected_callback = function() function(x) {
-      if (x == -1) testthat::skip("unknown number of `rows_affected`") else x
-    }
+    uri = tempfile("DBItest", fileext = ".sqlite")
   ),
   tweaks = suppressWarnings(
     DBItest::tweaks(
@@ -19,6 +16,7 @@ DBItest::make_context(
       time_typed = FALSE,
       timestamp_typed = FALSE,
       temporary_tables = FALSE, # apache/arrow-adbc#1141
+      allow_na_rows_affected = TRUE,
       strict_identifier = TRUE
     )
   ),
