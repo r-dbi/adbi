@@ -277,3 +277,33 @@ arrow_ptype <- function(x) {
     nanoarrow::infer_nanoarrow_schema(meta(x, "data"))
   )
 }
+
+collect_array_stream <- function(x) {
+
+  if (is.null(meta(x, "data"))) {
+
+    if (!isTRUE(meta(x, "has_completed"))) {
+
+      stop(
+        "Result has been released but not marked as completed.",
+        call. = FALSE
+      )
+    }
+
+    return(meta(x, "ptyp"))
+  }
+
+  ret <- nanoarrow::collect_array_stream(meta(x, "data"))
+
+  meta(x, "ptyp") <- list(arrow_ptype(x))
+
+  meta(x, "data")$release()
+  meta(x, "data") <- NULL
+  meta(x, "has_completed") <- TRUE
+
+  if (length(ret)) {
+    return(ret)
+  }
+
+  meta(x, "ptyp")
+}
