@@ -28,6 +28,9 @@ Suggests:
     withr,
     bit64,
     utils
+Remotes: 
+    r-dbi/DBI,
+    r-dbi/DBItest
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
