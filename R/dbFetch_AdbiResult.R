@@ -7,8 +7,6 @@
 #' available number of rows), in line with standard DBI expectations. As data
 #' transfer is mediated by Arrow data structures, which are retrieved as array
 #' chunks, the underlying chunk size can be used by passing an `n` value `NA`.
-#' As this behavior currently is not supported by DBItest, it is opt-in and
-#' has to be enables by setting `options(adbi.allow_na_fetch = TRUE)`.
 #'
 #' @rdname dbFetch
 #' @inheritParams DBI::dbFetch
@@ -35,14 +33,6 @@ dbFetch_AdbiResult <- function(res, n = -1, ...) {
 
     stop(
       "Only scalar integer values >= -1 or `NA` are recognized.",
-      call. = FALSE
-    )
-  }
-
-  if (is.na(n) && !isTRUE(getOption("adbi.allow_na_fetch"))) {
-    stop(
-      "`NA` fetching has to be explicitly enabled via the ",
-      "`adbi.allow_na_fetch` options.",
       call. = FALSE
     )
   }
