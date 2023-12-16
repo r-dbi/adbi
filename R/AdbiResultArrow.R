@@ -15,6 +15,7 @@ setClass(
   slots = list(
     statement = "ANY",
     metadata = "environment",
-    bigint = "character"
+    bigint = "character",
+    rows_affected_callback = "function"
   )
 )
