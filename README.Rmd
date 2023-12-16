@@ -60,3 +60,30 @@ dbFetch(res)
 dbClearResult(res)
 dbDisconnect(con)
 ```
+
+More interestingly, the recent arrow-extension API of DBI is supported as well.
+
+```{r arrow}
+# Queries
+dbGetQueryArrow(con, "SELECT * from swiss WHERE Agriculture < 40")
+
+# Prepared statements
+res <- dbSendQueryArrow(con, "SELECT * from swiss WHERE Agriculture < ?")
+
+dbBind(res, 30)
+
+ret <- dbFetchArrow(res)
+ret$length
+
+dbBind(res, 20)
+
+# Chunked fetches
+while (!dbHasCompleted(res)) {
+  ret <- dbFetchArrowChunk(res)
+  message("fetched ", ret$length, " rows")
+}
+
+# Cleanup
+dbClearResult(res)
+dbDisconnect(con)
+```

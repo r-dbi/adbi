@@ -16,7 +16,7 @@ BugReports: https://github.com/r-dbi/adbi/issues
 Depends: 
     R (>= 3.0.0)
 Imports: 
-    DBI (>= 1.1.3),
+    DBI (>= 1.1.3.9016),
     methods,
     adbcdrivermanager (>= 0.8.0),
     nanoarrow (>= 0.3.0)
@@ -28,6 +28,8 @@ Suggests:
     withr,
     bit64,
     utils
+Remotes: 
+    r-dbi/DBI
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
@@ -38,11 +40,15 @@ Collate:
     'AdbiDriver.R'
     'AdbiConnection.R'
     'AdbiResult.R'
+    'AdbiResultArrow.R'
     'dbAppendTable_AdbiConnection_character_data.frame.R'
     'dbBegin_AdbiConnection.R'
     'dbBind_AdbiResult.R'
+    'dbBind_AdbiResultArrow.R'
     'dbClearResult_AdbiResult.R'
+    'dbClearResult_AdbiResultArrow.R'
     'dbColumnInfo_AdbiResult.R'
+    'dbColumnInfo_AdbiResultArrow.R'
     'dbCommit_AdbiConnection.R'
     'dbConnect_AdbiDriver.R'
     'dbDataType_AdbiConnection.R'
@@ -51,16 +57,23 @@ Collate:
     'dbExistsTable_AdbiConnection_Id.R'
     'dbExistsTable_AdbiConnection_SQL.R'
     'dbExistsTable_AdbiConnection_character.R'
+    'dbFetchArrowChunk_AdbiResultArrow.R'
+    'dbFetchArrow_AdbiResultArrow.R'
     'dbFetch_AdbiResult.R'
     'dbGetInfo_AdbiConnection.R'
     'dbGetInfo_AdbiDriver.R'
     'dbGetRowCount_AdbiResult.R'
+    'dbGetRowCount_AdbiResultArrow.R'
     'dbGetRowsAffected_AdbiResult.R'
+    'dbGetRowsAffected_AdbiResultArrow.R'
     'dbGetStatement_AdbiResult.R'
+    'dbGetStatement_AdbiResultArrow.R'
     'dbHasCompleted_AdbiResult.R'
+    'dbHasCompleted_AdbiResultArrow.R'
     'dbIsValid_AdbiConnection.R'
     'dbIsValid_AdbiDriver.R'
     'dbIsValid_AdbiResult.R'
+    'dbIsValid_AdbiResultArrow.R'
     'dbListFields_AdbiConnection_Id.R'
     'dbListFields_AdbiConnection_SQL.R'
     'dbListFields_AdbiConnection_character.R'
@@ -70,6 +83,7 @@ Collate:
     'dbQuoteString_AdbiConnection_character.R'
     'dbRemoveTable_AdbiConnection_character.R'
     'dbRollback_AdbiConnection.R'
+    'dbSendQueryArrow_AdbiConnection.R'
     'dbSendQuery_AdbiConnection_character.R'
     'dbSendStatement_AdbiConnection_character.R'
     'dbUnquoteIdentifier_AdbiConnection.R'
