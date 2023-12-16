@@ -80,19 +80,13 @@ DBI::dbWithTransaction
 
 resolve_bigint <- function(x) {
 
-  has_bit64 <- requireNamespace("bit64", quietly = TRUE)
-
   if (is.null(x)) {
-    if (has_bit64) {
-      x <- "integer64"
-    } else {
-      x <- "character"
-    }
+    x <- "integer"
   }
 
   res <- match.arg(x, c("integer", "numeric", "character", "integer64"))
 
-  if (res == "integer64" && !has_bit64) {
+  if (res == "integer64" && !requireNamespace("bit64", quietly = TRUE)) {
     stop("Need to install bit64.", call. = FALSE)
   }
 
