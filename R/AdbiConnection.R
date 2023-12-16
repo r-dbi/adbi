@@ -1,8 +1,7 @@
 #' @include AdbiDriver.R
 NULL
 
-AdbiConnection <- function(driver, ..., rows_affected_callback = identity,
-    bigint = NULL) {
+AdbiConnection <- function(driver, ..., bigint = NULL) {
 
   db <- adbcdrivermanager::adbc_database_init(driver@driver, ...)
 
@@ -15,8 +14,7 @@ AdbiConnection <- function(driver, ..., rows_affected_callback = identity,
     database = db,
     connection = adbcdrivermanager::adbc_connection_init(db),
     metadata = list2env(meta, envir = new.env(parent = emptyenv())),
-    bigint = resolve_bigint(bigint),
-    rows_affected_callback = rows_affected_callback
+    bigint = resolve_bigint(bigint)
   )
 }
 
@@ -42,8 +40,7 @@ setClass(
     database = "ANY",
     connection = "ANY",
     metadata = "environment",
-    bigint = "character",
-    rows_affected_callback = "function"
+    bigint = "character"
   ),
   contains = "DBIConnection"
 )

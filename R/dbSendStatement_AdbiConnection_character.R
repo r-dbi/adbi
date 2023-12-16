@@ -13,8 +13,7 @@ dbSendStatement_AdbiConnection_character <- function(conn, statement, ...,
     statement = statement,
     immediate = immediate,
     type = "statement",
-    bigint = bigint,
-    rows_affected_callback = conn@rows_affected_callback
+    bigint = bigint
   )
 
   if (!is.null(params)) {

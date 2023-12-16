@@ -2,8 +2,7 @@
 NULL
 
 AdbiResult <- function(connection, statement, immediate = NULL,
-                       type = c("query", "statement"), bigint = NULL,
-                       rows_affected_callback = identity) {
+                       type = c("query", "statement"), bigint = NULL) {
 
   init_result(
     connection = connection,
@@ -11,14 +10,12 @@ AdbiResult <- function(connection, statement, immediate = NULL,
     class = "AdbiResult",
     immediate = immediate,
     type = type,
-    bigint = bigint,
-    rows_affected_callback = rows_affected_callback
+    bigint = bigint
   )
 }
 
 init_result <- function(connection, statement, class, immediate = NULL,
-                        type = c("query", "statement"), bigint = NULL,
-                        rows_affected_callback = identity) {
+                        type = c("query", "statement"), bigint = NULL) {
 
   if (!(is.null(immediate) || identical(immediate, TRUE) ||
     identical(immediate, FALSE))) {
@@ -72,7 +69,7 @@ init_result <- function(connection, statement, class, immediate = NULL,
   }
 
   res <- new_result(stmt, immediate, prepared, match.arg(type), statement,
-    class, bigint, rows_affected_callback)
+    class, bigint)
 
   register_result(connection, res)
 
@@ -82,8 +79,7 @@ init_result <- function(connection, statement, class, immediate = NULL,
 }
 
 new_result <- function(statement, immediate, prepared, type, sql,
-                       class = "AdbiResult", bigint = NULL,
-                       rows_affected_callback = identity) {
+                       class = "AdbiResult", bigint = NULL) {
 
   meta <- list(
     immediate = immediate,
@@ -97,8 +93,7 @@ new_result <- function(statement, immediate, prepared, type, sql,
     class,
     statement = statement,
     metadata = list2env(meta, envir = new.env(parent = emptyenv())),
-    bigint = resolve_bigint(bigint),
-    rows_affected_callback = rows_affected_callback
+    bigint = resolve_bigint(bigint)
   )
 }
 
@@ -124,7 +119,6 @@ setClass(
   slots = list(
     statement = "ANY",
     metadata = "environment",
-    bigint = "character",
-    rows_affected_callback = "function"
+    bigint = "character"
   )
 )
