@@ -8,7 +8,7 @@ DBItest::make_context(
   ),
   tweaks = suppressWarnings(
     DBItest::tweaks(
-      dbitest_version = "1.7.3",
+      dbitest_version = "1.8.0",
       constructor_relax_args = TRUE,
       placeholder_pattern = c("?", "$1", "$name", ":name"),
       date_cast = function(x) paste0("'", x, "'"),
