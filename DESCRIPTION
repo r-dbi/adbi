@@ -90,6 +90,7 @@ Collate:
     'dbWriteTable_AdbiConnection_Id_data.frame.R'
     'dbWriteTable_AdbiConnection_SQL_data.frame.R'
     'dbWriteTable_AdbiConnection_character_data.frame.R'
+    'export.R'
     'show_AdbiConnection.R'
     'show_AdbiDriver.R'
     'show_AdbiResult.R'
