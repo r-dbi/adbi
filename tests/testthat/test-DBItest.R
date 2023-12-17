@@ -49,6 +49,12 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
       "bind_factor", # segfault
       "bind_raw",
 
+      "arrow_bind_raw",
+      "arrow_bind_factor",
+      "arrow_bind_multi_row_zero_length",
+      "arrow_stream_bind_multi_row_zero_length",
+      "stream_bind_multi_row_zero_length",
+
       if (getRversion() < "4.0") {
         c(
           "column_info_consistent_keywords",

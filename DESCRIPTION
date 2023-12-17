@@ -43,6 +43,8 @@ Collate:
     'AdbiResultArrow.R'
     'dbAppendTable_AdbiConnection_character_data.frame.R'
     'dbBegin_AdbiConnection.R'
+    'dbBindArrow_AdbiResult.R'
+    'dbBindArrow_AdbiResultArrow.R'
     'dbBind_AdbiResult.R'
     'dbBind_AdbiResultArrow.R'
     'dbClearResult_AdbiResult.R'
