@@ -161,15 +161,35 @@ execute_statement <- function(x) {
   invisible(x)
 }
 
+split_dash <- function(x) {
+  stopifnot(is.character(x), length(x) == 1L)
+  strsplit(x, "-", fixed = TRUE)[[1L]]
+}
+
+bigint_type <- function(x) {
+  split_dash(x)[1L]
+}
+
+bigint_mode <- function(x) {
+
+  mode <- split_dash(x)[2L]
+
+  if (is.na(mode)) {
+    "classic"
+  } else {
+    mode
+  }
+}
+
 converter_to <- function(to) {
 
   bint_ptype <- switch(
-    to,
+    bigint_type(to),
     integer = integer(),
     numeric = numeric(),
     character = character(),
     integer64 = bit64::integer64(),
-    stop("Unexpected value for `to`.", call. = FALSE)
+    stop("Unexpected value for `to` (type).", call. = FALSE)
   )
 
   function(schema, ptype) {
@@ -190,15 +210,39 @@ converter_to <- function(to) {
   }
 }
 
+conversion_warn_handler <- function(to) {
+
+  handler <- switch(
+    bigint_mode(to),
+    classic = function(class) {
+      class <- force(class)
+      function(w) if (inherits(w, class)) tryInvokeRestart("muffleWarning")
+    },
+    strict = function(class) {
+      class <- force(class)
+      function(w) if (inherits(w, class)) stop(w)
+    },
+    stop("Unexpected value for `to` (mode).", call. = FALSE)
+  )
+
+  function(expr) {
+    withCallingHandlers(
+      expr,
+      warning = handler("nanoarrow_warning_lossy_conversion")
+    )
+  }
+}
+
 as_data_frame <- function(x, bigint) {
 
   to <- converter_to(bigint)
+  warn <- conversion_warn_handler(bigint)
 
   if (inherits(x, "nanoarrow_array_stream")) {
     on.exit(x$release())
-    nanoarrow::convert_array_stream(x, to)
+    warn(nanoarrow::convert_array_stream(x, to))
   } else if (inherits(x, "nanoarrow_array")) {
-    nanoarrow::convert_array(x, to)
+    warn(nanoarrow::convert_array(x, to))
   } else {
     stop("Unexpected conversion of type ", class(x), ".", call. = FALSE)
   }

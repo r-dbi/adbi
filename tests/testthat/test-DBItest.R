@@ -19,6 +19,10 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
       "arrow_send_query_stale_warning",
 
       # int/int64 https://github.com/r-dbi/DBItest/issues/311
+      "data_64_bit_numeric",
+      "data_64_bit_numeric_warning",
+      "data_64_bit_lossless",
+
       "table_visible_in_other_connection",
       "read_table",
       "read_table_empty",
