@@ -81,6 +81,7 @@ Collate:
     'dbQuoteLiteral_AdbiConnection_character.R'
     'dbQuoteString_AdbiConnection_character.R'
     'dbRemoveTable_AdbiConnection_character.R'
+    'dbRemoveTable_AdbiConnection_Id.R'
     'dbRollback_AdbiConnection.R'
     'dbSendQueryArrow_AdbiConnection.R'
     'dbSendQuery_AdbiConnection_character.R'

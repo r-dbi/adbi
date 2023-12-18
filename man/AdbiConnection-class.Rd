@@ -12,7 +12,8 @@
 %   R/dbQuoteLiteral_AdbiConnection_character.R,
 %   R/dbQuoteString_AdbiConnection_character.R,
 %   R/dbRemoveTable_AdbiConnection_character.R,
-%   R/dbRollback_AdbiConnection.R, R/dbUnquoteIdentifier_AdbiConnection.R,
+%   R/dbRemoveTable_AdbiConnection_Id.R, R/dbRollback_AdbiConnection.R,
+%   R/dbUnquoteIdentifier_AdbiConnection.R,
 %   R/dbWriteTable_AdbiConnection_Id_data.frame.R,
 %   R/dbWriteTable_AdbiConnection_SQL_data.frame.R,
 %   R/dbWriteTable_AdbiConnection_character_data.frame.R,
@@ -52,8 +53,9 @@
 \alias{dbQuoteLiteral,AdbiConnection,character-method}
 \alias{dbQuoteString_AdbiConnection_character}
 \alias{dbQuoteString,AdbiConnection,character-method}
-\alias{dbRemoveTable_AdbiConnection_character}
+\alias{dbRemoveTable_AdbiConnection}
 \alias{dbRemoveTable,AdbiConnection,character-method}
+\alias{dbRemoveTable,AdbiConnection,Id-method}
 \alias{dbRollback_AdbiConnection}
 \alias{dbRollback,AdbiConnection-method}
 \alias{dbUnquoteIdentifier_AdbiConnection}
@@ -101,6 +103,8 @@
 \S4method{dbQuoteString}{AdbiConnection,character}(conn, x, ...)
 
 \S4method{dbRemoveTable}{AdbiConnection,character}(conn, name, ..., temporary = FALSE, fail_if_missing = TRUE)
+
+\S4method{dbRemoveTable}{AdbiConnection,Id}(conn, name, ..., temporary = FALSE, fail_if_missing = TRUE)
 
 \S4method{dbRollback}{AdbiConnection}(conn, ...)
 

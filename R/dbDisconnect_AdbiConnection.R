@@ -7,7 +7,7 @@
 #' @param force Close open results when disconnecting
 #' @usage NULL
 dbDisconnect_AdbiConnection <- function(conn,
-    force = getOption("adbi.force_close_results", TRUE), ...) {
+    force = getOption("adbi.force_close_results", FALSE), ...) {
 
   n_res <- length(meta(conn, "results"))
 

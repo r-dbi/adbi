@@ -13,7 +13,7 @@ adbi(driver = NA_character_)
 
 \S4method{dbConnect}{AdbiDriver}(drv, ..., bigint = NULL)
 
-\S4method{dbDisconnect}{AdbiConnection}(conn, force = getOption("adbi.force_close_results", TRUE), ...)
+\S4method{dbDisconnect}{AdbiConnection}(conn, force = getOption("adbi.force_close_results", FALSE), ...)
 }
 \arguments{
 \item{driver}{A driver specification that can be evaluated (with no

@@ -62,39 +62,47 @@ dbWriteTable_AdbiConnection_Id_data.frame <- function(conn, name, value, overwri
     stop("Cannot specify `field.types` with `append = TRUE`")
   }
 
-  if (append) {
-    mode <- "append"
-  } else if (overwrite) {
-    mode <- "replace"
-  } else {
-    mode <- "create"
-  }
-
   catalog <- NULL
   schema <- NULL
 
-  name <- name@name
+  table <- name@name
 
-  if (!all(names(name) %in% c("catalog", "schema", "table"))) {
+  if (!all(names(table) %in% c("catalog", "schema", "table"))) {
     stop(
       "Expecting Id components \"catalog\", \"schema\", and \"table\".",
       call. = FALSE
     )
   }
 
-  if ("catalog" %in% names(name)) {
-    catalog <- unname(name["catalog"])
+  if ("catalog" %in% names(table)) {
+    catalog <- unname(table["catalog"])
   }
 
-  if ("schema" %in% names(name)) {
-    schema <- unname(name["schema"])
+  if ("schema" %in% names(table)) {
+    schema <- unname(table["schema"])
   }
 
-  name <- unname(name["table"])
+  if ("table" %in% names(table)) {
+    table <- unname(table["table"])
+  }
+
+  if (!is.character(table) && length(table) == 1L && is.null(names(table))) {
+    stop("Expecting an unnamed string as table name", call. = FALSE)
+  }
+
+  if (append) {
+    mode <- "append"
+  } else if (overwrite) {
+    # TODO: use "replace" mode when available: apache/arrow-adbc#1355
+    # mode <- "replace"
+    dbRemoveTable(conn, name, temporary = temporary, fail_if_missing = FALSE)
+  } else {
+    mode <- "create"
+  }
 
   stmt <- adbcdrivermanager::adbc_statement_init(
     conn@connection,
-    adbc.ingest.target_table = name,
+    adbc.ingest.target_table = table,
     adbc.ingest.target_catalog = catalog,
     adbc.ingest.target_db_schema = schema,
     adbc.ingest.mode = paste0("adbc.ingest.mode.", mode),
