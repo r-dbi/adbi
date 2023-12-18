@@ -172,7 +172,7 @@ table doesn't exist.}
 \item{append}{Allow appending to the destination table. Cannot be
 \code{TRUE} if \code{overwrite} is also \code{TRUE}.}
 
-\item{field.types}{character vector of named  SQL field types where
+\item{field.types}{character vector of named SQL field types where
 the names are the names of new table's columns. If missing, types inferred
 with \code{\link[DBI:dbDataType]{DBI::dbDataType()}}).}
 
