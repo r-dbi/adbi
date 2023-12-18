@@ -4,7 +4,9 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
   DBItest::test_all(
     skip = c(
 
+      # intentional compliance issues
       "package_name",
+      "connect_bigint_integer", # not compliant with silent overflow
 
       # options(adbi.allow_multiple_results = FALSE)
       "send_query_only_one_result_set",
@@ -16,45 +18,49 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
       "send_statement_stale_warning",
       "arrow_send_query_stale_warning",
 
-      "connect_bigint_character", # arrow-nanoarrow#324
-      "data_logical", # r-dbi/DBItest#308
-      "create_table_visible_in_other_connection", # r-dbi/DBItest#297
-      "table_visible_in_other_connection", # r-dbi/DBItest/issues/311
-
-      "connect_bigint_integer", # not compliant with silent overflow
-      "quote_identifier_string", # no error produced
-      "begin_write_commit", # visibility issue
-
-      "read_table", # apache/arrow-adbc#1008
-      "read_table_empty", # apache/arrow-adbc#1008
-      "read_table_row_names_na_missing", # apache/arrow-adbc#1008
+      # int/int64 https://github.com/r-dbi/DBItest/issues/311
+      "table_visible_in_other_connection",
+      "read_table",
+      "read_table_empty",
+      "read_table_row_names_na_missing",
       "read_table_name",
-      "append_roundtrip_64_bit_roundtrip",
       "write_table_overwrite",
       "write_table_append_incompatible",
       "append_table",
-      "append_table_new",
       "roundtrip_integer",
-      "roundtrip_64_bit_numeric",
-      "roundtrip_64_bit_character",
-      "roundtrip_64_bit_roundtrip",
       "roundtrip_character",
-      "roundtrip_raw",
       "roundtrip_blob",
-      "roundtrip_field_types",
       "write_table_row_names_true_missing",
       "write_table_row_names_na_missing",
       "write_table_row_names_string_missing",
+      "arrow_read_table_arrow",
+
+      # `field.types` https://github.com/r-dbi/adbi/issues/14
+      "append_roundtrip_64_bit_roundtrip",
+      "roundtrip_64_bit_numeric",
+      "roundtrip_64_bit_character",
+      "roundtrip_64_bit_roundtrip",
+      "roundtrip_field_types",
+
+      # misc issues with well understood causes
+      "connect_bigint_character", # arrow-nanoarrow#324
+      "data_logical", # r-dbi/DBItest#308
+      "create_table_visible_in_other_connection", # r-dbi/DBItest#297
+
+      # misc issues with poorly understood causes
+      "quote_identifier_string", # no error produced
+      "begin_write_commit", # visibility issue
+      "append_table_new", # SQL error
+      "roundtrip_raw", # unknown arrow type for `AsIs`
       "column_info",
-      "bind_multi_row_zero_length",
-      "bind_factor",
       "bind_raw",
       "arrow_bind_raw",
-      "arrow_bind_factor",
-      "arrow_bind_multi_row_zero_length",
-      "arrow_stream_bind_multi_row_zero_length",
-      "stream_bind_multi_row_zero_length",
-      "arrow_read_table_arrow",
+      "bind_factor", # no warnings?
+      "arrow_bind_factor", # no warnings?
+      "bind_multi_row_zero_length", # arrow schema issue
+      "arrow_bind_multi_row_zero_length", # arrow schema issue
+      "arrow_stream_bind_multi_row_zero_length", # arrow schema issue
+      "stream_bind_multi_row_zero_length", # arrow schema issue
 
       # cause segfaults
       "begin_write_disconnect",
@@ -66,10 +72,6 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
           "column_info_consistent",
           "column_info_row_names"
         )
-      },
-
-      if (packageVersion("DBItest") > "1.7.3") {
-        "arrow_read_table_arrow_name"
       }
     )
   )
