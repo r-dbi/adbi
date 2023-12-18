@@ -4,9 +4,7 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
   DBItest::test_all(
     skip = c(
 
-      # intentional compliance issues
       "package_name",
-      "connect_bigint_integer", # not compliant with silent overflow
 
       # options(adbi.allow_multiple_results = FALSE)
       "send_query_only_one_result_set",
@@ -22,21 +20,6 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
       "data_64_bit_numeric",
       "data_64_bit_numeric_warning",
       "data_64_bit_lossless",
-
-      "table_visible_in_other_connection",
-      "read_table",
-      "read_table_empty",
-      "read_table_row_names_na_missing",
-      "read_table_name",
-      "write_table_overwrite",
-      "write_table_append_incompatible",
-      "append_table",
-      "roundtrip_integer",
-      "roundtrip_character",
-      "roundtrip_blob",
-      "write_table_row_names_true_missing",
-      "write_table_row_names_na_missing",
-      "write_table_row_names_string_missing",
       "arrow_read_table_arrow",
 
       # `field.types` https://github.com/r-dbi/adbi/issues/14
@@ -65,6 +48,7 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
       "arrow_bind_multi_row_zero_length", # arrow schema issue
       "arrow_stream_bind_multi_row_zero_length", # arrow schema issue
       "stream_bind_multi_row_zero_length", # arrow schema issue
+      "read_table_empty",
 
       # cause segfaults
       "begin_write_disconnect",
