@@ -5,15 +5,16 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
     skip = c(
 
       "package_name",
-      "reexport",
 
       # options(adbi.allow_multiple_results = FALSE)
       "send_query_only_one_result_set",
       "send_statement_only_one_result_set",
+      "arrow_send_query_only_one_result_set",
 
       # options(adbi.force_close_results = TRUE)
       "send_query_stale_warning",
       "send_statement_stale_warning",
+      "arrow_send_query_stale_warning",
 
       "connect_bigint_character", # arrow-nanoarrow#324
       "data_logical", # r-dbi/DBItest#308
@@ -31,8 +32,6 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
       "append_roundtrip_64_bit_roundtrip",
       "write_table_overwrite",
       "write_table_append_incompatible",
-      "overwrite_table",
-      "overwrite_table_missing",
       "append_table",
       "append_table_new",
       "roundtrip_integer",
@@ -47,10 +46,6 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
       "write_table_row_names_na_missing",
       "write_table_row_names_string_missing",
       "column_info",
-      "begin_write_rollback",
-      "with_transaction_success",
-      "with_transaction_failure",
-      "with_transaction_break",
       "bind_multi_row_zero_length",
       "bind_factor",
       "bind_raw",
@@ -59,8 +54,6 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
       "arrow_bind_multi_row_zero_length",
       "arrow_stream_bind_multi_row_zero_length",
       "stream_bind_multi_row_zero_length",
-      "arrow_send_query_stale_warning",
-      "arrow_send_query_only_one_result_set",
       "arrow_read_table_arrow",
 
       # cause segfaults
