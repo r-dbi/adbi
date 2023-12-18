@@ -14,7 +14,7 @@ License: LGPL (>= 2.1)
 URL: https://adbi.r-dbi.org, https://github.com/r-dbi/adbi, https://arrow.apache.org/adbc/
 BugReports: https://github.com/r-dbi/adbi/issues
 Depends: 
-    R (>= 3.0.0)
+    R (>= 3.5.0)
 Imports: 
     DBI (>= 1.1.3.9017),
     methods,
