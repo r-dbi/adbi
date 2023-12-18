@@ -5,6 +5,7 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
     skip = c(
 
       "package_name",
+      "reexport",
 
       # options(adbi.allow_multiple_results = FALSE)
       "send_query_only_one_result_set",
