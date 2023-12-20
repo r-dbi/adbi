@@ -1,7 +1,5 @@
 test_that("fetch result with arbitrary chunk size", {
 
-  withr::local_options(adbi.allow_na_fetch = TRUE)
-
   res <- new_result("foo", TRUE, FALSE, "query", "")
   dat <- data.frame(x = 1:15)
 

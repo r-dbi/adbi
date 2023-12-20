@@ -30,8 +30,6 @@ integer will try returning as many rows (as long as \code{n} does not exceed the
 available number of rows), in line with standard DBI expectations. As data
 transfer is mediated by Arrow data structures, which are retrieved as array
 chunks, the underlying chunk size can be used by passing an \code{n} value \code{NA}.
-As this behavior currently is not supported by DBItest, it is opt-in and
-has to be enables by setting \code{options(adbi.allow_na_fetch = TRUE)}.
 }
 \examples{
 if (requireNamespace("adbcsqlite")) {

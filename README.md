@@ -8,6 +8,8 @@
 [![rcc](https://github.com/r-dbi/adbi/workflows/rcc/badge.svg)](https://github.com/r-dbi/adbi/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/r-dbi/adbi/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-dbi/adbi?branch=main)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/adbi)](https://CRAN.R-project.org/package=adbi)
 <!-- badges: end -->
 
 Bringing [arrow-adbc](https://github.com/apache/arrow-adbc) to R via
@@ -85,6 +87,40 @@ dbFetch(res)
 #> 6      64.4        17.6          35        32    16.92             23.0
 #> 7      67.6        18.7          25         7     8.65             19.5
 #> 8      35.0         1.2          37        53    42.34             18.0
+
+# Cleanup
+dbClearResult(res)
+```
+
+More interestingly, the recent arrow-extension API of DBI is supported
+as well.
+
+``` r
+# Queries
+dbGetQueryArrow(con, "SELECT * from swiss WHERE Agriculture < 40")
+#> <nanoarrow_array_stream struct<Fertility: double, Agriculture: double, Examination: int64, Education: int64, Catholic: double, Infant.Mortality: double>>
+#>  $ get_schema:function ()  
+#>  $ get_next  :function (schema = x$get_schema(), validate = TRUE)  
+#>  $ release   :function ()
+
+# Prepared statements
+res <- dbSendQueryArrow(con, "SELECT * from swiss WHERE Agriculture < ?")
+
+dbBind(res, 30)
+
+ret <- dbFetchArrow(res)
+ret$length
+#> NULL
+
+dbBind(res, 20)
+
+# Chunked fetches
+while (!dbHasCompleted(res)) {
+  ret <- dbFetchArrowChunk(res)
+  message("fetched ", ret$length, " rows")
+}
+#> fetched 8 rows
+#> fetched 0 rows
 
 # Cleanup
 dbClearResult(res)
