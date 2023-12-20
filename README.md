@@ -90,3 +90,97 @@ dbFetch(res)
 dbClearResult(res)
 dbDisconnect(con)
 ```
+
+More interestingly, the recent arrow-extension API of DBI is supported
+as well.
+
+``` r
+# Queries
+dbGetQueryArrow(con, "SELECT * from swiss WHERE Agriculture < 40")
+#> [[1]]
+#> <nanoarrow_array struct[16]>
+#>  $ length    : int 16
+#>  $ null_count: int 0
+#>  $ offset    : int 0
+#>  $ buffers   :List of 1
+#>   ..$ :<nanoarrow_buffer validity<bool>[0][0 b]> ``
+#>  $ children  :List of 6
+#>   ..$ Fertility       :<nanoarrow_array double[16]>
+#>   .. ..$ length    : int 16
+#>   .. ..$ null_count: int -1
+#>   .. ..$ offset    : int 0
+#>   .. ..$ buffers   :List of 2
+#>   .. .. ..$ :<nanoarrow_buffer validity<bool>[16][2 b]> `TRUE TRUE TRUE TRUE...`
+#>   .. .. ..$ :<nanoarrow_buffer data<double>[16][128 b]> `80.2 92.5 85.8 76.1...`
+#>   .. ..$ dictionary: NULL
+#>   .. ..$ children  : list()
+#>   ..$ Agriculture     :<nanoarrow_array double[16]>
+#>   .. ..$ length    : int 16
+#>   .. ..$ null_count: int -1
+#>   .. ..$ offset    : int 0
+#>   .. ..$ buffers   :List of 2
+#>   .. .. ..$ :<nanoarrow_buffer validity<bool>[16][2 b]> `TRUE TRUE TRUE TRUE...`
+#>   .. .. ..$ :<nanoarrow_buffer data<double>[16][128 b]> `17.0 39.7 36.5 35.3...`
+#>   .. ..$ dictionary: NULL
+#>   .. ..$ children  : list()
+#>   ..$ Examination     :<nanoarrow_array int64[16]>
+#>   .. ..$ length    : int 16
+#>   .. ..$ null_count: int -1
+#>   .. ..$ offset    : int 0
+#>   .. ..$ buffers   :List of 2
+#>   .. .. ..$ :<nanoarrow_buffer validity<bool>[16][2 b]> `TRUE TRUE TRUE TRUE...`
+#>   .. .. ..$ :<nanoarrow_buffer data<int64>[16][128 b]> `15 5 12 9 17 26 31 2...`
+#>   .. ..$ dictionary: NULL
+#>   .. ..$ children  : list()
+#>   ..$ Education       :<nanoarrow_array int64[16]>
+#>   .. ..$ length    : int 16
+#>   .. ..$ null_count: int -1
+#>   .. ..$ offset    : int 0
+#>   .. ..$ buffers   :List of 2
+#>   .. .. ..$ :<nanoarrow_buffer validity<bool>[16][2 b]> `TRUE TRUE TRUE TRUE...`
+#>   .. .. ..$ :<nanoarrow_buffer data<int64>[16][128 b]> `12 5 7 7 8 28 20 19 ...`
+#>   .. ..$ dictionary: NULL
+#>   .. ..$ children  : list()
+#>   ..$ Catholic        :<nanoarrow_array double[16]>
+#>   .. ..$ length    : int 16
+#>   .. ..$ null_count: int -1
+#>   .. ..$ offset    : int 0
+#>   .. ..$ buffers   :List of 2
+#>   .. .. ..$ :<nanoarrow_buffer validity<bool>[16][2 b]> `TRUE TRUE TRUE TRUE...`
+#>   .. .. ..$ :<nanoarrow_buffer data<double>[16][128 b]> `9.96 93.40 33.77 90...`
+#>   .. ..$ dictionary: NULL
+#>   .. ..$ children  : list()
+#>   ..$ Infant.Mortality:<nanoarrow_array double[16]>
+#>   .. ..$ length    : int 16
+#>   .. ..$ null_count: int -1
+#>   .. ..$ offset    : int 0
+#>   .. ..$ buffers   :List of 2
+#>   .. .. ..$ :<nanoarrow_buffer validity<bool>[16][2 b]> `TRUE TRUE TRUE TRUE...`
+#>   .. .. ..$ :<nanoarrow_buffer data<double>[16][128 b]> `22.2 20.2 20.3 26.6...`
+#>   .. ..$ dictionary: NULL
+#>   .. ..$ children  : list()
+#>  $ dictionary: NULL
+
+# Prepared statements
+res <- dbSendQueryArrow(con, "SELECT * from swiss WHERE Agriculture < ?")
+
+dbBind(res, 30)
+
+ret <- dbFetchArrow(res)
+ret$length
+#> NULL
+
+dbBind(res, 20)
+
+# Chunked fetches
+while (!dbHasCompleted(res)) {
+  ret <- dbFetchArrowChunk(res)
+  message("fetched ", ret$length, " rows")
+}
+#> fetched 8 rows
+#> fetched 0 rows
+
+# Cleanup
+dbClearResult(res)
+dbDisconnect(con)
+```
