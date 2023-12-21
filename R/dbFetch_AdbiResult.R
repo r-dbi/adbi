@@ -212,11 +212,31 @@ converter_to <- function(to) {
 
 conversion_warn_handler <- function(to) {
 
+  if (getRversion() >= "4.0.0") {
+
+    restart_fun <- tryInvokeRestart
+
+  } else {
+
+    restart_fun <- function(r, ...) {
+
+      if (!isRestart(r)) {
+        r <- findRestart(r)
+      }
+
+      if (is.null(r)) {
+        invisible(NULL)
+      } else {
+        invokeRestart(r, ...)
+      }
+    }
+  }
+
   handler <- switch(
     bigint_mode(to),
     classic = function(class) {
       class <- force(class)
-      function(w) if (inherits(w, class)) tryInvokeRestart("muffleWarning")
+      function(w) if (inherits(w, class)) restart_fun("muffleWarning")
     },
     strict = function(class) {
       class <- force(class)
