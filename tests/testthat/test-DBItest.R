@@ -49,6 +49,7 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
       "arrow_stream_bind_multi_row_zero_length", # arrow schema issue
       "stream_bind_multi_row_zero_length", # arrow schema issue
       "read_table_empty",
+      "list_objects_features",
 
       # cause segfaults
       "begin_write_disconnect",

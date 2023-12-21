@@ -16,21 +16,18 @@ BugReports: https://github.com/r-dbi/adbi/issues
 Depends: 
     R (>= 3.5.0)
 Imports: 
-    DBI (>= 1.1.3.9017),
+    DBI (>= 1.2.0),
     methods,
     adbcdrivermanager (>= 0.8.0),
     nanoarrow (>= 0.3.0)
 Suggests: 
     testthat,
     covr,
-    DBItest (>= 1.7.3.9014),
+    DBItest (>= 1.8.0),
     adbcsqlite (>= 0.8.0),
     withr,
     bit64,
     utils
-Remotes:
-    r-dbi/DBI,
-    r-dbi/DBItest
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
