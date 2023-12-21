@@ -5,9 +5,7 @@ corresponds to retrieving the entire result set at once, while a positive
 integer will try returning as many rows (as long as n does not exceed the
 available number of rows), in line with standard DBI expectations. As data
 transfer is mediated by Arrow data structures, which are retrieved as array
-chunks, the underlying chunk size can be used by passing an n value NA.
-As this behavior currently is not supported by DBItest, it is opt-in and
-has to be enables by setting options(adbi.allow_na_fetch = TRUE)."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
+chunks, the underlying chunk size can be used by passing an n value NA."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
@@ -25,7 +23,7 @@ has to be enables by setting options(adbi.allow_na_fetch = TRUE)."><!-- mathjax 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">adbi</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -63,9 +61,7 @@ corresponds to retrieving the entire result set at once, while a positive
 integer will try returning as many rows (as long as <code>n</code> does not exceed the
 available number of rows), in line with standard DBI expectations. As data
 transfer is mediated by Arrow data structures, which are retrieved as array
-chunks, the underlying chunk size can be used by passing an <code>n</code> value <code>NA</code>.
-As this behavior currently is not supported by DBItest, it is opt-in and
-has to be enables by setting <code>options(adbi.allow_na_fetch = TRUE)</code>.</p>
+chunks, the underlying chunk size can be used by passing an <code>n</code> value <code>NA</code>.</p>
     </div>
 
     <div id="ref-usage">

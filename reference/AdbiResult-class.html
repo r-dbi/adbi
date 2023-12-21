@@ -21,7 +21,7 @@ adbi.'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathj
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">adbi</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -48,7 +48,7 @@ adbi.'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathj
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Class AdbiResult (and methods)</h1>
-    <small class="dont-index">Source: <a href="https://github.com/r-dbi/adbi/blob/HEAD/R/AdbiResult.R" class="external-link"><code>R/AdbiResult.R</code></a>, <a href="https://github.com/r-dbi/adbi/blob/HEAD/R/dbBind_AdbiResult.R" class="external-link"><code>R/dbBind_AdbiResult.R</code></a>, <a href="https://github.com/r-dbi/adbi/blob/HEAD/R/dbClearResult_AdbiResult.R" class="external-link"><code>R/dbClearResult_AdbiResult.R</code></a>, and 7 more</small>
+    <small class="dont-index">Source: <a href="https://github.com/r-dbi/adbi/blob/HEAD/R/AdbiResult.R" class="external-link"><code>R/AdbiResult.R</code></a>, <a href="https://github.com/r-dbi/adbi/blob/HEAD/R/dbBindArrow_AdbiResult.R" class="external-link"><code>R/dbBindArrow_AdbiResult.R</code></a>, <a href="https://github.com/r-dbi/adbi/blob/HEAD/R/dbBind_AdbiResult.R" class="external-link"><code>R/dbBind_AdbiResult.R</code></a>, and 8 more</small>
     <div class="hidden name"><code>AdbiResult-class.Rd</code></div>
     </div>
 
@@ -62,6 +62,9 @@ class. The "Usage" section lists the class methods overridden by
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for AdbiResult</span></span>
+<span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbBind.html" class="external-link">dbBindArrow</a></span><span class="op">(</span><span class="va">res</span>, <span class="va">params</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for AdbiResult</span></span>
 <span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbBind.html" class="external-link">dbBind</a></span><span class="op">(</span><span class="va">res</span>, <span class="va">params</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for AdbiResult</span></span>
@@ -96,7 +99,10 @@ class. The "Usage" section lists the class methods overridden by
 
 
 <dt>params</dt>
-<dd><p>A list of bindings, named or unnamed.</p></dd>
+<dd><p>For <code><a href="https://dbi.r-dbi.org/reference/dbBind.html" class="external-link">dbBind()</a></code>, a list of values, named or unnamed,
+or a data frame, with one element/column per query parameter.
+For <code><a href="https://dbi.r-dbi.org/reference/dbBind.html" class="external-link">dbBindArrow()</a></code>, values as a nanoarrow stream,
+with one column per query parameter.</p></dd>
 
 
 <dt>...</dt>

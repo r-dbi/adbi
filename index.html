@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">adbi</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -140,6 +140,36 @@
 <span><span class="co">#&gt; 6      64.4        17.6          35        32    16.92             23.0</span></span>
 <span><span class="co">#&gt; 7      67.6        18.7          25         7     8.65             19.5</span></span>
 <span><span class="co">#&gt; 8      35.0         1.2          37        53    42.34             18.0</span></span>
+<span></span>
+<span><span class="co"># Cleanup</span></span>
+<span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbClearResult.html" class="external-link">dbClearResult</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></code></pre></div>
+<p>More interestingly, the recent arrow-extension API of DBI is supported as well.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Queries</span></span>
+<span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html" class="external-link">dbGetQueryArrow</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"SELECT * from swiss WHERE Agriculture &lt; 40"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; &lt;nanoarrow_array_stream struct&lt;Fertility: double, Agriculture: double, Examination: int64, Education: int64, Catholic: double, Infant.Mortality: double&gt;&gt;</span></span>
+<span><span class="co">#&gt;  $ get_schema:function ()  </span></span>
+<span><span class="co">#&gt;  $ get_next  :function (schema = x$get_schema(), validate = TRUE)  </span></span>
+<span><span class="co">#&gt;  $ release   :function ()</span></span>
+<span></span>
+<span><span class="co"># Prepared statements</span></span>
+<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html" class="external-link">dbSendQueryArrow</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"SELECT * from swiss WHERE Agriculture &lt; ?"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbBind.html" class="external-link">dbBind</a></span><span class="op">(</span><span class="va">res</span>, <span class="fl">30</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ret</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbFetch.html" class="external-link">dbFetchArrow</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
+<span><span class="va">ret</span><span class="op">$</span><span class="va">length</span></span>
+<span><span class="co">#&gt; NULL</span></span>
+<span></span>
+<span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbBind.html" class="external-link">dbBind</a></span><span class="op">(</span><span class="va">res</span>, <span class="fl">20</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Chunked fetches</span></span>
+<span><span class="kw">while</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbHasCompleted.html" class="external-link">dbHasCompleted</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">ret</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbFetch.html" class="external-link">dbFetchArrowChunk</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"fetched "</span>, <span class="va">ret</span><span class="op">$</span><span class="va">length</span>, <span class="st">" rows"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="co">#&gt; fetched 8 rows</span></span>
+<span><span class="co">#&gt; fetched 0 rows</span></span>
 <span></span>
 <span><span class="co"># Cleanup</span></span>
 <span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbClearResult.html" class="external-link">dbClearResult</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
