@@ -29,6 +29,12 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
       "roundtrip_64_bit_roundtrip",
       "roundtrip_field_types",
 
+      # bind zero length https://github.com/apache/arrow-adbc/issues/1365
+      "bind_multi_row_zero_length",
+      "arrow_bind_multi_row_zero_length",
+      "arrow_stream_bind_multi_row_zero_length",
+      "stream_bind_multi_row_zero_length",
+
       # misc issues with well understood causes
       "connect_bigint_character", # arrow-nanoarrow#324
       "data_logical", # r-dbi/DBItest#308
@@ -44,10 +50,6 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
       "arrow_bind_raw",
       "bind_factor", # no warnings?
       "arrow_bind_factor", # no warnings?
-      "bind_multi_row_zero_length", # arrow schema issue
-      "arrow_bind_multi_row_zero_length", # arrow schema issue
-      "arrow_stream_bind_multi_row_zero_length", # arrow schema issue
-      "stream_bind_multi_row_zero_length", # arrow schema issue
       "read_table_empty",
       "list_objects_features",
 
