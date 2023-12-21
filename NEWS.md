@@ -1,3 +1,8 @@
+# adbi 0.1.0 (2023-12-21)
+
+- Update for DBI 1.2.0
+- Adds arrow API extension
+
 # adbi 0.0.2 (2023-12-08)
 
 - Initial CRAN release
