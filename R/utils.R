@@ -24,7 +24,7 @@ adbc_is_valid <- function(x, class) {
 register_result <- function(con, res) {
 
   if (!isTRUE(getOption("adbi.allow_multiple_results", TRUE)) &&
-      length(meta(con, "results"))) {
+    length(meta(con, "results"))) {
 
     warning(
       "Open result(s) already exists for this connection and will be ",

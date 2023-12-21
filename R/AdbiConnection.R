@@ -66,7 +66,7 @@ resolve_bigint <- function(x) {
   res <- match.arg(x, bigint_opts)
 
   if (identical(res, "integer64") &&
-      !requireNamespace("bit64", quietly = TRUE)) {
+    !requireNamespace("bit64", quietly = TRUE)) {
 
     stop("Need to install bit64.", call. = FALSE)
   }
