@@ -12,7 +12,8 @@
 %   R/dbQuoteLiteral_AdbiConnection_character.R,
 %   R/dbQuoteString_AdbiConnection_character.R,
 %   R/dbRemoveTable_AdbiConnection_character.R,
-%   R/dbRollback_AdbiConnection.R, R/dbUnquoteIdentifier_AdbiConnection.R,
+%   R/dbRemoveTable_AdbiConnection_Id.R, R/dbRollback_AdbiConnection.R,
+%   R/dbUnquoteIdentifier_AdbiConnection.R,
 %   R/dbWriteTable_AdbiConnection_Id_data.frame.R,
 %   R/dbWriteTable_AdbiConnection_SQL_data.frame.R,
 %   R/dbWriteTable_AdbiConnection_character_data.frame.R,
@@ -52,8 +53,9 @@
 \alias{dbQuoteLiteral,AdbiConnection,character-method}
 \alias{dbQuoteString_AdbiConnection_character}
 \alias{dbQuoteString,AdbiConnection,character-method}
-\alias{dbRemoveTable_AdbiConnection_character}
+\alias{dbRemoveTable_AdbiConnection}
 \alias{dbRemoveTable,AdbiConnection,character-method}
+\alias{dbRemoveTable,AdbiConnection,Id-method}
 \alias{dbRollback_AdbiConnection}
 \alias{dbRollback,AdbiConnection-method}
 \alias{dbUnquoteIdentifier_AdbiConnection}
@@ -102,6 +104,8 @@
 
 \S4method{dbRemoveTable}{AdbiConnection,character}(conn, name, ..., temporary = FALSE, fail_if_missing = TRUE)
 
+\S4method{dbRemoveTable}{AdbiConnection,Id}(conn, name, ..., temporary = FALSE, fail_if_missing = TRUE)
+
 \S4method{dbRollback}{AdbiConnection}(conn, ...)
 
 \S4method{dbUnquoteIdentifier}{AdbiConnection}(conn, x, ...)
@@ -138,7 +142,8 @@ e.g. \code{Id(schema = "my_schema", table = "table_name")}
 given verbatim, e.g. \code{SQL('"my_schema"."table_name"')}
 }}
 
-\item{value}{a \link{data.frame} (or coercible to data.frame).}
+\item{value}{For \code{dbWriteTable()}, a \link{data.frame} (or coercible to data.frame).
+For \code{dbWriteTableArrow()}, an object coercible to an Arrow RecordBatchReader.}
 
 \item{...}{Other parameters passed on to methods.}
 
@@ -167,7 +172,7 @@ table doesn't exist.}
 \item{append}{Allow appending to the destination table. Cannot be
 \code{TRUE} if \code{overwrite} is also \code{TRUE}.}
 
-\item{field.types}{character vector of named  SQL field types where
+\item{field.types}{character vector of named SQL field types where
 the names are the names of new table's columns. If missing, types inferred
 with \code{\link[DBI:dbDataType]{DBI::dbDataType()}}).}
 

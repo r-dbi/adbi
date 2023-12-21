@@ -3,9 +3,9 @@
 #'   table doesn't exist.
 #' @inheritParams DBI::dbRemoveTable
 #' @usage NULL
-dbRemoveTable_AdbiConnection_character <- function(conn, name, ...,
-                                                   temporary = FALSE,
-                                                   fail_if_missing = TRUE) {
+dbRemoveTable_AdbiConnection <- function(conn, name, ..., temporary = FALSE,
+                                         fail_if_missing = TRUE) {
+
   name <- dbQuoteIdentifier(conn, name)
 
   sql <- paste0(
@@ -23,4 +23,8 @@ dbRemoveTable_AdbiConnection_character <- function(conn, name, ...,
 
 #' @rdname AdbiConnection-class
 #' @export
-setMethod("dbRemoveTable", c("AdbiConnection", "character"), dbRemoveTable_AdbiConnection_character)
+setMethod(
+  "dbRemoveTable",
+  c("AdbiConnection", "character"),
+  dbRemoveTable_AdbiConnection
+)

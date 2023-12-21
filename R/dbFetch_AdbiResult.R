@@ -7,8 +7,6 @@
 #' available number of rows), in line with standard DBI expectations. As data
 #' transfer is mediated by Arrow data structures, which are retrieved as array
 #' chunks, the underlying chunk size can be used by passing an `n` value `NA`.
-#' As this behavior currently is not supported by DBItest, it is opt-in and
-#' has to be enables by setting `options(adbi.allow_na_fetch = TRUE)`.
 #'
 #' @rdname dbFetch
 #' @inheritParams DBI::dbFetch
@@ -35,14 +33,6 @@ dbFetch_AdbiResult <- function(res, n = -1, ...) {
 
     stop(
       "Only scalar integer values >= -1 or `NA` are recognized.",
-      call. = FALSE
-    )
-  }
-
-  if (is.na(n) && !isTRUE(getOption("adbi.allow_na_fetch"))) {
-    stop(
-      "`NA` fetching has to be explicitly enabled via the ",
-      "`adbi.allow_na_fetch` options.",
       call. = FALSE
     )
   }
@@ -171,15 +161,35 @@ execute_statement <- function(x) {
   invisible(x)
 }
 
+split_dash <- function(x) {
+  stopifnot(is.character(x), length(x) == 1L)
+  strsplit(x, "-", fixed = TRUE)[[1L]]
+}
+
+bigint_type <- function(x) {
+  split_dash(x)[1L]
+}
+
+bigint_mode <- function(x) {
+
+  mode <- split_dash(x)[2L]
+
+  if (is.na(mode)) {
+    "classic"
+  } else {
+    mode
+  }
+}
+
 converter_to <- function(to) {
 
   bint_ptype <- switch(
-    to,
+    bigint_type(to),
     integer = integer(),
     numeric = numeric(),
     character = character(),
     integer64 = bit64::integer64(),
-    stop("Unexpected value for `to`.", call. = FALSE)
+    stop("Unexpected value for `to` (type).", call. = FALSE)
   )
 
   function(schema, ptype) {
@@ -200,15 +210,39 @@ converter_to <- function(to) {
   }
 }
 
+conversion_warn_handler <- function(to) {
+
+  handler <- switch(
+    bigint_mode(to),
+    classic = function(class) {
+      class <- force(class)
+      function(w) if (inherits(w, class)) tryInvokeRestart("muffleWarning")
+    },
+    strict = function(class) {
+      class <- force(class)
+      function(w) if (inherits(w, class)) stop(w)
+    },
+    stop("Unexpected value for `to` (mode).", call. = FALSE)
+  )
+
+  function(expr) {
+    withCallingHandlers(
+      expr,
+      warning = handler("nanoarrow_warning_lossy_conversion")
+    )
+  }
+}
+
 as_data_frame <- function(x, bigint) {
 
   to <- converter_to(bigint)
+  warn <- conversion_warn_handler(bigint)
 
   if (inherits(x, "nanoarrow_array_stream")) {
     on.exit(x$release())
-    nanoarrow::convert_array_stream(x, to)
+    warn(nanoarrow::convert_array_stream(x, to))
   } else if (inherits(x, "nanoarrow_array")) {
-    nanoarrow::convert_array(x, to)
+    warn(nanoarrow::convert_array(x, to))
   } else {
     stop("Unexpected conversion of type ", class(x), ".", call. = FALSE)
   }
@@ -276,4 +310,34 @@ arrow_ptype <- function(x) {
   nanoarrow::nanoarrow_array_init(
     nanoarrow::infer_nanoarrow_schema(meta(x, "data"))
   )
+}
+
+collect_array_stream <- function(x) {
+
+  if (is.null(meta(x, "data"))) {
+
+    if (!isTRUE(meta(x, "has_completed"))) {
+
+      stop(
+        "Result has been released but not marked as completed.",
+        call. = FALSE
+      )
+    }
+
+    return(meta(x, "ptyp"))
+  }
+
+  ret <- nanoarrow::collect_array_stream(meta(x, "data"))
+
+  meta(x, "ptyp") <- list(arrow_ptype(x))
+
+  meta(x, "data")$release()
+  meta(x, "data") <- NULL
+  meta(x, "has_completed") <- TRUE
+
+  if (length(ret)) {
+    return(ret)
+  }
+
+  meta(x, "ptyp")
 }

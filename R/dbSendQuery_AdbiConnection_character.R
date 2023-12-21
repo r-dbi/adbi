@@ -8,6 +8,11 @@
 #' of the accepted values as `bigint` when creating a result set will
 #' subsequently use that setting for all fetches using this result set.
 #'
+#' Multiple open result sets per connection are supported and support can
+#' be disabled by setting `options(adbi.allow_multiple_results = FALSE)`. If
+#' not enabled, creating a new result will finalize potential other results
+#' and throw a warning.
+#'
 #' @seealso adbi-driver
 #' @rdname dbSendQuery
 #' @param params Optional query parameters (forwarded to [dbBind()])

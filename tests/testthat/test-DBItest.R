@@ -1,50 +1,57 @@
-if (identical(Sys.getenv("NOT_CRAN"), "true")) {
+if (identical(Sys.getenv("NOT_CRAN"), "true") &&
+  packageVersion("DBItest") >= "1.7.2") {
 
   DBItest::test_all(
     skip = c(
+
       "package_name",
-      "connect_bigint_integer",
-      "connect_bigint_character",
-      "data_logical",
-      "send_query_stale_warning",
-      "send_statement_stale_warning",
+
+      # options(adbi.allow_multiple_results = FALSE)
       "send_query_only_one_result_set",
       "send_statement_only_one_result_set",
-      "quote_identifier_string",
-      "create_table_visible_in_other_connection",
-      "table_visible_in_other_connection",
-      "begin_write_commit",
-      "begin_write_disconnect",
-      "read_table",
-      "read_table_empty",
-      "read_table_row_names_na_missing",
-      "read_table_name",
+      "arrow_send_query_only_one_result_set",
+
+      # options(adbi.force_close_results = TRUE)
+      "send_query_stale_warning",
+      "send_statement_stale_warning",
+      "arrow_send_query_stale_warning",
+
+      # int/int64 https://github.com/r-dbi/DBItest/issues/311
+      "data_64_bit_numeric",
+      "data_64_bit_numeric_warning",
+      "data_64_bit_lossless",
+      "arrow_read_table_arrow",
+
+      # `field.types` https://github.com/r-dbi/adbi/issues/14
       "append_roundtrip_64_bit_roundtrip",
-      "write_table_overwrite",
-      "write_table_append_incompatible",
-      "overwrite_table",
-      "overwrite_table_missing",
-      "append_table",
-      "append_table_new",
-      "roundtrip_integer",
       "roundtrip_64_bit_numeric",
       "roundtrip_64_bit_character",
       "roundtrip_64_bit_roundtrip",
-      "roundtrip_character",
-      "roundtrip_raw",
-      "roundtrip_blob",
       "roundtrip_field_types",
-      "write_table_row_names_true_missing",
-      "write_table_row_names_na_missing",
-      "write_table_row_names_string_missing",
+
+      # misc issues with well understood causes
+      "connect_bigint_character", # arrow-nanoarrow#324
+      "data_logical", # r-dbi/DBItest#308
+      "create_table_visible_in_other_connection", # r-dbi/DBItest#297
+
+      # misc issues with poorly understood causes
+      "quote_identifier_string", # no error produced
+      "begin_write_commit", # visibility issue
+      "append_table_new", # SQL error
+      "roundtrip_raw", # unknown arrow type for `AsIs`
       "column_info",
-      "begin_write_rollback",
-      "with_transaction_success",
-      "with_transaction_failure",
-      "with_transaction_break",
-      "bind_multi_row_zero_length",
-      "bind_factor",
       "bind_raw",
+      "arrow_bind_raw",
+      "bind_factor", # no warnings?
+      "arrow_bind_factor", # no warnings?
+      "bind_multi_row_zero_length", # arrow schema issue
+      "arrow_bind_multi_row_zero_length", # arrow schema issue
+      "arrow_stream_bind_multi_row_zero_length", # arrow schema issue
+      "stream_bind_multi_row_zero_length", # arrow schema issue
+      "read_table_empty",
+
+      # cause segfaults
+      "begin_write_disconnect",
 
       if (getRversion() < "4.0") {
         c(

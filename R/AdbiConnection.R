@@ -48,51 +48,26 @@ setClass(
   contains = "DBIConnection"
 )
 
-#' @export
-DBI::dbIsReadOnly
-
-#' @export
-DBI::dbQuoteLiteral
-
-#' @export
-DBI::dbUnquoteIdentifier
-
-#' @export
-DBI::dbGetQuery
-
-#' @export
-DBI::dbExecute
-
-#' @export
-DBI::dbReadTable
-
-#' @export
-DBI::dbCreateTable
-
-#' @export
-DBI::dbAppendTable
-
-#' @export
-DBI::dbListObjects
-
-#' @export
-DBI::dbWithTransaction
+bigint_opts <- c(
+  "integer",
+  "integer-strict",
+  "numeric",
+  "numeric-strict",
+  "character",
+  "integer64"
+)
 
 resolve_bigint <- function(x) {
 
-  has_bit64 <- requireNamespace("bit64", quietly = TRUE)
-
   if (is.null(x)) {
-    if (has_bit64) {
-      x <- "integer64"
-    } else {
-      x <- "character"
-    }
+    x <- "integer-strict"
   }
 
-  res <- match.arg(x, c("integer", "numeric", "character", "integer64"))
+  res <- match.arg(x, bigint_opts)
 
-  if (res == "integer64" && !has_bit64) {
+  if (identical(res, "integer64") &&
+      !requireNamespace("bit64", quietly = TRUE)) {
+
     stop("Need to install bit64.", call. = FALSE)
   }
 

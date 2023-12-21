@@ -16,11 +16,7 @@ dbDisconnect_AdbiConnection <- function(conn,
     warning("There are ", n_res, " open result(s) in use. Force closing ",
       "can be disabled by setting `options(adbi.force_close_results = FALSE)`.")
 
-    for (res in meta(conn, "results")) {
-      dbClearResult(res)
-    }
-
-    meta(conn, "results") <- list()
+    clear_results(conn)
 
   } else if (n_res) {
 

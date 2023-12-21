@@ -8,13 +8,13 @@ DBItest::make_context(
   ),
   tweaks = suppressWarnings(
     DBItest::tweaks(
-      dbitest_version = "1.7.3",
+      dbitest_version = "1.8.0",
       constructor_relax_args = TRUE,
       placeholder_pattern = c("?", "$1", "$name", ":name"),
       date_cast = function(x) paste0("'", x, "'"),
       time_cast = function(x) paste0("'", x, "'"),
       timestamp_cast = function(x) paste0("'", x, "'"),
-      logical_return = function(x) bit64::as.integer64(x),
+      logical_return = function(x) as.integer(x),
       date_typed = FALSE,
       time_typed = FALSE,
       timestamp_typed = FALSE,
