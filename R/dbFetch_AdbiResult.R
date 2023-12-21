@@ -215,7 +215,7 @@ conversion_warn_handler <- function(to) {
   if (getRversion() >= "4.0.0") {
 
     restart_fun <- get("tryInvokeRestart", envir = getNamespace("base"),
-                       mode = "function", inherits = FALSE)
+      mode = "function", inherits = FALSE)
 
   } else {
 
