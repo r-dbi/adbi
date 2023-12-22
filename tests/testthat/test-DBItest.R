@@ -36,15 +36,13 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
       "stream_bind_multi_row_zero_length",
 
       # misc issues with well understood causes
-      "connect_bigint_character", # arrow-nanoarrow#324
+      "connect_bigint_character", # apache/arrow-nanoarrow#324
       "data_logical", # r-dbi/DBItest#308
       "create_table_visible_in_other_connection", # r-dbi/DBItest#297
+      "quote_identifier_string", # apache/arrow-adbc#1395
 
       # misc issues with poorly understood causes
-      "quote_identifier_string", # no error produced
-      "begin_write_commit", # visibility issue
       "append_table_new", # SQL error
-      "roundtrip_raw", # unknown arrow type for `AsIs`
       "column_info",
       "bind_raw",
       "arrow_bind_raw",
