@@ -21,7 +21,7 @@ dbColumnInfo_AdbiResult <- function(res, ...) {
   data.frame(
     name = names(ret),
     type = vapply(ret, `[[`, character(1L), "type"),
-    storage_type = vapply(ret, `[[`, character(1L), "storage_type"),
+    .storage_type = vapply(ret, `[[`, character(1L), "storage_type"),
     row.names = NULL
   )
 }

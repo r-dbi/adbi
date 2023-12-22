@@ -43,9 +43,6 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
 
       # misc issues with poorly understood causes
       "append_table_new", # SQL error
-      "column_info",
-      "bind_raw",
-      "arrow_bind_raw",
       "bind_factor", # no warnings?
       "arrow_bind_factor", # no warnings?
       "read_table_empty",

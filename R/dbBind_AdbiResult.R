@@ -20,7 +20,7 @@ dbBind_AdbiResult <- function(res, params, ...) {
   }
 
   if (is.list(params) && !inherits(params, "data.frame")) {
-    params <- as.data.frame(params, fix.empty.names = FALSE)
+    params <- as.data.frame(lapply(params, I), fix.empty.names = FALSE)
   }
 
   if (!isTRUE(meta(res, "prepared"))) {
