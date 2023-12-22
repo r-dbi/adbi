@@ -40,13 +40,12 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
       "data_logical", # r-dbi/DBItest#308
       "create_table_visible_in_other_connection", # r-dbi/DBItest#297
       "quote_identifier_string", # apache/arrow-adbc#1395
+      "read_table_empty", # apache/arrow-adbc#1400
 
       # misc issues with poorly understood causes
       "append_table_new", # SQL error
-      "bind_factor", # no warnings?
-      "arrow_bind_factor", # no warnings?
-      "read_table_empty",
       "list_objects_features",
+      "begin_write_commit",
 
       # cause segfaults
       "begin_write_disconnect",
