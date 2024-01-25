@@ -41,10 +41,10 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
       "create_table_visible_in_other_connection", # r-dbi/DBItest#297
       "quote_identifier_string", # apache/arrow-adbc#1395
       "read_table_empty", # apache/arrow-adbc#1400
+      "list_objects_features", # r-dbi/DBItest#339
 
       # misc issues with poorly understood causes
-      "append_table_new", # SQL error
-      "list_objects_features",
+      "append_table_new",
       "begin_write_commit",
 
       # cause segfaults
