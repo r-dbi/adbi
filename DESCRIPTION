@@ -27,7 +27,8 @@ Suggests:
     adbcsqlite (>= 0.8.0),
     withr,
     bit64,
-    utils
+    utils,
+    arrow
 Config/Needs/website: 
     r-dbi/dbitemplate
 Encoding: UTF-8
