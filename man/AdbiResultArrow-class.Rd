@@ -76,14 +76,14 @@ or a \linkS4class{DBIResult}}
 \item{object}{Any R object}
 }
 \description{
-AdbiResultArrow objects are created by \code{\link[DBI:dbSendQueryArrow]{DBI::dbSendQueryArrow()}}, and
+AdbiResultArrow objects are created by \code{\link[DBI:dbSendQuery]{DBI::dbSendQueryArrow()}}, and
 encapsulate the result of an SQL query (a \code{SELECT} statement). They are a
 superclass of the \linkS4class{DBIResultArrow} class. The "Usage" section lists
 the class methods overridden by \pkg{adbi}.
 }
 \seealso{
 The corresponding generic functions
-\code{\link[DBI:dbFetchArrow]{DBI::dbFetchArrow()}}, \code{\link[DBI:dbFetchArrowChunk]{DBI::dbFetchArrowChunk()}}, \code{\link[DBI:dbClearResult]{DBI::dbClearResult()}},
+\code{\link[DBI:dbFetch]{DBI::dbFetchArrow()}}, \code{\link[DBI:dbFetch]{DBI::dbFetchArrowChunk()}}, \code{\link[DBI:dbClearResult]{DBI::dbClearResult()}},
 \code{\link[DBI:dbBind]{DBI::dbBind()}}, \code{\link[DBI:dbColumnInfo]{DBI::dbColumnInfo()}}, \code{\link[DBI:dbGetRowsAffected]{DBI::dbGetRowsAffected()}},
 \code{\link[DBI:dbGetRowCount]{DBI::dbGetRowCount()}}, \code{\link[DBI:dbHasCompleted]{DBI::dbHasCompleted()}}, and \code{\link[DBI:dbGetStatement]{DBI::dbGetStatement()}}.
 }
