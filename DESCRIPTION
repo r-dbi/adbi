@@ -28,6 +28,8 @@ Suggests:
     withr,
     bit64,
     utils
+Config/Needs/website: 
+    r-dbi/dbitemplate
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1

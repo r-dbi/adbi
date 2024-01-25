@@ -1,8 +1,7 @@
 url: https://adbi.r-dbi.org
 
 template:
-  params:
-    bootswatch: flatly # https://bootswatch.com/flatly/
+  package: dbitemplate
 
 home:
   links:
@@ -13,10 +12,6 @@ home:
 
 development:
   mode: auto
-
-authors:
-  Nicolas Bennett:
-    href: https://github.com/nbenn
 
 news:
   cran_dates: false
