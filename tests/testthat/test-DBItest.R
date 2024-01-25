@@ -52,6 +52,7 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
 
       if (getRversion() < "4.0") {
         c(
+          "column_info",
           "column_info_consistent_keywords",
           "column_info_consistent_unnamed",
           "column_info_consistent",
