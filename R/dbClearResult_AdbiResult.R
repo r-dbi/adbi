@@ -10,7 +10,7 @@ dbClearResult_AdbiResult <- function(res, ...) {
 
   if (adbc_statement_is_valid(res@statement)) {
 
-    adbcdrivermanager::adbc_statement_release(res@statement)
+    adbc_release(res@statement)
 
   } else {
 

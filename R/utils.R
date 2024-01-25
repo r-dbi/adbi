@@ -86,3 +86,18 @@ db_data_type_blob <- function(drv) {
     )
   }
 }
+
+adbc_release <- function(x, type = c("statement", "connection", "database")) {
+
+  fun <- switch(
+    match.arg(type),
+    statement = adbcdrivermanager::adbc_statement_release,
+    connection = adbcdrivermanager::adbc_connection_release,
+    database = adbcdrivermanager::adbc_database_release
+  )
+
+  tryCatch(
+    fun(x),
+    error = function(e) message(conditionMessage(e))
+  )
+}

@@ -30,7 +30,7 @@ dbDisconnect_AdbiConnection <- function(conn,
 
   if (adbc_connection_is_valid(conn@connection)) {
 
-    adbcdrivermanager::adbc_connection_release(conn@connection)
+    adbc_release(conn@connection, "connection")
 
   } else {
 
@@ -39,7 +39,7 @@ dbDisconnect_AdbiConnection <- function(conn,
 
   if (adbc_database_is_valid(conn@database)) {
 
-    adbcdrivermanager::adbc_database_release(conn@database)
+    adbc_release(conn@database, "database")
 
   } else {
 

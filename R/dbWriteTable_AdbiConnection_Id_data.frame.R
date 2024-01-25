@@ -111,7 +111,7 @@ dbWriteTable_AdbiConnection_Id_data.frame <- function(conn, name, value,
     adbc.ingest.temporary = if (temporary) "true"
   )
 
-  on.exit(adbcdrivermanager::adbc_statement_release(stmt))
+  on.exit(adbc_release(stmt))
 
   value <- sqlRownamesToColumn(value, row.names)
 

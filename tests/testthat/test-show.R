@@ -9,7 +9,7 @@ test_that("show methods print", {
   expect_output(show(drv))
 
   con <- dbConnect(drv, uri = ":memory:")
-  withr::defer(dbDisconnect(con), priority = "last")
+  withr::defer(dbDisconnect(con))
 
   expect_output(show(con))
 
