@@ -95,7 +95,6 @@ Collate:
     'dbWriteTable_AdbiConnection_SQL_data.frame.R'
     'dbWriteTable_AdbiConnection_character_data.frame.R'
     'export.R'
-    'nanoarrow.R'
     'show_AdbiConnection.R'
     'show_AdbiDriver.R'
     'show_AdbiResult.R'
