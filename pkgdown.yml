@@ -1,8 +1,8 @@
-pandoc: 2.19.2
+pandoc: 3.1.11
 pkgdown: 2.0.7.9000
-pkgdown_sha: 548a9493b72ff93d3ed8392d4ad30b77d8b15fa5
+pkgdown_sha: 3979e7c0afbba4503248dc8a6d04fe0a2e03f26f
 articles: {}
-last_built: 2024-01-25T17:14Z
+last_built: 2024-03-05T07:39Z
 urls:
   reference: https://adbi.r-dbi.org/reference
   article: https://adbi.r-dbi.org/articles
