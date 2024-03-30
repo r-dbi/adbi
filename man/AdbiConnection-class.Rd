@@ -49,10 +49,12 @@
 \alias{dbListTables,AdbiConnection-method}
 \alias{dbQuoteIdentifier_AdbiConnection_character}
 \alias{dbQuoteIdentifier,AdbiConnection,character-method}
+\alias{dbQuoteIdentifier,AdbiConnection,SQL-method}
 \alias{dbQuoteLiteral_AdbiConnection_character}
 \alias{dbQuoteLiteral,AdbiConnection,character-method}
 \alias{dbQuoteString_AdbiConnection_character}
 \alias{dbQuoteString,AdbiConnection,character-method}
+\alias{dbQuoteString,AdbiConnection,SQL-method}
 \alias{dbRemoveTable_AdbiConnection}
 \alias{dbRemoveTable,AdbiConnection,character-method}
 \alias{dbRemoveTable,AdbiConnection,Id-method}
@@ -98,9 +100,13 @@
 
 \S4method{dbQuoteIdentifier}{AdbiConnection,character}(conn, x, ...)
 
+\S4method{dbQuoteIdentifier}{AdbiConnection,SQL}(conn, x, ...)
+
 \S4method{dbQuoteLiteral}{AdbiConnection,character}(conn, x, ...)
 
 \S4method{dbQuoteString}{AdbiConnection,character}(conn, x, ...)
+
+\S4method{dbQuoteString}{AdbiConnection,SQL}(conn, x, ...)
 
 \S4method{dbRemoveTable}{AdbiConnection,character}(conn, name, ..., temporary = FALSE, fail_if_missing = TRUE)
 
