@@ -12,3 +12,11 @@ setMethod(
   c("AdbiConnection", "character"),
   dbQuoteIdentifier_AdbiConnection_character
 )
+
+#' @rdname AdbiConnection-class
+#' @export
+setMethod(
+  "dbQuoteIdentifier",
+  c("AdbiConnection", "SQL"),
+  dbQuoteIdentifier_AdbiConnection_character
+)
