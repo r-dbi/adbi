@@ -2,7 +2,7 @@ pandoc: 3.1.11
 pkgdown: 2.0.8.9000
 pkgdown_sha: 97d7abf5e7b2cbcedc78ab86eeaaec4dbe0cadf4
 articles: {}
-last_built: 2024-04-17T08:14Z
+last_built: 2024-04-17T08:26Z
 urls:
   reference: https://adbi.r-dbi.org/reference
   article: https://adbi.r-dbi.org/articles
