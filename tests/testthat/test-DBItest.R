@@ -3,7 +3,6 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
 
   DBItest::test_all(
     skip = c(
-
       "package_name",
 
       # options(adbi.allow_multiple_results = FALSE)
