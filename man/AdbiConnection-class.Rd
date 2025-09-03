@@ -135,8 +135,8 @@
 \S4method{show}{AdbiConnection}(object)
 }
 \arguments{
-\item{conn}{A \linkS4class{DBIConnection} object, as returned by
-\code{\link[DBI:dbConnect]{dbConnect()}}.}
+\item{conn}{A \link[DBI:DBIConnection-class]{DBI::DBIConnection} object,
+as returned by \code{\link[DBI:dbConnect]{DBI::dbConnect()}}.}
 
 \item{name}{The table name, passed on to \code{\link[DBI:dbQuoteIdentifier]{dbQuoteIdentifier()}}. Options are:
 \itemize{
@@ -158,8 +158,8 @@ will be whatever the R identifier \code{"row.names"} maps to the DBMS (see
 \code{\link[DBI:make.db.names]{DBI::make.db.names()}}). If \code{NA} will add rows names if
 they are characters, otherwise will ignore.}
 
-\item{dbObj}{A object inheriting from \linkS4class{DBIDriver}
-or \linkS4class{DBIConnection}}
+\item{dbObj}{A object inheriting from \link[DBI:DBIDriver-class]{DBI::DBIDriver}
+or \link[DBI:DBIConnection-class]{DBI::DBIConnection}}
 
 \item{obj}{An R object whose SQL type we want to determine.}
 

@@ -3,7 +3,8 @@
 #' (default) or to simply inform about open results and mark the connection for
 #' finalization (which is triggered when the last open result is closed).
 #' @rdname dbConnect
-#' @inheritParams DBI::dbDisconnect
+#' @param conn A [DBI::DBIConnection][DBI::DBIConnection-class] object,
+#'   as returned by [DBI::dbConnect()].
 #' @param force Close open results when disconnecting
 #' @usage NULL
 dbDisconnect_AdbiConnection <- function(conn,

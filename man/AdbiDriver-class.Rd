@@ -23,8 +23,8 @@
 \S4method{show}{AdbiDriver}(object)
 }
 \arguments{
-\item{dbObj}{A object inheriting from \linkS4class{DBIDriver}
-or \linkS4class{DBIConnection}}
+\item{dbObj}{A object inheriting from \link[DBI:DBIDriver-class]{DBI::DBIDriver}
+or \link[DBI:DBIConnection-class]{DBI::DBIConnection}}
 
 \item{obj}{An R object whose SQL type we want to determine.}
 

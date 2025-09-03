@@ -20,8 +20,9 @@ adbi(driver = NA_character_)
 arguments) to give an \code{\link[adbcdrivermanager:adbc_driver_void]{adbcdrivermanager::adbc_driver()}}. See Details for
 more information.}
 
-\item{drv}{an object that inherits from \linkS4class{DBIDriver},
-or an existing \linkS4class{DBIConnection}
+\item{drv}{An object that inherits from
+\link[DBI:DBIDriver-class]{DBI::DBIDriver},
+or an existing \link[DBI:DBIConnection-class]{DBI::DBIConnection}
 object (in order to clone an existing connection).}
 
 \item{...}{Extra arguments passed to \code{\link[DBI:dbConnect]{DBI::dbConnect()}} are forwarded to
@@ -31,8 +32,8 @@ object (in order to clone an existing connection).}
 default is \link[bit64:bit64-package]{bit64::integer64}, if bit64 is installed and \code{character}
 otherwise}
 
-\item{conn}{A \linkS4class{DBIConnection} object, as returned by
-\code{\link[DBI:dbConnect]{dbConnect()}}.}
+\item{conn}{A \link[DBI:DBIConnection-class]{DBI::DBIConnection} object,
+as returned by \code{\link[DBI:dbConnect]{DBI::dbConnect()}}.}
 
 \item{force}{Close open results when disconnecting}
 }

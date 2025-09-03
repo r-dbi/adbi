@@ -11,6 +11,8 @@
 #'
 #' @rdname dbFetch
 #' @inheritParams DBI::dbFetch
+#' @param res An object inheriting from [DBI::DBIResult][DBI::DBIResult-class],
+#'   created by [DBI::dbSendQuery()].
 #' @examples
 #' if (requireNamespace("adbcsqlite")) {
 #'   library(DBI)

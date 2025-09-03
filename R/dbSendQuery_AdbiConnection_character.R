@@ -15,6 +15,9 @@
 #'
 #' @seealso adbi-driver
 #' @rdname dbSendQuery
+#' @param conn A [DBI::DBIConnection][DBI::DBIConnection-class] object,
+#'   as returned by [DBI::dbConnect()].
+#' @param statement a character string containing SQL.
 #' @param params Optional query parameters (forwarded to [DBI::dbBind()])
 #' @param immediate Passing a value `TRUE` is intended for statements containing
 #'   no placeholders and `FALSE` otherwise. The default value `NULL` will

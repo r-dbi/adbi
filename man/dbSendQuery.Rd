@@ -39,8 +39,8 @@
 )
 }
 \arguments{
-\item{conn}{A \linkS4class{DBIConnection} object, as returned by
-\code{\link[DBI:dbConnect]{dbConnect()}}.}
+\item{conn}{A \link[DBI:DBIConnection-class]{DBI::DBIConnection} object,
+as returned by \code{\link[DBI:dbConnect]{DBI::dbConnect()}}.}
 
 \item{statement}{a character string containing SQL.}
 
