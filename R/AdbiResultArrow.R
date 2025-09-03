@@ -20,8 +20,8 @@ AdbiResultArrow <- function(connection, statement, immediate = NULL,
 #'
 #' AdbiResultArrow objects are created by [DBI::dbSendQueryArrow()], and
 #' encapsulate the result of an SQL query (a `SELECT` statement). They are a
-#' superclass of the [DBIResultArrow-class] class. The "Usage" section lists
-#' the class methods overridden by \pkg{adbi}.
+#' superclass of the [DBI::DBIResultArrow-class] class. The "Usage" section
+#' lists the class methods overridden by \pkg{adbi}.
 #'
 #' @seealso
 #' The corresponding generic functions

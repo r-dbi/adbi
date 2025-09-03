@@ -24,7 +24,7 @@ more information.}
 or an existing \linkS4class{DBIConnection}
 object (in order to clone an existing connection).}
 
-\item{...}{Extra arguments passed to \code{\link[=dbConnect]{dbConnect()}} are forwarded to
+\item{...}{Extra arguments passed to \code{\link[DBI:dbConnect]{DBI::dbConnect()}} are forwarded to
 \code{\link[adbcdrivermanager:adbc_database_init]{adbcdrivermanager::adbc_database_init()}}}
 
 \item{bigint}{The R type that 64-bit integer types should be mapped to,
@@ -38,8 +38,8 @@ otherwise}
 }
 \value{
 A connection object (S4 class \code{AdbiCOnnection}, inheriting from
-\linkS4class{DBIConnection}) is returned by \code{\link[=dbConnect]{dbConnect()}}, while
-\code{\link[=dbDisconnect]{dbDisconnect()}} returns \code{TRUE} invisibly.
+\link[DBI:DBIConnection-class]{DBI::DBIConnection}) is returned by \code{\link[DBI:dbConnect]{DBI::dbConnect()}}, while
+\code{\link[DBI:dbDisconnect]{DBI::dbDisconnect()}} returns \code{TRUE} invisibly.
 }
 \description{
 In order to open a database connection, \code{\link[DBI:dbConnect]{DBI::dbConnect()}} dispatches on a

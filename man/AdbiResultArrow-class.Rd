@@ -78,8 +78,8 @@ or a \linkS4class{DBIResult}}
 \description{
 AdbiResultArrow objects are created by \code{\link[DBI:dbSendQueryArrow]{DBI::dbSendQueryArrow()}}, and
 encapsulate the result of an SQL query (a \code{SELECT} statement). They are a
-superclass of the \linkS4class{DBIResultArrow} class. The "Usage" section lists
-the class methods overridden by \pkg{adbi}.
+superclass of the \link[DBI:DBIResultArrow-class]{DBI::DBIResultArrow} class. The "Usage" section
+lists the class methods overridden by \pkg{adbi}.
 }
 \seealso{
 The corresponding generic functions

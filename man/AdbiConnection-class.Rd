@@ -163,12 +163,13 @@ or \linkS4class{DBIConnection}}
 
 \item{obj}{An R object whose SQL type we want to determine.}
 
-\item{x}{A character vector, \link[DBI]{SQL} or \link[DBI]{Id} object to quote as identifier.}
+\item{x}{A character vector, \link[DBI:SQL]{DBI::SQL} or \link[DBI:Id]{DBI::Id} object to quote as
+identifier.}
 
 \item{temporary}{a logical specifying whether the new table should be
 temporary. Its default is \code{FALSE}.}
 
-\item{fail_if_missing}{If \code{FALSE}, \code{dbRemoveTable()} succeeds if the
+\item{fail_if_missing}{If \code{FALSE}, \code{\link[DBI:dbRemoveTable]{DBI::dbRemoveTable()}} succeeds if the
 table doesn't exist.}
 
 \item{overwrite}{Allow overwriting the destination table. Cannot be
@@ -186,8 +187,8 @@ with \code{\link[DBI:dbDataType]{DBI::dbDataType()}}).}
 \description{
 AdbiConnection objects are created by passing \code{\link[=adbi]{adbi()}} as first
 argument to \code{\link[DBI:dbConnect]{DBI::dbConnect()}}. They are a superclass of the
-\linkS4class{DBIConnection} class. The "Usage" section lists the class methods
-overridden by \pkg{adbi}.
+\link[DBI:DBIConnection-class]{DBI::DBIConnection} class. The "Usage" section lists the class
+methods overridden by \pkg{adbi}.
 }
 \seealso{
 The corresponding generic functions

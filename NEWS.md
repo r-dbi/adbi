@@ -1,3 +1,7 @@
+# adbi 0.1.2 (2024-09-03)
+
+- Docs only update
+
 # adbi 0.1.1 (2024-01-25)
 
 - Update for adbcdrivermanager 0.9.0.1
