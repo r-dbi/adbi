@@ -35,7 +35,7 @@ or \linkS4class{DBIConnection}}
 \description{
 AdbiDriver objects are created by \code{\link[=adbi]{adbi()}}, and used to select the
 correct method in \code{\link[=dbConnect]{dbConnect()}}. They are a superclass of the
-\linkS4class{DBIDriver} class, and used purely for dispatch.
+\link[DBI:DBIDriver-class]{DBI::DBIDriver} class, and used purely for dispatch.
 The "Usage" section lists the class methods overridden by \pkg{adbi}.
 }
 \keyword{internal}
