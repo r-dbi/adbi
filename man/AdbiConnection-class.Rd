@@ -186,7 +186,7 @@ with \code{\link[DBI:dbDataType]{DBI::dbDataType()}}).}
 \description{
 AdbiConnection objects are created by passing \code{\link[=adbi]{adbi()}} as first
 argument to \code{\link[DBI:dbConnect]{DBI::dbConnect()}}. They are a superclass of the
-\linkS4class{DBIConnection} class. The "Usage" section lists the class methods
+\link[DBI:DBIConnection-class]{DBI::DBIConnection} class. The "Usage" section lists the class methods
 overridden by \pkg{adbi}.
 }
 \seealso{
