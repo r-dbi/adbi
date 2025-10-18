@@ -46,7 +46,7 @@
 
 \item{...}{Other parameters passed on to methods.}
 
-\item{params}{Optional query parameters (forwarded to \code{\link[=dbBind]{dbBind()}})}
+\item{params}{Optional query parameters (forwarded to \code{\link[DBI:dbBind]{DBI::dbBind()}})}
 
 \item{immediate}{Passing a value \code{TRUE} is intended for statements containing
 no placeholders and \code{FALSE} otherwise. The default value \code{NULL} will
@@ -57,11 +57,11 @@ statement)}
 default is chosen according to the connection setting}
 }
 \value{
-An S4 class \code{AdbiResult} (inheriting from \linkS4class{DBIResult}).
+An S4 class \code{AdbiResult} (inheriting from \link[DBI:DBIResult-class]{DBI::DBIResult}).
 }
 \description{
 Creating result sets using \code{\link[=dbSendQuery]{dbSendQuery()}} (and by extension using
-\code{\link[=dbGetQuery]{dbGetQuery()}}) mostly follows DBI specification. One way where adbi
+\code{\link[DBI:dbGetQuery]{DBI::dbGetQuery()}}) mostly follows DBI specification. One way where adbi
 deviates from DBI mechanisms is how the \code{bigint} setting is not only per
 connection, but the per-connection setting can be overridden on a result
 set basis. As default, the connection setting is applied, but passing one
