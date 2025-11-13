@@ -2,11 +2,7 @@
 #' @inheritParams DBI::dbSendQueryArrow
 #' @usage NULL
 dbSendQueryArrow_AdbiConnection <- function(conn, statement, ...,
-    params = NULL, immediate = NULL, bigint = NULL) {
-
-  if (!is.null(params)) {
-    immediate <- FALSE
-  }
+    params = NULL, immediate = is.null(params), bigint = NULL) {
 
   res <- AdbiResultArrow(
     connection = conn,
