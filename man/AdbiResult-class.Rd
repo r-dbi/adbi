@@ -68,7 +68,7 @@ or a \linkS4class{DBIResult}}
 \description{
 AdbiResult objects are created by \code{\link[DBI:dbSendQuery]{DBI::dbSendQuery()}} or
 \code{\link[DBI:dbSendStatement]{DBI::dbSendStatement()}}, and encapsulate the result of an SQL statement
-(either \code{SELECT} or not). They are a superclass of the \linkS4class{DBIResult}
+(either \code{SELECT} or not). They are a superclass of the \link[DBI:DBIResult-class]{DBI::DBIResult}
 class. The "Usage" section lists the class methods overridden by
 \pkg{adbi}.
 }
