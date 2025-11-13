@@ -106,7 +106,7 @@ new_result <- function(statement, immediate, prepared, type, sql,
 #'
 #' AdbiResult objects are created by [DBI::dbSendQuery()] or
 #' [DBI::dbSendStatement()], and encapsulate the result of an SQL statement
-#' (either `SELECT` or not). They are a superclass of the [DBIResult-class]
+#' (either `SELECT` or not). They are a superclass of the [DBI::DBIResult-class]
 #' class. The "Usage" section lists the class methods overridden by
 #' \pkg{adbi}.
 #'

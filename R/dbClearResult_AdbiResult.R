@@ -1,4 +1,5 @@
 #' @rdname AdbiResult-class
+#' @param res An object inheriting from [DBI::DBIResult][DBI::DBIResult-class].
 #' @inheritParams DBI::dbClearResult
 #' @usage NULL
 dbClearResult_AdbiResult <- function(res, ...) {

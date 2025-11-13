@@ -8,8 +8,8 @@
 \S4method{dbFetch}{AdbiResult}(res, n = -1, ...)
 }
 \arguments{
-\item{res}{An object inheriting from \linkS4class{DBIResult}, created by
-\code{\link[DBI:dbSendQuery]{dbSendQuery()}}.}
+\item{res}{An object inheriting from \link[DBI:DBIResult-class]{DBI::DBIResult},
+created by \code{\link[DBI:dbSendQuery]{DBI::dbSendQuery()}}.}
 
 \item{n}{maximum number of records to retrieve per fetch. Use \code{n = -1}
 or \code{n = Inf}
@@ -20,16 +20,17 @@ special values.}
 }
 \value{
 A \code{data.frame} with the requested number of rows (or zero rows if
-\code{\link[=dbFetch]{dbFetch()}} is called on a result set with no more remaining rows).
+\code{\link[DBI:dbFetch]{DBI::dbFetch()}} is called on a result set with no more remaining rows).
 }
 \description{
-When fetching results using \code{\link[=dbFetch]{dbFetch()}}, the argument \code{n} can be specified
-to control chunk size per fetching operation. The default value of \code{-1}
-corresponds to retrieving the entire result set at once, while a positive
-integer will try returning as many rows (as long as \code{n} does not exceed the
-available number of rows), in line with standard DBI expectations. As data
-transfer is mediated by Arrow data structures, which are retrieved as array
-chunks, the underlying chunk size can be used by passing an \code{n} value \code{NA}.
+When fetching results using \code{\link[DBI:dbFetch]{DBI::dbFetch()}}, the argument \code{n} can be
+specified to control chunk size per fetching operation. The default value of
+\code{-1} corresponds to retrieving the entire result set at once, while a
+positive integer will try returning as many rows (as long as \code{n} does not
+exceed the available number of rows), in line with standard DBI
+expectations. As data transfer is mediated by Arrow data structures, which
+are retrieved as array chunks, the underlying chunk size can be used by
+passing an \code{n} value \code{NA}.
 }
 \examples{
 if (requireNamespace("adbcsqlite")) {
