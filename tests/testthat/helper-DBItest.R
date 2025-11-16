@@ -2,8 +2,10 @@ DBItest::make_context(
   adbi::adbi("adbcsqlite"),
   list(
     uri = tempfile("DBItest", fileext = ".sqlite"),
-    rows_affected_callback = function() function(x) {
-      if (x == -1) testthat::skip("unknown number of `rows_affected`") else x
+    rows_affected_callback = function() {
+      function(x) {
+        if (x == -1) testthat::skip("unknown number of `rows_affected`") else x
+      }
     }
   ),
   tweaks = suppressWarnings(

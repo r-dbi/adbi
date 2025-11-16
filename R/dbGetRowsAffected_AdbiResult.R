@@ -2,7 +2,6 @@
 #' @inheritParams DBI::dbGetRowsAffected
 #' @usage NULL
 dbGetRowsAffected_AdbiResult <- function(res, ...) {
-
   if (!dbIsValid(res)) {
     stop("Cannot return row count for invalid results.", call. = FALSE)
   }

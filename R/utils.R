@@ -8,9 +8,7 @@ meta <- function(x, key) {
 }
 
 adbc_is_valid <- function(x, class) {
-
   if (inherits(x, class)) {
-
     res <- try(adbcdrivermanager::adbc_xptr_is_valid(x), silent = TRUE)
 
     if (!inherits(res, "try-error")) {
@@ -22,10 +20,10 @@ adbc_is_valid <- function(x, class) {
 }
 
 register_result <- function(con, res) {
-
-  if (!isTRUE(getOption("adbi.allow_multiple_results", TRUE)) &&
-    length(meta(con, "results"))) {
-
+  if (
+    !isTRUE(getOption("adbi.allow_multiple_results", TRUE)) &&
+      length(meta(con, "results"))
+  ) {
     warning(
       "Open result(s) already exists for this connection and will be ",
       "closed. To enable multiple open results, set ",
@@ -43,7 +41,6 @@ register_result <- function(con, res) {
 }
 
 clear_results <- function(con) {
-
   for (res in meta(con, "results")) {
     dbClearResult(res)
   }
@@ -54,7 +51,6 @@ clear_results <- function(con) {
 }
 
 rm_result <- function(res) {
-
   id <- meta(res, "id")
 
   con <- meta(res, "con")
@@ -73,7 +69,6 @@ split_rows <- function(x) {
 }
 
 db_data_type_blob <- function(drv) {
-
   if (inherits(drv, "adbcsqlite_driver_sqlite")) {
     "BLOB"
   } else if (inherits(drv, "adbcpostgresql_driver_postgresql")) {
@@ -88,7 +83,6 @@ db_data_type_blob <- function(drv) {
 }
 
 adbc_release <- function(x, type = c("statement", "connection", "database")) {
-
   fun <- switch(
     match.arg(type),
     statement = adbcdrivermanager::adbc_statement_release,

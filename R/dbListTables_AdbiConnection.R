@@ -2,7 +2,6 @@
 #' @inheritParams DBI::dbListTables
 #' @usage NULL
 dbListTables_AdbiConnection <- function(conn, ...) {
-
   if (!dbIsValid(conn)) {
     stop("Invalid connection.", call. = FALSE)
   }
@@ -15,7 +14,6 @@ dbListTables_AdbiConnection <- function(conn, ...) {
 setMethod("dbListTables", "AdbiConnection", dbListTables_AdbiConnection)
 
 process_fields <- function(x, dat, what) {
-
   stopifnot(identical(what, "field"))
 
   res <- x[, c("column_name", "xdbc_type_name")]
@@ -28,7 +26,6 @@ process_fields <- function(x, dat, what) {
 }
 
 process_tables <- function(x, dat, what) {
-
   res <- x[, c("table_name", "table_type")]
 
   if (!nrow(res)) {
@@ -52,7 +49,6 @@ process_tables <- function(x, dat, what) {
 }
 
 process_schemas <- function(x, dat, what) {
-
   res <- x[, c("db_schema_name"), drop = FALSE]
 
   if (!nrow(res)) {
@@ -76,7 +72,6 @@ process_schemas <- function(x, dat, what) {
 }
 
 process_catalogs <- function(x, what) {
-
   res <- x[, c("catalog_name"), drop = FALSE]
 
   if (identical(what, "catalog")) {
@@ -93,12 +88,13 @@ process_catalogs <- function(x, what) {
   do.call(rbind, res)
 }
 
-get_schema_objects <- function(con,
-    what = c("catalog", "schema", "table", "field"),
-    catalog = NULL,
-    schema = NULL,
-    table = NULL) {
-
+get_schema_objects <- function(
+  con,
+  what = c("catalog", "schema", "table", "field"),
+  catalog = NULL,
+  schema = NULL,
+  table = NULL
+) {
   what <- match.arg(what)
 
   nfo <- adbcdrivermanager::adbc_connection_get_objects(

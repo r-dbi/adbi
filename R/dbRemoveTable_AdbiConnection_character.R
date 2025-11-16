@@ -3,9 +3,13 @@
 #'   table doesn't exist.
 #' @inheritParams DBI::dbRemoveTable
 #' @usage NULL
-dbRemoveTable_AdbiConnection <- function(conn, name, ..., temporary = FALSE,
-                                         fail_if_missing = TRUE) {
-
+dbRemoveTable_AdbiConnection <- function(
+  conn,
+  name,
+  ...,
+  temporary = FALSE,
+  fail_if_missing = TRUE
+) {
   name <- dbQuoteIdentifier(conn, name)
 
   sql <- paste0(

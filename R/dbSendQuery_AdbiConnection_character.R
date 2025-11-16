@@ -42,9 +42,14 @@
 #' }
 #' @return An S4 class `AdbiResult` (inheriting from [DBI::DBIResult-class]).
 #' @usage NULL
-dbSendQuery_AdbiConnection_character <- function(conn, statement, ...,
-    params = NULL, immediate = NULL, bigint = NULL) {
-
+dbSendQuery_AdbiConnection_character <- function(
+  conn,
+  statement,
+  ...,
+  params = NULL,
+  immediate = NULL,
+  bigint = NULL
+) {
   if (!is.null(params)) {
     immediate <- FALSE
   }

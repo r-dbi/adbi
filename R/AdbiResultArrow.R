@@ -1,10 +1,14 @@
 #' @include AdbiConnection.R
 NULL
 
-AdbiResultArrow <- function(connection, statement, immediate = NULL,
-                            type = c("query", "statement"), bigint = NULL,
-                            rows_affected_callback = identity) {
-
+AdbiResultArrow <- function(
+  connection,
+  statement,
+  immediate = NULL,
+  type = c("query", "statement"),
+  bigint = NULL,
+  rows_affected_callback = identity
+) {
   init_result(
     connection = connection,
     statement = statement,

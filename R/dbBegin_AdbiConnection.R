@@ -4,7 +4,6 @@
 #' @inheritParams DBI::dbBegin
 #' @usage NULL
 dbBegin_AdbiConnection <- function(conn, ...) {
-
   if (...length()) {
     stop("Passing arguments as `...` is not supported", call. = FALSE)
   }

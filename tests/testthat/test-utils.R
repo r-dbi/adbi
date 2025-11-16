@@ -1,5 +1,4 @@
 test_that("dbDataType for blob", {
-
   expect_identical(
     db_data_type_blob(
       structure(list(), class = "adbcsqlite_driver_sqlite")

@@ -29,32 +29,22 @@ NULL
 #'   adbi("adbcsqlite")
 #' }
 adbi <- function(driver = NA_character_) {
-
   if (inherits(driver, "adbc_driver")) {
     return(new("AdbiDriver", driver = driver))
   }
 
   if (is.function(driver)) {
-
     drv_obj <- driver()
-
   } else {
-
     if (is.na(driver)) {
-
       pkg <- "adbcdrivermanager"
       fun <- "adbc_driver_monkey"
-
     } else {
-
       driver <- strsplit(driver, "::", fixed = TRUE)[[1L]]
 
       if (length(driver) == 1L) {
-
         pkg <- fun <- driver
-
       } else {
-
         stopifnot(length(driver) == 2L)
 
         pkg <- driver[1L]

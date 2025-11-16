@@ -1,9 +1,14 @@
 #' @rdname dbSendQuery
 #' @inheritParams DBI::dbSendStatement
 #' @usage NULL
-dbSendStatement_AdbiConnection_character <- function(conn, statement, ...,
-    params = NULL, immediate = NULL, bigint = NULL) {
-
+dbSendStatement_AdbiConnection_character <- function(
+  conn,
+  statement,
+  ...,
+  params = NULL,
+  immediate = NULL,
+  bigint = NULL
+) {
   if (!is.null(params)) {
     immediate <- FALSE
   }

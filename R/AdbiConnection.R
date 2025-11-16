@@ -1,9 +1,12 @@
 #' @include AdbiDriver.R
 NULL
 
-AdbiConnection <- function(driver, ..., rows_affected_callback = identity,
-    bigint = NULL) {
-
+AdbiConnection <- function(
+  driver,
+  ...,
+  rows_affected_callback = identity,
+  bigint = NULL
+) {
   db <- adbcdrivermanager::adbc_database_init(driver@driver, ...)
 
   meta <- list(
@@ -58,16 +61,16 @@ bigint_opts <- c(
 )
 
 resolve_bigint <- function(x) {
-
   if (is.null(x)) {
     x <- "integer-strict"
   }
 
   res <- match.arg(x, bigint_opts)
 
-  if (identical(res, "integer64") &&
-    !requireNamespace("bit64", quietly = TRUE)) {
-
+  if (
+    identical(res, "integer64") &&
+      !requireNamespace("bit64", quietly = TRUE)
+  ) {
     stop("Need to install bit64.", call. = FALSE)
   }
 

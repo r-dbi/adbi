@@ -2,7 +2,6 @@
 #' @inheritParams DBI::dbFetch
 #' @usage NULL
 dbFetchArrowChunk_AdbiResultArrow <- function(res, ...) {
-
   check_statement_bound(res)
 
   if (identical(meta(res, "type"), "statement")) {

@@ -2,7 +2,6 @@
 #' @inheritParams DBI::dbListFields
 #' @usage NULL
 dbListFields_AdbiConnection_Id <- function(conn, name, ...) {
-
   if (!dbIsValid(conn)) {
     stop("Invalid connection.", call. = FALSE)
   }
@@ -20,7 +19,9 @@ dbListFields_AdbiConnection_Id <- function(conn, name, ...) {
   if (!all(names(name) %in% c("catalog", "schema", "table"))) {
     stop(
       "Expecting Id components \"catalog\", \"schema\", and \"table\", ",
-      "not ", paste0("\"", names(name), "\"", collapse = ", "), ".",
+      "not ",
+      paste0("\"", names(name), "\"", collapse = ", "),
+      ".",
       call. = FALSE
     )
   }

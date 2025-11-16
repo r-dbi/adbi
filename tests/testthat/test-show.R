@@ -1,5 +1,4 @@
 test_that("show methods print", {
-
   expect_output(show(adbi()))
 
   skip_if_not_installed("adbcsqlite")

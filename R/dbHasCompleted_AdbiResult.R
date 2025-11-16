@@ -2,7 +2,6 @@
 #' @inheritParams DBI::dbHasCompleted
 #' @usage NULL
 dbHasCompleted_AdbiResult <- function(res, ...) {
-
   if (!dbIsValid(res)) {
     stop("Cannot return statement of invalid result.", call. = FALSE)
   }

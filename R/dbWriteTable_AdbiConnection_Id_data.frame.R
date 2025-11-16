@@ -15,10 +15,17 @@
 #' @param temporary a logical specifying whether the new table should be
 #'   temporary. Its default is `FALSE`.
 #' @usage NULL
-dbWriteTable_AdbiConnection_Id_data.frame <- function(conn, name, value,
-    overwrite = FALSE, append = FALSE, ..., field.types = NULL,
-    row.names = NULL, temporary = FALSE) {
-
+dbWriteTable_AdbiConnection_Id_data.frame <- function(
+  conn,
+  name,
+  value,
+  overwrite = FALSE,
+  append = FALSE,
+  ...,
+  field.types = NULL,
+  row.names = NULL,
+  temporary = FALSE
+) {
   if (!dbIsValid(conn)) {
     stop("Invalid connection.", call. = FALSE)
   }
@@ -27,9 +34,10 @@ dbWriteTable_AdbiConnection_Id_data.frame <- function(conn, name, value,
     row.names <- FALSE
   }
 
-  if ((!is.logical(row.names) && !is.character(row.names)) ||
-    length(row.names) != 1L) {
-
+  if (
+    (!is.logical(row.names) && !is.character(row.names)) ||
+      length(row.names) != 1L
+  ) {
     stop(
       "Argument `row.names` must be a logical scalar or a string",
       call. = FALSE
@@ -71,7 +79,9 @@ dbWriteTable_AdbiConnection_Id_data.frame <- function(conn, name, value,
   if (!all(names(table) %in% c("catalog", "schema", "table"))) {
     stop(
       "Expecting Id components \"catalog\", \"schema\", and \"table\", ",
-      "not ", paste0("\"", names(table), "\"", collapse = ", "), ".",
+      "not ",
+      paste0("\"", names(table), "\"", collapse = ", "),
+      ".",
       call. = FALSE
     )
   }

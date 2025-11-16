@@ -2,7 +2,6 @@
 #' @inheritParams DBI::dbFetch
 #' @usage NULL
 dbFetchArrow_AdbiResultArrow <- function(res, ...) {
-
   check_statement_bound(res)
 
   if (identical(meta(res, "type"), "statement")) {
@@ -16,9 +15,10 @@ dbFetchArrow_AdbiResultArrow <- function(res, ...) {
 
   ret <- collect_array_stream(res)
 
-  meta(res, "row_count") <- meta(res, "row_count") + sum(
-    vapply(ret, `[[`, integer(1L), "length")
-  )
+  meta(res, "row_count") <- meta(res, "row_count") +
+    sum(
+      vapply(ret, `[[`, integer(1L), "length")
+    )
 
   nanoarrow::basic_array_stream(ret, validate = FALSE)
 }

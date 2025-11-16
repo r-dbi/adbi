@@ -1,7 +1,12 @@
 #' @rdname AdbiConnection-class
 #' @inheritParams DBI::dbWriteTable
 #' @usage NULL
-dbWriteTable_AdbiConnection_character_data.frame <- function(conn, name, value, ...) {
+dbWriteTable_AdbiConnection_character_data.frame <- function(
+  conn,
+  name,
+  value,
+  ...
+) {
   dbWriteTable(conn, Id(table = name), value, ...)
 }
 
