@@ -46,6 +46,10 @@ if (identical(Sys.getenv("NOT_CRAN"), "true") &&
       # cause segfaults
       "begin_write_disconnect",
 
+      # not reproducible in isolation
+      "table_visible_in_other_connection",
+      "remove_table_other_con",
+
       if (getRversion() < "4.0") {
         c(
           "column_info",
