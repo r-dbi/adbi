@@ -1,4 +1,6 @@
 #' @rdname AdbiConnection-class
+#' @param conn A [DBI::DBIConnection][DBI::DBIConnection-class] object,
+#'   as returned by [DBI::dbConnect()].
 #' @inheritParams DBI::dbBegin
 #' @usage NULL
 dbBegin_AdbiConnection <- function(conn, ...) {

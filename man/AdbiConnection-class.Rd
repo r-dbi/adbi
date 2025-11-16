@@ -135,8 +135,8 @@
 \S4method{show}{AdbiConnection}(object)
 }
 \arguments{
-\item{conn}{A \linkS4class{DBIConnection} object, as returned by
-\code{\link[DBI:dbConnect]{dbConnect()}}.}
+\item{conn}{A \link[DBI:DBIConnection-class]{DBI::DBIConnection} object,
+as returned by \code{\link[DBI:dbConnect]{DBI::dbConnect()}}.}
 
 \item{name}{The table name, passed on to \code{\link[DBI:dbQuoteIdentifier]{dbQuoteIdentifier()}}. Options are:
 \itemize{
@@ -158,17 +158,18 @@ will be whatever the R identifier \code{"row.names"} maps to the DBMS (see
 \code{\link[DBI:make.db.names]{DBI::make.db.names()}}). If \code{NA} will add rows names if
 they are characters, otherwise will ignore.}
 
-\item{dbObj}{A object inheriting from \linkS4class{DBIDriver}
-or \linkS4class{DBIConnection}}
+\item{dbObj}{A object inheriting from \link[DBI:DBIDriver-class]{DBI::DBIDriver}
+or \link[DBI:DBIConnection-class]{DBI::DBIConnection}}
 
 \item{obj}{An R object whose SQL type we want to determine.}
 
-\item{x}{A character vector, \link[DBI]{SQL} or \link[DBI]{Id} object to quote as identifier.}
+\item{x}{A character vector, \link[DBI:SQL]{DBI::SQL} or \link[DBI:Id]{DBI::Id} object to quote as
+identifier.}
 
 \item{temporary}{a logical specifying whether the new table should be
 temporary. Its default is \code{FALSE}.}
 
-\item{fail_if_missing}{If \code{FALSE}, \code{dbRemoveTable()} succeeds if the
+\item{fail_if_missing}{If \code{FALSE}, \code{\link[DBI:dbRemoveTable]{DBI::dbRemoveTable()}} succeeds if the
 table doesn't exist.}
 
 \item{overwrite}{Allow overwriting the destination table. Cannot be
@@ -186,8 +187,8 @@ with \code{\link[DBI:dbDataType]{DBI::dbDataType()}}).}
 \description{
 AdbiConnection objects are created by passing \code{\link[=adbi]{adbi()}} as first
 argument to \code{\link[DBI:dbConnect]{DBI::dbConnect()}}. They are a superclass of the
-\linkS4class{DBIConnection} class. The "Usage" section lists the class methods
-overridden by \pkg{adbi}.
+\link[DBI:DBIConnection-class]{DBI::DBIConnection} class. The "Usage" section lists the class
+methods overridden by \pkg{adbi}.
 }
 \seealso{
 The corresponding generic functions
