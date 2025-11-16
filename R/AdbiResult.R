@@ -1,10 +1,14 @@
 #' @include AdbiConnection.R
 NULL
 
-AdbiResult <- function(connection, statement, immediate = NULL,
-                       type = c("query", "statement"), bigint = NULL,
-                       rows_affected_callback = identity) {
-
+AdbiResult <- function(
+  connection,
+  statement,
+  immediate = NULL,
+  type = c("query", "statement"),
+  bigint = NULL,
+  rows_affected_callback = identity
+) {
   init_result(
     connection = connection,
     statement = statement,
@@ -16,16 +20,25 @@ AdbiResult <- function(connection, statement, immediate = NULL,
   )
 }
 
-init_result <- function(connection, statement, class, immediate = NULL,
-                        type = c("query", "statement"), bigint = NULL,
-                        rows_affected_callback = identity) {
-
-  if (!(is.null(immediate) || identical(immediate, TRUE) ||
-    identical(immediate, FALSE))) {
-
-    stop("Expecting `immediate` to be either `TRUE` or `FALSE` (or `NULL` ",
+init_result <- function(
+  connection,
+  statement,
+  class,
+  immediate = NULL,
+  type = c("query", "statement"),
+  bigint = NULL,
+  rows_affected_callback = identity
+) {
+  if (
+    !(is.null(immediate) ||
+      identical(immediate, TRUE) ||
+      identical(immediate, FALSE))
+  ) {
+    stop(
+      "Expecting `immediate` to be either `TRUE` or `FALSE` (or `NULL` ",
       "in which case the statement is inspected for placeholders)",
-      call. = FALSE)
+      call. = FALSE
+    )
   }
 
   if (!dbIsValid(connection)) {
@@ -46,7 +59,6 @@ init_result <- function(connection, statement, class, immediate = NULL,
   )
 
   if (is.null(immediate)) {
-
     adbcdrivermanager::adbc_statement_prepare(stmt)
     prepared <- TRUE
 
@@ -60,9 +72,7 @@ init_result <- function(connection, statement, class, immediate = NULL,
     } else {
       immediate <- TRUE
     }
-
   } else {
-
     prepared <- FALSE
     schema <- NULL
   }
@@ -71,8 +81,16 @@ init_result <- function(connection, statement, class, immediate = NULL,
     bigint <- connection@bigint
   }
 
-  res <- new_result(stmt, immediate, prepared, match.arg(type), statement,
-    class, bigint, rows_affected_callback)
+  res <- new_result(
+    stmt,
+    immediate,
+    prepared,
+    match.arg(type),
+    statement,
+    class,
+    bigint,
+    rows_affected_callback
+  )
 
   register_result(connection, res)
 
@@ -81,10 +99,16 @@ init_result <- function(connection, statement, class, immediate = NULL,
   res
 }
 
-new_result <- function(statement, immediate, prepared, type, sql,
-                       class = "AdbiResult", bigint = NULL,
-                       rows_affected_callback = identity) {
-
+new_result <- function(
+  statement,
+  immediate,
+  prepared,
+  type,
+  sql,
+  class = "AdbiResult",
+  bigint = NULL,
+  rows_affected_callback = identity
+) {
   meta <- list(
     immediate = immediate,
     prepared = prepared,
@@ -106,7 +130,7 @@ new_result <- function(statement, immediate, prepared, type, sql,
 #'
 #' AdbiResult objects are created by [DBI::dbSendQuery()] or
 #' [DBI::dbSendStatement()], and encapsulate the result of an SQL statement
-#' (either `SELECT` or not). They are a superclass of the [DBIResult-class]
+#' (either `SELECT` or not). They are a superclass of the [DBI::DBIResult-class]
 #' class. The "Usage" section lists the class methods overridden by
 #' \pkg{adbi}.
 #'

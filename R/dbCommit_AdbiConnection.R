@@ -2,7 +2,6 @@
 #' @inheritParams DBI::dbCommit
 #' @usage NULL
 dbCommit_AdbiConnection <- function(conn, ...) {
-
   if (...length()) {
     stop("Passing arguments as `...` is not supported", call. = FALSE)
   }
@@ -10,8 +9,10 @@ dbCommit_AdbiConnection <- function(conn, ...) {
   state <- meta(conn, "transaction")
 
   if (is.null(state) || state == 0L) {
-    stop("Cannot commit a transaction without transactional context.",
-      call. = FALSE)
+    stop(
+      "Cannot commit a transaction without transactional context.",
+      call. = FALSE
+    )
   }
 
   adbcdrivermanager::adbc_connection_commit(conn@connection)

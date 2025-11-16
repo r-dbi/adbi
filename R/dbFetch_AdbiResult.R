@@ -1,15 +1,18 @@
 #' Fetch result sets
 #'
-#' When fetching results using [dbFetch()], the argument `n` can be specified
-#' to control chunk size per fetching operation. The default value of `-1`
-#' corresponds to retrieving the entire result set at once, while a positive
-#' integer will try returning as many rows (as long as `n` does not exceed the
-#' available number of rows), in line with standard DBI expectations. As data
-#' transfer is mediated by Arrow data structures, which are retrieved as array
-#' chunks, the underlying chunk size can be used by passing an `n` value `NA`.
+#' When fetching results using [DBI::dbFetch()], the argument `n` can be
+#' specified to control chunk size per fetching operation. The default value of
+#' `-1` corresponds to retrieving the entire result set at once, while a
+#' positive integer will try returning as many rows (as long as `n` does not
+#' exceed the available number of rows), in line with standard DBI
+#' expectations. As data transfer is mediated by Arrow data structures, which
+#' are retrieved as array chunks, the underlying chunk size can be used by
+#' passing an `n` value `NA`.
 #'
 #' @rdname dbFetch
 #' @inheritParams DBI::dbFetch
+#' @param res An object inheriting from [DBI::DBIResult][DBI::DBIResult-class],
+#'   created by [DBI::dbSendQuery()].
 #' @examples
 #' if (requireNamespace("adbcsqlite")) {
 #'   library(DBI)
@@ -21,35 +24,21 @@
 #'   dbDisconnect(con)
 #' }
 #' @return A `data.frame` with the requested number of rows (or zero rows if
-#'   [dbFetch()] is called on a result set with no more remaining rows).
+#'   [DBI::dbFetch()] is called on a result set with no more remaining rows).
 #' @usage NULL
 dbFetch_AdbiResult <- function(res, n = -1, ...) {
-
   if (length(n) == 1L && !is.na(n) && !is.finite(n)) {
     n <- -1
   }
 
   if (!length(n) == 1L || !is.na(n) && (n < -1 || isTRUE(n != trunc(n)))) {
-
     stop(
       "Only scalar integer values >= -1 or `NA` are recognized.",
       call. = FALSE
     )
   }
 
-  if (isFALSE(meta(res, "immediate"))) {
-
-    n_bound <- meta(res, "bound")
-
-    if (is.null(n_bound) || n_bound < 1L) {
-
-      stop(
-        "A statement created with `immediate = FALSE` should be prepared ",
-        "before being executed, typically by a call to `dbBind()`.",
-        call. = FALSE
-      )
-    }
-  }
+  check_statement_bound(res)
 
   if (identical(meta(res, "type"), "statement")) {
     warning("Statements are not expected to return results.", call. = FALSE)
@@ -63,7 +52,6 @@ dbFetch_AdbiResult <- function(res, n = -1, ...) {
   rem <- meta(res, "remainder")
 
   if (isTRUE(n == -1)) {
-
     ret <- get_data_batch(res, "rest")
 
     if (!is.null(rem)) {
@@ -79,7 +67,6 @@ dbFetch_AdbiResult <- function(res, n = -1, ...) {
   }
 
   if (is.na(n)) {
-
     if (is.null(rem)) {
       ret <- get_data_batch(res, "next")
       meta(res, "row_count") <- meta(res, "row_count") + nrow(ret)
@@ -95,20 +82,16 @@ dbFetch_AdbiResult <- function(res, n = -1, ...) {
   }
 
   if (is.null(rem)) {
-
     if (is.null(meta(res, "ptyp"))) {
       meta(res, "ptyp") <- arrow_ptype(res)
     }
 
     ret <- as_data_frame(meta(res, "ptyp"), res@bigint)
-
   } else {
-
     ret <- rem
   }
 
   while (nrow(ret) < n) {
-
     nxt <- get_data_batch(res, "next")
     ret <- rbind(ret, nxt)
 
@@ -118,7 +101,6 @@ dbFetch_AdbiResult <- function(res, n = -1, ...) {
   }
 
   if (nrow(ret) <= n) {
-
     meta(res, "row_count") <- meta(res, "row_count") + nrow(ret)
     meta(res, "remainder") <- NULL
 
@@ -145,7 +127,6 @@ dbFetch_AdbiResult <- function(res, n = -1, ...) {
 setMethod("dbFetch", "AdbiResult", dbFetch_AdbiResult)
 
 execute_statement <- function(x) {
-
   stopifnot(
     is.null(meta(x, "data")),
     is.null(meta(x, "row_count"))
@@ -171,7 +152,6 @@ bigint_type <- function(x) {
 }
 
 bigint_mode <- function(x) {
-
   mode <- split_dash(x)[2L]
 
   if (is.na(mode)) {
@@ -182,7 +162,6 @@ bigint_mode <- function(x) {
 }
 
 converter_to <- function(to) {
-
   bint_ptype <- switch(
     bigint_type(to),
     integer = integer(),
@@ -193,7 +172,6 @@ converter_to <- function(to) {
   )
 
   function(schema, ptype) {
-
     if (!inherits(schema, "nanoarrow_schema")) {
       schema <- nanoarrow::infer_nanoarrow_schema(schema)
     }
@@ -211,16 +189,15 @@ converter_to <- function(to) {
 }
 
 conversion_warn_handler <- function(to) {
-
   if (getRversion() >= "4.0.0") {
-
-    restart_fun <- get("tryInvokeRestart", envir = getNamespace("base"),
-      mode = "function", inherits = FALSE)
-
+    restart_fun <- get(
+      "tryInvokeRestart",
+      envir = getNamespace("base"),
+      mode = "function",
+      inherits = FALSE
+    )
   } else {
-
     restart_fun <- function(r, ...) {
-
       if (!isRestart(r)) {
         r <- findRestart(r)
       }
@@ -255,7 +232,6 @@ conversion_warn_handler <- function(to) {
 }
 
 as_data_frame <- function(x, bigint) {
-
   to <- converter_to(bigint)
   warn <- conversion_warn_handler(bigint)
 
@@ -270,22 +246,16 @@ as_data_frame <- function(x, bigint) {
 }
 
 get_data_batch <- function(x, what = c("next", "rest")) {
-
   if (is.null(meta(x, "data"))) {
-
     res <- meta(x, "ptyp")
-
   } else if (identical(match.arg(what), "rest")) {
-
     meta(x, "ptyp") <- arrow_ptype(x)
 
     res <- meta(x, "data")
 
     meta(x, "data") <- NULL
     meta(x, "has_completed") <- TRUE
-
   } else {
-
     res <- get_next_batch(x)
   }
 
@@ -293,11 +263,8 @@ get_data_batch <- function(x, what = c("next", "rest")) {
 }
 
 get_next_batch <- function(x) {
-
   if (is.null(meta(x, "data"))) {
-
     if (!isTRUE(meta(x, "has_completed"))) {
-
       stop(
         "Result has been released but not marked as completed.",
         call. = FALSE
@@ -310,7 +277,6 @@ get_next_batch <- function(x) {
   res <- meta(x, "data")$get_next()
 
   if (is.null(res)) {
-
     meta(x, "ptyp") <- arrow_ptype(x)
     meta(x, "data")$release()
     meta(x, "data") <- NULL
@@ -323,7 +289,6 @@ get_next_batch <- function(x) {
 }
 
 arrow_ptype <- function(x) {
-
   if (is.null(meta(x, "data"))) {
     stop("Cannot infer ptype from released result.", call. = FALSE)
   }
@@ -334,11 +299,8 @@ arrow_ptype <- function(x) {
 }
 
 collect_array_stream <- function(x) {
-
   if (is.null(meta(x, "data"))) {
-
     if (!isTRUE(meta(x, "has_completed"))) {
-
       stop(
         "Result has been released but not marked as completed.",
         call. = FALSE

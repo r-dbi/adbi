@@ -2,7 +2,6 @@
 #' @inheritParams DBI::dbGetInfo
 #' @usage NULL
 dbGetInfo_AdbiConnection <- function(dbObj, ...) {
-
   if (!dbIsValid(dbObj)) {
     stop("Invalid connection", call. = FALSE)
   }

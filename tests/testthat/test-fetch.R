@@ -1,5 +1,4 @@
 test_that("fetch result with arbitrary chunk size", {
-
   res <- new_result("foo", TRUE, FALSE, "query", "")
   dat <- data.frame(x = 1:15)
 

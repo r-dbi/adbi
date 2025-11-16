@@ -2,7 +2,6 @@
 #' @inheritParams methods::show
 #' @usage NULL
 show_AdbiDriver <- function(object) {
-
   cat("<AdbiDriver>\n")
 
   if (dbIsValid(object)) {

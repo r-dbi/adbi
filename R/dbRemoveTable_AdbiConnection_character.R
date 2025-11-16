@@ -1,11 +1,15 @@
 #' @rdname AdbiConnection-class
-#' @param fail_if_missing If `FALSE`, `dbRemoveTable()` succeeds if the
+#' @param fail_if_missing If `FALSE`, [DBI::dbRemoveTable()] succeeds if the
 #'   table doesn't exist.
 #' @inheritParams DBI::dbRemoveTable
 #' @usage NULL
-dbRemoveTable_AdbiConnection <- function(conn, name, ..., temporary = FALSE,
-                                         fail_if_missing = TRUE) {
-
+dbRemoveTable_AdbiConnection <- function(
+  conn,
+  name,
+  ...,
+  temporary = FALSE,
+  fail_if_missing = TRUE
+) {
   name <- dbQuoteIdentifier(conn, name)
 
   sql <- paste0(

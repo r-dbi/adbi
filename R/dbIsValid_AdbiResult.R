@@ -1,4 +1,7 @@
 #' @rdname AdbiResult-class
+#' @param dbObj An object inheriting from [DBI::DBIObject-class],
+#'  i.e. [DBI::DBIDriver-class], [DBI::DBIConnection-class],
+#'  or a [DBI::DBIResult-class]
 #' @inheritParams DBI::dbIsValid
 #' @usage NULL
 dbIsValid_AdbiResult <- function(dbObj, ...) {
