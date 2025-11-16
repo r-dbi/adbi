@@ -23,12 +23,14 @@ Imports:
 Suggests: 
     testthat,
     covr,
-    DBItest (>= 1.8.0),
+    DBItest (>= 1.8.2.9008),
     adbcsqlite (>= 0.8.0),
     withr,
     bit64,
     utils,
     arrow
+Remotes: 
+    r-dbi/DBItest
 Config/Needs/website: 
     r-dbi/dbitemplate
 Encoding: UTF-8

@@ -101,3 +101,25 @@ adbc_release <- function(x, type = c("statement", "connection", "database")) {
     error = function(e) message(conditionMessage(e))
   )
 }
+
+is_statement_bound <- function(res) {
+  if (isFALSE(meta(res, "immediate"))) {
+    n_bound <- meta(res, "bound")
+
+    return(!is.null(n_bound) && n_bound >= 1L)
+  }
+
+  TRUE
+}
+
+check_statement_bound <- function(res) {
+  if (!is_statement_bound(res)) {
+    stop(
+      "A statement created with `immediate = FALSE` should be prepared ",
+      "before being executed, typically by a call to `dbBind()`.",
+      call. = FALSE
+    )
+  }
+
+  invisible(res)
+}

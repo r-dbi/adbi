@@ -40,19 +40,7 @@ dbFetch_AdbiResult <- function(res, n = -1, ...) {
     )
   }
 
-  if (isFALSE(meta(res, "immediate"))) {
-
-    n_bound <- meta(res, "bound")
-
-    if (is.null(n_bound) || n_bound < 1L) {
-
-      stop(
-        "A statement created with `immediate = FALSE` should be prepared ",
-        "before being executed, typically by a call to `dbBind()`.",
-        call. = FALSE
-      )
-    }
-  }
+  check_statement_bound(res)
 
   if (identical(meta(res, "type"), "statement")) {
     warning("Statements are not expected to return results.", call. = FALSE)
