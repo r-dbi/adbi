@@ -2,11 +2,7 @@
 #' @inheritParams DBI::dbSendStatement
 #' @usage NULL
 dbSendStatement_AdbiConnection_character <- function(conn, statement, ...,
-    params = NULL, immediate = NULL, bigint = NULL) {
-
-  if (!is.null(params)) {
-    immediate <- FALSE
-  }
+    params = NULL, immediate = is.null(params), bigint = NULL) {
 
   res <- AdbiResult(
     connection = conn,
