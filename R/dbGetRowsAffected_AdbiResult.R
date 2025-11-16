@@ -11,6 +11,10 @@ dbGetRowsAffected_AdbiResult <- function(res, ...) {
     return(0L)
   }
 
+  if (!is_statement_bound(res)) {
+    return(NA_integer_)
+  }
+
   if (is.null(meta(res, "rows_affected"))) {
     execute_statement(res)
   }
