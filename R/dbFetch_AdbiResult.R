@@ -1,15 +1,18 @@
 #' Fetch result sets
 #'
-#' When fetching results using [dbFetch()], the argument `n` can be specified
-#' to control chunk size per fetching operation. The default value of `-1`
-#' corresponds to retrieving the entire result set at once, while a positive
-#' integer will try returning as many rows (as long as `n` does not exceed the
-#' available number of rows), in line with standard DBI expectations. As data
-#' transfer is mediated by Arrow data structures, which are retrieved as array
-#' chunks, the underlying chunk size can be used by passing an `n` value `NA`.
+#' When fetching results using [DBI::dbFetch()], the argument `n` can be
+#' specified to control chunk size per fetching operation. The default value of
+#' `-1` corresponds to retrieving the entire result set at once, while a
+#' positive integer will try returning as many rows (as long as `n` does not
+#' exceed the available number of rows), in line with standard DBI
+#' expectations. As data transfer is mediated by Arrow data structures, which
+#' are retrieved as array chunks, the underlying chunk size can be used by
+#' passing an `n` value `NA`.
 #'
 #' @rdname dbFetch
 #' @inheritParams DBI::dbFetch
+#' @param res An object inheriting from [DBI::DBIResult][DBI::DBIResult-class],
+#'   created by [DBI::dbSendQuery()].
 #' @examples
 #' if (requireNamespace("adbcsqlite")) {
 #'   library(DBI)
@@ -21,7 +24,7 @@
 #'   dbDisconnect(con)
 #' }
 #' @return A `data.frame` with the requested number of rows (or zero rows if
-#'   [dbFetch()] is called on a result set with no more remaining rows).
+#'   [DBI::dbFetch()] is called on a result set with no more remaining rows).
 #' @usage NULL
 dbFetch_AdbiResult <- function(res, n = -1, ...) {
 
@@ -37,19 +40,7 @@ dbFetch_AdbiResult <- function(res, n = -1, ...) {
     )
   }
 
-  if (isFALSE(meta(res, "immediate"))) {
-
-    n_bound <- meta(res, "bound")
-
-    if (is.null(n_bound) || n_bound < 1L) {
-
-      stop(
-        "A statement created with `immediate = FALSE` should be prepared ",
-        "before being executed, typically by a call to `dbBind()`.",
-        call. = FALSE
-      )
-    }
-  }
+  check_statement_bound(res)
 
   if (identical(meta(res, "type"), "statement")) {
     warning("Statements are not expected to return results.", call. = FALSE)

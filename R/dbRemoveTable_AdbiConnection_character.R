@@ -1,5 +1,5 @@
 #' @rdname AdbiConnection-class
-#' @param fail_if_missing If `FALSE`, `dbRemoveTable()` succeeds if the
+#' @param fail_if_missing If `FALSE`, [DBI::dbRemoveTable()] succeeds if the
 #'   table doesn't exist.
 #' @inheritParams DBI::dbRemoveTable
 #' @usage NULL
