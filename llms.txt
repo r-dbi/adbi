@@ -6,8 +6,14 @@ database access.
 
 ## Installation
 
-You can install the development version of adbi from
-[GitHub](https://github.com/) with:
+Install the latest release of adbi from CRAN with the following code:
+
+``` r
+install.packages("adbi")
+```
+
+To get a bug fix or to use a feature from the development version, you
+can install the development version of adbi from GitHub:
 
 ``` r
 # install.packages("devtools")
@@ -19,6 +25,10 @@ devtools::install_github("r-dbi/adbi")
 The `data.frame` API of DBI is supported.
 
 ``` r
+# To run this example, please install the adbcsqlite package first.
+# 
+# install.packages("adbcsqlite")
+
 library(DBI)
 
 # Create an SQLite connection using the adbcsqlite backend

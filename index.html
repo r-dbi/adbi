@@ -55,8 +55,11 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of adbi from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>Install the latest release of adbi from CRAN with the following code:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"adbi"</span><span class="op">)</span></span></code></pre></div>
+<p>To get a bug fix or to use a feature from the development version, you can install the development version of adbi from GitHub:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"r-dbi/adbi"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -64,8 +67,12 @@
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <p>The <code>data.frame</code> API of DBI is supported.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dbi.r-dbi.org" class="external-link">DBI</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># To run this example, please install the adbcsqlite package first.</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># install.packages("adbcsqlite")</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dbi.r-dbi.org" class="external-link">DBI</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Create an SQLite connection using the adbcsqlite backend</span></span>
 <span><span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect</a></span><span class="op">(</span><span class="fu">adbi</span><span class="fu">::</span><span class="fu"><a href="reference/dbConnect.html">adbi</a></span><span class="op">(</span><span class="st">"adbcsqlite"</span><span class="op">)</span>, uri <span class="op">=</span> <span class="st">":memory:"</span><span class="op">)</span></span>
@@ -125,7 +132,7 @@
 <span><span class="co"># Cleanup</span></span>
 <span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbClearResult.html" class="external-link">dbClearResult</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></code></pre></div>
 <p>More interestingly, the recent arrow-extension API of DBI is supported as well.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Queries</span></span>
 <span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbGetQueryArrow.html" class="external-link">dbGetQueryArrow</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"SELECT * from swiss WHERE Agriculture &lt; 40"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; &lt;nanoarrow_array_stream struct&lt;Fertility: double, Agriculture: double, Examination: int64, Education: int64, Catholic: double, Infant.Mortality: double&gt;&gt;</span></span>
