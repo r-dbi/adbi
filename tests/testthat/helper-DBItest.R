@@ -1,11 +1,18 @@
-if (requireNamespace("DBItest", quietly = TRUE) && requireNamespace("adbcsqlite", quietly = TRUE)) {
+if (
+  requireNamespace("DBItest", quietly = TRUE) &&
+    requireNamespace("adbcsqlite", quietly = TRUE)
+) {
   DBItest::make_context(
     adbi::adbi("adbcsqlite"),
     list(
       uri = tempfile("DBItest", fileext = ".sqlite"),
       rows_affected_callback = function() {
         function(x) {
-          if (x == -1) testthat::skip("unknown number of `rows_affected`") else x
+          if (x == -1) {
+            testthat::skip("unknown number of `rows_affected`")
+          } else {
+            x
+          }
         }
       }
     ),
