@@ -51,6 +51,24 @@ if (
       "table_visible_in_other_connection",
       "remove_table_other_con",
 
+      if (!requireNamespace("arrow", quietly = TRUE)) {
+        c(
+          "arrow_.*$",
+          "bind_.*$",
+          "roundtrip_raw",
+          "send_query_params",
+          "get_query_params",
+          "send_statement_params",
+          "execute_params"
+        )
+      },
+
+      if (!requireNamespace("bit64", quietly = TRUE)) {
+        c(
+          "connect_bigint_integer64"
+        )
+      },
+
       if (getRversion() < "4.0") {
         c(
           "column_info",
