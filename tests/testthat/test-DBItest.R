@@ -1,3 +1,6 @@
+skip_if_not_installed("DBItest")
+skip_if_not_installed("adbcsqlite")
+
 if (
   identical(Sys.getenv("NOT_CRAN"), "true") &&
     packageVersion("DBItest") >= "1.7.2"
