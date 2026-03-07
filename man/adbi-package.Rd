@@ -20,6 +20,11 @@ Useful links:
 \author{
 \strong{Maintainer}: Nicolas Bennett \email{nicolas@cynkra.com}
 
+Authors:
+\itemize{
+  \item Nicolas Bennett \email{nicolas@cynkra.com}
+}
+
 Other contributors:
 \itemize{
   \item Voltron Data [funder]
