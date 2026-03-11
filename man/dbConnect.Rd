@@ -17,7 +17,7 @@ adbi(driver = NA_character_)
 }
 \arguments{
 \item{driver}{A driver specification that can be evaluated (with no
-arguments) to give an \code{\link[adbcdrivermanager:adbc_driver_void]{adbcdrivermanager::adbc_driver()}}. See Details for
+arguments) to give an \code{\link[adbcdrivermanager:adbc_driver]{adbcdrivermanager::adbc_driver()}}. See Details for
 more information.}
 
 \item{drv}{An object that inherits from
@@ -29,7 +29,7 @@ object (in order to clone an existing connection).}
 \code{\link[adbcdrivermanager:adbc_database_init]{adbcdrivermanager::adbc_database_init()}}}
 
 \item{bigint}{The R type that 64-bit integer types should be mapped to,
-default is \link[bit64:bit64-package]{bit64::integer64}, if bit64 is installed and \code{character}
+default is \link[bit64:integer64]{bit64::integer64}, if bit64 is installed and \code{character}
 otherwise}
 
 \item{conn}{A \link[DBI:DBIConnection-class]{DBI::DBIConnection} object,
