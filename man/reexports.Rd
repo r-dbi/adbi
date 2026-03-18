@@ -12,6 +12,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{DBI}{\code{\link[DBI]{dbCanConnect}}, \code{\link[DBI]{Id}}}
+  \item{DBI}{\code{\link[DBI:dbCanConnect]{dbCanConnect()}}, \code{\link[DBI:Id]{Id()}}}
 }}
 
