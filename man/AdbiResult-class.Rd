@@ -3,7 +3,8 @@
 %   R/dbBind_AdbiResult.R, R/dbClearResult_AdbiResult.R,
 %   R/dbColumnInfo_AdbiResult.R, R/dbGetRowCount_AdbiResult.R,
 %   R/dbGetRowsAffected_AdbiResult.R, R/dbGetStatement_AdbiResult.R,
-%   R/dbHasCompleted_AdbiResult.R, R/dbIsValid_AdbiResult.R, R/show_AdbiResult.R
+%   R/dbHasCompleted_AdbiResult.R, R/dbIsValid_AdbiResult.R,
+%   R/show_AdbiResult.R
 \docType{class}
 \name{AdbiResult-class}
 \alias{AdbiResult-class}
