@@ -35,7 +35,6 @@ Config/Needs/website:
     r-dbi/dbitemplate
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3.9000
 Config/autostyle/scope: line_breaks
 Config/autostyle/strict: false
 Collate: 
@@ -102,3 +101,4 @@ Collate:
     'show_AdbiResult.R'
     'show_AdbiResultArrow.R'
     'utils.R'
+Config/roxygen2/version: 8.0.0.9000
