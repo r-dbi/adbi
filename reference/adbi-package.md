@@ -23,6 +23,10 @@ Useful links:
 
 **Maintainer**: Nicolas Bennett <nicolas@cynkra.com>
 
+Authors:
+
+- Nicolas Bennett <nicolas@cynkra.com>
+
 Other contributors:
 
 - Voltron Data \[funder\]

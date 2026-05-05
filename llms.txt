@@ -9,6 +9,7 @@ database access.
 Install the latest release of adbi from CRAN with the following code:
 
 ``` r
+
 install.packages("adbi")
 ```
 
@@ -16,6 +17,7 @@ To get a bug fix or to use a feature from the development version, you
 can install the development version of adbi from GitHub:
 
 ``` r
+
 # install.packages("devtools")
 devtools::install_github("r-dbi/adbi")
 ```
@@ -25,6 +27,7 @@ devtools::install_github("r-dbi/adbi")
 The `data.frame` API of DBI is supported.
 
 ``` r
+
 # To run this example, please install the adbcsqlite package first.
 # 
 # install.packages("adbcsqlite")
@@ -94,6 +97,7 @@ More interestingly, the recent arrow-extension API of DBI is supported
 as well.
 
 ``` r
+
 # Queries
 dbGetQueryArrow(con, "SELECT * from swiss WHERE Agriculture < 40")
 #> <nanoarrow_array_stream struct<Fertility: double, Agriculture: double, Examination: int64, Education: int64, Catholic: double, Infant.Mortality: double>>

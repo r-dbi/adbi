@@ -5,5 +5,5 @@ to see their documentation.
 
 - DBI:
 
-  [`dbCanConnect`](https://dbi.r-dbi.org/reference/dbCanConnect.html),
-  [`Id`](https://dbi.r-dbi.org/reference/Id.html)
+  [`dbCanConnect()`](https://dbi.r-dbi.org/reference/dbCanConnect.html),
+  [`Id()`](https://dbi.r-dbi.org/reference/Id.html)

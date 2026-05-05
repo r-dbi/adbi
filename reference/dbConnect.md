@@ -44,7 +44,7 @@ dbDisconnect(conn, force = getOption("adbi.force_close_results", FALSE), ...)
 - bigint:
 
   The R type that 64-bit integer types should be mapped to, default is
-  [bit64::integer64](https://rdrr.io/pkg/bit64/man/bit64-package.html),
+  [bit64::integer64](https://bit64.r-lib.org/reference/bit64-package.html),
   if bit64 is installed and `character` otherwise
 
 - conn:
