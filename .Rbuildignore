@@ -11,3 +11,4 @@
 ^CRAN-SUBMISSION$
 ^adbi\.Rproj$
 ^air\.toml$
+^\.ccache$
