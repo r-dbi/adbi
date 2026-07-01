@@ -59,6 +59,8 @@ exportMethods(dbWriteTableArrow)
 exportMethods(show)
 import(DBI)
 import(methods)
-importFrom(DBI,Id)
-importFrom(DBI,dbCanConnect)
+importFrom(DBI,
+  Id,
+  dbCanConnect
+)
 importFrom(adbcdrivermanager,adbc_driver)
