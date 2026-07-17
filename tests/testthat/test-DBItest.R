@@ -9,6 +9,9 @@ if (
     skip = c(
       "package_name",
 
+      # DBItest cannot inspect a constructor argument whose default is NULL
+      "constructor",
+
       # options(adbi.allow_multiple_results = FALSE)
       "send_query_only_one_result_set",
       "send_statement_only_one_result_set",
