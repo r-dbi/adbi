@@ -5,11 +5,9 @@
 #' @usage NULL
 dbIsValid_AdbiDriver <- function(dbObj, ...) {
   is.null(dbObj@driver) ||
-    (
-      is.character(dbObj@driver) &&
-        length(dbObj@driver) == 1L &&
-        !is.na(dbObj@driver)
-    ) ||
+    (is.character(dbObj@driver) &&
+      length(dbObj@driver) == 1L &&
+      !is.na(dbObj@driver)) ||
     inherits(dbObj@driver, "adbc_driver")
 }
 

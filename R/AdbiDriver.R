@@ -76,7 +76,10 @@ adbi <- function(driver = NULL) {
     return(new("AdbiDriver", driver = driver))
   }
 
-  stop("The driver function must return an `adbc_driver` object.", call. = FALSE)
+  stop(
+    "The driver function must return an `adbc_driver` object.",
+    call. = FALSE
+  )
 }
 
 adbi_legacy_driver_string <- function(driver) {
