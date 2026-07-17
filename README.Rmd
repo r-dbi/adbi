@@ -38,6 +38,36 @@ To get a bug fix or to use a feature from the development version, you can insta
 devtools::install_github("r-dbi/adbi")
 ```
 
+## Connecting
+
+`adbi()` uses the ADBC driver manager to select a driver from a connection
+profile, URI, driver name, or manifest. When `DBI::dbConnect()` is called,
+the value passed to `adbi()` becomes the `driver` argument of
+`adbcdrivermanager::adbc_database_init()`:
+
+```r
+# Load a connection profile
+con <- DBI::dbConnect(adbi::adbi(), profile = "myprofile")
+
+# Equivalently, use a profile URI
+con <- DBI::dbConnect(adbi::adbi("profile://myprofile"))
+
+# Infer the PostgreSQL driver from the URI scheme
+con <- DBI::dbConnect(
+  adbi::adbi(),
+  uri = "postgresql://localhost/database"
+)
+
+# Load a driver by name
+con <- DBI::dbConnect(
+  adbi::adbi("postgresql"),
+  uri = "postgresql://localhost/database"
+)
+```
+
+An R driver object can still be supplied directly. Resolving an R driver from
+a function or package name is deprecated.
+
 ## Example
 
 The `data.frame` API of DBI is supported.
@@ -49,8 +79,11 @@ The `data.frame` API of DBI is supported.
 
 library(DBI)
 
-# Create an SQLite connection using the adbcsqlite backend
-con <- dbConnect(adbi::adbi("adbcsqlite"), uri = ":memory:")
+# Create an SQLite connection using an R driver object
+con <- dbConnect(
+  adbi::adbi(adbcsqlite::adbcsqlite()),
+  uri = ":memory:"
+)
 
 # Write a table
 dbWriteTable(con, "swiss", datasets::swiss)

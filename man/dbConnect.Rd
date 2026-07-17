@@ -9,16 +9,16 @@
 \alias{dbDisconnect,AdbiConnection-method}
 \title{Adbi driver}
 \usage{
-adbi(driver = NA_character_)
+adbi(driver = NULL)
 
 \S4method{dbConnect}{AdbiDriver}(drv, ..., bigint = NULL)
 
 \S4method{dbDisconnect}{AdbiConnection}(conn, force = getOption("adbi.force_close_results", FALSE), ...)
 }
 \arguments{
-\item{driver}{A driver specification that can be evaluated (with no
-arguments) to give an \code{\link[adbcdrivermanager:adbc_driver]{adbcdrivermanager::adbc_driver()}}. See Details for
-more information.}
+\item{driver}{An ADBC driver specification forwarded to the \code{driver}
+argument of \code{\link[adbcdrivermanager:adbc_database_init]{adbcdrivermanager::adbc_database_init()}} when connecting.
+See Details for the accepted values and deprecated compatibility forms.}
 
 \item{drv}{An object that inherits from
 \link[DBI:DBIDriver-class]{DBI::DBIDriver},
@@ -47,24 +47,34 @@ In order to open a database connection, \code{\link[DBI:dbConnect]{DBI::dbConnec
 driver object, which can be instantiated by calling \code{adbi()}.
 }
 \details{
-To specify the type of adbc driver, \code{adbi} accepts as \code{driver} argument
+\code{adbi()} stores the \code{driver} specification in an \code{AdbiDriver} object. When
+that object is passed to \code{\link[DBI:dbConnect]{DBI::dbConnect()}}, the stored value is forwarded
+as the \code{driver} argument of
+\code{\link[adbcdrivermanager:adbc_database_init]{adbcdrivermanager::adbc_database_init()}}. Additional arguments to
+\code{\link[DBI:dbConnect]{DBI::dbConnect()}} are forwarded to the same function as database options.
+
+Consequently, \code{adbi()} accepts the same modern driver specifications as
+\code{\link[adbcdrivermanager:adbc_database_init]{adbcdrivermanager::adbc_database_init()}}:
 \itemize{
-\item an object inheriting from \code{adbc_driver},
-\item a function that can be evaluated with no arguments and returns an object
-inheriting from \code{adbc_driver},
-\item a string of the form \code{pkg::fun} (where \verb{pkg::} is optional and defaults
-to \code{fun}), which can be used to look up such a function.
+\item \code{NULL}, which leaves driver selection to the driver manager. Supply a
+\code{uri} or \code{profile} argument to \code{\link[DBI:dbConnect]{DBI::dbConnect()}}.
+\item A non-missing string containing a driver or manifest name, path, or URI.
+\item An object inheriting from \link[adbcdrivermanager:adbc_driver]{adbcdrivermanager::adbc_driver}.
 }
 
-As default, an \code{\link[adbcdrivermanager:adbc_driver_monkey]{adbcdrivermanager::adbc_driver_monkey()}} object is created.
+Functions, strings of the form \code{pkg::fun}, and bare strings that identify an
+installed R package and driver function are resolved to an \code{adbc_driver}
+object before forwarding. These forms are supported for backwards
+compatibility, but are deprecated. Pass an \code{adbc_driver} object directly
+when using an R driver package.
 }
 \examples{
 adbi()
 if (requireNamespace("adbcsqlite")) {
-  adbi("adbcsqlite")
+  adbi(adbcsqlite::adbcsqlite())
 }
 library(DBI)
-con <- dbConnect(adbi())
+con <- dbConnect(adbi(adbcdrivermanager::adbc_driver_monkey()))
 dbIsValid(con)
 dbDisconnect(con)
 dbIsValid(con)

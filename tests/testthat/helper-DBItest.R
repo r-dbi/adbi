@@ -3,7 +3,7 @@ if (
     requireNamespace("adbcsqlite", quietly = TRUE)
 ) {
   DBItest::make_context(
-    adbi::adbi("adbcsqlite"),
+    adbi::adbi(adbcsqlite::adbcsqlite()),
     list(
       uri = tempfile("DBItest", fileext = ".sqlite"),
       rows_affected_callback = function() {

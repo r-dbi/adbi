@@ -10,7 +10,7 @@
 #'   otherwise
 #' @examples
 #' library(DBI)
-#' con <- dbConnect(adbi())
+#' con <- dbConnect(adbi(adbcdrivermanager::adbc_driver_monkey()))
 #' dbIsValid(con)
 #' dbDisconnect(con)
 #' dbIsValid(con)
