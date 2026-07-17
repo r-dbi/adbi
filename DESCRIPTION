@@ -30,7 +30,7 @@ Suggests:
     utils,
     arrow
 Remotes:
-    apache/arrow-adbc/r/adbcdrivermanager,
+    adbcdrivermanager=github::apache/arrow-adbc/r/adbcdrivermanager,
     r-dbi/DBItest
 Config/Needs/website: 
     r-dbi/dbitemplate
