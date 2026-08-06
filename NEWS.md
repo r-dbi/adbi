@@ -1,3 +1,12 @@
+# adbi (development version)
+
+- `adbi()` now defaults to driver-manager inference. It accepts connection
+  profile URIs, ordinary URIs, driver or manifest names and paths, as well as
+  existing `adbc_driver` objects.
+- Resolving an R driver from a function, `pkg::fun`, or installed package name
+  is deprecated. Pass the driver object directly instead.
+- A database allocated during a failed connection attempt is now released.
+
 # adbi 0.1.2 (2024-09-03)
 
 - Docs only update

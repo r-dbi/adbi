@@ -4,7 +4,11 @@
 show_AdbiDriver <- function(object) {
   cat("<AdbiDriver>\n")
 
-  if (dbIsValid(object)) {
+  if (is.null(object@driver)) {
+    cat("  Driver: <driver manager>\n")
+  } else if (is.character(object@driver) && dbIsValid(object)) {
+    cat("  Driver: ", object@driver, "\n", sep = "")
+  } else if (dbIsValid(object)) {
     cat("  Type: <", class(object@driver)[1L], ">\n", sep = "")
   } else {
     cat("  INVALID\n")

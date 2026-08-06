@@ -1,9 +1,11 @@
 test_that("show methods print", {
-  expect_output(show(adbi()))
+  expect_output(
+    show(adbi(adbcdrivermanager::adbc_driver_monkey()))
+  )
 
   skip_if_not_installed("adbcsqlite")
 
-  drv <- adbi("adbcsqlite::adbcsqlite")
+  drv <- adbi(adbcsqlite::adbcsqlite())
 
   expect_output(show(drv))
 
