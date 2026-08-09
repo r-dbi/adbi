@@ -18,7 +18,7 @@ Depends:
 Imports: 
     DBI (>= 1.2.0),
     methods,
-    adbcdrivermanager (>= 0.23.0.9000),
+    adbcdrivermanager (>= 0.24.0),
     nanoarrow (>= 0.3.0)
 Suggests: 
     testthat,
@@ -30,7 +30,6 @@ Suggests:
     utils,
     arrow
 Remotes:
-    adbcdrivermanager=github::apache/arrow-adbc/r/adbcdrivermanager,
     r-dbi/DBItest
 Config/Needs/website: 
     r-dbi/dbitemplate
