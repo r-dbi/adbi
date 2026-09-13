@@ -28,6 +28,31 @@ Bringing [arrow-adbc](https://github.com/apache/arrow-adbc) to R via
 [DBI](https://github.com/r-dbi), adbi aims to provide DBI-compliant database
 access.
 
+## Goals and non-goals
+
+adbi aims to:
+
+- Expose ADBC drivers through DBI,
+  so that a connection opened with `dbConnect(adbi("adbcsqlite"), ...)` behaves like any other DBI connection.
+- Accept any driver built on the adbcdrivermanager framework,
+  passed as an `adbc_driver` object, as a function returning one, or as a `pkg::fun` string.
+- Support DBI's Arrow extension next to the `data.frame` API,
+  so that results can stay in the Arrow format, fetched whole or chunk by chunk.
+- Offer an efficient alternative to ODBC for analytical applications.
+- Conform to the DBI specification, which DBItest checks against the adbcsqlite driver.
+
+It is explicitly not trying to:
+
+- Implement ADBC.
+  The C API and the driver manager live in arrow-adbc and adbcdrivermanager; adbi is the DBI layer on top of them.
+- Ship database drivers.
+  Packages such as adbcsqlite are suggested rather than imported, and you install the ones you need.
+- Define the database interface.
+  DBI owns the generics and their specification.
+- Hide what an individual ADBC driver cannot do.
+  Temporary tables, 64-bit integers and identifier quoting follow the driver,
+  and the DBItest setup under `tests/testthat/` records where that shows.
+
 ## Installation
 
 Install the latest release of adbi from CRAN with the following code:
