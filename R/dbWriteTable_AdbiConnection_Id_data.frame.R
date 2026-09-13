@@ -1,19 +1,16 @@
 #' @rdname AdbiConnection-class
 #' @inheritParams DBI::dbWriteTable
-#' @param overwrite Allow overwriting the destination table. Cannot be
-#'   `TRUE` if `append` is also `TRUE`.
-#' @param append Allow appending to the destination table. Cannot be
-#'   `TRUE` if `overwrite` is also `TRUE`.
-#' @param field.types character vector of named SQL field types where
-#'   the names are the names of new table's columns. If missing, types inferred
-#'   with [DBI::dbDataType()]).
-#' @param row.names A logical specifying whether the `row.names` should be
-#'   output to the output DBMS table; if `TRUE`, an extra field whose name
-#'   will be whatever the R identifier `"row.names"` maps to the DBMS (see
-#'   [DBI::make.db.names()]). If `NA` will add rows names if
-#'   they are characters, otherwise will ignore.
-#' @param temporary a logical specifying whether the new table should be
-#'   temporary. Its default is `FALSE`.
+#' @param overwrite Allow overwriting the destination table.
+#'   Cannot be `TRUE` if `append` is also `TRUE`.
+#' @param append Allow appending to the destination table.
+#'   Cannot be `TRUE` if `overwrite` is also `TRUE`.
+#' @param field.types character vector of named SQL field types where the names are the names of new table's columns.
+#'   If missing, types inferred with [DBI::dbDataType()]).
+#' @param row.names A logical specifying whether the `row.names` should be output to the output DBMS table;
+#'   if `TRUE`, an extra field whose name will be whatever the R identifier `"row.names"` maps to the DBMS (see [DBI::make.db.names()]).
+#'   If `NA` will add rows names if they are characters, otherwise will ignore.
+#' @param temporary a logical specifying whether the new table should be temporary.
+#'   Its default is `FALSE`.
 #' @usage NULL
 dbWriteTable_AdbiConnection_Id_data.frame <- function(
   conn,

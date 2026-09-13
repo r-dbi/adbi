@@ -128,11 +128,10 @@ new_result <- function(
 
 #' Class AdbiResult (and methods)
 #'
-#' AdbiResult objects are created by [DBI::dbSendQuery()] or
-#' [DBI::dbSendStatement()], and encapsulate the result of an SQL statement
-#' (either `SELECT` or not). They are a superclass of the [DBI::DBIResult-class]
-#' class. The "Usage" section lists the class methods overridden by
-#' \pkg{adbi}.
+#' AdbiResult objects are created by [DBI::dbSendQuery()] or [DBI::dbSendStatement()],
+#' and encapsulate the result of an SQL statement (either `SELECT` or not).
+#' They are a superclass of the [DBI::DBIResult-class] class.
+#' The "Usage" section lists the class methods overridden by \pkg{adbi}.
 #'
 #' @seealso
 #' The corresponding generic functions

@@ -3,23 +3,21 @@ NULL
 
 #' Adbi driver
 #'
-#' In order to open a database connection, [DBI::dbConnect()] dispatches on a
-#' driver object, which can be instantiated by calling `adbi()`.
+#' In order to open a database connection, [DBI::dbConnect()] dispatches on a driver object,
+#' which can be instantiated by calling `adbi()`.
 #'
 #' @details
 #' To specify the type of adbc driver, `adbi` accepts as `driver` argument
 #'
 #' * an object inheriting from `adbc_driver`,
-#' * a function that can be evaluated with no arguments and returns an object
-#'   inheriting from `adbc_driver`,
-#' * a string of the form `pkg::fun` (where `pkg::` is optional and defaults
-#'   to `fun`), which can be used to look up such a function.
+#' * a function that can be evaluated with no arguments and returns an object inheriting from `adbc_driver`,
+#' * a string of the form `pkg::fun` (where `pkg::` is optional and defaults to `fun`),
+#'   which can be used to look up such a function.
 #'
 #' As default, an [adbcdrivermanager::adbc_driver_monkey()] object is created.
 #'
-#' @param driver A driver specification that can be evaluated (with no
-#'  arguments) to give an [adbcdrivermanager::adbc_driver()]. See Details for
-#'  more information.
+#' @param driver A driver specification that can be evaluated (with no arguments) to give an [adbcdrivermanager::adbc_driver()].
+#'  See Details for more information.
 #'
 #' @export
 #' @rdname dbConnect
@@ -69,9 +67,8 @@ adbi <- function(driver = NA_character_) {
 
 #' Class AdbiDriver (and methods)
 #'
-#' AdbiDriver objects are created by [adbi()], and used to select the
-#' correct method in [DBI::dbConnect()]. They are a superclass of the
-#' [DBI::DBIDriver-class] class, and used purely for dispatch.
+#' AdbiDriver objects are created by [adbi()], and used to select the correct method in [DBI::dbConnect()].
+#' They are a superclass of the [DBI::DBIDriver-class] class, and used purely for dispatch.
 #' The "Usage" section lists the class methods overridden by \pkg{adbi}.
 #'
 #' @keywords internal
