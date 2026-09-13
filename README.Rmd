@@ -83,7 +83,7 @@ res <- dbSendQueryArrow(con, "SELECT * from swiss WHERE Agriculture < ?")
 dbBind(res, 30)
 
 ret <- dbFetchArrow(res)
-ret$length
+as.data.frame(ret)
 
 dbBind(res, 20)
 
