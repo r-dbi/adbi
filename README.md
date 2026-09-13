@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![rcc](https://github.com/r-dbi/adbi/workflows/rcc/badge.svg)](https://github.com/r-dbi/adbi/actions)
-[![Codecov test coverage](https://codecov.io/gh/r-dbi/adbi/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-dbi/adbi?branch=main)
+[![Codecov test coverage](https://codecov.io/gh/r-dbi/adbi/graph/badge.svg)](https://app.codecov.io/gh/r-dbi/adbi/tree/main)
 [![CRAN status](https://www.r-pkg.org/badges/version/adbi)](https://CRAN.R-project.org/package=adbi)
 <!-- badges: end -->
 
