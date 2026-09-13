@@ -3,7 +3,7 @@ test_that("show methods print", {
 
   skip_if_not_installed("adbcsqlite")
 
-  drv <- adbi("adbcsqlite::adbcsqlite")
+  drv <- adbi(pkg = "adbcsqlite")
 
   expect_output(show(drv))
 

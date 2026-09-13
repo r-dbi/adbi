@@ -36,6 +36,15 @@ devtools::install_github("r-dbi/adbi")
 
 The `data.frame` API of DBI is supported.
 
+Drivers can be selected by an ADBC Driver Manager specification, explicitly
+from an R package, or by passing an existing driver object:
+
+``` r
+adbi::adbi("sqlite")
+adbi::adbi(pkg = "adbcsqlite")
+adbi::adbi(adbcsqlite::adbcsqlite())
+```
+
 ``` r
 # To run this example, please install the adbcsqlite package first.
 # 
@@ -43,8 +52,8 @@ The `data.frame` API of DBI is supported.
 
 library(DBI)
 
-# Create an SQLite connection using the adbcsqlite backend
-con <- dbConnect(adbi::adbi("adbcsqlite"), uri = ":memory:")
+# Create an SQLite connection using the adbcsqlite R package
+con <- dbConnect(adbi::adbi(pkg = "adbcsqlite"), uri = ":memory:")
 
 # Write a table
 dbWriteTable(con, "swiss", datasets::swiss)

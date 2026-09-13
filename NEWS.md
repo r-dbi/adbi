@@ -1,3 +1,10 @@
+# adbi (development version)
+
+- `adbi()` now accepts ADBC Driver Manager driver names and manifest paths.
+  The new `pkg` argument explicitly selects an R package driver. Implicit R
+  package lookup through `driver` remains available for compatibility but is
+  deprecated.
+
 # adbi 0.1.2 (2024-09-03)
 
 - Docs only update
