@@ -1,8 +1,7 @@
 
 <!-- README.md and index.md are generated from README.Rmd.
-     Edit that file and render it the usual way: rmarkdown::render(),
-     devtools::build_readme(), or the Knit button. The cynkratemplate
-     package must be installed; it supplies the output format. -->
+     Edit that file and render it the usual way: rmarkdown::render(), devtools::build_readme(), or the Knit button.
+     The cynkratemplate package must be installed; it supplies the output format. -->
 
 # adbi
 
@@ -13,7 +12,8 @@
 [![CRAN status](https://www.r-pkg.org/badges/version/adbi)](https://CRAN.R-project.org/package=adbi)
 <!-- badges: end -->
 
-Bringing [arrow-adbc](https://github.com/apache/arrow-adbc) to R via [DBI](https://github.com/r-dbi), adbi aims to provide DBI-compliant database access.
+Bringing [arrow-adbc](https://github.com/apache/arrow-adbc) to R via [DBI](https://github.com/r-dbi),
+adbi aims to provide DBI-compliant database access.
 
 ## Installation
 
@@ -23,7 +23,8 @@ Install the latest release of adbi from CRAN with the following code:
 install.packages("adbi")
 ```
 
-To get a bug fix or to use a feature from the development version, you can install the development version of adbi from GitHub:
+To get a bug fix or to use a feature from the development version,
+you can install the development version of adbi from GitHub:
 
 ``` r
 # install.packages("devtools")

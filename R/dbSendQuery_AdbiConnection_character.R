@@ -1,17 +1,15 @@
 #' Create result sets
 #'
-#' Creating result sets using [DBI::dbSendQuery()] (and by extension using
-#' [DBI::dbGetQuery()]) mostly follows DBI specification. One way where adbi
-#' deviates from DBI mechanisms is how the `bigint` setting is not only per
-#' connection, but the per-connection setting can be overridden on a result
-#' set basis. As default, the connection setting is applied, but passing one
-#' of the accepted values as `bigint` when creating a result set will
-#' subsequently use that setting for all fetches using this result set.
+#' Creating result sets using [DBI::dbSendQuery()] (and by extension using [DBI::dbGetQuery()]) mostly follows DBI specification.
+#' One way where adbi deviates from DBI mechanisms is how the `bigint` setting is not only per connection,
+#' but the per-connection setting can be overridden on a result set basis.
+#' As default, the connection setting is applied,
+#' but passing one of the accepted values as `bigint` when creating a result set
+#' will subsequently use that setting for all fetches using this result set.
 #'
-#' Multiple open result sets per connection are supported and support can
-#' be disabled by setting `options(adbi.allow_multiple_results = FALSE)`. If
-#' not enabled, creating a new result will finalize potential other results
-#' and throw a warning.
+#' Multiple open result sets per connection are supported
+#' and support can be disabled by setting `options(adbi.allow_multiple_results = FALSE)`.
+#' If not enabled, creating a new result will finalize potential other results and throw a warning.
 #'
 #' @seealso adbi-driver
 #' @rdname dbSendQuery
@@ -19,10 +17,8 @@
 #'   as returned by [DBI::dbConnect()].
 #' @param statement a character string containing SQL.
 #' @param params Optional query parameters (forwarded to [DBI::dbBind()])
-#' @param immediate Passing a value `TRUE` is intended for statements containing
-#'   no placeholders and `FALSE` otherwise. The default value `NULL` will
-#'   inspect the statement for presence of placeholders (will `PREPARE` the
-#'   statement)
+#' @param immediate Passing a value `TRUE` is intended for statements containing no placeholders and `FALSE` otherwise.
+#'   The default value `NULL` will inspect the statement for presence of placeholders (will `PREPARE` the statement)
 #' @param bigint The R type that 64-bit integer types should be mapped to,
 #'   default is chosen according to the connection setting
 #' @inheritParams DBI::dbSendQuery

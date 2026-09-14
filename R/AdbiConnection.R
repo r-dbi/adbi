@@ -25,10 +25,9 @@ AdbiConnection <- function(
 
 #' Class AdbiConnection (and methods)
 #'
-#' AdbiConnection objects are created by passing [adbi()] as first
-#' argument to [DBI::dbConnect()]. They are a superclass of the
-#' [DBI::DBIConnection-class] class. The "Usage" section lists the class
-#' methods overridden by \pkg{adbi}.
+#' AdbiConnection objects are created by passing [adbi()] as first argument to [DBI::dbConnect()].
+#' They are a superclass of the [DBI::DBIConnection-class] class.
+#' The "Usage" section lists the class methods overridden by \pkg{adbi}.
 #'
 #' @seealso
 #' The corresponding generic functions

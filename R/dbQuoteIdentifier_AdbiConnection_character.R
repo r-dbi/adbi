@@ -1,5 +1,4 @@
-#' @param x A character vector, [DBI::SQL] or [DBI::Id] object to quote as
-#'  identifier.
+#' @param x A character vector, [DBI::SQL] or [DBI::Id] object to quote as identifier.
 #' @rdname AdbiConnection-class
 #' @inheritParams DBI::dbQuoteIdentifier
 #' @usage NULL
