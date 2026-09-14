@@ -1,3 +1,8 @@
+# adbi (development version)
+
+- ADBC database and connection resources are now released if constructing an
+  `AdbiConnection` fails.
+
 # adbi 0.1.2 (2024-09-03)
 
 - Docs only update
