@@ -1,20 +1,19 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- README.md and index.md are generated from README.Rmd.
+     Edit that file and render it the usual way: rmarkdown::render(),
+     devtools::build_readme(), or the Knit button. The cynkratemplate
+     package must be installed; it supplies the output format. -->
 
 # adbi
 
 <!-- badges: start -->
 
 [![rcc](https://github.com/r-dbi/adbi/workflows/rcc/badge.svg)](https://github.com/r-dbi/adbi/actions)
-[![Codecov test
-coverage](https://codecov.io/gh/r-dbi/adbi/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-dbi/adbi?branch=main)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/adbi)](https://CRAN.R-project.org/package=adbi)
+[![Codecov test coverage](https://codecov.io/gh/r-dbi/adbi/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-dbi/adbi?branch=main)
+[![CRAN status](https://www.r-pkg.org/badges/version/adbi)](https://CRAN.R-project.org/package=adbi)
 <!-- badges: end -->
 
-Bringing [arrow-adbc](https://github.com/apache/arrow-adbc) to R via
-[DBI](https://github.com/r-dbi), adbi aims to provide DBI-compliant
-database access.
+Bringing [arrow-adbc](https://github.com/apache/arrow-adbc) to R via [DBI](https://github.com/r-dbi), adbi aims to provide DBI-compliant database access.
 
 ## Installation
 
@@ -24,8 +23,7 @@ Install the latest release of adbi from CRAN with the following code:
 install.packages("adbi")
 ```
 
-To get a bug fix or to use a feature from the development version, you
-can install the development version of adbi from GitHub:
+To get a bug fix or to use a feature from the development version, you can install the development version of adbi from GitHub:
 
 ``` r
 # install.packages("devtools")
@@ -102,8 +100,7 @@ dbFetch(res)
 dbClearResult(res)
 ```
 
-More interestingly, the recent arrow-extension API of DBI is supported
-as well.
+More interestingly, the recent arrow-extension API of DBI is supported as well.
 
 ``` r
 # Queries
