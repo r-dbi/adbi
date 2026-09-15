@@ -2,7 +2,7 @@
 #' @inheritParams DBI::dbBind
 #' @usage NULL
 dbBind_AdbiResult <- function(res, params, ...) {
-  if (!isFALSE(meta(res, "immediate"))) {
+  if (isTRUE(meta(res, "immediate"))) {
     stop(
       "A statement containing placeholders should be created using ",
       "`immediate = FALSE`",
@@ -35,51 +35,50 @@ dbBind_AdbiResult <- function(res, params, ...) {
   }
 
   if (is.null(meta(res, "params"))) {
-    meta(res, "params") <- nanoarrow::nanoarrow_schema_parse(
-      adbcdrivermanager::adbc_statement_get_parameter_schema(res@statement),
-      recursive = TRUE
-    )
+    meta(res, "params") <- get_parameter_schema(res@statement)
   }
 
   schema <- meta(res, "params")
 
-  if (!"children" %in% names(schema) || length(schema[["children"]]) == 0L) {
-    stop("Unexpected parameter schema.", call. = FALSE)
-  }
-
-  schema <- schema[["children"]]
-
-  if (length(params) != length(schema)) {
-    stop(
-      "Expecting equally many `params` components as placeholders.",
-      call. = FALSE
-    )
-  }
-
-  # TODO placeholders fixed to c("?", "$1", "$name", ":name")
-
-  named_params <- !is.null(names(params)) && all(names(params) != "")
-  named_schema <- all(
-    names(schema) != as.character(seq_along(schema) - 1L) &
-      names(schema) != paste0("$", seq_along(schema))
-  )
-
-  if (named_schema) {
-    if (named_params) {
-      prep_schema_names <- sub("^\\:", "", sub("^\\$", "", names(schema)))
-
-      if (!setequal(prep_schema_names, names(params))) {
-        stop(
-          "Expecting the same names for `params` components as for ",
-          "placeholders.",
-          call. = FALSE
-        )
-      }
-    } else {
-      stop("Expecting named `params` for named placeholders")
+  if (!isFALSE(schema)) {
+    if (length(schema[["children"]]) == 0L) {
+      stop("Unexpected parameter schema.", call. = FALSE)
     }
-  } else if (named_params) {
-    stop("Expecting unnamed `params` for unnamed placeholders")
+
+    schema <- schema[["children"]]
+
+    if (length(params) != length(schema)) {
+      stop(
+        "Expecting equally many `params` components as placeholders.",
+        call. = FALSE
+      )
+    }
+
+    # TODO placeholders fixed to c("?", "$1", "$name", ":name")
+
+    named_params <- !is.null(names(params)) && all(names(params) != "")
+    named_schema <- all(
+      names(schema) != as.character(seq_along(schema) - 1L) &
+        names(schema) != paste0("$", seq_along(schema))
+    )
+
+    if (named_schema) {
+      if (named_params) {
+        prep_schema_names <- sub("^\\:", "", sub("^\\$", "", names(schema)))
+
+        if (!setequal(prep_schema_names, names(params))) {
+          stop(
+            "Expecting the same names for `params` components as for ",
+            "placeholders.",
+            call. = FALSE
+          )
+        }
+      } else {
+        stop("Expecting named `params` for named placeholders")
+      }
+    } else if (named_params) {
+      stop("Expecting unnamed `params` for unnamed placeholders")
+    }
   }
 
   adbcdrivermanager::adbc_statement_bind_stream(res@statement, params)
