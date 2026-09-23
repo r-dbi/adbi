@@ -35,8 +35,6 @@ Config/Needs/website:
     r-dbi/dbitemplate
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-Config/autostyle/scope: line_breaks
-Config/autostyle/strict: false
 Collate: 
     'adbi-package.R'
     'AdbiDriver.R'
