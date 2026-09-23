@@ -1,5 +1,3 @@
-^.*\.Rproj$
-^\.Rproj\.user$
 ^_pkgdown\.yml$
 ^docs$
 ^\.github$
@@ -9,6 +7,3 @@
 ^README\.(Rmd|html)$
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
-^adbi\.Rproj$
-^air\.toml$
-^\.ccache$
