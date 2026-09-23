@@ -1,7 +1,7 @@
-^_pkgdown\.yml$
+^_pkgdown\.yaml$
 ^docs$
 ^\.github$
-^codecov\.yml$
+^codecov\.yaml$
 ^LICENSE\.md$
 ^CODE_OF_CONDUCT\.md$
 ^README\.(Rmd|html)$
