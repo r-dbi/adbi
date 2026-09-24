@@ -65,9 +65,7 @@ jobs:
           - {os: ubuntu-latest, r: devel, http-user-agent: release}
           - {os: ubuntu-latest, r: oldrel-1}
           - {os: ubuntu-latest, r: '4.1', extra-packages: 'arrow=?ignore-before-r=4.2.0'}
-          # From source for as long as mac.cran.dev serves zstd binaries of
-          # these two, which pak cannot extract
-          - {os: macos-latest, r: release, extra-packages: 'adbcdrivermanager=?source, adbcsqlite=?source'}
+          - {os: macos-latest, r: release}
           - {os: windows-latest, r: release}
 
     steps:
