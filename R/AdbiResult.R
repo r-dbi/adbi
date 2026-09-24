@@ -30,9 +30,9 @@ init_result <- function(
   rows_affected_callback = identity
 ) {
   if (
-    !(is.null(immediate) ||
-      identical(immediate, TRUE) ||
-      identical(immediate, FALSE))
+    !is.null(immediate) &&
+      !identical(immediate, TRUE) &&
+      !identical(immediate, FALSE)
   ) {
     stop(
       "Expecting `immediate` to be either `TRUE` or `FALSE` (or `NULL` ",
