@@ -29,7 +29,7 @@ if (
         date_typed = FALSE,
         time_typed = FALSE,
         timestamp_typed = FALSE,
-        temporary_tables = FALSE, # apache/arrow-adbc#1141
+        temporary_tables = FALSE, # see apache/arrow-adbc#1141
         strict_identifier = TRUE
       )
     ),

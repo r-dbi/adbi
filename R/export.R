@@ -1,9 +1,5 @@
-# Created with:
-# methods::getGenerics(asNamespace("DBI")) %>%
-#   grep("^db[A-Z]", ., value = TRUE) %>%
-#   setdiff(c("dbCallProc", "dbListConnections", "dbSetDataMappings", "dbGetException")) %>%
-#   paste0("#' @exportMethod ", ., "\nNULL\n", collapse = "\n") %>%
-#   cat(file = "R/export.R")
+# Exports every DBI generic whose name starts with "db", except the deprecated
+# dbCallProc(), dbListConnections(), dbSetDataMappings() and dbGetException()
 #' @exportMethod dbAppendTable
 NULL
 

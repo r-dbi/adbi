@@ -1,5 +1,6 @@
 # adbi (development version)
 
+- Requires R >= 4.1.0.
 - `adbi()` now accepts ADBC Driver Manager driver names and manifest paths.
   The new `pkg` argument explicitly selects an R package driver. Implicit R
   package lookup through `driver` remains available for compatibility but is

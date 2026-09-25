@@ -1,14 +1,10 @@
-^.*\.Rproj$
-^\.Rproj\.user$
-^_pkgdown\.yml$
+^_pkgdown\.yaml$
 ^docs$
 ^\.github$
-^codecov\.yml$
+^codecov\.yaml$
 ^LICENSE\.md$
 ^CODE_OF_CONDUCT\.md$
 ^README\.(Rmd|html)$
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
-^adbi\.Rproj$
-^air\.toml$
-^\.ccache$
+^\.lintr$
