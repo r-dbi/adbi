@@ -23,3 +23,8 @@ now use 'adbcsqlite' and 'DBItest' only when they are installed.
 0 errors | 0 warnings | 1 note
 
 * This is a new submission of a package that was archived on CRAN.
+
+## Reverse dependencies
+
+Three CRAN packages suggest adbi: db2pq, dbplyr and fabricQueryR. All three
+pass R CMD check with this version installed.
