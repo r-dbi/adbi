@@ -24,6 +24,21 @@ test_that("ADBC driver specifications use the Driver Manager", {
   expect_identical(seen, c("sqlite", "/tmp/sqlite.toml"))
 })
 
+test_that("Driver Manager specs load a real driver", {
+  skip_if_not_installed("adbcsqlite")
+
+  dir <- withr::local_tempdir()
+  manifest <- sqlite_manifest(dir)
+  # Before adbcdrivermanager 0.20.0, the variable was ADBC_CONFIG_PATH
+  withr::local_envvar(ADBC_DRIVER_PATH = dir, ADBC_CONFIG_PATH = dir)
+
+  for (spec in c(manifest, "adbi_test_sqlite")) {
+    con <- dbConnect(adbi(spec), uri = ":memory:")
+    expect_equal(dbGetQuery(con, "SELECT 1 AS x")$x, 1)
+    dbDisconnect(con)
+  }
+})
+
 test_that("pkg explicitly selects an R package driver", {
   skip_if_not_installed("adbcsqlite")
   expect_s3_class(adbi(pkg = "adbcsqlite")@driver, "adbc_driver")
@@ -47,6 +62,13 @@ test_that("package names passed as driver still select the package driver", {
   expect_no_warning(result <- adbi("fakepkg"))
   expect_identical(result@driver, driver)
   expect_no_warning(adbi(driver = "fakepkg"))
+})
+
+test_that("package names resolve to the package's own driver", {
+  skip_if_not_installed("adbcsqlite")
+
+  expect_no_warning(drv <- adbi("adbcsqlite"))
+  expect_s3_class(drv@driver, "adbcsqlite_driver_sqlite")
 })
 
 test_that("pkg::fun warns and continues to work", {
