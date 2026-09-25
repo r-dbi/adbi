@@ -1,4 +1,4 @@
-# adbi (development version)
+# adbi 0.1.3
 
 - A `dbConnect()` call that fails partway now releases the ADBC database and
   connection it had already created.
