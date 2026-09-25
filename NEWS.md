@@ -7,7 +7,7 @@
   `NA` (#32).
 - Requires R >= 4.1.0 (#71).
 
-# adbi 0.1.2 (2024-09-03)
+# adbi 0.1.2 (2025-09-03)
 
 - Docs only update
 
