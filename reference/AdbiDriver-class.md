@@ -45,3 +45,11 @@ show(object)
 - object:
 
   Any R object
+
+## Value
+
+The DBI methods return what their generics specify, as documented on the
+generic's help page, for example
+[`DBI::dbGetInfo()`](https://dbi.r-dbi.org/reference/dbGetInfo.html).
+The [`show()`](https://rdrr.io/r/methods/show.html) method is called for
+its side effect of printing a summary.

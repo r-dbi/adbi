@@ -1,13 +1,21 @@
 # Changelog
 
-## adbi (development version)
+## adbi 0.1.3
 
 - A [`dbConnect()`](https://dbi.r-dbi.org/reference/dbConnect.html) call
   that fails partway now releases the ADBC database and connection it
-  had already created.
-- Requires R \>= 4.1.0.
+  had already created ([\#59](https://github.com/r-dbi/adbi/issues/59)).
+- For a
+  [`dbSendStatement()`](https://dbi.r-dbi.org/reference/dbSendStatement.html)
+  result that has not been bound yet,
+  [`dbHasCompleted()`](https://dbi.r-dbi.org/reference/dbHasCompleted.html)
+  now returns `FALSE` and
+  [`dbGetRowsAffected()`](https://dbi.r-dbi.org/reference/dbGetRowsAffected.html)
+  returns `NA` ([\#32](https://github.com/r-dbi/adbi/issues/32)).
+- Requires R \>= 4.1.0
+  ([\#71](https://github.com/r-dbi/adbi/issues/71)).
 
-## adbi 0.1.2 (2024-09-03)
+## adbi 0.1.2 (2025-09-03)
 
 - Docs only update
 

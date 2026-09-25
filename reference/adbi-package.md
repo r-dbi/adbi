@@ -21,11 +21,12 @@ Useful links:
 
 ## Author
 
-**Maintainer**: Nicolas Bennett <nicolas@cynkra.com>
+**Maintainer**: Nicolas Bennett <nicolas@cynkra.com> \[copyright
+holder\]
 
 Authors:
 
-- Nicolas Bennett <nicolas@cynkra.com>
+- Nicolas Bennett <nicolas@cynkra.com> \[copyright holder\]
 
 Other contributors:
 

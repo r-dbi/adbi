@@ -60,7 +60,7 @@ dbDisconnect(conn, force = getOption("adbi.force_close_results", FALSE), ...)
 
 ## Value
 
-A connection object (S4 class `AdbiCOnnection`, inheriting from
+A connection object (S4 class `AdbiConnection`, inheriting from
 [DBI::DBIConnection](https://dbi.r-dbi.org/reference/DBIConnection-class.html))
 is returned by
 [`DBI::dbConnect()`](https://dbi.r-dbi.org/reference/dbConnect.html),
