@@ -74,6 +74,11 @@ adbi <- function(driver = NA_character_) {
 #' [DBI::DBIDriver-class] class, and used purely for dispatch.
 #' The "Usage" section lists the class methods overridden by \pkg{adbi}.
 #'
+#' @return
+#' The DBI methods return what their generics specify, as documented on the
+#' generic's help page, for example [DBI::dbGetInfo()]. The `show()` method is
+#' called for its side effect of printing a summary.
+#'
 #' @keywords internal
 #' @export
 setClass(

@@ -75,6 +75,11 @@ or a \link[DBI:DBIResult-class]{DBI::DBIResult}}
 
 \item{object}{Any R object}
 }
+\value{
+The DBI methods return what their generics specify, as documented on the
+generic's help page, for example \code{\link[DBI:dbFetchArrow]{DBI::dbFetchArrow()}}. The \code{show()} method
+is called for its side effect of printing a summary.
+}
 \description{
 AdbiResultArrow objects are created by \code{\link[DBI:dbSendQueryArrow]{DBI::dbSendQueryArrow()}}, and
 encapsulate the result of an SQL query (a \code{SELECT} statement). They are a

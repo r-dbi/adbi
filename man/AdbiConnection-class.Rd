@@ -184,6 +184,11 @@ with \code{\link[DBI:dbDataType]{DBI::dbDataType()}}).}
 
 \item{object}{Any R object}
 }
+\value{
+The DBI methods return what their generics specify, as documented on the
+generic's help page, for example \code{\link[DBI:dbListTables]{DBI::dbListTables()}}. The \code{show()} method
+is called for its side effect of printing a summary.
+}
 \description{
 AdbiConnection objects are created by passing \code{\link[=adbi]{adbi()}} as first
 argument to \code{\link[DBI:dbConnect]{DBI::dbConnect()}}. They are a superclass of the
