@@ -36,14 +36,19 @@ devtools::install_github("r-dbi/adbi")
 
 The `data.frame` API of DBI is supported.
 
-Drivers can be selected by an ADBC Driver Manager specification, explicitly
-from an R package, or by passing an existing driver object:
+Drivers can be selected by an ADBC Driver Manager specification,
+explicitly from an R package, or by passing an existing driver object:
 
 ``` r
 adbi::adbi("sqlite")
 adbi::adbi(pkg = "adbcsqlite")
 adbi::adbi(adbcsqlite::adbcsqlite())
 ```
+
+A Driver Manager specification such as `"sqlite"` needs that driver
+installed separately; see [ADBC Driver Manager and
+Manifests](https://arrow.apache.org/adbc/current/format/driver_manifests.html)
+for where the driver manager looks for it.
 
 ``` r
 # To run this example, please install the adbcsqlite package first.

@@ -51,6 +51,11 @@ adbi::adbi(pkg = "adbcsqlite")
 adbi::adbi(adbcsqlite::adbcsqlite())
 ```
 
+A Driver Manager specification such as `"sqlite"` needs that driver installed
+separately; see
+[ADBC Driver Manager and Manifests](https://arrow.apache.org/adbc/current/format/driver_manifests.html)
+for where the driver manager looks for it.
+
 ```{r df}
 # To run this example, please install the adbcsqlite package first.
 # 
