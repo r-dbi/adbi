@@ -2,6 +2,8 @@ test_that("adbi() retains its default and accepts existing drivers", {
   default <- adbi()
   expect_s4_class(default, "AdbiDriver")
   expect_s3_class(default@driver, "adbc_driver_monkey")
+  expect_s3_class(adbi(NA)@driver, "adbc_driver_monkey")
+  expect_s3_class(adbi(pkg = NA)@driver, "adbc_driver_monkey")
 
   driver <- adbcdrivermanager::adbc_driver_monkey()
   result <- adbi(driver)

@@ -43,11 +43,11 @@ NULL
 #'   adbi(pkg = "adbcsqlite")
 #' }
 adbi <- function(driver = NA_character_, pkg = NA_character_) {
-  pkg_supplied <- !identical(pkg, NA_character_)
+  pkg_supplied <- !is_scalar_na(pkg)
 
   if (
     pkg_supplied &&
-      (!is.character(pkg) || length(pkg) != 1L || is.na(pkg) || !nzchar(pkg))
+      (!is.character(pkg) || length(pkg) != 1L || !nzchar(pkg))
   ) {
     stop("`pkg` must be a non-missing character scalar.", call. = FALSE)
   }
@@ -71,14 +71,14 @@ adbi <- function(driver = NA_character_, pkg = NA_character_) {
     }
     drv_obj <- driver()
   } else {
-    if (!is.character(driver) || length(driver) != 1L) {
+    driver_default <- is_scalar_na(driver)
+
+    if (!driver_default && (!is.character(driver) || length(driver) != 1L)) {
       stop(
         "`driver` must be an ADBC driver, a function, or a character scalar.",
         call. = FALSE
       )
     }
-
-    driver_default <- identical(driver, NA_character_)
 
     if (pkg_supplied) {
       fun <- if (driver_default) pkg else driver
@@ -156,6 +156,10 @@ adbi_manager_driver <- function(driver) {
       stop(e)
     }
   )
+}
+
+is_scalar_na <- function(x) {
+  is.atomic(x) && length(x) == 1L && is.na(x)
 }
 
 adbi_has_package_function <- function(pkg) {
