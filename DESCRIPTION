@@ -1,10 +1,10 @@
 Package: adbi
 Title: 'DBI' Compliant Database Access Using 'ADBC'
-Version: 0.1.2
+Version: 0.1.4
 Authors@R: 
     c(person(given = "Nicolas",
              family = "Bennett",
-             role = c("aut", "cre"),
+             role = c("aut", "cre", "cph"),
              email = "nicolas@cynkra.com"),
       person(given = "Voltron Data",
              role = "fnd")
@@ -23,14 +23,12 @@ Imports:
 Suggests: 
     testthat,
     covr,
-    DBItest (>= 1.8.2.9008),
+    DBItest (>= 1.8.3),
     adbcsqlite (>= 0.8.0),
     withr,
     bit64,
     utils,
     arrow
-Remotes: 
-    r-dbi/DBItest
 Config/Needs/website: 
     r-dbi/dbitemplate
 Encoding: UTF-8

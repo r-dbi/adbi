@@ -134,6 +134,11 @@ new_result <- function(
 #' class. The "Usage" section lists the class methods overridden by
 #' \pkg{adbi}.
 #'
+#' @return
+#' The DBI methods return what their generics specify, as documented on the
+#' generic's help page, for example [DBI::dbColumnInfo()]. The `show()` method
+#' is called for its side effect of printing a summary.
+#'
 #' @seealso
 #' The corresponding generic functions
 #' [DBI::dbFetch()], [DBI::dbClearResult()], [DBI::dbBind()],

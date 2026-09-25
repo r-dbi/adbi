@@ -8,19 +8,30 @@ AdbiConnection <- function(
   bigint = NULL
 ) {
   db <- adbcdrivermanager::adbc_database_init(driver@driver, ...)
+  on.exit(adbc_release(db, "database"))
 
   meta <- list(
     results = list()
   )
 
-  new(
+  connection <- adbcdrivermanager::adbc_connection_init(db)
+  on.exit(
+    adbc_release(connection, "connection"),
+    add = TRUE,
+    after = FALSE
+  )
+
+  out <- new(
     "AdbiConnection",
     database = db,
-    connection = adbcdrivermanager::adbc_connection_init(db),
+    connection = connection,
     metadata = list2env(meta, envir = new.env(parent = emptyenv())),
     bigint = resolve_bigint(bigint),
     rows_affected_callback = rows_affected_callback
   )
+
+  on.exit()
+  out
 }
 
 #' Class AdbiConnection (and methods)
@@ -29,6 +40,11 @@ AdbiConnection <- function(
 #' argument to [DBI::dbConnect()]. They are a superclass of the
 #' [DBI::DBIConnection-class] class. The "Usage" section lists the class
 #' methods overridden by \pkg{adbi}.
+#'
+#' @return
+#' The DBI methods return what their generics specify, as documented on the
+#' generic's help page, for example [DBI::dbListTables()]. The `show()` method
+#' is called for its side effect of printing a summary.
 #'
 #' @seealso
 #' The corresponding generic functions

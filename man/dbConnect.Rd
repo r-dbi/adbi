@@ -41,7 +41,7 @@ as returned by \code{\link[DBI:dbConnect]{DBI::dbConnect()}}.}
 \item{force}{Close open results when disconnecting}
 }
 \value{
-A connection object (S4 class \code{AdbiCOnnection}, inheriting from
+A connection object (S4 class \code{AdbiConnection}, inheriting from
 \link[DBI:DBIConnection-class]{DBI::DBIConnection}) is returned by \code{\link[DBI:dbConnect]{DBI::dbConnect()}}, while
 \code{\link[DBI:dbDisconnect]{DBI::dbDisconnect()}} returns \code{TRUE} invisibly.
 }
