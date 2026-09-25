@@ -67,15 +67,21 @@
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <p>The <code>data.frame</code> API of DBI is supported.</p>
+<p>Drivers can be selected by an ADBC Driver Manager specification, explicitly from an R package, or by passing an existing driver object:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">adbi</span><span class="fu">::</span><span class="fu"><a href="reference/dbConnect.html">adbi</a></span><span class="op">(</span><span class="st">"sqlite"</span><span class="op">)</span></span>
+<span><span class="fu">adbi</span><span class="fu">::</span><span class="fu"><a href="reference/dbConnect.html">adbi</a></span><span class="op">(</span>pkg <span class="op">=</span> <span class="st">"adbcsqlite"</span><span class="op">)</span></span>
+<span><span class="fu">adbi</span><span class="fu">::</span><span class="fu"><a href="reference/dbConnect.html">adbi</a></span><span class="op">(</span><span class="fu">adbcsqlite</span><span class="fu">::</span><span class="fu"><a href="https://arrow.apache.org/adbc/current/r/adbcsqlite/reference/adbcsqlite.html" class="external-link">adbcsqlite</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>A Driver Manager specification such as <code>"sqlite"</code> needs that driver installed separately; see <a href="https://arrow.apache.org/adbc/current/format/driver_manifests.html" class="external-link">ADBC Driver Manager and Manifests</a> for where the driver manager looks for it.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># To run this example, please install the adbcsqlite package first.</span></span>
 <span><span class="co"># </span></span>
 <span><span class="co"># install.packages("adbcsqlite")</span></span>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dbi.r-dbi.org" class="external-link">DBI</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Create an SQLite connection using the adbcsqlite backend</span></span>
-<span><span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect</a></span><span class="op">(</span><span class="fu">adbi</span><span class="fu">::</span><span class="fu"><a href="reference/dbConnect.html">adbi</a></span><span class="op">(</span><span class="st">"adbcsqlite"</span><span class="op">)</span>, uri <span class="op">=</span> <span class="st">":memory:"</span><span class="op">)</span></span>
+<span><span class="co"># Create an SQLite connection using the adbcsqlite R package</span></span>
+<span><span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect</a></span><span class="op">(</span><span class="fu">adbi</span><span class="fu">::</span><span class="fu"><a href="reference/dbConnect.html">adbi</a></span><span class="op">(</span>pkg <span class="op">=</span> <span class="st">"adbcsqlite"</span><span class="op">)</span>, uri <span class="op">=</span> <span class="st">":memory:"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Write a table</span></span>
 <span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbWriteTable.html" class="external-link">dbWriteTable</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"swiss"</span>, <span class="fu">datasets</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/datasets/swiss.html" class="external-link">swiss</a></span><span class="op">)</span></span>
@@ -132,7 +138,7 @@
 <span><span class="co"># Cleanup</span></span>
 <span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbClearResult.html" class="external-link">dbClearResult</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></code></pre></div>
 <p>More interestingly, the recent arrow-extension API of DBI is supported as well.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Queries</span></span>
 <span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbGetQueryArrow.html" class="external-link">dbGetQueryArrow</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"SELECT * from swiss WHERE Agriculture &lt; 40"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; &lt;nanoarrow_array_stream struct&lt;Fertility: double, Agriculture: double, Examination: int64, Education: int64, Catholic: double, Infant.Mortality: double&gt;&gt;</span></span>

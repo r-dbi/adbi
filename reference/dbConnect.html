@@ -42,7 +42,7 @@ driver object, which can be instantiated by calling <code>adbi()</code>.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">adbi</span><span class="op">(</span>driver <span class="op">=</span> <span class="cn">NA_character_</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">adbi</span><span class="op">(</span>driver <span class="op">=</span> <span class="cn">NA_character_</span>, pkg <span class="op">=</span> <span class="cn">NA_character_</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for class 'AdbiDriver'</span></span>
 <span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect</a></span><span class="op">(</span><span class="va">drv</span>, <span class="va">...</span>, bigint <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
@@ -56,9 +56,14 @@ driver object, which can be instantiated by calling <code>adbi()</code>.</p>
 
 
 <dl><dt id="arg-driver">driver<a class="anchor" aria-label="anchor" href="#arg-driver"></a></dt>
-<dd><p>A driver specification that can be evaluated (with no
-arguments) to give an <code><a href="https://arrow.apache.org/adbc/current/r/adbcdrivermanager/reference/adbc_driver_void.html" class="external-link">adbcdrivermanager::adbc_driver()</a></code>. See Details for
-more information.</p></dd>
+<dd><p>An ADBC driver object, a function returning one, an ADBC Driver
+Manager driver name or manifest path, or (when <code>pkg</code> is supplied) the name
+of a driver function in that package. See Details for more information.</p></dd>
+
+
+<dt id="arg-pkg">pkg<a class="anchor" aria-label="anchor" href="#arg-pkg"></a></dt>
+<dd><p>An R package containing a driver function, or <code>NA</code> if no R package
+is explicitly specified.</p></dd>
 
 
 <dt id="arg-drv">drv<a class="anchor" aria-label="anchor" href="#arg-drv"></a></dt>
@@ -96,12 +101,21 @@ as returned by <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" cl
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>To specify the type of adbc driver, <code>adbi</code> accepts as <code>driver</code> argument</p><ul><li><p>an object inheriting from <code>adbc_driver</code>,</p></li>
+    <p>To specify the type of ADBC driver, <code>adbi()</code> accepts as <code>driver</code> argument</p><ul><li><p>an object inheriting from <code>adbc_driver</code>,</p></li>
 <li><p>a function that can be evaluated with no arguments and returns an object
 inheriting from <code>adbc_driver</code>,</p></li>
-<li><p>a string of the form <code>pkg::fun</code> (where <code>pkg::</code> is optional and defaults
-to <code>fun</code>), which can be used to look up such a function.</p></li>
-</ul><p>As default, an <code><a href="https://arrow.apache.org/adbc/current/r/adbcdrivermanager/reference/adbc_driver_monkey.html" class="external-link">adbcdrivermanager::adbc_driver_monkey()</a></code> object is created.</p>
+<li><p>an ADBC Driver Manager driver name or manifest path.</p></li>
+</ul><p>Use <code>pkg</code> to load a driver provided by an R package. By default, the driver
+function has the same name as the package; supply a character <code>driver</code> to
+use a different function. For example, <code>adbi(pkg = "adbcsqlite")</code> calls
+<code><a href="https://arrow.apache.org/adbc/current/r/adbcsqlite/reference/adbcsqlite.html" class="external-link">adbcsqlite::adbcsqlite()</a></code>, while
+<code>adbi("adbc_driver_monkey", pkg = "adbcdrivermanager")</code> calls
+<code><a href="https://arrow.apache.org/adbc/current/r/adbcdrivermanager/reference/adbc_driver_monkey.html" class="external-link">adbcdrivermanager::adbc_driver_monkey()</a></code>.</p>
+<p>For compatibility, a character <code>driver</code> that names an installed R package
+with a same-named driver function still selects that function, so
+<code>adbi("adbcsqlite")</code> is equivalent to <code>adbi(pkg = "adbcsqlite")</code>. Strings of
+the form <code>pkg::fun</code> are deprecated; use <code>adbi("fun", pkg = "pkg")</code> instead.</p>
+<p>As default, an <code><a href="https://arrow.apache.org/adbc/current/r/adbcdrivermanager/reference/adbc_driver_monkey.html" class="external-link">adbcdrivermanager::adbc_driver_monkey()</a></code> object is created.</p>
     </div>
 
     <div class="section level2">
@@ -109,10 +123,10 @@ to <code>fun</code>), which can be used to look up such a function.</p></li>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">adbi</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;AdbiDriver&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Type: &lt;adbc_driver_monkey&gt;</span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="fu">adbi</span><span class="op">(</span><span class="st">"sqlite"</span><span class="op">)</span> <span class="co"># \dontrun{}</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"adbcsqlite"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="fu">adbi</span><span class="op">(</span><span class="st">"adbcsqlite"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">adbi</span><span class="op">(</span>pkg <span class="op">=</span> <span class="st">"adbcsqlite"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required namespace: adbcsqlite</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;AdbiDriver&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Type: &lt;adbcsqlite_driver_sqlite&gt;</span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dbi.r-dbi.org" class="external-link">DBI</a></span><span class="op">)</span></span></span>
