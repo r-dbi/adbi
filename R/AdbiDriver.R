@@ -116,10 +116,10 @@ adbi <- function(driver = NA_character_, pkg = NA_character_) {
     } else if (adbi_has_package_function(driver)) {
       drv_obj <- adbi_package_driver(driver, driver)
       if (!inherits(drv_obj, "adbc_driver")) {
-        drv_obj <- adbcdrivermanager::adbc_driver(driver)
+        drv_obj <- adbi_manager_driver(driver)
       }
     } else {
-      drv_obj <- adbcdrivermanager::adbc_driver(driver)
+      drv_obj <- adbi_manager_driver(driver)
     }
   }
 
@@ -143,8 +143,23 @@ adbi_package_driver <- function(pkg, fun) {
   drv_fun()
 }
 
+adbi_manager_driver <- function(driver) {
+  tryCatch(
+    adbcdrivermanager::adbc_driver(driver),
+    adbc_status_not_found = function(e) {
+      e$message <- paste0(
+        conditionMessage(e),
+        "\nNo installed R package `",
+        driver,
+        "` provides an ADBC driver either."
+      )
+      stop(e)
+    }
+  )
+}
+
 adbi_has_package_function <- function(pkg) {
-  if (!requireNamespace(pkg, quietly = TRUE)) {
+  if (!nzchar(system.file(package = pkg))) {
     return(FALSE)
   }
 

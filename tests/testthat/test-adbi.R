@@ -88,6 +88,28 @@ test_that("installed packages without a same-name driver use Driver Manager", {
   expect_identical(adbi("utils")@driver, fake_driver)
 })
 
+test_that("a package that fails to load reports its own error", {
+  lib <- withr::local_tempdir()
+  dir.create(file.path(lib, "adbibrokenpkg"))
+  writeLines(
+    c("Package: adbibrokenpkg", "Version: 0.0.1"),
+    file.path(lib, "adbibrokenpkg", "DESCRIPTION")
+  )
+  withr::local_libpaths(lib, action = "prefix")
+
+  err <- expect_error(adbi("adbibrokenpkg"))
+  expect_false(inherits(err, "adbc_status"))
+})
+
+test_that("unknown driver names also rule out an R package", {
+  expect_error(
+    adbi("adbi_no_such_driver"),
+    "No installed R package `adbi_no_such_driver`",
+    fixed = TRUE,
+    class = "adbc_status_not_found"
+  )
+})
+
 test_that("invalid adbi() argument combinations fail clearly", {
   expect_error(adbi(pkg = character()), "`pkg` must")
   expect_error(adbi(pkg = ""), "`pkg` must")
