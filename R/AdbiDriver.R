@@ -21,9 +21,10 @@ NULL
 #' `adbi("adbc_driver_monkey", pkg = "adbcdrivermanager")` calls
 #' [adbcdrivermanager::adbc_driver_monkey()].
 #'
-#' Character values passed through `driver` that identify an R package with a
-#' same-named driver function, and strings of the form `pkg::fun`, are supported
-#' for compatibility but deprecated. Use the explicit `pkg` argument instead.
+#' For compatibility, a character `driver` that names an installed R package
+#' with a same-named driver function still selects that function, so
+#' `adbi("adbcsqlite")` is equivalent to `adbi(pkg = "adbcsqlite")`. Strings of
+#' the form `pkg::fun` are deprecated; use `adbi("fun", pkg = "pkg")` instead.
 #'
 #' As default, an [adbcdrivermanager::adbc_driver_monkey()] object is created.
 #'
@@ -113,17 +114,6 @@ adbi <- function(driver = NA_character_, pkg = NA_character_) {
       )
       drv_obj <- adbi_package_driver(pkg, fun)
     } else if (adbi_has_package_function(driver)) {
-      .Deprecated(
-        new = sprintf('adbi(pkg = "%s")', driver),
-        msg = sprintf(
-          paste0(
-            '`adbi("%s")` as an R package lookup is deprecated; ',
-            'use `adbi(pkg = "%s")` instead.'
-          ),
-          driver,
-          driver
-        )
-      )
       drv_obj <- adbi_package_driver(driver, driver)
     } else {
       drv_obj <- adbcdrivermanager::adbc_driver(driver)

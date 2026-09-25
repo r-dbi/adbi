@@ -65,9 +65,10 @@ use a different function. For example, \code{adbi(pkg = "adbcsqlite")} calls
 \code{adbi("adbc_driver_monkey", pkg = "adbcdrivermanager")} calls
 \code{\link[adbcdrivermanager:adbc_driver_monkey]{adbcdrivermanager::adbc_driver_monkey()}}.
 
-Character values passed through \code{driver} that identify an R package with a
-same-named driver function, and strings of the form \code{pkg::fun}, are supported
-for compatibility but deprecated. Use the explicit \code{pkg} argument instead.
+For compatibility, a character \code{driver} that names an installed R package
+with a same-named driver function still selects that function, so
+\code{adbi("adbcsqlite")} is equivalent to \code{adbi(pkg = "adbcsqlite")}. Strings of
+the form \code{pkg::fun} are deprecated; use \code{adbi("fun", pkg = "pkg")} instead.
 
 As default, an \code{\link[adbcdrivermanager:adbc_driver_monkey]{adbcdrivermanager::adbc_driver_monkey()}} object is created.
 }
