@@ -115,6 +115,9 @@ adbi <- function(driver = NA_character_, pkg = NA_character_) {
       drv_obj <- adbi_package_driver(pkg, fun)
     } else if (adbi_has_package_function(driver)) {
       drv_obj <- adbi_package_driver(driver, driver)
+      if (!inherits(drv_obj, "adbc_driver")) {
+        drv_obj <- adbcdrivermanager::adbc_driver(driver)
+      }
     } else {
       drv_obj <- adbcdrivermanager::adbc_driver(driver)
     }

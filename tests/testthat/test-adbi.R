@@ -57,6 +57,23 @@ test_that("pkg::fun warns and continues to work", {
   )
 })
 
+test_that("non-driver package functions fall back to the Driver Manager", {
+  fake_driver <- adbcdrivermanager::adbc_driver_monkey()
+  local_mocked_bindings(
+    adbi_has_package_function = function(pkg) identical(pkg, "fakepkg"),
+    adbi_package_driver = function(pkg, fun) 42
+  )
+  local_mocked_bindings(
+    adbc_driver = function(driver) {
+      expect_identical(driver, "fakepkg")
+      fake_driver
+    },
+    .package = "adbcdrivermanager"
+  )
+
+  expect_identical(adbi("fakepkg")@driver, fake_driver)
+})
+
 test_that("installed packages without a same-name driver use Driver Manager", {
   fake_driver <- adbcdrivermanager::adbc_driver_monkey()
   local_mocked_bindings(
@@ -88,15 +105,6 @@ test_that("driver functions must return an adbc_driver", {
   local_mocked_bindings(adbi_package_driver = function(pkg, fun) 42)
   expect_error(
     adbi(pkg = "fakepkg"),
-    "must return an `adbc_driver` object",
-    fixed = TRUE
-  )
-
-  local_mocked_bindings(
-    adbi_has_package_function = function(pkg) identical(pkg, "fakepkg")
-  )
-  expect_error(
-    adbi("fakepkg"),
     "must return an `adbc_driver` object",
     fixed = TRUE
   )
