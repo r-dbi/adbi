@@ -1,5 +1,9 @@
 # adbi (development version)
 
+- `adbi()` now accepts ADBC Driver Manager driver names and manifest paths.
+  The new `pkg` argument explicitly selects an R package driver. Strings of the
+  form `pkg::fun` are deprecated in favour of `adbi("fun", pkg = "pkg")` (#60).
+
 # adbi 0.1.3
 
 - A `dbConnect()` call that fails partway now releases the ADBC database and

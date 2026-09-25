@@ -68,18 +68,44 @@ split_rows <- function(x) {
   split(x, seq_len(nrow(x)))
 }
 
-db_data_type_blob <- function(drv) {
-  if (inherits(drv, "adbcsqlite_driver_sqlite")) {
-    "BLOB"
-  } else if (inherits(drv, "adbcpostgresql_driver_postgresql")) {
-    "bytea"
-  } else {
+db_data_type_blob <- function(drv, con = NULL) {
+  switch(
+    db_vendor_name(drv, con),
+    SQLite = "BLOB",
+    PostgreSQL = "bytea",
     stop(
       "dbDataType for blob objects unknown for type ",
       paste0(class(drv), collapse = ", "),
       call. = FALSE
     )
+  )
+}
+
+db_vendor_name <- function(drv, con = NULL) {
+  if (inherits(drv, "adbcsqlite_driver_sqlite")) {
+    return("SQLite")
   }
+
+  if (inherits(drv, "adbcpostgresql_driver_postgresql")) {
+    return("PostgreSQL")
+  }
+
+  if (is.null(con)) {
+    return(NA_character_)
+  }
+
+  tryCatch(
+    connection_info_string(con, 0L),
+    adbc_status_not_implemented = function(e) NA_character_
+  )
+}
+
+connection_info_string <- function(con, code) {
+  info <- nanoarrow::convert_array_stream(
+    adbcdrivermanager::adbc_connection_get_info(con, code)
+  )
+
+  info[1L, "info_value"][1L, "string_value"]
 }
 
 adbc_release <- function(x, type = c("statement", "connection", "database")) {

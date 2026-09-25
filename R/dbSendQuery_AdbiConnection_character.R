@@ -29,7 +29,7 @@
 #' @examples
 #' if (requireNamespace("adbcsqlite")) {
 #'   library(DBI)
-#'   con <- dbConnect(adbi::adbi("adbcsqlite"), uri = ":memory:")
+#'   con <- dbConnect(adbi::adbi(pkg = "adbcsqlite"), uri = ":memory:")
 #'   dbWriteTable(con, "swiss", swiss)
 #'   str(
 #'     dbGetQuery(con, "SELECT Examination from swiss WHERE Agriculture < 30")
