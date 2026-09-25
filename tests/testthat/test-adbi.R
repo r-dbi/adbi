@@ -42,11 +42,15 @@ test_that("Driver Manager specs load a real driver", {
 })
 
 test_that("pkg explicitly selects an R package driver", {
-  skip_if_not_installed("adbcsqlite")
-  expect_s3_class(adbi(pkg = "adbcsqlite")@driver, "adbc_driver")
   expect_s3_class(
     adbi("adbc_driver_monkey", pkg = "adbcdrivermanager")@driver,
-    "adbc_driver"
+    "adbc_driver_monkey"
+  )
+
+  skip_if_not_installed("adbcsqlite")
+  expect_s3_class(
+    adbi(pkg = "adbcsqlite")@driver,
+    "adbcsqlite_driver_sqlite"
   )
 })
 
