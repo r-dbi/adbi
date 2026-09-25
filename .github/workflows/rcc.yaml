@@ -2,7 +2,10 @@
 on:
   push:
     branches: [main]
+  # `labeled`, so that applying the `release` label starts the release
+  # jobs. Any label change reruns the whole workflow.
   pull_request:
+    types: [opened, reopened, synchronize, labeled]
   workflow_dispatch:
 
 name: rcc
@@ -51,6 +54,17 @@ jobs:
           git diff --cached --exit-code
 
       - uses: r-lib/actions/check-r-package@v2
+
+  # The mechanical CRAN release checks from blockr.ci, reported in one
+  # comment on a pull request carrying the `release` label. A skipped caller
+  # creates none of the called workflow's check contexts, so drop the `if:`
+  # before requiring any of them in a ruleset.
+  release:
+    if: contains(github.event.pull_request.labels.*.name, 'release')
+    permissions:
+      contents: read
+      pull-requests: write
+    uses: BristolMyersSquibb/blockr.ci/.github/workflows/release-gate.yaml@main
 
   check:
     needs: smoke
@@ -185,6 +199,155 @@ jobs:
           clean: false
           branch: gh-pages
           folder: docs
+
+  # Reverse dependency check on a release pull request, once smoke and the
+  # gate have passed. Never require it: r-devel/recheck, whose container it
+  # uses, calls such a check "typically too volatile to use as an automatic
+  # pass/fail CI test". The label test repeats the gate's, which passes on
+  # any pull request once its `if:` is dropped.
+  #
+  # This job installs every CRAN dependent with all it needs, once, into a
+  # library the check jobs unpack. The container carries the system
+  # libraries of CRAN's check server.
+  revdep-setup:
+    needs: [smoke, release]
+    if: contains(github.event.pull_request.labels.*.name, 'release')
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    container:
+      image: ghcr.io/r-devel/recheck
+      volumes:
+        - /usr:/host/usr
+    permissions:
+      contents: read
+    env:
+      R_LIBS_USER: ${{ github.workspace }}/pkglib
+    outputs:
+      packages: ${{ steps.dependents.outputs.packages }}
+    steps:
+      # The image fills most of the runner's disk, so make room as
+      # recheck does.
+      - name: Free disk space
+        run: rm -rf /host/usr/share/dotnet /host/usr/local/lib/android
+
+      - uses: actions/checkout@v7
+        with:
+          path: source
+
+      - name: List the dependents on CRAN
+        id: dependents
+        shell: Rscript {0}
+        run: |
+          db <- available.packages(repos = "https://cloud.r-project.org")
+          if (!"adbi" %in% rownames(db)) {
+            stop("adbi is not on CRAN, so there is no release to compare against")
+          }
+          pkgs <- tools::package_dependencies("adbi", db = db, which = "most", reverse = TRUE)[[1]]
+          json <- if (length(pkgs)) sprintf('["%s"]', paste(pkgs, collapse = '", "')) else "[]"
+          cat("packages=", json, "\n", file = Sys.getenv("GITHUB_OUTPUT"), sep = "", append = TRUE)
+
+      - name: Install them with everything they need
+        run: |
+          mkdir -p "$R_LIBS_USER"
+          Rscript -e 'rechecktools::install_recheck_deps("source", "most")'
+
+      # Tarred, since an artifact does not keep the executable bits some
+      # packages need.
+      - name: Build this branch and download the CRAN release
+        run: |
+          mkdir new old
+          R CMD build source
+          mv adbi_*.tar.gz new/
+          Rscript -e 'download.packages("adbi", "old", repos = "https://cloud.r-project.org")'
+          tar -cf revdep.tar pkglib new old
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: revdep
+          path: revdep.tar
+          retention-days: 1
+
+  # One job per dependent, checked against adbi's CRAN release and then
+  # against this branch, on the same machine and library. The job fails
+  # when a check does worse against this branch.
+  revdep:
+    needs: revdep-setup
+    if: needs.revdep-setup.outputs.packages != '[]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    container:
+      image: ghcr.io/r-devel/recheck
+      volumes:
+        - /usr:/host/usr
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        package: ${{ fromJSON(needs.revdep-setup.outputs.packages) }}
+    env:
+      R_LIBS_USER: ${{ github.workspace }}/pkglib
+    steps:
+      - name: Free disk space
+        run: rm -rf /host/usr/share/dotnet /host/usr/local/lib/android
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: revdep
+
+      - name: Unpack the library and both versions of adbi
+        run: tar -xf revdep.tar
+
+      - name: Check ${{ matrix.package }}
+        shell: Rscript {0}
+        env:
+          PACKAGE: ${{ matrix.package }}
+          _R_CHECK_FORCE_SUGGESTS_: 'false'
+          _R_CHECK_ELAPSED_TIMEOUT_: 3600
+          # Blank, as on CRAN, so that tests skipped on CI run here.
+          CI: ''
+          GITHUB_ACTIONS: ''
+        run: |
+          pkg <- Sys.getenv("PACKAGE")
+          libs <- .libPaths()
+          for (side in c("old", "new")) {
+            lib <- file.path("lib", side)
+            dir <- file.path("check", side)
+            dir.create(lib, recursive = TRUE)
+            dir.create(dir, recursive = TRUE)
+            .libPaths(c(lib, libs))
+            install.packages(Sys.glob(file.path(side, "adbi_*.tar.gz")), lib = lib, repos = NULL)
+            download.packages(pkg, dir, repos = "https://cloud.r-project.org", type = "source")
+            tools::check_packages_in_dir(dir, check_args = "--no-manual")
+          }
+          status <- function(side) {
+            log <- Sys.glob(file.path("check", side, "*.Rcheck", "00check.log"))
+            s <- grep("^Status:", unlist(lapply(log, readLines)), value = TRUE)
+            if (length(s)) sub("^Status: ", "", s) else "no result"
+          }
+          changes <- tools::check_packages_in_dir_changes("check/new", "check/old")
+          print(changes)
+          levels <- c("NOTE", "WARNING", "ERROR", "FAILURE")
+          worse <- match(changes$New, levels, 0) > match(changes$Old, levels, 0)
+          ok <- function(x) sub("^$", "OK", x)
+          cat(
+            sprintf("### %s", pkg), "",
+            sprintf("CRAN release: %s. This branch: %s.", status("old"), status("new")), "",
+            if (nrow(changes)) c(
+              "| Check | CRAN release | This branch |", "|---|---|---|",
+              sprintf("| %s | %s | %s |", changes$Check, ok(changes$Old), ok(changes$New)), ""
+            ),
+            file = Sys.getenv("GITHUB_STEP_SUMMARY"), sep = "\n", append = TRUE
+          )
+          if (any(worse)) stop(pkg, " does worse against this branch than against the CRAN release")
+
+      - uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: revdep-${{ matrix.package }}
+          path: |
+            check/*/*.Rcheck/00*
+            check/*/*.Rcheck/tests/*.Rout*
 
   rcc:
     needs: [smoke, check, suggests, coverage, pkgdown]
