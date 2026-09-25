@@ -2,6 +2,9 @@
 
 ## adbi (development version)
 
+- A [`dbConnect()`](https://dbi.r-dbi.org/reference/dbConnect.html) call
+  that fails partway now releases the ADBC database and connection it
+  had already created.
 - Requires R \>= 4.1.0.
 
 ## adbi 0.1.2 (2024-09-03)
