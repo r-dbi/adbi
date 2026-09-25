@@ -2,6 +2,7 @@
 
 - ADBC database and connection resources are now released if constructing an
   `AdbiConnection` fails.
+- Requires R >= 4.1.0.
 
 # adbi 0.1.2 (2024-09-03)
 
