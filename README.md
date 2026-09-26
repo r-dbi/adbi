@@ -127,8 +127,18 @@ res <- dbSendQueryArrow(con, "SELECT * from swiss WHERE Agriculture < ?")
 dbBind(res, 30)
 
 ret <- dbFetchArrow(res)
-ret$length
-#> NULL
+as.data.frame(ret)
+#>    Fertility Agriculture Examination Education Catholic Infant.Mortality
+#> 1       80.2        17.0          15        12     9.96             22.2
+#> 2       55.7        19.4          26        28    12.11             20.2
+#> 3       54.3        15.2          31        20     2.15             10.8
+#> 4       58.3        26.8          25        19    18.46             20.9
+#> 5       65.7         7.7          29        11    13.79             20.5
+#> 6       72.7        16.7          22        13    11.22             18.9
+#> 7       64.4        17.6          35        32    16.92             23.0
+#> 8       67.6        18.7          25         7     8.65             19.5
+#> 9       35.0         1.2          37        53    42.34             18.0
+#> 10      42.8        27.7          22        29    58.33             19.3
 
 dbBind(res, 20)
 
