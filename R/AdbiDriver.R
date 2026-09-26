@@ -14,23 +14,25 @@ NULL
 #'   inheriting from `adbc_driver`,
 #' * an ADBC Driver Manager driver name or manifest path.
 #'
-#' Use `pkg` to load a driver provided by an R package. By default, the driver
-#' function has the same name as the package; supply a character `driver` to
-#' use a different function. For example, `adbi(pkg = "adbcsqlite")` calls
-#' [adbcsqlite::adbcsqlite()], while
-#' `adbi("adbc_driver_monkey", pkg = "adbcdrivermanager")` calls
+#' Use `pkg` to load a driver provided by an R package.
+#' By default, the driver function has the same name as the package; supply a
+#' character `driver` to use a different function.
+#' For example, `adbi(pkg = "adbcsqlite")` calls [adbcsqlite::adbcsqlite()],
+#' while `adbi("adbc_driver_monkey", pkg = "adbcdrivermanager")` calls
 #' [adbcdrivermanager::adbc_driver_monkey()].
 #'
 #' For compatibility, a character `driver` that names an installed R package
 #' with a same-named driver function still selects that function, so
-#' `adbi("adbcsqlite")` is equivalent to `adbi(pkg = "adbcsqlite")`. Strings of
-#' the form `pkg::fun` are deprecated; use `adbi("fun", pkg = "pkg")` instead.
+#' `adbi("adbcsqlite")` is equivalent to `adbi(pkg = "adbcsqlite")`.
+#' Strings of the form `pkg::fun` are deprecated; use `adbi("fun", pkg = "pkg")`
+#' instead.
 #'
 #' As default, an [adbcdrivermanager::adbc_driver_monkey()] object is created.
 #'
 #' @param driver An ADBC driver object, a function returning one, an ADBC Driver
 #'   Manager driver name or manifest path, or (when `pkg` is supplied) the name
-#'   of a driver function in that package. See Details for more information.
+#'   of a driver function in that package.
+#'   See Details for more information.
 #' @param pkg An R package containing a driver function, or `NA` if no R package
 #'   is explicitly specified.
 #'
@@ -172,15 +174,16 @@ adbi_has_package_function <- function(pkg) {
 
 #' Class AdbiDriver (and methods)
 #'
-#' AdbiDriver objects are created by [adbi()], and used to select the
-#' correct method in [DBI::dbConnect()]. They are a superclass of the
-#' [DBI::DBIDriver-class] class, and used purely for dispatch.
+#' AdbiDriver objects are created by [adbi()], and used to select the correct
+#' method in [DBI::dbConnect()].
+#' They are a superclass of the [DBI::DBIDriver-class] class, and used purely
+#' for dispatch.
 #' The "Usage" section lists the class methods overridden by \pkg{adbi}.
 #'
 #' @return
 #' The DBI methods return what their generics specify, as documented on the
-#' generic's help page, for example [DBI::dbGetInfo()]. The `show()` method is
-#' called for its side effect of printing a summary.
+#' generic's help page, for example [DBI::dbGetInfo()].
+#' The `show()` method is called for its side effect of printing a summary.
 #'
 #' @keywords internal
 #' @export
