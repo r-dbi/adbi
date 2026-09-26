@@ -1,5 +1,8 @@
 ---
-output: github_document
+output:
+  github_document:
+    md_extensions: "-smart"
+    pandoc_args: "--wrap=preserve"
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
