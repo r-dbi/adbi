@@ -77,14 +77,14 @@ or a \link[DBI:DBIResult-class]{DBI::DBIResult}}
 }
 \value{
 The DBI methods return what their generics specify, as documented on the
-generic's help page, for example \code{\link[DBI:dbFetchArrow]{DBI::dbFetchArrow()}}. The \code{show()} method
-is called for its side effect of printing a summary.
+generic's help page, for example \code{\link[DBI:dbFetchArrow]{DBI::dbFetchArrow()}}.
+The \code{show()} method is called for its side effect of printing a summary.
 }
 \description{
 AdbiResultArrow objects are created by \code{\link[DBI:dbSendQueryArrow]{DBI::dbSendQueryArrow()}}, and
-encapsulate the result of an SQL query (a \code{SELECT} statement). They are a
-superclass of the \link[DBI:DBIResultArrow-class]{DBI::DBIResultArrow} class. The "Usage" section
-lists the class methods overridden by \pkg{adbi}.
+encapsulate the result of an SQL query (a \code{SELECT} statement).
+They are a superclass of the \link[DBI:DBIResultArrow-class]{DBI::DBIResultArrow} class.
+The "Usage" section lists the class methods overridden by \pkg{adbi}.
 }
 \seealso{
 The corresponding generic functions

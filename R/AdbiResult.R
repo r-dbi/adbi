@@ -130,14 +130,14 @@ new_result <- function(
 #'
 #' AdbiResult objects are created by [DBI::dbSendQuery()] or
 #' [DBI::dbSendStatement()], and encapsulate the result of an SQL statement
-#' (either `SELECT` or not). They are a superclass of the [DBI::DBIResult-class]
-#' class. The "Usage" section lists the class methods overridden by
-#' \pkg{adbi}.
+#' (either `SELECT` or not).
+#' They are a superclass of the [DBI::DBIResult-class] class.
+#' The "Usage" section lists the class methods overridden by \pkg{adbi}.
 #'
 #' @return
 #' The DBI methods return what their generics specify, as documented on the
-#' generic's help page, for example [DBI::dbColumnInfo()]. The `show()` method
-#' is called for its side effect of printing a summary.
+#' generic's help page, for example [DBI::dbColumnInfo()].
+#' The `show()` method is called for its side effect of printing a summary.
 #'
 #' @seealso
 #' The corresponding generic functions

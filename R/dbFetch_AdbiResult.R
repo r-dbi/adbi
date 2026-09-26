@@ -1,13 +1,14 @@
 #' Fetch result sets
 #'
 #' When fetching results using [DBI::dbFetch()], the argument `n` can be
-#' specified to control chunk size per fetching operation. The default value of
-#' `-1` corresponds to retrieving the entire result set at once, while a
-#' positive integer will try returning as many rows (as long as `n` does not
-#' exceed the available number of rows), in line with standard DBI
-#' expectations. As data transfer is mediated by Arrow data structures, which
-#' are retrieved as array chunks, the underlying chunk size can be used by
-#' passing an `n` value `NA`.
+#' specified to control chunk size per fetching operation.
+#' The default value of `-1` corresponds to retrieving the entire result set at
+#' once, while a positive integer will try returning as many rows (as long as
+#' `n` does not exceed the available number of rows), in line with standard DBI
+#' expectations.
+#' As data transfer is mediated by Arrow data structures, which are retrieved as
+#' array chunks, the underlying chunk size can be used by passing an `n` value
+#' `NA`.
 #'
 #' @rdname dbFetch
 #' @inheritParams DBI::dbFetch

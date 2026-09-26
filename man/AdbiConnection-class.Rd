@@ -153,10 +153,10 @@ given verbatim, e.g. \code{SQL('"my_schema"."table_name"')}
 \item{...}{Other parameters passed on to methods.}
 
 \item{row.names}{A logical specifying whether the \code{row.names} should be
-output to the output DBMS table; if \code{TRUE}, an extra field whose name
-will be whatever the R identifier \code{"row.names"} maps to the DBMS (see
-\code{\link[DBI:make.db.names]{DBI::make.db.names()}}). If \code{NA} will add rows names if
-they are characters, otherwise will ignore.}
+output to the output DBMS table; if \code{TRUE}, an extra field whose name will
+be whatever the R identifier \code{"row.names"} maps to the DBMS (see
+\code{\link[DBI:make.db.names]{DBI::make.db.names()}}).
+If \code{NA} will add rows names if they are characters, otherwise will ignore.}
 
 \item{dbObj}{A object inheriting from \link[DBI:DBIDriver-class]{DBI::DBIDriver}
 or \link[DBI:DBIConnection-class]{DBI::DBIConnection}}
@@ -167,33 +167,34 @@ or \link[DBI:DBIConnection-class]{DBI::DBIConnection}}
 identifier.}
 
 \item{temporary}{a logical specifying whether the new table should be
-temporary. Its default is \code{FALSE}.}
+temporary.
+Its default is \code{FALSE}.}
 
 \item{fail_if_missing}{If \code{FALSE}, \code{\link[DBI:dbRemoveTable]{DBI::dbRemoveTable()}} succeeds if the
 table doesn't exist.}
 
-\item{overwrite}{Allow overwriting the destination table. Cannot be
-\code{TRUE} if \code{append} is also \code{TRUE}.}
+\item{overwrite}{Allow overwriting the destination table.
+Cannot be \code{TRUE} if \code{append} is also \code{TRUE}.}
 
-\item{append}{Allow appending to the destination table. Cannot be
-\code{TRUE} if \code{overwrite} is also \code{TRUE}.}
+\item{append}{Allow appending to the destination table.
+Cannot be \code{TRUE} if \code{overwrite} is also \code{TRUE}.}
 
-\item{field.types}{character vector of named SQL field types where
-the names are the names of new table's columns. If missing, types inferred
-with \code{\link[DBI:dbDataType]{DBI::dbDataType()}}).}
+\item{field.types}{character vector of named SQL field types where the names
+are the names of new table's columns.
+If missing, types inferred with \code{\link[DBI:dbDataType]{DBI::dbDataType()}}).}
 
 \item{object}{Any R object}
 }
 \value{
 The DBI methods return what their generics specify, as documented on the
-generic's help page, for example \code{\link[DBI:dbListTables]{DBI::dbListTables()}}. The \code{show()} method
-is called for its side effect of printing a summary.
+generic's help page, for example \code{\link[DBI:dbListTables]{DBI::dbListTables()}}.
+The \code{show()} method is called for its side effect of printing a summary.
 }
 \description{
-AdbiConnection objects are created by passing \code{\link[=adbi]{adbi()}} as first
-argument to \code{\link[DBI:dbConnect]{DBI::dbConnect()}}. They are a superclass of the
-\link[DBI:DBIConnection-class]{DBI::DBIConnection} class. The "Usage" section lists the class
-methods overridden by \pkg{adbi}.
+AdbiConnection objects are created by passing \code{\link[=adbi]{adbi()}} as first argument to
+\code{\link[DBI:dbConnect]{DBI::dbConnect()}}.
+They are a superclass of the \link[DBI:DBIConnection-class]{DBI::DBIConnection} class.
+The "Usage" section lists the class methods overridden by \pkg{adbi}.
 }
 \seealso{
 The corresponding generic functions

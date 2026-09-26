@@ -23,14 +23,14 @@ AdbiResultArrow <- function(
 #' Class AdbiResultArrow (and methods)
 #'
 #' AdbiResultArrow objects are created by [DBI::dbSendQueryArrow()], and
-#' encapsulate the result of an SQL query (a `SELECT` statement). They are a
-#' superclass of the [DBI::DBIResultArrow-class] class. The "Usage" section
-#' lists the class methods overridden by \pkg{adbi}.
+#' encapsulate the result of an SQL query (a `SELECT` statement).
+#' They are a superclass of the [DBI::DBIResultArrow-class] class.
+#' The "Usage" section lists the class methods overridden by \pkg{adbi}.
 #'
 #' @return
 #' The DBI methods return what their generics specify, as documented on the
-#' generic's help page, for example [DBI::dbFetchArrow()]. The `show()` method
-#' is called for its side effect of printing a summary.
+#' generic's help page, for example [DBI::dbFetchArrow()].
+#' The `show()` method is called for its side effect of printing a summary.
 #'
 #' @seealso
 #' The corresponding generic functions

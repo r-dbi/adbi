@@ -18,7 +18,8 @@ adbi(driver = NA_character_, pkg = NA_character_)
 \arguments{
 \item{driver}{An ADBC driver object, a function returning one, an ADBC Driver
 Manager driver name or manifest path, or (when \code{pkg} is supplied) the name
-of a driver function in that package. See Details for more information.}
+of a driver function in that package.
+See Details for more information.}
 
 \item{pkg}{An R package containing a driver function, or \code{NA} if no R package
 is explicitly specified.}
@@ -58,17 +59,18 @@ inheriting from \code{adbc_driver},
 \item an ADBC Driver Manager driver name or manifest path.
 }
 
-Use \code{pkg} to load a driver provided by an R package. By default, the driver
-function has the same name as the package; supply a character \code{driver} to
-use a different function. For example, \code{adbi(pkg = "adbcsqlite")} calls
-\code{\link[adbcsqlite:adbcsqlite]{adbcsqlite::adbcsqlite()}}, while
-\code{adbi("adbc_driver_monkey", pkg = "adbcdrivermanager")} calls
+Use \code{pkg} to load a driver provided by an R package.
+By default, the driver function has the same name as the package; supply a
+character \code{driver} to use a different function.
+For example, \code{adbi(pkg = "adbcsqlite")} calls \code{\link[adbcsqlite:adbcsqlite]{adbcsqlite::adbcsqlite()}},
+while \code{adbi("adbc_driver_monkey", pkg = "adbcdrivermanager")} calls
 \code{\link[adbcdrivermanager:adbc_driver_monkey]{adbcdrivermanager::adbc_driver_monkey()}}.
 
 For compatibility, a character \code{driver} that names an installed R package
 with a same-named driver function still selects that function, so
-\code{adbi("adbcsqlite")} is equivalent to \code{adbi(pkg = "adbcsqlite")}. Strings of
-the form \code{pkg::fun} are deprecated; use \code{adbi("fun", pkg = "pkg")} instead.
+\code{adbi("adbcsqlite")} is equivalent to \code{adbi(pkg = "adbcsqlite")}.
+Strings of the form \code{pkg::fun} are deprecated; use \code{adbi("fun", pkg = "pkg")}
+instead.
 
 As default, an \code{\link[adbcdrivermanager:adbc_driver_monkey]{adbcdrivermanager::adbc_driver_monkey()}} object is created.
 }
