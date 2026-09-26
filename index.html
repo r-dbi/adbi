@@ -170,8 +170,18 @@
 <span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbBind.html" class="external-link">dbBind</a></span><span class="op">(</span><span class="va">res</span>, <span class="fl">30</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ret</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbFetchArrow.html" class="external-link">dbFetchArrow</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
-<span><span class="va">ret</span><span class="op">$</span><span class="va">length</span></span>
-<span><span class="co">#&gt; NULL</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">ret</span><span class="op">)</span></span>
+<span><span class="co">#&gt;    Fertility Agriculture Examination Education Catholic Infant.Mortality</span></span>
+<span><span class="co">#&gt; 1       80.2        17.0          15        12     9.96             22.2</span></span>
+<span><span class="co">#&gt; 2       55.7        19.4          26        28    12.11             20.2</span></span>
+<span><span class="co">#&gt; 3       54.3        15.2          31        20     2.15             10.8</span></span>
+<span><span class="co">#&gt; 4       58.3        26.8          25        19    18.46             20.9</span></span>
+<span><span class="co">#&gt; 5       65.7         7.7          29        11    13.79             20.5</span></span>
+<span><span class="co">#&gt; 6       72.7        16.7          22        13    11.22             18.9</span></span>
+<span><span class="co">#&gt; 7       64.4        17.6          35        32    16.92             23.0</span></span>
+<span><span class="co">#&gt; 8       67.6        18.7          25         7     8.65             19.5</span></span>
+<span><span class="co">#&gt; 9       35.0         1.2          37        53    42.34             18.0</span></span>
+<span><span class="co">#&gt; 10      42.8        27.7          22        29    58.33             19.3</span></span>
 <span></span>
 <span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbBind.html" class="external-link">dbBind</a></span><span class="op">(</span><span class="va">res</span>, <span class="fl">20</span><span class="op">)</span></span>
 <span></span>
