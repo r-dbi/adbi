@@ -68,15 +68,15 @@ or a \link[DBI:DBIResult-class]{DBI::DBIResult}}
 }
 \value{
 The DBI methods return what their generics specify, as documented on the
-generic's help page, for example \code{\link[DBI:dbColumnInfo]{DBI::dbColumnInfo()}}. The \code{show()} method
-is called for its side effect of printing a summary.
+generic's help page, for example \code{\link[DBI:dbColumnInfo]{DBI::dbColumnInfo()}}.
+The \code{show()} method is called for its side effect of printing a summary.
 }
 \description{
 AdbiResult objects are created by \code{\link[DBI:dbSendQuery]{DBI::dbSendQuery()}} or
 \code{\link[DBI:dbSendStatement]{DBI::dbSendStatement()}}, and encapsulate the result of an SQL statement
-(either \code{SELECT} or not). They are a superclass of the \link[DBI:DBIResult-class]{DBI::DBIResult}
-class. The "Usage" section lists the class methods overridden by
-\pkg{adbi}.
+(either \code{SELECT} or not).
+They are a superclass of the \link[DBI:DBIResult-class]{DBI::DBIResult} class.
+The "Usage" section lists the class methods overridden by \pkg{adbi}.
 }
 \seealso{
 The corresponding generic functions

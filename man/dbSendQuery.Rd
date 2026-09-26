@@ -49,9 +49,9 @@ as returned by \code{\link[DBI:dbConnect]{DBI::dbConnect()}}.}
 \item{params}{Optional query parameters (forwarded to \code{\link[DBI:dbBind]{DBI::dbBind()}})}
 
 \item{immediate}{Passing a value \code{TRUE} is intended for statements containing
-no placeholders and \code{FALSE} otherwise. The default value \code{NULL} will
-inspect the statement for presence of placeholders (will \code{PREPARE} the
-statement)}
+no placeholders and \code{FALSE} otherwise.
+The default value \code{NULL} will inspect the statement for presence of
+placeholders (will \code{PREPARE} the statement)}
 
 \item{bigint}{The R type that 64-bit integer types should be mapped to,
 default is chosen according to the connection setting}
@@ -61,17 +61,18 @@ An S4 class \code{AdbiResult} (inheriting from \link[DBI:DBIResult-class]{DBI::D
 }
 \description{
 Creating result sets using \code{\link[DBI:dbSendQuery]{DBI::dbSendQuery()}} (and by extension using
-\code{\link[DBI:dbGetQuery]{DBI::dbGetQuery()}}) mostly follows DBI specification. One way where adbi
-deviates from DBI mechanisms is how the \code{bigint} setting is not only per
-connection, but the per-connection setting can be overridden on a result
-set basis. As default, the connection setting is applied, but passing one
-of the accepted values as \code{bigint} when creating a result set will
-subsequently use that setting for all fetches using this result set.
+\code{\link[DBI:dbGetQuery]{DBI::dbGetQuery()}}) mostly follows DBI specification.
+One way where adbi deviates from DBI mechanisms is how the \code{bigint} setting
+is not only per connection, but the per-connection setting can be overridden
+on a result set basis.
+As default, the connection setting is applied, but passing one of the
+accepted values as \code{bigint} when creating a result set will subsequently use
+that setting for all fetches using this result set.
 }
 \details{
-Multiple open result sets per connection are supported and support can
-be disabled by setting \code{options(adbi.allow_multiple_results = FALSE)}. If
-not enabled, creating a new result will finalize potential other results
+Multiple open result sets per connection are supported and support can be
+disabled by setting \code{options(adbi.allow_multiple_results = FALSE)}.
+If not enabled, creating a new result will finalize potential other results
 and throw a warning.
 }
 \examples{
