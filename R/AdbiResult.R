@@ -62,15 +62,10 @@ init_result <- function(
     adbcdrivermanager::adbc_statement_prepare(stmt)
     prepared <- TRUE
 
-    schema <- nanoarrow::nanoarrow_schema_parse(
-      adbcdrivermanager::adbc_statement_get_parameter_schema(stmt),
-      recursive = TRUE
-    )
+    schema <- get_parameter_schema(stmt)
 
-    if ("children" %in% names(schema) && length(schema[["children"]]) > 0L) {
-      immediate <- FALSE
-    } else {
-      immediate <- TRUE
+    if (!isFALSE(schema)) {
+      immediate <- length(schema[["children"]]) == 0L
     }
   } else {
     prepared <- FALSE
@@ -99,6 +94,17 @@ init_result <- function(
   res
 }
 
+get_parameter_schema <- function(statement) {
+  # FALSE denotes unavailable metadata; NULL denotes an unrequested schema.
+  tryCatch(
+    nanoarrow::nanoarrow_schema_parse(
+      adbcdrivermanager::adbc_statement_get_parameter_schema(statement),
+      recursive = TRUE
+    ),
+    adbc_status_not_implemented = function(e) FALSE
+  )
+}
+
 new_result <- function(
   statement,
   immediate,
@@ -114,7 +120,7 @@ new_result <- function(
     prepared = prepared,
     type = type,
     sql = sql,
-    has_completed = switch(type, statement = TRUE, query = FALSE)
+    has_completed = switch(type, statement = !is.null(immediate), query = FALSE)
   )
 
   new(

@@ -13,16 +13,22 @@
 #' not enabled, creating a new result will finalize potential other results
 #' and throw a warning.
 #'
+#' If parameter metadata is unavailable, bind before fetching when parameters
+#' are needed. Parameter count and name checks are delegated to the driver.
+#'
+#' The driver may report parameter errors during execution.
+#'
+#' Without metadata, requesting rows affected for an unbound statement attempts
+#' execution with `immediate = NULL`, but returns `NA` with `immediate = FALSE`.
+#'
 #' @seealso adbi-driver
 #' @rdname dbSendQuery
 #' @param conn A [DBI::DBIConnection][DBI::DBIConnection-class] object,
 #'   as returned by [DBI::dbConnect()].
 #' @param statement a character string containing SQL.
 #' @param params Optional query parameters (forwarded to [DBI::dbBind()])
-#' @param immediate Passing a value `TRUE` is intended for statements containing
-#'   no placeholders and `FALSE` otherwise. The default value `NULL` will
-#'   inspect the statement for presence of placeholders (will `PREPARE` the
-#'   statement)
+#' @param immediate Use `TRUE` for direct execution, `FALSE` to bind parameters,
+#'   or `NULL` to inspect placeholders when the driver supports it.
 #' @param bigint The R type that 64-bit integer types should be mapped to,
 #'   default is chosen according to the connection setting
 #' @inheritParams DBI::dbSendQuery
