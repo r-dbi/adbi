@@ -58,7 +58,8 @@ driver object, which can be instantiated by calling <code>adbi()</code>.</p>
 <dl><dt id="arg-driver">driver<a class="anchor" aria-label="anchor" href="#arg-driver"></a></dt>
 <dd><p>An ADBC driver object, a function returning one, an ADBC Driver
 Manager driver name or manifest path, or (when <code>pkg</code> is supplied) the name
-of a driver function in that package. See Details for more information.</p></dd>
+of a driver function in that package.
+See Details for more information.</p></dd>
 
 
 <dt id="arg-pkg">pkg<a class="anchor" aria-label="anchor" href="#arg-pkg"></a></dt>
@@ -105,16 +106,17 @@ as returned by <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" cl
 <li><p>a function that can be evaluated with no arguments and returns an object
 inheriting from <code>adbc_driver</code>,</p></li>
 <li><p>an ADBC Driver Manager driver name or manifest path.</p></li>
-</ul><p>Use <code>pkg</code> to load a driver provided by an R package. By default, the driver
-function has the same name as the package; supply a character <code>driver</code> to
-use a different function. For example, <code>adbi(pkg = "adbcsqlite")</code> calls
-<code><a href="https://arrow.apache.org/adbc/current/r/adbcsqlite/reference/adbcsqlite.html" class="external-link">adbcsqlite::adbcsqlite()</a></code>, while
-<code>adbi("adbc_driver_monkey", pkg = "adbcdrivermanager")</code> calls
+</ul><p>Use <code>pkg</code> to load a driver provided by an R package.
+By default, the driver function has the same name as the package; supply a
+character <code>driver</code> to use a different function.
+For example, <code>adbi(pkg = "adbcsqlite")</code> calls <code><a href="https://arrow.apache.org/adbc/current/r/adbcsqlite/reference/adbcsqlite.html" class="external-link">adbcsqlite::adbcsqlite()</a></code>,
+while <code>adbi("adbc_driver_monkey", pkg = "adbcdrivermanager")</code> calls
 <code><a href="https://arrow.apache.org/adbc/current/r/adbcdrivermanager/reference/adbc_driver_monkey.html" class="external-link">adbcdrivermanager::adbc_driver_monkey()</a></code>.</p>
 <p>For compatibility, a character <code>driver</code> that names an installed R package
 with a same-named driver function still selects that function, so
-<code>adbi("adbcsqlite")</code> is equivalent to <code>adbi(pkg = "adbcsqlite")</code>. Strings of
-the form <code>pkg::fun</code> are deprecated; use <code>adbi("fun", pkg = "pkg")</code> instead.</p>
+<code>adbi("adbcsqlite")</code> is equivalent to <code>adbi(pkg = "adbcsqlite")</code>.
+Strings of the form <code>pkg::fun</code> are deprecated; use <code>adbi("fun", pkg = "pkg")</code>
+instead.</p>
 <p>As default, an <code><a href="https://arrow.apache.org/adbc/current/r/adbcdrivermanager/reference/adbc_driver_monkey.html" class="external-link">adbcdrivermanager::adbc_driver_monkey()</a></code> object is created.</p>
     </div>
 
