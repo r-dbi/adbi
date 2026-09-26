@@ -53,6 +53,24 @@
 
 <p>Bringing <a href="https://github.com/apache/arrow-adbc" class="external-link">arrow-adbc</a> to R via <a href="https://github.com/r-dbi" class="external-link">DBI</a>, adbi aims to provide DBI-compliant database access.</p>
 <div class="section level2">
+<h2 id="goals-and-non-goals">Goals and non-goals<a class="anchor" aria-label="anchor" href="#goals-and-non-goals"></a>
+</h2>
+<p>The package aims to:</p>
+<ul>
+<li>Expose ADBC drivers through DBI, so that a connection opened with <code>dbConnect(adbi("sqlite"), ...)</code> behaves like any other DBI connection.</li>
+<li>Accept a driver in any of the forms <code><a href="reference/dbConnect.html">adbi()</a></code> supports: an ADBC Driver Manager driver name or manifest path, a driver function from an R package selected with <code>pkg</code>, an <code>adbc_driver</code> object, or a function returning one.</li>
+<li>Support DBI’s Arrow extension next to the <code>data.frame</code> API, so that results can stay in the Arrow format, fetched whole or chunk by chunk.</li>
+<li>Offer an efficient alternative to ODBC for analytical applications.</li>
+<li>Conform to the DBI specification, which DBItest checks against the adbcsqlite driver.</li>
+</ul>
+<p>It is explicitly not trying to:</p>
+<ul>
+<li>Implement ADBC. The C API and the driver manager live in arrow-adbc and adbcdrivermanager; adbi is the DBI layer on top of them.</li>
+<li>Ship database drivers. Drivers are installed separately, for example with <a href="https://docs.columnar.tech/dbc/" class="external-link">dbc</a>, and loaded by name through the ADBC driver manager.</li>
+<li>Define the database interface. DBI owns the generics and their specification.</li>
+</ul>
+</div>
+<div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>Install the latest release of adbi from CRAN with the following code:</p>
