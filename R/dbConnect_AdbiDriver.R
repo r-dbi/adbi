@@ -14,7 +14,7 @@
 #' dbIsValid(con)
 #' dbDisconnect(con)
 #' dbIsValid(con)
-#' @return A connection object (S4 class `AdbiCOnnection`, inheriting from
+#' @return A connection object (S4 class `AdbiConnection`, inheriting from
 #'   [DBI::DBIConnection-class]) is returned by [DBI::dbConnect()], while
 #'   [DBI::dbDisconnect()] returns `TRUE` invisibly.
 #' @usage NULL

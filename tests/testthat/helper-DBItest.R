@@ -3,7 +3,7 @@ if (
     requireNamespace("adbcsqlite", quietly = TRUE)
 ) {
   DBItest::make_context(
-    adbi::adbi("adbcsqlite"),
+    adbi::adbi(pkg = "adbcsqlite"),
     list(
       uri = tempfile("DBItest", fileext = ".sqlite"),
       rows_affected_callback = function() {
@@ -29,7 +29,7 @@ if (
         date_typed = FALSE,
         time_typed = FALSE,
         timestamp_typed = FALSE,
-        temporary_tables = FALSE, # apache/arrow-adbc#1141
+        temporary_tables = FALSE, # see apache/arrow-adbc#1141
         strict_identifier = TRUE
       )
     ),

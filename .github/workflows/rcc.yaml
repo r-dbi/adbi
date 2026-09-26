@@ -1,0 +1,327 @@
+# Derived from https://github.com/r-lib/actions/tree/v2/examples
+on:
+  push:
+    branches: [main]
+  # `labeled`, so that applying the `release` label starts the release
+  # jobs. Any label change reruns the whole workflow.
+  pull_request:
+    types: [opened, reopened, synchronize, labeled]
+  workflow_dispatch:
+
+name: rcc
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+env:
+  GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+  R_KEEP_PKG_SOURCE: yes
+
+jobs:
+  smoke:
+    name: Smoke
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: r-lib/actions/setup-pandoc@v2
+
+      - uses: r-lib/actions/setup-r@v2
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::lintr, any::rcmdcheck, roxygen2@8.1.0, local::.
+          needs: check
+
+      - name: Lint
+        run: lintr::lint_package()
+        shell: Rscript {0}
+        env:
+          LINTR_ERROR_ON_LINT: true
+
+      - name: Document
+        run: roxygen2::roxygenise()
+        shell: Rscript {0}
+
+      - name: Check that the documentation is up to date
+        run: |
+          git add --all
+          git diff --cached --exit-code
+
+      - uses: r-lib/actions/check-r-package@v2
+
+  # The mechanical CRAN release checks from blockr.ci, reported in one
+  # comment on a pull request carrying the `release` label. A skipped caller
+  # creates none of the called workflow's check contexts, so drop the `if:`
+  # before requiring any of them in a ruleset.
+  release:
+    if: contains(github.event.pull_request.labels.*.name, 'release')
+    permissions:
+      contents: read
+      pull-requests: write
+    uses: BristolMyersSquibb/blockr.ci/.github/workflows/release-gate.yaml@main
+
+  check:
+    needs: smoke
+
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    runs-on: ${{ matrix.config.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {os: ubuntu-latest, r: devel, http-user-agent: release}
+          - {os: ubuntu-latest, r: oldrel-1}
+          - {os: ubuntu-latest, r: '4.1', extra-packages: 'arrow=?ignore-before-r=4.2.0'}
+          - {os: macos-latest, r: release}
+          - {os: windows-latest, r: release}
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: r-lib/actions/setup-pandoc@v2
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: ${{ matrix.config.r }}
+          http-user-agent: ${{ matrix.config.http-user-agent }}
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::rcmdcheck, ${{ matrix.config.extra-packages }}
+          needs: check
+
+      - uses: r-lib/actions/check-r-package@v2
+
+  suggests:
+    needs: smoke
+
+    name: Without suggested packages
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: r-lib/actions/setup-pandoc@v2
+
+      - uses: r-lib/actions/setup-r@v2
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          dependencies: '"hard"'
+          cache: false
+          extra-packages: any::rcmdcheck, any::testthat
+          needs: check
+
+      - uses: r-lib/actions/check-r-package@v2
+
+  coverage:
+    needs: smoke
+
+    name: Coverage
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: r-lib/actions/setup-r@v2
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::covr, any::xml2
+          needs: coverage
+
+      - name: Test coverage
+        run: |
+          cov <- covr::package_coverage(
+            quiet = FALSE,
+            clean = FALSE,
+            install_path = file.path(normalizePath(Sys.getenv("RUNNER_TEMP"), winslash = "/"), "package")
+          )
+          print(cov)
+          covr::to_cobertura(cov)
+        shell: Rscript {0}
+
+      - uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
+        with:
+          files: ./cobertura.xml
+          plugins: noop
+          disable_search: true
+          fail_ci_if_error: false
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Show testthat output
+        if: always()
+        run: find '${{ runner.temp }}/package' -name 'testthat.Rout*' -exec cat '{}' \; || true
+
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: coverage-test-failures
+          path: ${{ runner.temp }}/package
+
+  pkgdown:
+    needs: smoke
+
+    name: Website
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: r-lib/actions/setup-pandoc@v2
+
+      - uses: r-lib/actions/setup-r@v2
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::pkgdown, local::.
+          needs: website
+
+      - name: Build the website
+        run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
+        shell: Rscript {0}
+
+      - name: Deploy the website
+        if: github.ref == 'refs/heads/main'
+        uses: JamesIves/github-pages-deploy-action@fa24774553152dd7873cd16ebd8d959b010c5445 # v4.9.0
+        with:
+          clean: false
+          branch: gh-pages
+          folder: docs
+
+  # Reverse dependency check on a release pull request, once smoke and the
+  # gate have passed: one job per CRAN dependent, checked against adbi's
+  # CRAN release and then against this branch. Never require it:
+  # r-devel/recheck calls such a check "typically too volatile to use as an
+  # automatic pass/fail CI test". The label test repeats the gate's, which
+  # passes on any pull request once its `if:` is dropped.
+  revdep-list:
+    needs: [smoke, release]
+    if: contains(github.event.pull_request.labels.*.name, 'release')
+    runs-on: ubuntu-latest
+
+    outputs:
+      packages: ${{ steps.dependents.outputs.packages }}
+
+    steps:
+      - uses: r-lib/actions/setup-r@v2
+
+      - name: List the dependents on CRAN
+        id: dependents
+        shell: Rscript {0}
+        run: |
+          db <- available.packages(repos = "https://cloud.r-project.org")
+          if (!"adbi" %in% rownames(db)) {
+            stop("adbi is not on CRAN, so there is no release to compare against")
+          }
+          pkgs <- tools::package_dependencies("adbi", db = db, which = "most", reverse = TRUE)[[1]]
+          json <- if (length(pkgs)) sprintf('["%s"]', paste(pkgs, collapse = '", "')) else "[]"
+          cat("packages=", json, "\n", file = Sys.getenv("GITHUB_OUTPUT"), sep = "", append = TRUE)
+
+  revdep:
+    needs: revdep-list
+    if: needs.revdep-list.outputs.packages != '[]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    strategy:
+      fail-fast: false
+      matrix:
+        package: ${{ fromJSON(needs.revdep-list.outputs.packages) }}
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: r-lib/actions/setup-pandoc@v2
+
+      - uses: r-lib/actions/setup-r@v2
+
+      # Installs the dependent with its Suggests, along with the system
+      # libraries they declare. A plain ref, since pak skips the Suggests
+      # of an any:: one.
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: ${{ matrix.package }}
+
+      - name: Build this branch and download the CRAN release
+        run: |
+          R CMD build .
+          mkdir new old
+          mv adbi_*.tar.gz new/
+          Rscript -e 'download.packages("adbi", "old", repos = "https://cloud.r-project.org")'
+
+      - name: Check ${{ matrix.package }}
+        shell: Rscript {0}
+        env:
+          PACKAGE: ${{ matrix.package }}
+          _R_CHECK_FORCE_SUGGESTS_: 'false'
+          _R_CHECK_ELAPSED_TIMEOUT_: 3600
+          # Blank, as on CRAN, so that tests skipped on CI run here.
+          CI: ''
+          GITHUB_ACTIONS: ''
+        run: |
+          pkg <- Sys.getenv("PACKAGE")
+          libs <- .libPaths()
+          for (side in c("old", "new")) {
+            lib <- file.path("lib", side)
+            dir <- file.path("check", side)
+            dir.create(lib, recursive = TRUE)
+            dir.create(dir, recursive = TRUE)
+            .libPaths(c(lib, libs))
+            install.packages(Sys.glob(file.path(side, "adbi_*.tar.gz")), lib = lib, repos = NULL)
+            download.packages(pkg, dir, repos = "https://cloud.r-project.org", type = "source")
+            tools::check_packages_in_dir(dir, check_args = "--no-manual")
+          }
+          status <- function(side) {
+            log <- Sys.glob(file.path("check", side, "*.Rcheck", "00check.log"))
+            s <- grep("^Status:", unlist(lapply(log, readLines)), value = TRUE)
+            if (length(s)) sub("^Status: ", "", s) else "no result"
+          }
+          changes <- tools::check_packages_in_dir_changes("check/new", "check/old")
+          print(changes)
+          levels <- c("NOTE", "WARNING", "ERROR", "FAILURE")
+          worse <- match(changes$New, levels, 0) > match(changes$Old, levels, 0)
+          ok <- function(x) sub("^$", "OK", x)
+          cat(
+            sprintf("### %s", pkg), "",
+            sprintf("CRAN release: %s. This branch: %s.", status("old"), status("new")), "",
+            if (nrow(changes)) c(
+              "| Check | CRAN release | This branch |", "|---|---|---|",
+              sprintf("| %s | %s | %s |", changes$Check, ok(changes$Old), ok(changes$New)), ""
+            ),
+            file = Sys.getenv("GITHUB_STEP_SUMMARY"), sep = "\n", append = TRUE
+          )
+          if (any(worse)) stop(pkg, " does worse against this branch than against the CRAN release")
+
+      - uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: revdep-${{ matrix.package }}
+          path: |
+            check/*/*.Rcheck/00*
+            check/*/*.Rcheck/tests/*.Rout*
+
+  rcc:
+    needs: [smoke, check, suggests, coverage, pkgdown]
+    if: always()
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Require every job to pass
+        env:
+          RESULTS: ${{ toJSON(needs) }}
+        run: |
+          jq -r 'to_entries[] | "\(.key): \(.value.result)"' <<< "$RESULTS"
+          jq -e 'all(.[]; .result == "success")' <<< "$RESULTS" > /dev/null

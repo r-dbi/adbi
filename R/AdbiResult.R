@@ -30,9 +30,9 @@ init_result <- function(
   rows_affected_callback = identity
 ) {
   if (
-    !(is.null(immediate) ||
-      identical(immediate, TRUE) ||
-      identical(immediate, FALSE))
+    !is.null(immediate) &&
+      !identical(immediate, TRUE) &&
+      !identical(immediate, FALSE)
   ) {
     stop(
       "Expecting `immediate` to be either `TRUE` or `FALSE` (or `NULL` ",
@@ -133,6 +133,11 @@ new_result <- function(
 #' (either `SELECT` or not). They are a superclass of the [DBI::DBIResult-class]
 #' class. The "Usage" section lists the class methods overridden by
 #' \pkg{adbi}.
+#'
+#' @return
+#' The DBI methods return what their generics specify, as documented on the
+#' generic's help page, for example [DBI::dbColumnInfo()]. The `show()` method
+#' is called for its side effect of printing a summary.
 #'
 #' @seealso
 #' The corresponding generic functions

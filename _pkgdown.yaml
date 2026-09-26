@@ -11,8 +11,5 @@ home:
   - text: DBI project website
     href: https://r-dbi.org
 
-development:
-  mode: auto
-
 news:
   cran_dates: false

@@ -16,7 +16,7 @@
 #' @examples
 #' if (requireNamespace("adbcsqlite")) {
 #'   library(DBI)
-#'   con <- dbConnect(adbi::adbi("adbcsqlite"), uri = ":memory:")
+#'   con <- dbConnect(adbi::adbi(pkg = "adbcsqlite"), uri = ":memory:")
 #'   dbWriteTable(con, "swiss", swiss)
 #'   res <- dbSendQuery(con, "SELECT * from swiss WHERE Agriculture < 30")
 #'   dbFetch(res)

@@ -6,15 +6,11 @@
 <!-- badges: start -->
 
 [![rcc](https://github.com/r-dbi/adbi/workflows/rcc/badge.svg)](https://github.com/r-dbi/adbi/actions)
-[![Codecov test
-coverage](https://codecov.io/gh/r-dbi/adbi/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-dbi/adbi?branch=main)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/adbi)](https://CRAN.R-project.org/package=adbi)
+[![coverage](https://codecov.io/gh/r-dbi/adbi/graph/badge.svg)](https://app.codecov.io/gh/r-dbi/adbi)
+[![cran](https://www.r-pkg.org/badges/version/adbi)](https://CRAN.R-project.org/package=adbi)
 <!-- badges: end -->
 
-Bringing [arrow-adbc](https://github.com/apache/arrow-adbc) to R via
-[DBI](https://github.com/r-dbi), adbi aims to provide DBI-compliant
-database access.
+Bringing [arrow-adbc](https://github.com/apache/arrow-adbc) to R via [DBI](https://github.com/r-dbi), adbi aims to provide DBI-compliant database access.
 
 ## Installation
 
@@ -24,8 +20,7 @@ Install the latest release of adbi from CRAN with the following code:
 install.packages("adbi")
 ```
 
-To get a bug fix or to use a feature from the development version, you
-can install the development version of adbi from GitHub:
+To get a bug fix or to use a feature from the development version, you can install the development version of adbi from GitHub:
 
 ``` r
 # install.packages("devtools")
@@ -36,6 +31,20 @@ devtools::install_github("r-dbi/adbi")
 
 The `data.frame` API of DBI is supported.
 
+Drivers can be selected by an ADBC Driver Manager specification, explicitly
+from an R package, or by passing an existing driver object:
+
+``` r
+adbi::adbi("sqlite")
+adbi::adbi(pkg = "adbcsqlite")
+adbi::adbi(adbcsqlite::adbcsqlite())
+```
+
+A Driver Manager specification such as `"sqlite"` needs that driver installed
+separately; see
+[ADBC Driver Manager and Manifests](https://arrow.apache.org/adbc/current/format/driver_manifests.html)
+for where the driver manager looks for it.
+
 ``` r
 # To run this example, please install the adbcsqlite package first.
 # 
@@ -43,8 +52,8 @@ The `data.frame` API of DBI is supported.
 
 library(DBI)
 
-# Create an SQLite connection using the adbcsqlite backend
-con <- dbConnect(adbi::adbi("adbcsqlite"), uri = ":memory:")
+# Create an SQLite connection using the adbcsqlite R package
+con <- dbConnect(adbi::adbi(pkg = "adbcsqlite"), uri = ":memory:")
 
 # Write a table
 dbWriteTable(con, "swiss", datasets::swiss)
@@ -102,8 +111,7 @@ dbFetch(res)
 dbClearResult(res)
 ```
 
-More interestingly, the recent arrow-extension API of DBI is supported
-as well.
+More interestingly, the recent arrow-extension API of DBI is supported as well.
 
 ``` r
 # Queries

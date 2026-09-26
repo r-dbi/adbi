@@ -9,16 +9,19 @@
 \alias{dbDisconnect,AdbiConnection-method}
 \title{Adbi driver}
 \usage{
-adbi(driver = NA_character_)
+adbi(driver = NA_character_, pkg = NA_character_)
 
 \S4method{dbConnect}{AdbiDriver}(drv, ..., bigint = NULL)
 
 \S4method{dbDisconnect}{AdbiConnection}(conn, force = getOption("adbi.force_close_results", FALSE), ...)
 }
 \arguments{
-\item{driver}{A driver specification that can be evaluated (with no
-arguments) to give an \code{\link[adbcdrivermanager:adbc_driver]{adbcdrivermanager::adbc_driver()}}. See Details for
-more information.}
+\item{driver}{An ADBC driver object, a function returning one, an ADBC Driver
+Manager driver name or manifest path, or (when \code{pkg} is supplied) the name
+of a driver function in that package. See Details for more information.}
+
+\item{pkg}{An R package containing a driver function, or \code{NA} if no R package
+is explicitly specified.}
 
 \item{drv}{An object that inherits from
 \link[DBI:DBIDriver-class]{DBI::DBIDriver},
@@ -38,7 +41,7 @@ as returned by \code{\link[DBI:dbConnect]{DBI::dbConnect()}}.}
 \item{force}{Close open results when disconnecting}
 }
 \value{
-A connection object (S4 class \code{AdbiCOnnection}, inheriting from
+A connection object (S4 class \code{AdbiConnection}, inheriting from
 \link[DBI:DBIConnection-class]{DBI::DBIConnection}) is returned by \code{\link[DBI:dbConnect]{DBI::dbConnect()}}, while
 \code{\link[DBI:dbDisconnect]{DBI::dbDisconnect()}} returns \code{TRUE} invisibly.
 }
@@ -47,21 +50,33 @@ In order to open a database connection, \code{\link[DBI:dbConnect]{DBI::dbConnec
 driver object, which can be instantiated by calling \code{adbi()}.
 }
 \details{
-To specify the type of adbc driver, \code{adbi} accepts as \code{driver} argument
+To specify the type of ADBC driver, \code{adbi()} accepts as \code{driver} argument
 \itemize{
 \item an object inheriting from \code{adbc_driver},
 \item a function that can be evaluated with no arguments and returns an object
 inheriting from \code{adbc_driver},
-\item a string of the form \code{pkg::fun} (where \verb{pkg::} is optional and defaults
-to \code{fun}), which can be used to look up such a function.
+\item an ADBC Driver Manager driver name or manifest path.
 }
+
+Use \code{pkg} to load a driver provided by an R package. By default, the driver
+function has the same name as the package; supply a character \code{driver} to
+use a different function. For example, \code{adbi(pkg = "adbcsqlite")} calls
+\code{\link[adbcsqlite:adbcsqlite]{adbcsqlite::adbcsqlite()}}, while
+\code{adbi("adbc_driver_monkey", pkg = "adbcdrivermanager")} calls
+\code{\link[adbcdrivermanager:adbc_driver_monkey]{adbcdrivermanager::adbc_driver_monkey()}}.
+
+For compatibility, a character \code{driver} that names an installed R package
+with a same-named driver function still selects that function, so
+\code{adbi("adbcsqlite")} is equivalent to \code{adbi(pkg = "adbcsqlite")}. Strings of
+the form \code{pkg::fun} are deprecated; use \code{adbi("fun", pkg = "pkg")} instead.
 
 As default, an \code{\link[adbcdrivermanager:adbc_driver_monkey]{adbcdrivermanager::adbc_driver_monkey()}} object is created.
 }
 \examples{
 adbi()
+\dontrun{adbi("sqlite")}
 if (requireNamespace("adbcsqlite")) {
-  adbi("adbcsqlite")
+  adbi(pkg = "adbcsqlite")
 }
 library(DBI)
 con <- dbConnect(adbi())

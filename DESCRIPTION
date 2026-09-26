@@ -1,10 +1,10 @@
 Package: adbi
 Title: 'DBI' Compliant Database Access Using 'ADBC'
-Version: 0.1.2
+Version: 0.1.4
 Authors@R: 
     c(person(given = "Nicolas",
              family = "Bennett",
-             role = c("aut", "cre"),
+             role = c("aut", "cre", "cph"),
              email = "nicolas@cynkra.com"),
       person(given = "Voltron Data",
              role = "fnd")
@@ -14,29 +14,25 @@ License: LGPL (>= 2.1)
 URL: https://adbi.r-dbi.org, https://github.com/r-dbi/adbi, https://arrow.apache.org/adbc/
 BugReports: https://github.com/r-dbi/adbi/issues
 Depends: 
-    R (>= 3.6.0)
+    R (>= 4.1.0)
 Imports: 
     DBI (>= 1.2.0),
     methods,
-    adbcdrivermanager (>= 0.8.0),
+    adbcdrivermanager (>= 0.19.0),
     nanoarrow (>= 0.3.0)
 Suggests: 
     testthat,
     covr,
-    DBItest (>= 1.8.2.9008),
+    DBItest (>= 1.8.3),
     adbcsqlite (>= 0.8.0),
     withr,
     bit64,
     utils,
     arrow
-Remotes: 
-    r-dbi/DBItest
 Config/Needs/website: 
     r-dbi/dbitemplate
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-Config/autostyle/scope: line_breaks
-Config/autostyle/strict: false
 Collate: 
     'adbi-package.R'
     'AdbiDriver.R'
@@ -101,4 +97,4 @@ Collate:
     'show_AdbiResult.R'
     'show_AdbiResultArrow.R'
     'utils.R'
-Config/roxygen2/version: 8.1.0.9000
+Config/roxygen2/version: 8.1.0
