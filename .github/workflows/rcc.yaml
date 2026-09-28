@@ -35,7 +35,7 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::lintr, any::rcmdcheck, roxygen2@8.1.0, local::.
+          extra-packages: any::lintr, any::rcmdcheck, roxygen2@8.1.0
           needs: check
 
       - name: Lint
