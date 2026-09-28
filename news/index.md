@@ -28,6 +28,11 @@
   through ADBC’s `replace` ingest mode, which adbcsqlite supports from
   version 0.11.0.1 ([\#72](https://github.com/r-dbi/adbi/issues/72),
   [\#91](https://github.com/r-dbi/adbi/issues/91)).
+- Binding POSIXlt timestamps with
+  [`dbBind()`](https://dbi.r-dbi.org/reference/dbBind.html) no longer
+  fails with an unsupported struct type. They are now bound as the
+  equivalent POSIXct values
+  ([\#89](https://github.com/r-dbi/adbi/issues/89)).
 
 ## adbi 0.1.3
 
