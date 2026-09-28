@@ -7,6 +7,11 @@
   argument explicitly selects an R package driver. Strings of the form
   `pkg::fun` are deprecated in favour of `adbi("fun", pkg = "pkg")`
   ([\#60](https://github.com/r-dbi/adbi/issues/60)).
+- Binding logical, integer, numeric or character values, or lists of raw
+  vectors, with
+  [`dbBind()`](https://dbi.r-dbi.org/reference/dbBind.html) no longer
+  requires the arrow package
+  ([\#82](https://github.com/r-dbi/adbi/issues/82)).
 
 ## adbi 0.1.3
 
