@@ -68,6 +68,11 @@ split_rows <- function(x) {
   split(x, seq_len(nrow(x)))
 }
 
+drop_asis <- function(x) {
+  oldClass(x) <- setdiff(oldClass(x), "AsIs")
+  x
+}
+
 db_data_type_blob <- function(drv, con = NULL) {
   switch(
     db_vendor_name(drv, con),

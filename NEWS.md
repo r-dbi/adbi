@@ -3,6 +3,8 @@
 - `adbi()` now accepts ADBC Driver Manager driver names and manifest paths.
   The new `pkg` argument explicitly selects an R package driver. Strings of the
   form `pkg::fun` are deprecated in favour of `adbi("fun", pkg = "pkg")` (#60).
+- Binding logical, integer, numeric or character values, or lists of raw
+  vectors, with `dbBind()` no longer requires the arrow package (#82).
 
 # adbi 0.1.3
 
