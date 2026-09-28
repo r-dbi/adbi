@@ -18,8 +18,7 @@ if (
     ),
     tweaks = suppressWarnings(
       DBItest::tweaks(
-        # FIXME: Bump
-        dbitest_version = "1.8.0",
+        dbitest_version = "1.8.3",
         constructor_relax_args = TRUE,
         placeholder_pattern = c("?", "$1", "$name", ":name"),
         date_cast = function(x) paste0("'", x, "'"),
