@@ -86,6 +86,19 @@ db_data_type_blob <- function(drv, con = NULL) {
   )
 }
 
+db_temp_schema <- function(drv, con = NULL) {
+  switch(
+    db_vendor_name(drv, con),
+    SQLite = "temp",
+    PostgreSQL = "pg_temp",
+    stop(
+      "Removing a temporary table with `temporary = TRUE` is only supported ",
+      "for SQLite and PostgreSQL.",
+      call. = FALSE
+    )
+  )
+}
+
 db_vendor_name <- function(drv, con = NULL) {
   if (inherits(drv, "adbcsqlite_driver_sqlite")) {
     return("SQLite")

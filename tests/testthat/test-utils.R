@@ -16,6 +16,27 @@ test_that("dbDataType for blob", {
   expect_error(db_data_type_blob(structure(list(), class = "foo")))
 })
 
+test_that("schema of temporary tables", {
+  expect_identical(
+    db_temp_schema(
+      structure(list(), class = "adbcsqlite_driver_sqlite")
+    ),
+    "temp"
+  )
+
+  expect_identical(
+    db_temp_schema(
+      structure(list(), class = "adbcpostgresql_driver_postgresql")
+    ),
+    "pg_temp"
+  )
+
+  expect_error(
+    db_temp_schema(structure(list(), class = "foo")),
+    "only supported for SQLite and PostgreSQL"
+  )
+})
+
 test_that("dbDataType for blob falls back to the connection's vendor", {
   blob <- structure(list(), class = "blob")
 
