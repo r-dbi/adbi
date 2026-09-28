@@ -15,6 +15,9 @@
   and works for temporary tables too. The table is now replaced, or created if
   it does not exist yet, through ADBC's `replace` ingest mode, which adbcsqlite
   supports from version 0.11.0.1 (#72, #91).
+- Binding POSIXlt timestamps with `dbBind()` no longer fails with an
+  unsupported struct type. They are now bound as the equivalent POSIXct
+  values (#89).
 
 # adbi 0.1.3
 

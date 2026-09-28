@@ -210,3 +210,20 @@ test_that("failed execution leaves the result available for binding", {
   dbBind(res, list(7L))
   expect_equal(dbFetch(res)[[1L]], 7L)
 })
+
+test_that("POSIXlt parameters bind like POSIXct", {
+  driver <- local_parameter_connection(metadata = TRUE)
+  ct <- as.POSIXct(
+    c("2020-01-01 12:00:00", NA, "2020-07-01 12:00:00"),
+    tz = "Europe/Zurich"
+  )
+  lt <- as.POSIXlt(ct)
+  expected <- dbGetQuery(driver$con, "SELECT ? AS x", params = list(ct))
+
+  for (params in list(list(lt), list2DF(list(lt)))) {
+    expect_identical(
+      dbGetQuery(driver$con, "SELECT ? AS x", params = params),
+      expected
+    )
+  }
+})
