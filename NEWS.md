@@ -11,6 +11,9 @@
 - After a bound statement has run, `dbHasCompleted()` now returns `TRUE`, and
   binding it again no longer warns that not all data may have been fetched
   (#69).
+- Overwriting a table with `dbWriteTable()` no longer drops it and then fails.
+  With `overwrite = TRUE`, the table is now replaced, or created if it does not
+  exist yet (#72).
 
 # adbi 0.1.3
 
