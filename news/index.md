@@ -21,6 +21,13 @@
   now returns `TRUE`, and binding it again no longer warns that not all
   data may have been fetched
   ([\#69](https://github.com/r-dbi/adbi/issues/69)).
+- Overwriting a table with
+  [`dbWriteTable()`](https://dbi.r-dbi.org/reference/dbWriteTable.html)
+  no longer drops it and then fails, and works for temporary tables too.
+  The table is now replaced, or created if it does not exist yet,
+  through ADBC’s `replace` ingest mode, which adbcsqlite supports from
+  version 0.11.0.1 ([\#72](https://github.com/r-dbi/adbi/issues/72),
+  [\#91](https://github.com/r-dbi/adbi/issues/91)).
 
 ## adbi 0.1.3
 
