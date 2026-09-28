@@ -16,8 +16,8 @@
 #'   temporary.
 #'   Its default is `FALSE`.
 #'   If `TRUE`, [DBI::dbRemoveTable()] considers only temporary tables.
-#'   For SQLite and PostgreSQL, it qualifies the name with the schema of
-#'   temporary tables, and for other databases it sends
+#'   For SQLite, PostgreSQL and DuckDB, it qualifies the name with the schema
+#'   of temporary tables, and for other databases it sends
 #'   `DROP TEMPORARY TABLE`, which not all of them support.
 #' @usage NULL
 dbWriteTable_AdbiConnection_Id_data.frame <- function(

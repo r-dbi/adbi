@@ -32,6 +32,12 @@ test_that("schema of temporary tables", {
   )
 
   expect_null(db_temp_schema(structure(list(), class = "foo")))
+
+  local_mocked_bindings(db_vendor_name = function(...) "duckdb")
+  expect_identical(
+    db_temp_schema(structure(list(), class = "foo")),
+    "temp.main"
+  )
 })
 
 test_that("dbDataType for blob falls back to the connection's vendor", {

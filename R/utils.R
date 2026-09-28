@@ -91,6 +91,7 @@ db_temp_schema <- function(drv, con = NULL) {
     db_vendor_name(drv, con),
     SQLite = "temp",
     PostgreSQL = "pg_temp",
+    duckdb = "temp.main",
     NULL
   )
 }
