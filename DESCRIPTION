@@ -24,7 +24,7 @@ Suggests:
     testthat,
     covr,
     DBItest (>= 1.8.3),
-    adbcsqlite (>= 0.8.0),
+    adbcsqlite (>= 0.11.0.1),
     withr,
     bit64,
     utils,
