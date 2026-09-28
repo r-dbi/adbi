@@ -40,8 +40,10 @@ if (
 
       # misc issues with well understood causes
       "create_table_visible_in_other_connection", # see apache/arrow-adbc#1591
+      "arrow_create_table_arrow_visible_in_other_connection", # same cause
       "quote_identifier_string", # see apache/arrow-adbc#1395
       "read_table_empty", # see apache/arrow-adbc#1400
+      "arrow_read_table_arrow_empty", # same cause
 
       # misc issues with poorly understood causes
       "append_table_new",
@@ -53,6 +55,10 @@ if (
       # not reproducible in isolation
       "table_visible_in_other_connection",
       "remove_table_other_con",
+
+      # First stage skips on `rows_affected`, leaving the table empty,
+      # see https://github.com/r-dbi/adbi/issues/92
+      "arrow_write_table_arrow_visible_in_other_connection",
 
       if (!requireNamespace("arrow", quietly = TRUE)) {
         c(
