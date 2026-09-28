@@ -5,6 +5,12 @@
   form `pkg::fun` are deprecated in favour of `adbi("fun", pkg = "pkg")` (#60).
 - Binding logical, integer, numeric or character values, or lists of raw
   vectors, with `dbBind()` no longer requires the arrow package (#82).
+- Queries and statements now work without `immediate = TRUE` with drivers
+  that cannot report parameter metadata, such as Snowflake's. With such
+  drivers, parameters are bound without checking their number or names (#4).
+- After a bound statement has run, `dbHasCompleted()` now returns `TRUE`, and
+  binding it again no longer warns that not all data may have been fetched
+  (#69).
 
 # adbi 0.1.3
 
