@@ -20,9 +20,8 @@
   values (#89).
 - Removing a temporary table with `dbRemoveTable(temporary = TRUE)` no longer
   fails with a syntax error on SQLite and PostgreSQL. The table name is now
-  qualified with the schema of temporary tables, so a permanent table of the
-  same name is left alone. With other databases, `temporary = TRUE` is an
-  error (#91).
+  qualified with the schema of temporary tables there, so a permanent table of
+  the same name is left alone (#91).
 
 # adbi 0.1.3
 

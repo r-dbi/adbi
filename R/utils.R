@@ -91,11 +91,7 @@ db_temp_schema <- function(drv, con = NULL) {
     db_vendor_name(drv, con),
     SQLite = "temp",
     PostgreSQL = "pg_temp",
-    stop(
-      "Removing a temporary table with `temporary = TRUE` is only supported ",
-      "for SQLite and PostgreSQL.",
-      call. = FALSE
-    )
+    NULL
   )
 }
 

@@ -26,3 +26,16 @@ test_that("removing a missing temporary table leaves a permanent one alone", {
   )
   expect_identical(dbReadTable(con, "x"), data.frame(a = "permanent"))
 })
+
+test_that("other databases get the `TEMPORARY` keyword", {
+  skip_if_not_installed("adbcsqlite")
+
+  con <- dbConnect(adbi(pkg = "adbcsqlite"), uri = ":memory:")
+  withr::defer(dbDisconnect(con))
+  local_mocked_bindings(db_vendor_name = function(...) NA_character_)
+
+  dbWriteTable(con, "x", data.frame(a = "permanent"))
+
+  expect_error(dbRemoveTable(con, "x", temporary = TRUE), "TEMPORARY")
+  expect_identical(dbReadTable(con, "x"), data.frame(a = "permanent"))
+})

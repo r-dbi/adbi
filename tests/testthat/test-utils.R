@@ -31,10 +31,7 @@ test_that("schema of temporary tables", {
     "pg_temp"
   )
 
-  expect_error(
-    db_temp_schema(structure(list(), class = "foo")),
-    "only supported for SQLite and PostgreSQL"
-  )
+  expect_null(db_temp_schema(structure(list(), class = "foo")))
 })
 
 test_that("dbDataType for blob falls back to the connection's vendor", {

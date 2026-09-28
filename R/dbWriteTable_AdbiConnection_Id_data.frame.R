@@ -15,8 +15,10 @@
 #' @param temporary a logical specifying whether the new table should be
 #'   temporary.
 #'   Its default is `FALSE`.
-#'   If `TRUE`, [DBI::dbRemoveTable()] considers only temporary tables, which
-#'   is supported for SQLite and PostgreSQL.
+#'   If `TRUE`, [DBI::dbRemoveTable()] considers only temporary tables.
+#'   For SQLite and PostgreSQL, it qualifies the name with the schema of
+#'   temporary tables, and for other databases it sends
+#'   `DROP TEMPORARY TABLE`, which not all of them support.
 #' @usage NULL
 dbWriteTable_AdbiConnection_Id_data.frame <- function(
   conn,
