@@ -56,7 +56,8 @@ if (
       "table_visible_in_other_connection",
       "remove_table_other_con",
 
-      # First stage skips on `rows_affected`, leaving the table empty
+      # First stage skips on `rows_affected`, leaving the table empty,
+      # see https://github.com/r-dbi/adbi/issues/92
       "arrow_write_table_arrow_visible_in_other_connection",
 
       if (!requireNamespace("arrow", quietly = TRUE)) {
