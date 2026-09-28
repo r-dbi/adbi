@@ -11,6 +11,10 @@
 - After a bound statement has run, `dbHasCompleted()` now returns `TRUE`, and
   binding it again no longer warns that not all data may have been fetched
   (#69).
+- Overwriting a table with `dbWriteTable()` no longer drops it and then fails,
+  and works for temporary tables too. The table is now replaced, or created if
+  it does not exist yet, through ADBC's `replace` ingest mode, which adbcsqlite
+  supports from version 0.11.0.1 (#72, #91).
 
 # adbi 0.1.3
 

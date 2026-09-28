@@ -106,8 +106,7 @@ dbWriteTable_AdbiConnection_Id_data.frame <- function(
   if (append) {
     mode <- "append"
   } else if (overwrite) {
-    # TODO: use "replace" mode when available: apache/arrow-adbc#1355
-    dbRemoveTable(conn, name, temporary = temporary, fail_if_missing = FALSE)
+    mode <- "replace"
   } else {
     mode <- "create"
   }
