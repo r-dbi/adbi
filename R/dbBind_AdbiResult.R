@@ -25,6 +25,9 @@ dbBind_AdbiResult <- function(res, params, ...) {
     params[fct] <- lapply(params[fct], as.character)
   }
 
+  lt <- vapply(params, inherits, logical(1L), "POSIXlt")
+  params[lt] <- lapply(params[lt], as.POSIXct)
+
   if (is.list(params) && !inherits(params, "data.frame")) {
     params <- as.data.frame(lapply(params, I), fix.empty.names = FALSE)
     params[] <- lapply(params, drop_asis)
