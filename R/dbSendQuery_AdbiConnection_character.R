@@ -15,9 +15,10 @@
 #' and throw a warning.
 #'
 #' If parameter metadata is unavailable, bind before fetching when parameters
-#' are needed. Parameter count and name checks are delegated to the driver.
-#'
-#' The driver may report parameter errors during execution.
+#' are needed.
+#' Without metadata, adbi does not check the number or names of the
+#' parameters, so a mismatch is reported only if the driver checks for it,
+#' possibly not until the statement is executed.
 #'
 #' Without metadata, requesting rows affected for an unbound statement attempts
 #' execution with `immediate = NULL`, but returns `NA` with `immediate = FALSE`.
