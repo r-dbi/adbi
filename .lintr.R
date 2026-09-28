@@ -1,5 +1,16 @@
 # An R script rather than a .lintr file, so that the two documentation
 # linters below can be defined in place. See ?lintr::default_settings.
+
+# Resolve names against this checkout rather than an installed copy, and
+# attach testthat as the test run does. Since lintr evaluates this file with
+# sys.source(), its path is in that call's `file` argument. It is looked up
+# before load_all() is called: as a lazily evaluated argument, the lookup
+# would have dynGet() search pkgload's own frames first.
+local({
+  path <- dirname(dynGet("file"))
+  pkgload::load_all(path, helpers = FALSE, quiet = TRUE)
+})
+
 linters <- local({
   # Full stops that do not end a sentence.
   abbreviations <- c("e.g.", "i.e.", "etc.", "cf.", "vs.", "al.", "incl.")
