@@ -56,13 +56,7 @@ if (
 
       if (!requireNamespace("arrow", quietly = TRUE)) {
         c(
-          "arrow_.*$",
-          "bind_.*$",
-          "roundtrip_raw",
-          "send_query_params",
-          "get_query_params",
-          "send_statement_params",
-          "execute_params"
+          "roundtrip_raw"
         )
       },
 
