@@ -48,10 +48,8 @@ as returned by \code{\link[DBI:dbConnect]{DBI::dbConnect()}}.}
 
 \item{params}{Optional query parameters (forwarded to \code{\link[DBI:dbBind]{DBI::dbBind()}})}
 
-\item{immediate}{Passing a value \code{TRUE} is intended for statements containing
-no placeholders and \code{FALSE} otherwise.
-The default value \code{NULL} will inspect the statement for presence of
-placeholders (will \code{PREPARE} the statement)}
+\item{immediate}{Use \code{TRUE} for direct execution, \code{FALSE} to bind parameters,
+or \code{NULL} to inspect placeholders when the driver supports it.}
 
 \item{bigint}{The R type that 64-bit integer types should be mapped to,
 default is chosen according to the connection setting}
@@ -74,6 +72,15 @@ Multiple open result sets per connection are supported and support can be
 disabled by setting \code{options(adbi.allow_multiple_results = FALSE)}.
 If not enabled, creating a new result will finalize potential other results
 and throw a warning.
+
+If parameter metadata is unavailable, bind before fetching when parameters
+are needed.
+Without metadata, adbi does not check the number or names of the
+parameters, so a mismatch is reported only if the driver checks for it,
+possibly not until the statement is executed.
+
+Without metadata, requesting rows affected for an unbound statement attempts
+execution with \code{immediate = NULL}, but returns \code{NA} with \code{immediate = FALSE}.
 }
 \examples{
 if (requireNamespace("adbcsqlite")) {
