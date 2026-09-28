@@ -12,6 +12,15 @@
   [`dbBind()`](https://dbi.r-dbi.org/reference/dbBind.html) no longer
   requires the arrow package
   ([\#82](https://github.com/r-dbi/adbi/issues/82)).
+- Queries and statements now work without `immediate = TRUE` with
+  drivers that cannot report parameter metadata, such as Snowflake’s.
+  With such drivers, parameters are bound without checking their number
+  or names ([\#4](https://github.com/r-dbi/adbi/issues/4)).
+- After a bound statement has run,
+  [`dbHasCompleted()`](https://dbi.r-dbi.org/reference/dbHasCompleted.html)
+  now returns `TRUE`, and binding it again no longer warns that not all
+  data may have been fetched
+  ([\#69](https://github.com/r-dbi/adbi/issues/69)).
 
 ## adbi 0.1.3
 

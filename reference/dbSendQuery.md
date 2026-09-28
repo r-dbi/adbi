@@ -69,10 +69,8 @@ dbSendStatement(
 
 - immediate:
 
-  Passing a value `TRUE` is intended for statements containing no
-  placeholders and `FALSE` otherwise. The default value `NULL` will
-  inspect the statement for presence of placeholders (will `PREPARE` the
-  statement)
+  Use `TRUE` for direct execution, `FALSE` to bind parameters, or `NULL`
+  to inspect placeholders when the driver supports it.
 
 - bigint:
 
@@ -90,6 +88,15 @@ Multiple open result sets per connection are supported and support can
 be disabled by setting `options(adbi.allow_multiple_results = FALSE)`.
 If not enabled, creating a new result will finalize potential other
 results and throw a warning.
+
+If parameter metadata is unavailable, bind before fetching when
+parameters are needed. Without metadata, adbi does not check the number
+or names of the parameters, so a mismatch is reported only if the driver
+checks for it, possibly not until the statement is executed.
+
+Without metadata, requesting rows affected for an unbound statement
+attempts execution with `immediate = NULL`, but returns `NA` with
+`immediate = FALSE`.
 
 ## See also
 

@@ -113,10 +113,8 @@ as returned by <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" cl
 
 
 <dt id="arg-immediate">immediate<a class="anchor" aria-label="anchor" href="#arg-immediate"></a></dt>
-<dd><p>Passing a value <code>TRUE</code> is intended for statements containing
-no placeholders and <code>FALSE</code> otherwise.
-The default value <code>NULL</code> will inspect the statement for presence of
-placeholders (will <code>PREPARE</code> the statement)</p></dd>
+<dd><p>Use <code>TRUE</code> for direct execution, <code>FALSE</code> to bind parameters,
+or <code>NULL</code> to inspect placeholders when the driver supports it.</p></dd>
 
 
 <dt id="arg-bigint">bigint<a class="anchor" aria-label="anchor" href="#arg-bigint"></a></dt>
@@ -134,6 +132,13 @@ default is chosen according to the connection setting</p></dd>
 disabled by setting <code>options(adbi.allow_multiple_results = FALSE)</code>.
 If not enabled, creating a new result will finalize potential other results
 and throw a warning.</p>
+<p>If parameter metadata is unavailable, bind before fetching when parameters
+are needed.
+Without metadata, adbi does not check the number or names of the
+parameters, so a mismatch is reported only if the driver checks for it,
+possibly not until the statement is executed.</p>
+<p>Without metadata, requesting rows affected for an unbound statement attempts
+execution with <code>immediate = NULL</code>, but returns <code>NA</code> with <code>immediate = FALSE</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
