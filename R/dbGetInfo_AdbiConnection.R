@@ -6,16 +6,12 @@ dbGetInfo_AdbiConnection <- function(dbObj, ...) {
     stop("Invalid connection", call. = FALSE)
   }
 
-  version <- nanoarrow::convert_array_stream(
-    adbcdrivermanager::adbc_connection_get_info(dbObj@connection, 1L)
-  )
-
   db <- nanoarrow::convert_array_stream(
     adbcdrivermanager::adbc_connection_get_objects(dbObj@connection, 1L)
   )
 
   list(
-    db.version = version[1L, "info_value"][1L, "string_value"],
+    db.version = connection_info_string(dbObj@connection, 1L),
     dbname = db[1L, "catalog_name"],
     username = NA_character_,
     host = NA_character_,

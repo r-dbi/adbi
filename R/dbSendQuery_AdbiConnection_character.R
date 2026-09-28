@@ -1,16 +1,17 @@
 #' Create result sets
 #'
 #' Creating result sets using [DBI::dbSendQuery()] (and by extension using
-#' [DBI::dbGetQuery()]) mostly follows DBI specification. One way where adbi
-#' deviates from DBI mechanisms is how the `bigint` setting is not only per
-#' connection, but the per-connection setting can be overridden on a result
-#' set basis. As default, the connection setting is applied, but passing one
-#' of the accepted values as `bigint` when creating a result set will
-#' subsequently use that setting for all fetches using this result set.
+#' [DBI::dbGetQuery()]) mostly follows DBI specification.
+#' One way where adbi deviates from DBI mechanisms is how the `bigint` setting
+#' is not only per connection, but the per-connection setting can be overridden
+#' on a result set basis.
+#' As default, the connection setting is applied, but passing one of the
+#' accepted values as `bigint` when creating a result set will subsequently use
+#' that setting for all fetches using this result set.
 #'
-#' Multiple open result sets per connection are supported and support can
-#' be disabled by setting `options(adbi.allow_multiple_results = FALSE)`. If
-#' not enabled, creating a new result will finalize potential other results
+#' Multiple open result sets per connection are supported and support can be
+#' disabled by setting `options(adbi.allow_multiple_results = FALSE)`.
+#' If not enabled, creating a new result will finalize potential other results
 #' and throw a warning.
 #'
 #' If parameter metadata is unavailable, bind before fetching when parameters
@@ -35,7 +36,7 @@
 #' @examples
 #' if (requireNamespace("adbcsqlite")) {
 #'   library(DBI)
-#'   con <- dbConnect(adbi::adbi("adbcsqlite"), uri = ":memory:")
+#'   con <- dbConnect(adbi::adbi(pkg = "adbcsqlite"), uri = ":memory:")
 #'   dbWriteTable(con, "swiss", swiss)
 #'   str(
 #'     dbGetQuery(con, "SELECT Examination from swiss WHERE Agriculture < 30")

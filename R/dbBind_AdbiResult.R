@@ -27,6 +27,7 @@ dbBind_AdbiResult <- function(res, params, ...) {
 
   if (is.list(params) && !inherits(params, "data.frame")) {
     params <- as.data.frame(lapply(params, I), fix.empty.names = FALSE)
+    params[] <- lapply(params, drop_asis)
   }
 
   if (!isTRUE(meta(res, "prepared"))) {
