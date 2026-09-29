@@ -72,3 +72,39 @@ test_that("failure after connection initialization releases all resources", {
   expect_false(adbcdrivermanager::adbc_xptr_is_valid(connection))
   expect_false(adbcdrivermanager::adbc_xptr_is_valid(database))
 })
+
+test_that("looking up tables leaves the connection free to close", {
+  skip_if_not_installed("adbcsqlite")
+
+  con <- dbConnect(adbi(pkg = "adbcsqlite"), uri = ":memory:")
+  dbWriteTable(con, "x", data.frame(a = 1))
+
+  expect_true(dbExistsTable(con, "x"))
+  expect_identical(dbListTables(con), "x")
+  expect_identical(dbListFields(con, "x"), "a")
+
+  dbDisconnect(con)
+  expect_false(dbIsValid(con))
+})
+
+test_that("getting the connection info leaves the connection free to close", {
+  skip_if_not_installed("adbcsqlite")
+
+  con <- dbConnect(adbi(pkg = "adbcsqlite"), uri = ":memory:")
+
+  expect_identical(dbGetInfo(con)$dbname, "main")
+
+  dbDisconnect(con)
+  expect_false(dbIsValid(con))
+})
+
+test_that("printing the connection leaves it free to close", {
+  skip_if_not_installed("adbcsqlite")
+
+  con <- dbConnect(adbi(pkg = "adbcsqlite"), uri = ":memory:")
+
+  expect_output(show(con), "Vendor name: SQLite")
+
+  dbDisconnect(con)
+  expect_false(dbIsValid(con))
+})

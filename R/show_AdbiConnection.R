@@ -5,7 +5,7 @@ show_AdbiConnection <- function(object) {
   cat("<AdbiConnection>\n")
 
   if (dbIsValid(object)) {
-    info <- nanoarrow::convert_array_stream(
+    info <- convert_stream(
       adbcdrivermanager::adbc_connection_get_info(object@connection)
     )
 

@@ -22,6 +22,10 @@
   fails with a syntax error on SQLite, PostgreSQL and DuckDB. The table name
   is now qualified with the schema of temporary tables there, so a permanent
   table of the same name is left alone (#91).
+- Calling `dbExistsTable()`, `dbListTables()`, `dbListFields()` or
+  `dbGetInfo()` on a connection, or printing it, no longer keeps a following
+  `dbDisconnect()` from closing the connection. These calls left the ADBC
+  streams they read unreleased until the next garbage collection (#97).
 
 # adbi 0.1.3
 

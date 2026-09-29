@@ -105,8 +105,5 @@ get_schema_objects <- function(
     table_name = table
   )
 
-  process_catalogs(
-    nanoarrow::convert_array_stream(nfo),
-    what
-  )
+  process_catalogs(convert_stream(nfo), what)
 }
