@@ -168,7 +168,11 @@ identifier.}
 
 \item{temporary}{a logical specifying whether the new table should be
 temporary.
-Its default is \code{FALSE}.}
+Its default is \code{FALSE}.
+If \code{TRUE}, \code{\link[DBI:dbRemoveTable]{DBI::dbRemoveTable()}} considers only temporary tables.
+For SQLite, PostgreSQL and DuckDB, it qualifies the name with the schema
+of temporary tables, and for other databases it sends
+\verb{DROP TEMPORARY TABLE}, which not all of them support.}
 
 \item{fail_if_missing}{If \code{FALSE}, \code{\link[DBI:dbRemoveTable]{DBI::dbRemoveTable()}} succeeds if the
 table doesn't exist.}

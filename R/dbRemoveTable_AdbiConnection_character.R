@@ -12,11 +12,16 @@ dbRemoveTable_AdbiConnection <- function(
 ) {
   name <- dbQuoteIdentifier(conn, name)
 
+  schema <- if (temporary) {
+    db_temp_schema(conn@connection$database$driver, conn@connection)
+  }
+
   sql <- paste0(
     "DROP ",
-    if (temporary) "TEMPORARY ",
+    if (temporary && is.null(schema)) "TEMPORARY ",
     "TABLE ",
     if (!fail_if_missing) "IF EXISTS ",
+    if (!is.null(schema)) paste0(schema, "."),
     name
   )
 

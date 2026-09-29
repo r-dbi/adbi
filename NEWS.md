@@ -18,6 +18,10 @@
 - Binding POSIXlt timestamps with `dbBind()` no longer fails with an
   unsupported struct type. They are now bound as the equivalent POSIXct
   values (#89).
+- Removing a temporary table with `dbRemoveTable(temporary = TRUE)` no longer
+  fails with a syntax error on SQLite, PostgreSQL and DuckDB. The table name
+  is now qualified with the schema of temporary tables there, so a permanent
+  table of the same name is left alone (#91).
 
 # adbi 0.1.3
 
