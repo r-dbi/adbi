@@ -22,11 +22,15 @@ if (
       "arrow_send_query_stale_warning",
 
       # int/int64 https://github.com/r-dbi/DBItest/issues/311
+      # https://github.com/r-dbi/DBItest/issues/334
       "data_64_bit_numeric",
       "data_64_bit_numeric_warning",
       "data_64_bit_lossless",
       "append_roundtrip_64_bit_numeric",
       "append_roundtrip_64_bit_character",
+
+      # Arrow results keep int64, which DBItest converts to double
+      # https://github.com/r-dbi/DBItest/issues/334
       "arrow_read_table_arrow",
       "arrow_write_table_arrow_roundtrip_integer",
       "arrow_write_table_arrow_roundtrip_logical",
