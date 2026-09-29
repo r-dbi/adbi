@@ -14,17 +14,22 @@ show_AdbiConnection <- function(object) {
       `102` = "Driver arrow version"
     )
 
-    info <- convert_stream(
-      adbcdrivermanager::adbc_connection_get_info(
-        object@connection,
-        as.integer(names(nms))
-      )
+    info <- tryCatch(
+      convert_stream(
+        adbcdrivermanager::adbc_connection_get_info(
+          object@connection,
+          as.integer(names(nms))
+        )
+      ),
+      adbc_status_not_implemented = function(e) NULL
     )
 
-    info_val <- info[["info_value"]][["string_value"]]
-    info_nme <- nms[as.character(info[["info_name"]])]
+    if (!is.null(info)) {
+      info_val <- info[["info_value"]][["string_value"]]
+      info_nme <- nms[as.character(info[["info_name"]])]
 
-    Map(cat, "  ", info_nme, ": ", info_val, "\n", sep = "")
+      Map(cat, "  ", info_nme, ": ", info_val, "\n", sep = "")
+    }
   } else {
     cat("  DISCONNECTED\n")
   }
