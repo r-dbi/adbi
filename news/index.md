@@ -38,6 +38,16 @@
   table name is now qualified with the schema of temporary tables there,
   so a permanent table of the same name is left alone
   ([\#91](https://github.com/r-dbi/adbi/issues/91)).
+- Calling
+  [`dbExistsTable()`](https://dbi.r-dbi.org/reference/dbExistsTable.html),
+  [`dbListTables()`](https://dbi.r-dbi.org/reference/dbListTables.html),
+  [`dbListFields()`](https://dbi.r-dbi.org/reference/dbListFields.html)
+  or [`dbGetInfo()`](https://dbi.r-dbi.org/reference/dbGetInfo.html) on
+  a connection, or printing it, no longer keeps a following
+  [`dbDisconnect()`](https://dbi.r-dbi.org/reference/dbDisconnect.html)
+  from closing the connection. These calls left the ADBC streams they
+  read unreleased until the next garbage collection
+  ([\#97](https://github.com/r-dbi/adbi/issues/97)).
 
 ## adbi 0.1.3
 
