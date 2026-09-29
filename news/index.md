@@ -48,6 +48,12 @@
   from closing the connection. These calls left the ADBC streams they
   read unreleased until the next garbage collection
   ([\#97](https://github.com/r-dbi/adbi/issues/97)).
+- Appending anything but a data frame with
+  [`dbAppendTable()`](https://dbi.r-dbi.org/reference/dbAppendTable.html)
+  now fails, as the DBI specification requires. A list used to be
+  appended as if it were a data frame. Factor columns are still appended
+  as character, but now with a warning
+  ([\#95](https://github.com/r-dbi/adbi/issues/95)).
 
 ## adbi 0.1.3
 
