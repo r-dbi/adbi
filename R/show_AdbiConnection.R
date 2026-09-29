@@ -5,10 +5,6 @@ show_AdbiConnection <- function(object) {
   cat("<AdbiConnection>\n")
 
   if (dbIsValid(object)) {
-    info <- convert_stream(
-      adbcdrivermanager::adbc_connection_get_info(object@connection)
-    )
-
     nms <- c(
       `0` = "Vendor name",
       `1` = "Vendor version",
@@ -16,6 +12,13 @@ show_AdbiConnection <- function(object) {
       `100` = "Driver name",
       `101` = "Driver version",
       `102` = "Driver arrow version"
+    )
+
+    info <- convert_stream(
+      adbcdrivermanager::adbc_connection_get_info(
+        object@connection,
+        as.integer(names(nms))
+      )
     )
 
     info_val <- info[["info_value"]][["string_value"]]
