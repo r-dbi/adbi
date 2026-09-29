@@ -36,3 +36,10 @@ test_that("printing the connection labels every line", {
   expect_identical(out[[1L]], "<AdbiConnection>")
   expect_match(out[-1L], "^  (Vendor|Driver) (name|version|arrow version): ")
 })
+
+test_that("printing a connection without GetInfo prints the header alone", {
+  con <- dbConnect(adbi())
+  withr::defer(dbDisconnect(con))
+
+  expect_identical(capture.output(show(con)), "<AdbiConnection>")
+})
