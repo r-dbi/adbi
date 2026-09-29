@@ -6,7 +6,7 @@ dbGetInfo_AdbiConnection <- function(dbObj, ...) {
     stop("Invalid connection", call. = FALSE)
   }
 
-  db <- nanoarrow::convert_array_stream(
+  db <- convert_stream(
     adbcdrivermanager::adbc_connection_get_objects(dbObj@connection, 1L)
   )
 
