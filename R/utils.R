@@ -116,11 +116,17 @@ db_vendor_name <- function(drv, con = NULL) {
 }
 
 connection_info_string <- function(con, code) {
-  info <- nanoarrow::convert_array_stream(
+  info <- convert_stream(
     adbcdrivermanager::adbc_connection_get_info(con, code)
   )
 
   info[1L, "info_value"][1L, "string_value"]
+}
+
+convert_stream <- function(stream) {
+  force(stream)
+  on.exit(stream$release())
+  nanoarrow::convert_array_stream(stream)
 }
 
 adbc_release <- function(x, type = c("statement", "connection", "database")) {
