@@ -24,3 +24,15 @@ test_that("show methods print", {
   expect_output(show(con))
   expect_output(show(res))
 })
+
+test_that("printing the connection labels every line", {
+  skip_if_not_installed("adbcsqlite")
+
+  con <- dbConnect(adbi(pkg = "adbcsqlite"), uri = ":memory:")
+  withr::defer(dbDisconnect(con))
+
+  out <- capture.output(show(con))
+
+  expect_identical(out[[1L]], "<AdbiConnection>")
+  expect_match(out[-1L], "^  (Vendor|Driver) (name|version|arrow version): ")
+})
