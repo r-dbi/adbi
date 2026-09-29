@@ -11,6 +11,12 @@ dbAppendTable_AdbiConnection <- function(
     stop("Can't pass `row.names` to `dbAppendTable()`", call. = FALSE)
   }
 
+  if (!is.data.frame(value)) {
+    stop("Argument `value` must be a data frame", call. = FALSE)
+  }
+
+  value <- factor_to_character(value, "Appending factors as character.")
+
   query <- sqlAppendTable(
     con = conn,
     table = name,

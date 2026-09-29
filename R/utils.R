@@ -73,6 +73,17 @@ drop_asis <- function(x) {
   x
 }
 
+factor_to_character <- function(x, msg) {
+  fct <- vapply(x, is.factor, logical(1L))
+
+  if (any(fct)) {
+    warning(msg, call. = FALSE)
+    x[fct] <- lapply(x[fct], as.character)
+  }
+
+  x
+}
+
 db_data_type_blob <- function(drv, con = NULL) {
   switch(
     db_vendor_name(drv, con),

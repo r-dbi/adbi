@@ -18,12 +18,7 @@ dbBind_AdbiResult <- function(res, params, ...) {
     params <- as.list(params)
   }
 
-  fct <- vapply(params, is.factor, logical(1L))
-
-  if (any(fct)) {
-    warning("Binding factors as character.", call. = FALSE)
-    params[fct] <- lapply(params[fct], as.character)
-  }
+  params <- factor_to_character(params, "Binding factors as character.")
 
   lt <- vapply(params, inherits, logical(1L), "POSIXlt")
   params[lt] <- lapply(params[lt], as.POSIXct)
