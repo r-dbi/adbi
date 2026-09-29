@@ -10,11 +10,13 @@ if (
       "package_name",
 
       # need options(adbi.allow_multiple_results = FALSE)
+      # https://github.com/r-dbi/adbi/issues/109
       "send_query_only_one_result_set",
       "send_statement_only_one_result_set",
       "arrow_send_query_only_one_result_set",
 
       # need options(adbi.force_close_results = TRUE)
+      # https://github.com/r-dbi/adbi/issues/109
       "send_query_stale_warning",
       "send_statement_stale_warning",
       "arrow_send_query_stale_warning",
@@ -45,7 +47,7 @@ if (
       "roundtrip_field_types",
 
       # Lists of raw vectors with NULL entries fail in `dbDataType()`
-      # https://github.com/r-dbi/adbi/issues/15
+      # https://github.com/r-dbi/adbi/issues/108
       "append_roundtrip_raw",
 
       # bind zero length https://github.com/apache/arrow-adbc/issues/1365
@@ -80,21 +82,24 @@ if (
       "arrow_append_table_arrow_invalid_value",
       "arrow_append_table_arrow_value_subset",
       "arrow_append_table_arrow_value_shuffle_subset",
+      "create_table_visible_in_other_connection",
+      "arrow_create_table_arrow_visible_in_other_connection",
 
       # misc issues with well understood causes
-      "create_table_visible_in_other_connection", # see apache/arrow-adbc#1591
-      "arrow_create_table_arrow_visible_in_other_connection", # same cause
       "quote_identifier_string", # see apache/arrow-adbc#1395
       "read_table_empty", # see apache/arrow-adbc#1400
-      "arrow_read_table_arrow_empty", # same cause
+      "arrow_read_table_arrow_empty", # see apache/arrow-adbc#1400
 
-      # misc issues with poorly understood causes
+      # Appending to a missing table https://github.com/r-dbi/adbi/issues/107
       "append_table_new",
 
       # cause segfaults
+      # https://github.com/r-dbi/adbi/issues/110
       "begin_write_disconnect",
 
-      # not reproducible in isolation
+      # A failed append in `write_table_append_incompatible` leaves the
+      # connection in a transaction
+      # https://github.com/apache/arrow-adbc/issues/4828
       "table_visible_in_other_connection",
       "remove_table_other_con",
 
