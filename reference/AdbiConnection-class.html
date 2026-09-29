@@ -189,7 +189,11 @@ identifier.</p></dd>
 <dt id="arg-temporary">temporary<a class="anchor" aria-label="anchor" href="#arg-temporary"></a></dt>
 <dd><p>a logical specifying whether the new table should be
 temporary.
-Its default is <code>FALSE</code>.</p></dd>
+Its default is <code>FALSE</code>.
+If <code>TRUE</code>, <code><a href="https://dbi.r-dbi.org/reference/dbRemoveTable.html" class="external-link">DBI::dbRemoveTable()</a></code> considers only temporary tables.
+For SQLite, PostgreSQL and DuckDB, it qualifies the name with the schema
+of temporary tables, and for other databases it sends
+<code>DROP TEMPORARY TABLE</code>, which not all of them support.</p></dd>
 
 
 <dt id="arg-fail-if-missing">fail_if_missing<a class="anchor" aria-label="anchor" href="#arg-fail-if-missing"></a></dt>

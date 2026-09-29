@@ -165,7 +165,12 @@ show(object)
 - temporary:
 
   a logical specifying whether the new table should be temporary. Its
-  default is `FALSE`.
+  default is `FALSE`. If `TRUE`,
+  [`DBI::dbRemoveTable()`](https://dbi.r-dbi.org/reference/dbRemoveTable.html)
+  considers only temporary tables. For SQLite, PostgreSQL and DuckDB, it
+  qualifies the name with the schema of temporary tables, and for other
+  databases it sends `DROP TEMPORARY TABLE`, which not all of them
+  support.
 
 - fail_if_missing:
 
