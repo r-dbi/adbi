@@ -133,18 +133,21 @@ execute_statement <- function(x) {
     is.null(meta(x, "row_count"))
   )
 
-  stream <- nanoarrow::nanoarrow_allocate_array_stream()
-  meta(x, "rows_affected") <- adbcdrivermanager::adbc_statement_execute_query(
-    x@statement,
-    stream = stream
-  )
-
-  meta(x, "data") <- stream
-  meta(x, "row_count") <- 0L
-
   if (identical(meta(x, "type"), "statement")) {
+    meta(x, "rows_affected") <- adbcdrivermanager::adbc_statement_execute_query(
+      x@statement
+    )
     meta(x, "has_completed") <- TRUE
+  } else {
+    stream <- nanoarrow::nanoarrow_allocate_array_stream()
+    meta(x, "rows_affected") <- adbcdrivermanager::adbc_statement_execute_query(
+      x@statement,
+      stream = stream
+    )
+    meta(x, "data") <- stream
   }
+
+  meta(x, "row_count") <- 0L
 
   invisible(x)
 }

@@ -23,7 +23,19 @@ if (
       "data_64_bit_numeric",
       "data_64_bit_numeric_warning",
       "data_64_bit_lossless",
+      "append_roundtrip_64_bit_numeric",
+      "append_roundtrip_64_bit_character",
       "arrow_read_table_arrow",
+      "arrow_write_table_arrow_roundtrip_integer",
+      "arrow_write_table_arrow_roundtrip_logical",
+      "arrow_write_table_arrow_roundtrip_character",
+      "arrow_write_table_arrow_roundtrip_blob",
+      "arrow_write_table_arrow_roundtrip_mixed",
+      "arrow_append_table_arrow_roundtrip_integer",
+      "arrow_append_table_arrow_roundtrip_logical",
+      "arrow_append_table_arrow_roundtrip_character",
+      "arrow_append_table_arrow_roundtrip_blob",
+      "arrow_append_table_arrow_roundtrip_mixed",
 
       # `field.types` https://github.com/r-dbi/adbi/issues/14
       "append_roundtrip_64_bit_roundtrip",
@@ -32,11 +44,42 @@ if (
       "roundtrip_64_bit_roundtrip",
       "roundtrip_field_types",
 
+      # Lists of raw vectors with NULL entries fail in `dbDataType()`
+      # https://github.com/r-dbi/adbi/issues/15
+      "append_roundtrip_raw",
+
       # bind zero length https://github.com/apache/arrow-adbc/issues/1365
       "bind_multi_row_zero_length",
       "arrow_bind_multi_row_zero_length",
       "arrow_stream_bind_multi_row_zero_length",
       "stream_bind_multi_row_zero_length",
+
+      # Empty and all-NULL columns read back as integer, as adbcsqlite infers
+      # types from values https://github.com/apache/arrow-adbc/issues/1591
+      "create_table_name",
+      "create_table_name_quoted",
+      "create_table_value_df",
+      "create_table_value_array",
+      "create_table_temporary_1",
+      "create_table_row_names_default",
+      "create_table_row_names_null",
+      "append_table_invalid_value",
+      "append_table_value_subset",
+      "append_table_value_shuffle_subset",
+      "write_table_value_subset",
+      "write_table_value_shuffle_subset",
+      "arrow_write_table_arrow_value_subset",
+      "arrow_write_table_arrow_value_shuffle_subset",
+      "arrow_create_table_arrow_name",
+      "arrow_create_table_arrow_name_quoted",
+      "arrow_create_table_arrow_value_df",
+      "arrow_create_table_arrow_value_array",
+      "arrow_create_table_arrow_value_stream",
+      "arrow_create_table_arrow_value_schema",
+      "arrow_create_table_arrow_temporary_1",
+      "arrow_append_table_arrow_invalid_value",
+      "arrow_append_table_arrow_value_subset",
+      "arrow_append_table_arrow_value_shuffle_subset",
 
       # misc issues with well understood causes
       "create_table_visible_in_other_connection", # see apache/arrow-adbc#1591
@@ -47,7 +90,6 @@ if (
 
       # misc issues with poorly understood causes
       "append_table_new",
-      "begin_write_commit",
 
       # cause segfaults
       "begin_write_disconnect",
@@ -55,10 +97,6 @@ if (
       # not reproducible in isolation
       "table_visible_in_other_connection",
       "remove_table_other_con",
-
-      # First stage skips on `rows_affected`, leaving the table empty,
-      # see https://github.com/r-dbi/adbi/issues/92
-      "arrow_write_table_arrow_visible_in_other_connection",
 
       if (!requireNamespace("arrow", quietly = TRUE)) {
         c(

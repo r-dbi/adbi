@@ -4,18 +4,7 @@ if (
 ) {
   DBItest::make_context(
     adbi::adbi(pkg = "adbcsqlite"),
-    list(
-      uri = tempfile("DBItest", fileext = ".sqlite"),
-      rows_affected_callback = function() {
-        function(x) {
-          if (x == -1) {
-            testthat::skip("unknown number of `rows_affected`")
-          } else {
-            x
-          }
-        }
-      }
-    ),
+    list(uri = tempfile("DBItest", fileext = ".sqlite")),
     tweaks = suppressWarnings(
       DBItest::tweaks(
         dbitest_version = "1.8.3",
