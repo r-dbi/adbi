@@ -12,7 +12,7 @@ AdbiConnection <- function(
 
   meta <- list(
     results = list(),
-    last_result_id = 0L
+    last_result_id = 0
   )
 
   connection <- adbcdrivermanager::adbc_connection_init(db)

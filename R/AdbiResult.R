@@ -49,6 +49,8 @@ init_result <- function(
     stop("Expecting a non-NA string as `statement`.", call. = FALSE)
   }
 
+  id <- new_result_id(connection)
+
   con <- connection@connection
 
   stmt <- adbcdrivermanager::adbc_statement_init(con)
@@ -87,7 +89,7 @@ init_result <- function(
     rows_affected_callback
   )
 
-  register_result(connection, res)
+  register_result(connection, res, id)
 
   meta(res, "params") <- schema
 

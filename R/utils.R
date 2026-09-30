@@ -19,7 +19,22 @@ adbc_is_valid <- function(x, class) {
   FALSE
 }
 
-register_result <- function(con, res) {
+new_result_id <- function(con) {
+  last <- meta(con, "last_result_id")
+
+  if (last >= 2^53) {
+    stop(
+      "Cannot send more than 2^53 results on one connection. ",
+      "Open a new connection to send more.",
+      call. = FALSE
+    )
+  }
+
+  meta(con, "last_result_id") <- last + 1
+  sprintf("%.0f", last + 1)
+}
+
+register_result <- function(con, res, id) {
   if (
     !isTRUE(getOption("adbi.allow_multiple_results", TRUE)) &&
       length(meta(con, "results"))
@@ -33,10 +48,8 @@ register_result <- function(con, res) {
     clear_results(con)
   }
 
-  meta(con, "last_result_id") <- meta(con, "last_result_id") + 1L
-  meta(res, "id") <- as.character(meta(con, "last_result_id"))
-
-  meta(con, "results")[[meta(res, "id")]] <- res
+  meta(res, "id") <- id
+  meta(con, "results")[[id]] <- res
   meta(res, "con") <- con
 
   invisible(res)
