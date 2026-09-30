@@ -45,6 +45,11 @@
   metadata, only statements sent with `immediate = TRUE` or `params` run before
   `dbSendStatement()` returns. A statement that fails to run there no longer
   keeps `dbDisconnect()` from closing the connection (#113).
+- Queries that fail to bind their `params`, or to run when sent with
+  `immediate = TRUE`, no longer keep a following `dbDisconnect()` from closing
+  the connection. Such a failure in `dbSendQuery()`, `dbSendQueryArrow()`,
+  `dbGetQuery()` or `dbGetQueryArrow()` used to leave behind a result that was
+  never returned, so nothing could clear it (#115).
 
 # adbi 0.1.3
 

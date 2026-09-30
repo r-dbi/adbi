@@ -77,6 +77,8 @@ dbSendQuery_AdbiConnection_character <- function(
     rows_affected_callback = conn@rows_affected_callback
   )
 
+  on.exit(dbClearResult(res))
+
   if (!is.null(params)) {
     dbBind(res, params)
   }
@@ -85,6 +87,7 @@ dbSendQuery_AdbiConnection_character <- function(
     execute_statement(res)
   }
 
+  on.exit()
   res
 }
 

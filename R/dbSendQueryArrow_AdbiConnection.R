@@ -22,6 +22,8 @@ dbSendQueryArrow_AdbiConnection <- function(
     rows_affected_callback = conn@rows_affected_callback
   )
 
+  on.exit(dbClearResult(res))
+
   if (!is.null(params)) {
     dbBind(res, params)
   }
@@ -30,6 +32,7 @@ dbSendQueryArrow_AdbiConnection <- function(
     execute_statement(res)
   }
 
+  on.exit()
   res
 }
 
