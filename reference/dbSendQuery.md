@@ -94,9 +94,17 @@ parameters are needed. Without metadata, adbi does not check the number
 or names of the parameters, so a mismatch is reported only if the driver
 checks for it, possibly not until the statement is executed.
 
-Without metadata, requesting rows affected for an unbound statement
-attempts execution with `immediate = NULL`, but returns `NA` with
-`immediate = FALSE`.
+Without metadata, adbi cannot tell whether a statement sent with
+`immediate = NULL` has placeholders, so such a statement runs only once
+it is bound or
+[`DBI::dbGetRowsAffected()`](https://dbi.r-dbi.org/reference/dbGetRowsAffected.html)
+is called, as
+[`DBI::dbExecute()`](https://dbi.r-dbi.org/reference/dbExecute.html)
+does. Pass `immediate = TRUE` for a statement without placeholders to
+run when it is sent. For an unbound statement sent with
+`immediate = FALSE`,
+[`DBI::dbGetRowsAffected()`](https://dbi.r-dbi.org/reference/dbGetRowsAffected.html)
+returns `NA`.
 
 ## See also
 

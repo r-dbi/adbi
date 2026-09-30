@@ -68,6 +68,22 @@
   count of the last `INSERT`, `UPDATE` or `DELETE` until
   apache/arrow-adbc#4820 is fixed
   ([\#92](https://github.com/r-dbi/adbi/issues/92)).
+- Statements from
+  [`dbSendStatement()`](https://dbi.r-dbi.org/reference/dbSendStatement.html)
+  now run before it returns, or, if they have placeholders, each time
+  they are bound with
+  [`dbBind()`](https://dbi.r-dbi.org/reference/dbBind.html), as the DBI
+  specification requires. Unless sent with `immediate = TRUE`, they used
+  to run only once
+  [`dbGetRowsAffected()`](https://dbi.r-dbi.org/reference/dbGetRowsAffected.html)
+  asked for their count, so a statement cleared without that call never
+  ran. With drivers that cannot report parameter metadata, only
+  statements sent with `immediate = TRUE` or `params` run before
+  [`dbSendStatement()`](https://dbi.r-dbi.org/reference/dbSendStatement.html)
+  returns. A statement that fails to run there no longer keeps
+  [`dbDisconnect()`](https://dbi.r-dbi.org/reference/dbDisconnect.html)
+  from closing the connection
+  ([\#113](https://github.com/r-dbi/adbi/issues/113)).
 
 ## adbi 0.1.3
 

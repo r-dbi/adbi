@@ -137,8 +137,14 @@ are needed.
 Without metadata, adbi does not check the number or names of the
 parameters, so a mismatch is reported only if the driver checks for it,
 possibly not until the statement is executed.</p>
-<p>Without metadata, requesting rows affected for an unbound statement attempts
-execution with <code>immediate = NULL</code>, but returns <code>NA</code> with <code>immediate = FALSE</code>.</p>
+<p>Without metadata, adbi cannot tell whether a statement sent with
+<code>immediate = NULL</code> has placeholders, so such a statement runs only once it
+is bound or <code><a href="https://dbi.r-dbi.org/reference/dbGetRowsAffected.html" class="external-link">DBI::dbGetRowsAffected()</a></code> is called, as <code><a href="https://dbi.r-dbi.org/reference/dbExecute.html" class="external-link">DBI::dbExecute()</a></code>
+does.
+Pass <code>immediate = TRUE</code> for a statement without placeholders to run when it
+is sent.
+For an unbound statement sent with <code>immediate = FALSE</code>,
+<code><a href="https://dbi.r-dbi.org/reference/dbGetRowsAffected.html" class="external-link">DBI::dbGetRowsAffected()</a></code> returns <code>NA</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
