@@ -19,25 +19,10 @@ adbc_is_valid <- function(x, class) {
   FALSE
 }
 
-new_result_id <- function(con) {
-  last <- meta(con, "last_result_id")
-
-  if (last >= 2^53) {
-    stop(
-      "Cannot send more than 2^53 results on one connection. ",
-      "Open a new connection to send more.",
-      call. = FALSE
-    )
-  }
-
-  meta(con, "last_result_id") <- last + 1
-  sprintf("%.0f", last + 1)
-}
-
-register_result <- function(con, res, id) {
+register_result <- function(con, res) {
   if (
     !isTRUE(getOption("adbi.allow_multiple_results", TRUE)) &&
-      length(meta(con, "results"))
+      utils::numhash(meta(con, "results"))
   ) {
     warning(
       "Open result(s) already exists for this connection and will be ",
@@ -48,31 +33,28 @@ register_result <- function(con, res, id) {
     clear_results(con)
   }
 
-  meta(res, "id") <- id
-  meta(con, "results")[[id]] <- res
+  utils::sethash(meta(con, "results"), res@metadata, res)
   meta(res, "con") <- con
 
   invisible(res)
 }
 
 clear_results <- function(con) {
-  for (res in meta(con, "results")) {
-    dbClearResult(res)
-  }
-
-  meta(con, "results") <- list()
+  utils::maphash(meta(con, "results"), function(key, res) dbClearResult(res))
+  utils::clrhash(meta(con, "results"))
 
   invisible()
 }
 
 rm_result <- function(res) {
-  id <- meta(res, "id")
-
   con <- meta(res, "con")
 
-  meta(con, "results")[[id]] <- NULL
+  utils::remhash(meta(con, "results"), res@metadata)
 
-  if (isTRUE(meta(con, "disconnect")) && length(meta(con, "results")) == 0L) {
+  if (
+    isTRUE(meta(con, "disconnect")) &&
+      utils::numhash(meta(con, "results")) == 0L
+  ) {
     dbDisconnect(con)
   }
 

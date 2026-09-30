@@ -56,6 +56,7 @@
   result as open, and lose track of one that was still open, which
   `dbDisconnect(force = TRUE)` then left unreleased along with the connection
   (#119).
+- Requires R >= 4.2.0 (#119).
 
 # adbi 0.1.3
 
