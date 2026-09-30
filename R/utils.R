@@ -34,7 +34,6 @@ register_result <- function(con, res) {
   }
 
   meta(con, "results") <- append(meta(con, "results"), res)
-  meta(res, "id") <- length(meta(con, "results"))
   meta(res, "con") <- con
 
   invisible(res)
@@ -51,11 +50,12 @@ clear_results <- function(con) {
 }
 
 rm_result <- function(res) {
-  id <- meta(res, "id")
-
   con <- meta(res, "con")
 
-  meta(con, "results")[id] <- NULL
+  meta(con, "results") <- Filter(
+    function(x) !identical(x@metadata, res@metadata),
+    meta(con, "results")
+  )
 
   if (isTRUE(meta(con, "disconnect")) && length(meta(con, "results")) == 0L) {
     dbDisconnect(con)
