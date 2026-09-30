@@ -122,6 +122,10 @@ dbBind_AdbiResult <- function(res, params, ...) {
 
   meta(res, "has_completed") <- FALSE
 
+  if (identical(meta(res, "type"), "statement")) {
+    execute_statement(res)
+  }
+
   invisible(res)
 }
 
