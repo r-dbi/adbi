@@ -54,6 +54,20 @@
   appended as if it were a data frame. Factor columns are still appended
   as character, but now with a warning
   ([\#95](https://github.com/r-dbi/adbi/issues/95)).
+- The row counts that
+  [`dbExecute()`](https://dbi.r-dbi.org/reference/dbExecute.html),
+  [`dbGetRowsAffected()`](https://dbi.r-dbi.org/reference/dbGetRowsAffected.html)
+  and
+  [`dbAppendTable()`](https://dbi.r-dbi.org/reference/dbAppendTable.html)
+  return are now the number of rows changed, where adbcsqlite reported
+  `-1` for every statement, and adbcpostgresql for those with bound
+  parameters. Statements from
+  [`dbSendStatement()`](https://dbi.r-dbi.org/reference/dbSendStatement.html)
+  no longer ask the driver for a result set. With adbcsqlite, a
+  statement that changes no rows, such as `CREATE TABLE`, reports the
+  count of the last `INSERT`, `UPDATE` or `DELETE` until
+  apache/arrow-adbc#4820 is fixed
+  ([\#92](https://github.com/r-dbi/adbi/issues/92)).
 
 ## adbi 0.1.3
 
