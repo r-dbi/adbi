@@ -32,9 +32,16 @@ object (in order to clone an existing connection).}
 \item{...}{Extra arguments passed to \code{\link[DBI:dbConnect]{DBI::dbConnect()}} are forwarded to
 \code{\link[adbcdrivermanager:adbc_database_init]{adbcdrivermanager::adbc_database_init()}}}
 
-\item{bigint}{The R type that 64-bit integer types should be mapped to,
-default is \link[bit64:integer64]{bit64::integer64}, if bit64 is installed and \code{character}
-otherwise}
+\item{bigint}{The R type that 64-bit integer types should be mapped to.
+The default, \code{"integer-strict"}, maps them to \code{integer} and fails with an
+error for values outside its range, whereas \code{"integer"} silently returns
+\code{NA} for them.
+Likewise, \code{"numeric-strict"} maps them to \code{numeric} and fails for values
+beyond 2^53 in magnitude, which a double may not represent exactly,
+whereas \code{"numeric"} silently rounds them to the nearest double.
+Both \code{"character"} and \code{"integer64"} are lossless, returning decimal
+strings and \link[bit64:integer64]{bit64::integer64} values respectively.
+The latter requires the bit64 package.}
 
 \item{conn}{A \link[DBI:DBIConnection-class]{DBI::DBIConnection} object,
 as returned by \code{\link[DBI:dbConnect]{DBI::dbConnect()}}.}

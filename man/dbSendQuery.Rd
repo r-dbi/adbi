@@ -52,7 +52,8 @@ as returned by \code{\link[DBI:dbConnect]{DBI::dbConnect()}}.}
 or \code{NULL} to inspect placeholders when the driver supports it.}
 
 \item{bigint}{The R type that 64-bit integer types should be mapped to,
-default is chosen according to the connection setting}
+default is chosen according to the connection setting.
+See \code{\link[=dbConnect_AdbiDriver]{dbConnect()}} for the accepted values.}
 }
 \value{
 An S4 class \code{AdbiResult} (inheriting from \link[DBI:DBIResult-class]{DBI::DBIResult}).
@@ -98,7 +99,7 @@ if (requireNamespace("adbcsqlite")) {
   )
   str(
     dbGetQuery(con, "SELECT Examination from swiss WHERE Agriculture < 30",
-      bigint = "integer")
+      bigint = "numeric")
   )
   dbDisconnect(con)
 }

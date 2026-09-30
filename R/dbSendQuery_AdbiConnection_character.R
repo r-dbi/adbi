@@ -38,7 +38,8 @@
 #' @param immediate Use `TRUE` for direct execution, `FALSE` to bind parameters,
 #'   or `NULL` to inspect placeholders when the driver supports it.
 #' @param bigint The R type that 64-bit integer types should be mapped to,
-#'   default is chosen according to the connection setting
+#'   default is chosen according to the connection setting.
+#'   See [`dbConnect()`][dbConnect_AdbiDriver] for the accepted values.
 #' @inheritParams DBI::dbSendQuery
 #' @examples
 #' if (requireNamespace("adbcsqlite")) {
@@ -50,7 +51,7 @@
 #'   )
 #'   str(
 #'     dbGetQuery(con, "SELECT Examination from swiss WHERE Agriculture < 30",
-#'       bigint = "integer")
+#'       bigint = "numeric")
 #'   )
 #'   dbDisconnect(con)
 #' }
