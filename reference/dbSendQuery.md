@@ -75,7 +75,9 @@ dbSendStatement(
 - bigint:
 
   The R type that 64-bit integer types should be mapped to, default is
-  chosen according to the connection setting
+  chosen according to the connection setting. See
+  [`dbConnect()`](https://adbi.r-dbi.org/reference/dbConnect.md) for the
+  accepted values.
 
 ## Value
 
@@ -122,12 +124,12 @@ if (requireNamespace("adbcsqlite")) {
   )
   str(
     dbGetQuery(con, "SELECT Examination from swiss WHERE Agriculture < 30",
-      bigint = "integer")
+      bigint = "numeric")
   )
   dbDisconnect(con)
 }
 #> 'data.frame':    10 obs. of  1 variable:
 #>  $ Examination: int  15 26 31 25 29 22 35 25 37 22
 #> 'data.frame':    10 obs. of  1 variable:
-#>  $ Examination: int  15 26 31 25 29 22 35 25 37 22
+#>  $ Examination: num  15 26 31 25 29 22 35 25 37 22
 ```

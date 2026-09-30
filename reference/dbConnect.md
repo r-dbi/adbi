@@ -48,9 +48,16 @@ dbDisconnect(conn, force = getOption("adbi.force_close_results", FALSE), ...)
 
 - bigint:
 
-  The R type that 64-bit integer types should be mapped to, default is
-  [bit64::integer64](https://bit64.r-lib.org/reference/bit64-package.html),
-  if bit64 is installed and `character` otherwise
+  The R type that 64-bit integer types should be mapped to. The default,
+  `"integer-strict"`, maps them to `integer` and fails with an error for
+  values outside its range, whereas `"integer"` silently returns `NA`
+  for them. Likewise, `"numeric-strict"` maps them to `numeric` and
+  fails for values beyond 2^53 in magnitude, which a double may not
+  represent exactly, whereas `"numeric"` silently rounds them to the
+  nearest double. Both `"character"` and `"integer64"` are lossless,
+  returning decimal strings and
+  [bit64::integer64](https://bit64.r-lib.org/reference/bit64-package.html)
+  values respectively. The latter requires the bit64 package.
 
 - conn:
 

@@ -80,9 +80,16 @@ object (in order to clone an existing connection).</p></dd>
 
 
 <dt id="arg-bigint">bigint<a class="anchor" aria-label="anchor" href="#arg-bigint"></a></dt>
-<dd><p>The R type that 64-bit integer types should be mapped to,
-default is <a href="https://bit64.r-lib.org/reference/bit64-package.html" class="external-link">bit64::integer64</a>, if bit64 is installed and <code>character</code>
-otherwise</p></dd>
+<dd><p>The R type that 64-bit integer types should be mapped to.
+The default, <code>"integer-strict"</code>, maps them to <code>integer</code> and fails with an
+error for values outside its range, whereas <code>"integer"</code> silently returns
+<code>NA</code> for them.
+Likewise, <code>"numeric-strict"</code> maps them to <code>numeric</code> and fails for values
+beyond 2^53 in magnitude, which a double may not represent exactly,
+whereas <code>"numeric"</code> silently rounds them to the nearest double.
+Both <code>"character"</code> and <code>"integer64"</code> are lossless, returning decimal
+strings and <a href="https://bit64.r-lib.org/reference/bit64-package.html" class="external-link">bit64::integer64</a> values respectively.
+The latter requires the bit64 package.</p></dd>
 
 
 <dt id="arg-conn">conn<a class="anchor" aria-label="anchor" href="#arg-conn"></a></dt>
