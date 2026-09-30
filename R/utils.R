@@ -53,7 +53,7 @@ rm_result <- function(res) {
   con <- meta(res, "con")
 
   meta(con, "results") <- Filter(
-    function(x) !identical(x@metadata, res@metadata),
+    function(x) !is_same_result(x, res),
     meta(con, "results")
   )
 
@@ -62,6 +62,13 @@ rm_result <- function(res) {
   }
 
   invisible()
+}
+
+is_same_result <- function(x, y) {
+  # Copies of a result all share its metadata environment. Since identical()
+  # compares environments by identity rather than contents, this matches the
+  # copies of one result and no other result, even one with the same SQL.
+  identical(x@metadata, y@metadata)
 }
 
 split_rows <- function(x) {
