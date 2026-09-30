@@ -84,6 +84,16 @@
   [`dbDisconnect()`](https://dbi.r-dbi.org/reference/dbDisconnect.html)
   from closing the connection
   ([\#113](https://github.com/r-dbi/adbi/issues/113)).
+- Queries that fail to bind their `params`, or to run when sent with
+  `immediate = TRUE`, no longer keep a following
+  [`dbDisconnect()`](https://dbi.r-dbi.org/reference/dbDisconnect.html)
+  from closing the connection. Such a failure in
+  [`dbSendQuery()`](https://dbi.r-dbi.org/reference/dbSendQuery.html),
+  [`dbSendQueryArrow()`](https://dbi.r-dbi.org/reference/dbSendQueryArrow.html),
+  [`dbGetQuery()`](https://dbi.r-dbi.org/reference/dbGetQuery.html) or
+  [`dbGetQueryArrow()`](https://dbi.r-dbi.org/reference/dbGetQueryArrow.html)
+  used to leave behind a result that was never returned, so nothing
+  could clear it ([\#115](https://github.com/r-dbi/adbi/issues/115)).
 
 ## adbi 0.1.3
 
