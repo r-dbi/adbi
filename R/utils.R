@@ -33,7 +33,10 @@ register_result <- function(con, res) {
     clear_results(con)
   }
 
-  meta(con, "results") <- append(meta(con, "results"), res)
+  meta(con, "last_result_id") <- meta(con, "last_result_id") + 1L
+  meta(res, "id") <- as.character(meta(con, "last_result_id"))
+
+  meta(con, "results")[[meta(res, "id")]] <- res
   meta(res, "con") <- con
 
   invisible(res)
@@ -50,25 +53,17 @@ clear_results <- function(con) {
 }
 
 rm_result <- function(res) {
+  id <- meta(res, "id")
+
   con <- meta(res, "con")
 
-  meta(con, "results") <- Filter(
-    function(x) !is_same_result(x, res),
-    meta(con, "results")
-  )
+  meta(con, "results")[[id]] <- NULL
 
   if (isTRUE(meta(con, "disconnect")) && length(meta(con, "results")) == 0L) {
     dbDisconnect(con)
   }
 
   invisible()
-}
-
-is_same_result <- function(x, y) {
-  # Copies of a result all share its metadata environment. Since identical()
-  # compares environments by identity rather than contents, this matches the
-  # copies of one result and no other result, even one with the same SQL.
-  identical(x@metadata, y@metadata)
 }
 
 split_rows <- function(x) {
