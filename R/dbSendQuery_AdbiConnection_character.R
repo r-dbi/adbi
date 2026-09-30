@@ -20,8 +20,14 @@
 #' parameters, so a mismatch is reported only if the driver checks for it,
 #' possibly not until the statement is executed.
 #'
-#' Without metadata, requesting rows affected for an unbound statement attempts
-#' execution with `immediate = NULL`, but returns `NA` with `immediate = FALSE`.
+#' Without metadata, adbi cannot tell whether a statement sent with
+#' `immediate = NULL` has placeholders, so such a statement runs only once it
+#' is bound or [DBI::dbGetRowsAffected()] is called, as [DBI::dbExecute()]
+#' does.
+#' Pass `immediate = TRUE` for a statement without placeholders to run when it
+#' is sent.
+#' For an unbound statement sent with `immediate = FALSE`,
+#' [DBI::dbGetRowsAffected()] returns `NA`.
 #'
 #' @seealso adbi-driver
 #' @rdname dbSendQuery

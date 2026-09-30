@@ -79,8 +79,14 @@ Without metadata, adbi does not check the number or names of the
 parameters, so a mismatch is reported only if the driver checks for it,
 possibly not until the statement is executed.
 
-Without metadata, requesting rows affected for an unbound statement attempts
-execution with \code{immediate = NULL}, but returns \code{NA} with \code{immediate = FALSE}.
+Without metadata, adbi cannot tell whether a statement sent with
+\code{immediate = NULL} has placeholders, so such a statement runs only once it
+is bound or \code{\link[DBI:dbGetRowsAffected]{DBI::dbGetRowsAffected()}} is called, as \code{\link[DBI:dbExecute]{DBI::dbExecute()}}
+does.
+Pass \code{immediate = TRUE} for a statement without placeholders to run when it
+is sent.
+For an unbound statement sent with \code{immediate = FALSE},
+\code{\link[DBI:dbGetRowsAffected]{DBI::dbGetRowsAffected()}} returns \code{NA}.
 }
 \examples{
 if (requireNamespace("adbcsqlite")) {

@@ -22,14 +22,17 @@ dbSendStatement_AdbiConnection_character <- function(
     rows_affected_callback = conn@rows_affected_callback
   )
 
+  on.exit(dbClearResult(res))
+
   if (!is.null(params)) {
     dbBind(res, params)
   }
 
-  if (isTRUE(immediate)) {
+  if (isTRUE(meta(res, "immediate"))) {
     execute_statement(res)
   }
 
+  on.exit()
   res
 }
 

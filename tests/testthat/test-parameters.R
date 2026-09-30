@@ -102,7 +102,7 @@ test_that("convenience methods work without parameter metadata", {
   expect_equal(dbGetQuery(con, "SELECT x FROM t"), data.frame(x = 7L))
 })
 
-test_that("statements with unknown parameters complete after execution", {
+test_that("statements with unknown parameters run when bound", {
   driver <- local_parameter_connection()
   dbExecute(driver$con, "CREATE TABLE t (x INTEGER)")
   dbExecute(driver$con, "INSERT INTO t VALUES (0)")
@@ -123,10 +123,9 @@ test_that("statements with unknown parameters complete after execution", {
 
     for (value in 1:2) {
       dbBind(res, list(value))
-      expect_false(dbHasCompleted(res))
-      dbGetRowsAffected(res)
       expect_true(dbHasCompleted(res))
       expect_equal(dbGetQuery(driver$con, "SELECT x FROM t")$x, value)
+      expect_equal(dbGetRowsAffected(res), 1)
     }
 
     dbClearResult(res)
