@@ -41,8 +41,6 @@ register_result <- function(con, res) {
 
 clear_results <- function(con) {
   utils::maphash(meta(con, "results"), function(key, res) dbClearResult(res))
-  utils::clrhash(meta(con, "results"))
-
   invisible()
 }
 
