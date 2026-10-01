@@ -58,13 +58,14 @@ jobs:
   # The mechanical CRAN release checks from blockr.ci, reported in one
   # comment on a pull request carrying the `release` label. A skipped caller
   # creates none of the called workflow's check contexts, so drop the `if:`
-  # before requiring any of them in a ruleset.
+  # before requiring any of them in a ruleset. A Dependabot pull request
+  # bumping the pin runs these checks only once labelled `release`.
   release:
     if: contains(github.event.pull_request.labels.*.name, 'release')
     permissions:
       contents: read
       pull-requests: write
-    uses: BristolMyersSquibb/blockr.ci/.github/workflows/release-gate.yaml@main
+    uses: BristolMyersSquibb/blockr.ci/.github/workflows/release-gate.yaml@v0.1.1
 
   check:
     needs: smoke
