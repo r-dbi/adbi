@@ -101,6 +101,15 @@
   cleared result as open, and lose track of one that was still open,
   which `dbDisconnect(force = TRUE)` then left unreleased along with the
   connection ([\#119](https://github.com/r-dbi/adbi/issues/119)).
+- The strict `bigint` modes, `"integer-strict"` (the default) and
+  `"numeric-strict"`, now fail with an error for 64-bit values they
+  cannot represent. They used to re-signal nanoarrow’s lossy-conversion
+  warning, which neither
+  [`tryCatch()`](https://rdrr.io/r/base/conditions.html) nor
+  [`try()`](https://rdrr.io/r/base/try.html) caught as an error, and
+  which [`suppressWarnings()`](https://rdrr.io/r/base/warning.html)
+  turned into `NA` or a rounded value
+  ([\#111](https://github.com/r-dbi/adbi/issues/111)).
 - Requires R \>= 4.2.0
   ([\#119](https://github.com/r-dbi/adbi/issues/119)).
 
