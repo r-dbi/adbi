@@ -83,3 +83,37 @@ test_that("a deferred close waits for the result that replaces the open one", {
   dbClearResult(res2)
   expect_false(dbIsValid(con))
 })
+
+test_that("a deferred close runs once when its last result is cleared twice", {
+  skip_if_not_installed("adbcsqlite")
+
+  con <- dbConnect(adbi(pkg = "adbcsqlite"), uri = ":memory:")
+  res <- dbSendQuery(con, "SELECT 1")
+
+  expect_message(expect_false(dbDisconnect(con)), "There are 1 result")
+  dbClearResult(res)
+  expect_false(dbIsValid(con))
+
+  expect_warning(
+    expect_no_warning(dbClearResult(res), message = "Connection|Database"),
+    "Statement already released"
+  )
+})
+
+test_that("a forced close leaves no deferred one to run on a later clear", {
+  skip_if_not_installed("adbcsqlite")
+
+  con <- dbConnect(adbi(pkg = "adbcsqlite"), uri = ":memory:")
+  res <- dbSendQuery(con, "SELECT 1")
+
+  expect_message(expect_false(dbDisconnect(con)), "There are 1 result")
+  expect_warning(
+    expect_true(dbDisconnect(con, force = TRUE)),
+    "There are 1 open result"
+  )
+
+  expect_warning(
+    expect_no_warning(dbClearResult(res), message = "Connection|Database"),
+    "Statement already released"
+  )
+})

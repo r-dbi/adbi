@@ -36,6 +36,8 @@ dbDisconnect_AdbiConnection <- function(
     return(invisible(FALSE))
   }
 
+  meta(conn, "disconnect") <- FALSE
+
   if (adbc_connection_is_valid(conn@connection)) {
     adbc_release(conn@connection, "connection")
   } else {
