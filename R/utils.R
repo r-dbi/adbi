@@ -40,6 +40,10 @@ register_result <- function(con, res) {
 }
 
 clear_results <- function(con) {
+  disconnect <- meta(con, "disconnect")
+  meta(con, "disconnect") <- FALSE
+  on.exit(meta(con, "disconnect") <- disconnect)
+
   utils::maphash(meta(con, "results"), function(key, res) dbClearResult(res))
   invisible()
 }
