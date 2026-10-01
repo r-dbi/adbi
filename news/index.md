@@ -94,6 +94,15 @@
   [`dbGetQueryArrow()`](https://dbi.r-dbi.org/reference/dbGetQueryArrow.html)
   used to leave behind a result that was never returned, so nothing
   could clear it ([\#115](https://github.com/r-dbi/adbi/issues/115)).
+- Clearing a result while one sent after it is still open, as clearing
+  results in the order they were sent does, no longer keeps a following
+  [`dbDisconnect()`](https://dbi.r-dbi.org/reference/dbDisconnect.html)
+  from closing the connection. The connection could go on counting a
+  cleared result as open, and lose track of one that was still open,
+  which `dbDisconnect(force = TRUE)` then left unreleased along with the
+  connection ([\#119](https://github.com/r-dbi/adbi/issues/119)).
+- Requires R \>= 4.2.0
+  ([\#119](https://github.com/r-dbi/adbi/issues/119)).
 
 ## adbi 0.1.3
 
