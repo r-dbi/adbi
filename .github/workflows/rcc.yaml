@@ -65,7 +65,7 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
-    uses: BristolMyersSquibb/blockr.ci/.github/workflows/release-gate.yaml@b61f20b0edd729c273ed78ffe47025691ac6829c # v0.1.1
+    uses: BristolMyersSquibb/blockr.ci/.github/workflows/release-gate.yaml@v0.1.1
 
   check:
     needs: smoke
