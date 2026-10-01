@@ -50,6 +50,13 @@
   the connection. Such a failure in `dbSendQuery()`, `dbSendQueryArrow()`,
   `dbGetQuery()` or `dbGetQueryArrow()` used to leave behind a result that was
   never returned, so nothing could clear it (#115).
+- Clearing a result while one sent after it is still open, as clearing results
+  in the order they were sent does, no longer keeps a following `dbDisconnect()`
+  from closing the connection. The connection could go on counting a cleared
+  result as open, and lose track of one that was still open, which
+  `dbDisconnect(force = TRUE)` then left unreleased along with the connection
+  (#119).
+- Requires R >= 4.2.0 (#119).
 
 # adbi 0.1.3
 

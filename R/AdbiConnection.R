@@ -11,7 +11,7 @@ AdbiConnection <- function(
   on.exit(adbc_release(db, "database"))
 
   meta <- list(
-    results = list()
+    results = utils::hashtab("address")
   )
 
   connection <- adbcdrivermanager::adbc_connection_init(db)

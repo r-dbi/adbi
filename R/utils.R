@@ -22,7 +22,7 @@ adbc_is_valid <- function(x, class) {
 register_result <- function(con, res) {
   if (
     !isTRUE(getOption("adbi.allow_multiple_results", TRUE)) &&
-      length(meta(con, "results"))
+      utils::numhash(meta(con, "results"))
   ) {
     warning(
       "Open result(s) already exists for this connection and will be ",
@@ -33,31 +33,26 @@ register_result <- function(con, res) {
     clear_results(con)
   }
 
-  meta(con, "results") <- append(meta(con, "results"), res)
-  meta(res, "id") <- length(meta(con, "results"))
+  utils::sethash(meta(con, "results"), res@metadata, res)
   meta(res, "con") <- con
 
   invisible(res)
 }
 
 clear_results <- function(con) {
-  for (res in meta(con, "results")) {
-    dbClearResult(res)
-  }
-
-  meta(con, "results") <- list()
-
+  utils::maphash(meta(con, "results"), function(key, res) dbClearResult(res))
   invisible()
 }
 
 rm_result <- function(res) {
-  id <- meta(res, "id")
-
   con <- meta(res, "con")
 
-  meta(con, "results")[id] <- NULL
+  utils::remhash(meta(con, "results"), res@metadata)
 
-  if (isTRUE(meta(con, "disconnect")) && length(meta(con, "results")) == 0L) {
+  if (
+    isTRUE(meta(con, "disconnect")) &&
+      utils::numhash(meta(con, "results")) == 0L
+  ) {
     dbDisconnect(con)
   }
 

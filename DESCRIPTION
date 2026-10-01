@@ -14,12 +14,13 @@ License: LGPL (>= 2.1)
 URL: https://adbi.r-dbi.org, https://github.com/r-dbi/adbi, https://arrow.apache.org/adbc/
 BugReports: https://github.com/r-dbi/adbi/issues
 Depends: 
-    R (>= 4.1.0)
+    R (>= 4.2.0)
 Imports: 
     DBI (>= 1.2.0),
     methods,
     adbcdrivermanager (>= 0.19.0),
-    nanoarrow (>= 0.3.0)
+    nanoarrow (>= 0.3.0),
+    utils
 Suggests: 
     testthat,
     covr,
@@ -27,7 +28,6 @@ Suggests:
     adbcsqlite (>= 0.11.0.1),
     withr,
     bit64,
-    utils,
     arrow
 Config/Needs/website: 
     r-dbi/dbitemplate

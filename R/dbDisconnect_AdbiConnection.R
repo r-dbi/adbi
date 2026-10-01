@@ -12,7 +12,7 @@ dbDisconnect_AdbiConnection <- function(
   force = getOption("adbi.force_close_results", FALSE),
   ...
 ) {
-  n_res <- length(meta(conn, "results"))
+  n_res <- utils::numhash(meta(conn, "results"))
 
   if (n_res && isTRUE(force)) {
     warning(
