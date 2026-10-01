@@ -56,6 +56,11 @@
   result as open, and lose track of one that was still open, which
   `dbDisconnect(force = TRUE)` then left unreleased along with the connection
   (#119).
+- The strict `bigint` modes, `"integer-strict"` (the default) and
+  `"numeric-strict"`, now fail with an error for 64-bit values they cannot
+  represent. They used to re-signal nanoarrow's lossy-conversion warning, which
+  neither `tryCatch()` nor `try()` caught as an error, and which
+  `suppressWarnings()` turned into `NA` or a rounded value (#111).
 - Requires R >= 4.2.0 (#119).
 
 # adbi 0.1.3

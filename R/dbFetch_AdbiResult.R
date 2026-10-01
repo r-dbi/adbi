@@ -228,7 +228,9 @@ conversion_warn_handler <- function(to) {
     },
     strict = function(class) {
       class <- force(class)
-      function(w) if (inherits(w, class)) stop(w)
+      function(w) {
+        if (inherits(w, class)) stop(conditionMessage(w), call. = FALSE)
+      }
     },
     stop("Unexpected value for `to` (mode).", call. = FALSE)
   )
