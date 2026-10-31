@@ -57,7 +57,8 @@ dbBind_AdbiResult <- function(res, params, ...) {
 
     named_params <- !is.null(names(params)) && all(names(params) != "")
     named_schema <- all(
-      names(schema) != as.character(seq_along(schema) - 1L) &
+      nzchar(names(schema)) &
+        names(schema) != as.character(seq_along(schema) - 1L) &
         names(schema) != paste0("$", seq_along(schema))
     )
 

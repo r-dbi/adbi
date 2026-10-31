@@ -226,3 +226,22 @@ test_that("POSIXlt parameters bind like POSIXct", {
     )
   }
 })
+
+test_that("empty field names denote positional parameters", {
+  driver <- local_parameter_connection(metadata = TRUE)
+  original <- get_parameter_schema
+  local_mocked_bindings(get_parameter_schema = function(statement) {
+    schema <- original(statement)
+    names(schema$children) <- rep("", length(schema$children))
+    schema
+  })
+
+  res <- dbSendQuery(driver$con, "SELECT ? AS x, ? AS y")
+  expect_error(dbBind(res, list(x = 1L, y = 2L)), "unnamed")
+  expect_error(dbBind(res, list(1L)), "equally many")
+  dbBind(res, list(1L, NA_integer_))
+  expect_equal(dbFetch(res), data.frame(x = 1L, y = NA_integer_))
+  dbBind(res, list(3L, 4L))
+  expect_equal(dbFetch(res), data.frame(x = 3L, y = 4L))
+  dbClearResult(res)
+})
