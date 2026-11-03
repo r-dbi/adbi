@@ -82,11 +82,9 @@ jobs:
           - {os: ubuntu-latest, r: '4.2'}
           - {os: macos-latest, r: release}
           - {os: windows-latest, r: release}
-          # Testing: the windows-11-arm job tries to install all deps from
-          # source whereas other jobs use binaries. arrow isn't building cleanly
-          # on windows-11-arm here in CI but apparently the released version of
-          # pak just doesn't know about windows-11-arm? Try devel version of pak
-          # to test the theory.
+          # TODO(XXX): Remove pak-version override here and below once a new
+          # version of pak is available that includes
+          # https://github.com/r-lib/pkgcache/pull/142
           - {os: windows-11-arm, r: release, pak-version: devel}
 
     steps:
