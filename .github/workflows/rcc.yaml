@@ -82,6 +82,7 @@ jobs:
           - {os: ubuntu-latest, r: '4.2'}
           - {os: macos-latest, r: release}
           - {os: windows-latest, r: release}
+          - {os: windows-11-arm, r: release}
 
     steps:
       - uses: actions/checkout@v7
